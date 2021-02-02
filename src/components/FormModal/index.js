@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
 
 const FormModal = ({ setShowModal, successHandler, title, fields, onSubmit }) => {
   const classes = useStyles();
-  const [ details, setDetails ] = useState();
+  const [ details, setDetails ] = useState(null);
 
   const onInputChange = (key, value) => {
     const updatedDetails = details.map((item) => {
@@ -75,31 +75,31 @@ const FormModal = ({ setShowModal, successHandler, title, fields, onSubmit }) =>
             size={35} />
         </div>
       </div>
-      <form className={ classes.root } noValidate autoComplete='off'>
+      <form className={classes.root} autoComplete='off'>
         {
           details?.map((field, index) => {
-            return field.isDropdown ? (
+            return field.isDropdown && field.options.length ? (
               <Autocomplete
-                value={ details?.find((detail) => detail.id === field.id)?.value }
-                onChange={ (event, value) => onInputChange(field.id, value) }
-                defaultValue={ field.value || null }
-                options={ field.options }
-                getOptionLabel={ (item) => item.label }
-                className={ classes.input }
-                required={ field.isRequired }
-                disabled={ field.isDisabled }
-                renderInput={ (params) => <TextField {...params} label={field.label} variant='filled' /> }
+                value={details?.find((detail) => detail.id === field.id)?.value}
+                onChange={(event, value) => onInputChange(field.id, value)}
+                defaultValue={field.value}
+                options={field.options}
+                getOptionLabel={(id) => field.options?.find((option) => option._id === id)?.label}
+                className={classes.input}
+                required={field.isRequired}
+                disabled={field.isDisabled}
+                renderInput={(params) => <TextField {...params} label={field.label} variant='filled' />}
               />
               ) : (
               <TextField
-                key={ index }
-                value={ details?.find((detail) => detail.id === field.id)?.value }
-                onChange={ (event) => onInputChange(field.id,  event.target.value) }
-                className={ classes.input }
-                id={ field.id }
-                label={ field.label }
+                key={index}
+                value={details?.find((detail) => detail.id === field.id)?.value}
+                onChange={(event) => onInputChange(field.id,  event.target.value)}
+                className={classes.input}
+                id={field.id}
+                label={field.label}
                 variant='filled'
-                required={ field.isRequired } />
+                required={field.isRequired} />
               )
           })
         }
