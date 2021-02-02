@@ -1,0 +1,30 @@
+.modal-header {
+    display: flex;
+
+    h2 {
+        margin: 60px 0 0 100px;
+        width: 50%;
+    }
+
+    .close-btn-container {
+        width: 50%;
+
+        .close-btn {
+            float: right;
+            margin: 30px;
+            cursor: pointer;
+        }
+    }
+}
+
+.modal-footer {
+    padding: 20px;
+    display: flex;
+
+    button {
+        width: 50%;
+        margin: auto;
+    }
+}
+
+

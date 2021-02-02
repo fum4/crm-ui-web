@@ -1,0 +1,27 @@
+.search-input-container {
+    display: flex;
+    margin: auto;
+    padding: 0 10% 0;
+    max-width: 800px;
+
+    button.add-new-btn {
+        margin-left: 20px;
+
+        p {
+            margin: 1px 0 0 0;
+        }
+    }
+
+    .add-icon {
+        margin-right: 10px;
+    }
+
+    &__main-input {
+        flex-grow: 5;
+
+        input {
+            width: 100%;
+        }
+    }
+}
+
