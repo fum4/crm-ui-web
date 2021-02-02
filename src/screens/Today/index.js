@@ -2,7 +2,7 @@ import { Fragment, useEffect, useState } from 'react';
 import { getAppointments } from '../../services/network';
 import { AppointmentList, SearchEnAdd } from '../../components';
 
-const ClientsScreen = () => {
+const Clients = () => {
   const [allAppointments, setAllAppointments] = useState([]);
   const [filteredAppointments, setFilteredAppointments] = useState([]);
   const [appointments, setAppointments] = useState([]);
@@ -38,4 +38,4 @@ const ClientsScreen = () => {
   )
 }
 
-export default ClientsScreen;
+export default Clients;

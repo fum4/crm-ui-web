@@ -1,5 +1,4 @@
-import AddScreen from '../components/FormModal';
-import ClientsScreen from './Clients';
-import TodayScreen from './Today';
+import Clients from './Clients';
+import Today from './Today';
 
-export { AddScreen, ClientsScreen, TodayScreen };
+export { Clients, Today };

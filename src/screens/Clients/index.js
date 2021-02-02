@@ -2,7 +2,7 @@ import { Fragment, useEffect, useState } from 'react';
 import { ClientList, SearchEnAdd } from '../../components';
 import { getClients } from '../../services/network';
 
-const ClientsScreen = () => {
+const Clients = () => {
   const [allClients, setAllClients] = useState();
   const [filteredClients, setFilteredClients] = useState([]);
   const [clients, setClients] = useState();
@@ -56,4 +56,4 @@ const ClientsScreen = () => {
   )
 }
 
-export default ClientsScreen;
+export default Clients;

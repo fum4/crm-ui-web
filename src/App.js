@@ -3,7 +3,7 @@ import {
   Switch,
   Route,
 } from 'react-router-dom';
-import { TodayScreen, ClientsScreen } from './screens';
+import { Today, Clients } from './screens';
 import { Navigation } from './components';
 import './App.css';
 
@@ -14,10 +14,10 @@ function App() {
         <Navigation />
         <Switch>
           <Route exact path="/">
-            <TodayScreen />
+            <Today />
           </Route>
           <Route path="/clients">
-            <ClientsScreen />
+            <Clients />
           </Route>
         </Switch>
       </div>
