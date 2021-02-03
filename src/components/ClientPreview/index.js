@@ -22,6 +22,7 @@ const ClientPreview = ({ entry }) => {
   useEffect(() => {
     console.log(entry);
   }, [entry]);
+  console.log("values", values);
   return (
     <Fragment>
       <Typography>{`${entry.surname} ${entry.name}`}</Typography>

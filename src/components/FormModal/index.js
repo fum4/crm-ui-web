@@ -116,7 +116,7 @@ const FormModal = ({
               }}
               className={classes.input}
               required={field.isRequired}
-              disabled={field.isDisabled}
+              // disabled={field.isDisabled}
               renderInput={(params) => (
                 <TextField {...params} label={field.label} variant="filled" />
               )}
