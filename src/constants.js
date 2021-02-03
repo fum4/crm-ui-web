@@ -48,7 +48,7 @@ export const addAppointmentFields = [
     id: 'client',
     label: 'Pacient',
     isDropdown: true,
-    isRequired: true
+    isRequired: true,
   },
   {
     id: 'appointment',
