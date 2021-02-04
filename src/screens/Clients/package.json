@@ -1,0 +1,5 @@
+{
+  "name": "clients",
+  "private": true,
+  "main": "./Clients.js"
+}

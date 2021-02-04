@@ -1,10 +1,10 @@
-import { useState, useEffect } from 'react';
-import { FormModal } from '../';
-import { getFormValues, serializeForm } from '../../services/utils';
-import { addClientFields, labels } from '../../constants';
-import { addClient, updateClient } from '../../services/network';
+import {useState, useEffect} from 'react';
+import {FormModal} from '..';
+import {getFormValues, serializeForm} from '../../services/utils';
+import {addClientFields, labels} from '../../constants';
+import {addClient, updateClient} from '../../services/network';
 
-const ClientDialog = ({ successHandler, action, setShowModal }) => {
+const ClientDialog = ({successHandler, action, setShowModal}) => {
   const [formFields, setFormFields] = useState();
   const [title, setTitle] = useState();
 
@@ -14,7 +14,7 @@ const ClientDialog = ({ successHandler, action, setShowModal }) => {
 
     setFormFields(formValues);
     setTitle(title);
-  }, [action])
+  }, [action]);
 
   const handleSubmit = (payload) => {
     switch (action) {
@@ -25,7 +25,7 @@ const ClientDialog = ({ successHandler, action, setShowModal }) => {
       default:
         return undefined;
     }
-  }
+  };
 
   return (
     <FormModal
@@ -33,9 +33,9 @@ const ClientDialog = ({ successHandler, action, setShowModal }) => {
       setShowModal={setShowModal}
       successHandler={successHandler}
       title={title}
-      fields={formFields} />
+      fields={formFields}
+    />
   );
-}
+};
 
 export default ClientDialog;
-

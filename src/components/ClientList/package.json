@@ -1,0 +1,5 @@
+{
+  "name": "client-list",
+  "private": true,
+  "main": "./ClientList.js"
+}

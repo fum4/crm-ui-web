@@ -1,10 +1,10 @@
-import { Fragment, useState } from 'react';
-import { fade, withStyles } from '@material-ui/core/styles';
-import { InputBase, Button } from '@material-ui/core';
-import { Dialog } from '../';
-import { FaPlus } from 'react-icons/fa';
+import {Fragment, useState} from 'react';
+import {fade, withStyles} from '@material-ui/core/styles';
+import {InputBase, Button} from '@material-ui/core';
+import {Dialog} from '..';
+import {FaPlus} from 'react-icons/fa';
 import './styles.scss';
-import { labels } from '../../constants';
+import {labels} from '../../constants';
 
 const BootstrapInput = withStyles((theme) => ({
   root: {
@@ -40,34 +40,38 @@ const BootstrapInput = withStyles((theme) => ({
   },
 }))(InputBase);
 
-const SearchEnAdd = ({ handleSearch, actionSuccessHandler, type }) => {
+const SearchEnAdd = ({handleSearch, actionSuccessHandler, type}) => {
   const [showModal, setShowModal] = useState(false);
 
   return (
     <Fragment>
-      <div className='search-input-container'>
-        <BootstrapInput className='search-input-container__main-input' onChange={(ev) => handleSearch(ev.target.value)}/>
+      <div className="search-input-container">
+        <BootstrapInput
+          className="search-input-container__main-input"
+          onChange={(ev) => handleSearch(ev.target.value)}
+        />
         <Button
-          className='add-new-btn'
-          variant='contained'
-          color='primary'
-          size='large'
+          className="add-new-btn"
+          variant="contained"
+          color="primary"
+          size="large"
           onClick={() => setShowModal(true)}>
-          <FaPlus className='add-icon' size={13}/>
-          <p>{type === 'client' ? labels.ADD_CLIENT : labels.ADD_APPOINTMENT }</p>
+          <FaPlus className="add-icon" size={13} />
+          <p>
+            {type === 'client' ? labels.ADD_CLIENT : labels.ADD_APPOINTMENT}
+          </p>
         </Button>
       </div>
-      {
-        showModal && (
-          <Dialog
-            type={type}
-            action='add'
-            setShowModal={setShowModal}
-            successHandler={actionSuccessHandler} />
-        )
-      }
+      {showModal && (
+        <Dialog
+          type={type}
+          action="add"
+          setShowModal={setShowModal}
+          successHandler={actionSuccessHandler}
+        />
+      )}
     </Fragment>
   );
-}
+};
 
 export default SearchEnAdd;

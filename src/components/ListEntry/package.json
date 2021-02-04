@@ -1,0 +1,5 @@
+{
+  "name": "list-entry",
+  "private": true,
+  "main": "./ListEntry.js"
+}

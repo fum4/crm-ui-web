@@ -1,0 +1,5 @@
+{
+  "name": "today",
+  "private": true,
+  "main": "./Today.js"
+}

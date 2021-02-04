@@ -1,18 +1,18 @@
-import { useEffect, useState } from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import Autocomplete from "@material-ui/lab/Autocomplete";
-import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
-import { Dialog } from "@material-ui/core";
-import { FaTimes } from "react-icons/fa";
-import "./styles.scss";
+import {useEffect, useState} from 'react';
+import {makeStyles} from '@material-ui/core/styles';
+import Autocomplete from '@material-ui/lab/Autocomplete';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+import {Dialog} from '@material-ui/core';
+import {FaTimes} from 'react-icons/fa';
+import './styles.scss';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: "60%",
-    display: "flex",
-    flexDirection: "column",
-    alignSelf: "center",
+    width: '60%',
+    display: 'flex',
+    flexDirection: 'column',
+    alignSelf: 'center',
     padding: 10,
   },
   input: {
@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
   },
   heading: {
     fontSize: theme.typography.pxToRem(15),
-    flexBasis: "33.33%",
+    flexBasis: '33.33%',
     flexShrink: 0,
   },
   secondaryHeading: {
@@ -29,14 +29,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const FormModal = ({
-  setShowModal,
-  successHandler,
-  title,
-  fields,
-  onSubmit,
-
-}) => {
+const FormModal = ({setShowModal, successHandler, title, fields, onSubmit}) => {
   const classes = useStyles();
   const [details, setDetails] = useState();
 
@@ -53,7 +46,7 @@ const FormModal = ({
   };
 
   useEffect(() => {
-    console.log("fields", fields);
+    console.log('fields', fields);
     setDetails(fields);
   }, [fields]);
 
@@ -62,7 +55,7 @@ const FormModal = ({
   };
 
   const handleSubmit = () => {
-    onSubmit({ ...details }).then(() => {
+    onSubmit({...details}).then(() => {
       hideModal();
       successHandler();
     });
@@ -120,8 +113,7 @@ const FormModal = ({
             onClick={() => handleSubmit()}
             variant="contained"
             color="primary"
-            size="large"
-          >
+            size="large">
             Adaugă
           </Button>
         </div>

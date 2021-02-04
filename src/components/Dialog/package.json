@@ -1,0 +1,5 @@
+{
+  "name": "dialog",
+  "private": true,
+  "main": "./Dialog.js"
+}

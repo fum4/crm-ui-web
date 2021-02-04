@@ -1,0 +1,5 @@
+{
+  "name": "appointment-list",
+  "private": true,
+  "main": "./AppointmentList.js"
+}

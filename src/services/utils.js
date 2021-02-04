@@ -10,11 +10,14 @@ export const getFormValues = (baseFields, payload) => {
   });
 
   return fields;
-}
+};
 
 export const serializeForm = (payload) => {
-  return Object.keys(payload).reduce((result, index) => ({
-    ...result,
-    [payload[index].id]: payload[index].value
-  }), [])
-}
+  return Object.keys(payload).reduce(
+    (result, index) => ({
+      ...result,
+      [payload[index].id]: payload[index].value,
+    }),
+    [],
+  );
+};

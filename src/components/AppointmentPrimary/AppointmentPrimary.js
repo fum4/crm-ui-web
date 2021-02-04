@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
@@ -22,32 +22,42 @@ const useStyles = makeStyles({
   },
 });
 
-const AppointmentPrimary = ({ entry }) => {
+const AppointmentPrimary = ({entry}) => {
   const classes = useStyles();
-  const { name, surname } = entry;
-  const { appointment, date, control, price, treatment, technician } = entry.appointment;
+  const {name, surname} = entry;
+  const {
+    appointment,
+    date,
+    control,
+    price,
+    treatment,
+    technician,
+  } = entry.appointment;
 
   return (
-    <Card className='appointment-primary' variant="outlined">
+    <Card className="appointment-primary" variant="outlined">
       <CardContent>
-        <Typography className={classes.title} color="textSecondary" gutterBottom>
-          { appointment }
+        <Typography
+          className={classes.title}
+          color="textSecondary"
+          gutterBottom>
+          {appointment}
         </Typography>
         <Typography variant="h5" component="h2">
-          { date }
+          {date}
         </Typography>
         <Typography className={classes.pos} color="textSecondary">
-          { `${surname} ${name}` }
+          {`${surname} ${name}`}
         </Typography>
         <Typography variant="body2" component="p">
-          { control }
+          {control}
         </Typography>
         <Typography variant="body2" component="p">
-          { price }
+          {price}
         </Typography>
       </CardContent>
     </Card>
   );
-}
+};
 
 export default AppointmentPrimary;

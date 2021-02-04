@@ -1,0 +1,5 @@
+{
+  "name": "search-en-add",
+  "private": true,
+  "main": "./SearchEnAdd.js"
+}

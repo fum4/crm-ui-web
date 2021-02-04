@@ -1,19 +1,19 @@
 .navigation-container {
-    margin: 50px 0 150px;
+  margin: 50px 0 150px;
 
-    ul {
-        display: flex;
-        list-style-type: none;
-        justify-content: center;
+  ul {
+    display: flex;
+    list-style-type: none;
+    justify-content: center;
 
-        li {
-            padding: 20px 50px;
+    li {
+      padding: 20px 50px;
 
-            a {
-                text-decoration: none;
-                color: black;
-                font-size: 30px;
-            }
-        }
+      a {
+        text-decoration: none;
+        color: black;
+        font-size: 30px;
+      }
     }
+  }
 }

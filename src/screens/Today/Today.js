@@ -1,6 +1,6 @@
-import { Fragment, useEffect, useState } from 'react';
-import { getAppointments } from '../../services/network';
-import { AppointmentList, SearchEnAdd } from '../../components';
+import {Fragment, useEffect, useState} from 'react';
+import {getAppointments} from '../../services/network';
+import {AppointmentList, SearchEnAdd} from '../../components';
 
 const Clients = () => {
   const [allAppointments, setAllAppointments] = useState([]);
@@ -13,29 +13,30 @@ const Clients = () => {
         setAllAppointments(response.data);
       }
     });
-  }
+  };
 
   useEffect(() => {
     refreshAppointments();
   }, []);
 
   useEffect(() => {
-    setAppointments(filteredAppointments.length ? filteredAppointments : allAppointments);
+    setAppointments(
+      filteredAppointments.length ? filteredAppointments : allAppointments,
+    );
   }, [allAppointments, filteredAppointments]);
 
-  const handleSearch = () => {
-
-  }
+  const handleSearch = () => {};
 
   return (
     <Fragment>
       <SearchEnAdd
-        type='appointment'
+        type="appointment"
         handleSearch={(payload) => handleSearch(payload)}
-        actionSuccessHandler={() => refreshAppointments()} />
-      <AppointmentList type='primary' entries={appointments} />
+        actionSuccessHandler={() => refreshAppointments()}
+      />
+      <AppointmentList type="primary" entries={appointments} />
     </Fragment>
-  )
-}
+  );
+};
 
 export default Clients;

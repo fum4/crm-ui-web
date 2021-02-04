@@ -1,6 +1,6 @@
-import { Fragment, useEffect, useState } from 'react';
-import { ClientList, SearchEnAdd } from '../../components';
-import { getClients } from '../../services/network';
+import {Fragment, useEffect, useState} from 'react';
+import {ClientList, SearchEnAdd} from '../../components';
+import {getClients} from '../../services/network';
 
 const Clients = () => {
   const [allClients, setAllClients] = useState();
@@ -13,7 +13,7 @@ const Clients = () => {
         setAllClients(response.data);
       }
     });
-  }
+  };
 
   useEffect(() => {
     refreshClients();
@@ -37,23 +37,24 @@ const Clients = () => {
         if (name.includes(searchTerm) || surname.includes(searchTerm)) {
           isMatch = true;
         }
-      })
+      });
 
       return isMatch;
     });
 
     setFilteredClients(filtered);
-  }
+  };
 
   return (
     <Fragment>
       <SearchEnAdd
-        type='client'
+        type="client"
         handleSearch={(payload) => handleSearch(payload)}
-        actionSuccessHandler={() => refreshClients()} />
+        actionSuccessHandler={() => refreshClients()}
+      />
       <ClientList entries={clients} />
     </Fragment>
-  )
-}
+  );
+};
 
 export default Clients;

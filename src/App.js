@@ -1,10 +1,6 @@
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-} from 'react-router-dom';
-import { Today, Clients } from './screens';
-import { Navigation } from './components';
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+import {Today, Clients} from './screens';
+import {Navigation} from './components';
 import './App.css';
 
 function App() {
