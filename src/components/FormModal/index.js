@@ -38,10 +38,9 @@ const FormModal = ({
   type,
 }) => {
   const classes = useStyles();
-  const [details, setDetails] = useState(null);
+  const [details, setDetails] = useState();
 
   const onInputChange = (key, value) => {
-    console.log("---> value ", value);
     const updatedDetails = details.map((item) => {
       if (item.id === key) {
         item.value = value;
@@ -49,7 +48,7 @@ const FormModal = ({
 
       return item;
     });
-    console.log("updatedDetails", updatedDetails);
+
     setDetails(updatedDetails);
   };
 
@@ -63,10 +62,6 @@ const FormModal = ({
   };
 
   const handleSubmit = () => {
-    const client = details.find((detail) => detail.id === "client");
-
-    client.value = client.value._id;
-
     onSubmit({ ...details }).then(() => {
       hideModal();
       successHandler();
@@ -87,44 +82,30 @@ const FormModal = ({
       </div>
       <form className={classes.root} autoComplete="off">
         {details?.map((field, index) => {
-          if (field.isDropdown && field.options.length) {
-            console.log("######## fields: ", fields);
-            console.log("######## details: ", details);
-            console.log("====== field", field);
-            console.log(
-              "++++++++ defaultValue ",
-              field.options?.find((option) => option._id === field.value)
-            );
-          }
+          const value = details.find((detail) => detail.id === field.id).value;
+          const options = field.options?.map((option) => option._id);
+
           return field.isDropdown && field.options.length ? (
             <Autocomplete
-              key={details?.find((detail) => detail.id === field.id)?.value}
-              value={details?.find((detail) => detail.id === field.id).value}
+              key={value}
+              value={value}
               onChange={(event, value) => onInputChange(field.id, value)}
-              defaultValue={field.options?.find(
-                (option) => option._id === field.value
-              )}
-              options={field.options}
-              getOptionLabel={(item) => {
-                console.log("------ item._id : ", item);
-                // if (type === "appointment") {
-                // return field.options?.find((option) => option._id === item)
-                //   ?.label;
-                // } else {
-                return item.label;
-                // }
-              }}
+              defaultValue={field.value}
+              options={options}
+              getOptionLabel={(item) =>
+                field.options?.find((option) => option._id === item)?.label
+              }
               className={classes.input}
               required={field.isRequired}
-              // disabled={field.isDisabled}
+              disabled={field.isDisabled}
               renderInput={(params) => (
                 <TextField {...params} label={field.label} variant="filled" />
               )}
             />
           ) : (
             <TextField
-              key={index}
-              value={details?.find((detail) => detail.id === field.id)?.value}
+              key={value}
+              value={value}
               onChange={(event) => onInputChange(field.id, event.target.value)}
               className={classes.input}
               id={field.id}
