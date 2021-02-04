@@ -28,11 +28,11 @@ const Clients = () => {
   return (
     <Fragment>
       <SearchEnAdd
-        type='appointment'
-        handleSearch={(payload) => handleSearch(payload)}
         actionSuccessHandler={() => refreshAppointments()}
+        handleSearch={(payload) => handleSearch(payload)}
+        type='appointment'
       />
-      <AppointmentList type='primary' entries={appointments} />
+      <AppointmentList entries={appointments} type='primary' />
     </Fragment>
   );
 };

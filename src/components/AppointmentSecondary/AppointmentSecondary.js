@@ -75,11 +75,11 @@ const AppointmentSecondary = ({entry, parentId}) => {
       </ListItem>
       {showEditModal && (
         <Dialog
-          type='appointment'
           action='edit'
-          values={formValues}
           setShowModal={setShowEditModal}
           successHandler={() => {}}
+          type='appointment'
+          values={formValues}
         />
       )}
     </Fragment>

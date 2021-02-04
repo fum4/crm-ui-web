@@ -29,19 +29,19 @@ const AppointmentPrimary = ({entry}) => {
   return (
     <Card className='appointment-primary' variant='outlined'>
       <CardContent>
-        <Typography className={classes.title} color='textSecondary' gutterBottom>
+        <Typography gutterBottom className={classes.title} color='textSecondary'>
           {appointment}
         </Typography>
-        <Typography variant='h5' component='h2'>
+        <Typography component='h2' variant='h5'>
           {date}
         </Typography>
         <Typography className={classes.pos} color='textSecondary'>
           {`${surname} ${name}`}
         </Typography>
-        <Typography variant='body2' component='p'>
+        <Typography component='p' variant='body2'>
           {control}
         </Typography>
-        <Typography variant='body2' component='p'>
+        <Typography component='p' variant='body2'>
           {price}
         </Typography>
       </CardContent>

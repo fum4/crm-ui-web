@@ -48,9 +48,9 @@ const Clients = () => {
   return (
     <Fragment>
       <SearchEnAdd
-        type='client'
-        handleSearch={(payload) => handleSearch(payload)}
         actionSuccessHandler={() => refreshClients()}
+        handleSearch={(payload) => handleSearch(payload)}
+        type='client'
       />
       <ClientList entries={clients} />
     </Fragment>
