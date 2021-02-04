@@ -32,7 +32,8 @@ const useStyles = makeStyles((theme) => ({
 const FormModal = ({setShowModal, successHandler, title, fields, onSubmit}) => {
   const classes = useStyles();
   const [details, setDetails] = useState();
-
+  // const [autocompleteValue, setAutoComplValue] = useState();
+  const [inputValue, setInputValue] = useState('');
   const onInputChange = (key, value) => {
     const updatedDetails = details.map((item) => {
       if (item.id === key) {
@@ -42,6 +43,7 @@ const FormModal = ({setShowModal, successHandler, title, fields, onSubmit}) => {
       return item;
     });
 
+    // setAutoComplValue(value);
     setDetails(updatedDetails);
   };
 
@@ -70,32 +72,40 @@ const FormModal = ({setShowModal, successHandler, title, fields, onSubmit}) => {
       </div>
       <form className={classes.root} autoComplete='off'>
         {details?.map((field, index) => {
-          const value = details.find((detail) => detail.id === field.id).value;
           const options = field.options?.map((option) => option._id);
+          const type = field.id === 'date' ? 'datetime-local' : '';
+          const value = details.find((detail) => detail.id === field.id).value;
 
           return field.isDropdown && field.options.length ? (
             <Autocomplete
-              key={value}
-              value={value}
-              onChange={(event, value) => onInputChange(field.id, value)}
-              defaultValue={field.value}
-              options={options}
-              getOptionLabel={(item) => field.options?.find((option) => option._id === item)?.label}
               className={classes.input}
-              required={field.isRequired}
+              defaultValue={value}
               disabled={field.isDisabled}
+              getOptionLabel={(item) => field.options?.find((option) => option._id === item)?.label}
+              inputValue={inputValue}
+              key={field.id}
+              value={value}
+              onChange={(ev, value) => onInputChange(field.id, value)}
+              onInputChange={(ev, value) => {
+                console.log('inputchangeh pizdii', value);
+                setInputValue(value);
+              }}
+              options={options}
               renderInput={(params) => <TextField {...params} label={field.label} variant='filled' />}
+              required={field.isRequired}
             />
           ) : (
             <TextField
-              key={value}
-              value={value}
-              onChange={(event) => onInputChange(field.id, event.target.value)}
               className={classes.input}
+              defaultValue={field.id === 'date' ? '2017-05-24T10:30' : ''}
               id={field.id}
+              key={field.id}
               label={field.label}
-              variant='filled'
+              onChange={(event) => onInputChange(field.id, event.target.value)}
               required={field.isRequired}
+              type={type}
+              value={value}
+              variant='filled'
             />
           );
         })}
