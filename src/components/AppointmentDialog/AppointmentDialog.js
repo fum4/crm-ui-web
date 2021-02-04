@@ -2,20 +2,10 @@ import React, {useState, useEffect} from 'react';
 import {FormModal} from '..';
 import {getFormValues, serializeForm} from '../../services/utils';
 import {addAppointmentFields, labels} from '../../constants';
-import {
-  addAppointment,
-  updateAppointment,
-  getClients,
-} from '../../services/network';
+import {addAppointment, updateAppointment, getClients} from '../../services/network';
 import _ from 'lodash';
 
-const AppointmentDialog = ({
-  successHandler,
-  action,
-  setShowModal,
-  values,
-  type,
-}) => {
+const AppointmentDialog = ({successHandler, action, setShowModal, values, type}) => {
   const [formFields, setFormFields] = useState();
   const [clients, setClients] = useState([]);
   const [title, setTitle] = useState();
@@ -23,7 +13,7 @@ const AppointmentDialog = ({
   useEffect(() => {
     const clientsFieldOptions = clients.map((client) => ({
       label: `${client.surname} ${client.name}`,
-      _id: client._id,
+      _id: client._id
     }));
 
     let options = [{id: 'client', key: 'options', value: clientsFieldOptions}];
@@ -33,8 +23,7 @@ const AppointmentDialog = ({
     }
 
     const formValues = getFormValues(addAppointmentFields, _.flatten(options));
-    const title =
-      action === 'add' ? labels.ADD_APPOINTMENT : labels.EDIT_APPOINTMENT;
+    const title = action === 'add' ? labels.ADD_APPOINTMENT : labels.EDIT_APPOINTMENT;
 
     setFormFields(formValues);
     setTitle(title);
@@ -47,10 +36,6 @@ const AppointmentDialog = ({
       }
     });
   }, []);
-
-  useEffect(() => {
-    console.log('appointment dialog -> ', formFields);
-  }, [formFields]);
 
   const handleSubmit = (payload) => {
     switch (action) {

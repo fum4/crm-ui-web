@@ -20,9 +20,7 @@ const Clients = () => {
   }, []);
 
   useEffect(() => {
-    setAppointments(
-      filteredAppointments.length ? filteredAppointments : allAppointments,
-    );
+    setAppointments(filteredAppointments.length ? filteredAppointments : allAppointments);
   }, [allAppointments, filteredAppointments]);
 
   const handleSearch = () => {};
@@ -30,11 +28,11 @@ const Clients = () => {
   return (
     <Fragment>
       <SearchEnAdd
-        type="appointment"
+        type='appointment'
         handleSearch={(payload) => handleSearch(payload)}
         actionSuccessHandler={() => refreshAppointments()}
       />
-      <AppointmentList type="primary" entries={appointments} />
+      <AppointmentList type='primary' entries={appointments} />
     </Fragment>
   );
 };

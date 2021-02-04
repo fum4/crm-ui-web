@@ -19,7 +19,7 @@ const ListEntry = (props) => {
         expandIcon={<ExpandMoreIcon />}
         onChange={handleChange(props.key)}
         expanded={expanded === props.key}>
-        <AccordionSummary id="panel1bh-header" aria-controls="panel1bh-content">
+        <AccordionSummary id='panel1bh-header' aria-controls='panel1bh-content'>
           <ClientPreview entry={props.entry} />
         </AccordionSummary>
         <AccordionDetails>{props.children}</AccordionDetails>

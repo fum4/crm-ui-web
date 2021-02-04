@@ -9,8 +9,8 @@ import {labels} from '../../constants';
 const BootstrapInput = withStyles((theme) => ({
   root: {
     'label + &': {
-      marginTop: theme.spacing(3),
-    },
+      marginTop: theme.spacing(3)
+    }
   },
   input: {
     borderRadius: 4,
@@ -31,13 +31,13 @@ const BootstrapInput = withStyles((theme) => ({
       'sans-serif',
       '"Apple Color Emoji"',
       '"Segoe UI Emoji"',
-      '"Segoe UI Symbol"',
+      '"Segoe UI Symbol"'
     ].join(','),
     '&:focus': {
       boxShadow: `${fade(theme.palette.primary.main, 0.25)} 0 0 0 0.2rem`,
-      borderColor: theme.palette.primary.main,
-    },
-  },
+      borderColor: theme.palette.primary.main
+    }
+  }
 }))(InputBase);
 
 const SearchEnAdd = ({handleSearch, actionSuccessHandler, type}) => {
@@ -45,30 +45,23 @@ const SearchEnAdd = ({handleSearch, actionSuccessHandler, type}) => {
 
   return (
     <Fragment>
-      <div className="search-input-container">
+      <div className='search-input-container'>
         <BootstrapInput
-          className="search-input-container__main-input"
+          className='search-input-container__main-input'
           onChange={(ev) => handleSearch(ev.target.value)}
         />
         <Button
-          className="add-new-btn"
-          variant="contained"
-          color="primary"
-          size="large"
+          className='add-new-btn'
+          variant='contained'
+          color='primary'
+          size='large'
           onClick={() => setShowModal(true)}>
-          <FaPlus className="add-icon" size={13} />
-          <p>
-            {type === 'client' ? labels.ADD_CLIENT : labels.ADD_APPOINTMENT}
-          </p>
+          <FaPlus className='add-icon' size={13} />
+          <p>{type === 'client' ? labels.ADD_CLIENT : labels.ADD_APPOINTMENT}</p>
         </Button>
       </div>
       {showModal && (
-        <Dialog
-          type={type}
-          action="add"
-          setShowModal={setShowModal}
-          successHandler={actionSuccessHandler}
-        />
+        <Dialog type={type} action='add' setShowModal={setShowModal} successHandler={actionSuccessHandler} />
       )}
     </Fragment>
   );

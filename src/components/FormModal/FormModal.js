@@ -13,20 +13,20 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
     alignSelf: 'center',
-    padding: 10,
+    padding: 10
   },
   input: {
-    margin: 10,
+    margin: 10
   },
   heading: {
     fontSize: theme.typography.pxToRem(15),
     flexBasis: '33.33%',
-    flexShrink: 0,
+    flexShrink: 0
   },
   secondaryHeading: {
     fontSize: theme.typography.pxToRem(15),
-    color: theme.palette.text.secondary,
-  },
+    color: theme.palette.text.secondary
+  }
 }));
 
 const FormModal = ({setShowModal, successHandler, title, fields, onSubmit}) => {
@@ -46,7 +46,6 @@ const FormModal = ({setShowModal, successHandler, title, fields, onSubmit}) => {
   };
 
   useEffect(() => {
-    console.log('fields', fields);
     setDetails(fields);
   }, [fields]);
 
@@ -62,18 +61,18 @@ const FormModal = ({setShowModal, successHandler, title, fields, onSubmit}) => {
   };
 
   return (
-    <Dialog fullWidth={true} maxWidth="md" open={true}>
-      <div className="modal-header">
+    <Dialog fullWidth={true} maxWidth='md' open={true}>
+      <div className='modal-header'>
         <h2>{title}</h2>
-        <div className="close-btn-container">
+        <div className='close-btn-container'>
           <FaTimes
             onClick={() => hideModal()}
-            className="close-btn"
+            className='close-btn'
             size={35}
           />
         </div>
       </div>
-      <form className={classes.root} autoComplete="off">
+      <form className={classes.root} autoComplete='off'>
         {details?.map((field, index) => {
           const value = details.find((detail) => detail.id === field.id).value;
           const options = field.options?.map((option) => option._id);
@@ -92,7 +91,7 @@ const FormModal = ({setShowModal, successHandler, title, fields, onSubmit}) => {
               required={field.isRequired}
               disabled={field.isDisabled}
               renderInput={(params) => (
-                <TextField {...params} label={field.label} variant="filled" />
+                <TextField {...params} label={field.label} variant='filled' />
               )}
             />
           ) : (
@@ -103,17 +102,17 @@ const FormModal = ({setShowModal, successHandler, title, fields, onSubmit}) => {
               className={classes.input}
               id={field.id}
               label={field.label}
-              variant="filled"
+              variant='filled'
               required={field.isRequired}
             />
           );
         })}
-        <div className="modal-footer">
+        <div className='modal-footer'>
           <Button
             onClick={() => handleSubmit()}
-            variant="contained"
-            color="primary"
-            size="large">
+            variant='contained'
+            color='primary'
+            size='large'>
             Adaugă
           </Button>
         </div>

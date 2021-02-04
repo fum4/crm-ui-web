@@ -11,34 +11,31 @@ const ClientPreview = ({entry}) => {
     {
       id: 'client',
       key: 'value',
-      value: entry._id,
+      value: entry._id
     },
     {
       id: 'client',
       key: 'isDisabled',
-      value: true,
-    },
+      value: true
+    }
   ];
-  useEffect(() => {
-    console.log(entry);
-  }, [entry]);
-  console.log('values', values);
+
   return (
     <Fragment>
       <Typography>{`${entry.surname} ${entry.name}`}</Typography>
       <Button
-        className="add-new-btn pull-right"
-        variant="outlined"
-        color="primary"
-        size="small"
+        className='add-new-btn pull-right'
+        variant='outlined'
+        color='primary'
+        size='small'
         onClick={() => setShowModal(true)}>
-        <FaPlus className="add-icon" size={13} />
+        <FaPlus className='add-icon' size={13} />
         <p>{labels.APPOINTMENT}</p>
       </Button>
       {showModal && (
         <Dialog
-          type="appointment"
-          action="add"
+          type='appointment'
+          action='add'
           values={values}
           setShowModal={setShowModal}
           successHandler={() => {}}
