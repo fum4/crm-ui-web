@@ -1,11 +1,11 @@
-import React, {useState, useEffect} from 'react';
+import {useState, useEffect} from 'react';
 import {FormModal} from '..';
 import {getFormValues, serializeForm} from '../../services/utils';
 import {addAppointmentFields, labels} from '../../constants';
 import {addAppointment, updateAppointment, getClients} from '../../services/network';
 import _ from 'lodash';
 
-const AppointmentDialog = ({successHandler, action, setShowModal, values, type}) => {
+const AppointmentDialog = ({successHandler, action, setShowModal, values}) => {
   const [formFields, setFormFields] = useState();
   const [clients, setClients] = useState([]);
   const [title, setTitle] = useState();
