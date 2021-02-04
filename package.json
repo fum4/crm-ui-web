@@ -15,6 +15,7 @@
     "lodash": "^4.17.20",
     "react": "^17.0.1",
     "react-bootstrap": "^1.4.3",
+    "react-calendar": "^3.3.1",
     "react-collapsible": "^2.8.1",
     "react-dom": "^17.0.1",
     "react-icons": "^4.1.0",
@@ -28,7 +29,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint .",
-    "lint:fix": "eslint --fix ."
+    "lint:fix": "eslint --fix .",
+    "prettier": "prettier --write ."
   },
   "eslintConfig": {
     "extends": [

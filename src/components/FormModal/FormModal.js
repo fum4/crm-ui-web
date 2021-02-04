@@ -65,11 +65,7 @@ const FormModal = ({setShowModal, successHandler, title, fields, onSubmit}) => {
       <div className='modal-header'>
         <h2>{title}</h2>
         <div className='close-btn-container'>
-          <FaTimes
-            onClick={() => hideModal()}
-            className='close-btn'
-            size={35}
-          />
+          <FaTimes onClick={() => hideModal()} className='close-btn' size={35} />
         </div>
       </div>
       <form className={classes.root} autoComplete='off'>
@@ -84,15 +80,11 @@ const FormModal = ({setShowModal, successHandler, title, fields, onSubmit}) => {
               onChange={(event, value) => onInputChange(field.id, value)}
               defaultValue={field.value}
               options={options}
-              getOptionLabel={(item) =>
-                field.options?.find((option) => option._id === item)?.label
-              }
+              getOptionLabel={(item) => field.options?.find((option) => option._id === item)?.label}
               className={classes.input}
               required={field.isRequired}
               disabled={field.isDisabled}
-              renderInput={(params) => (
-                <TextField {...params} label={field.label} variant='filled' />
-              )}
+              renderInput={(params) => <TextField {...params} label={field.label} variant='filled' />}
             />
           ) : (
             <TextField
@@ -108,11 +100,7 @@ const FormModal = ({setShowModal, successHandler, title, fields, onSubmit}) => {
           );
         })}
         <div className='modal-footer'>
-          <Button
-            onClick={() => handleSubmit()}
-            variant='contained'
-            color='primary'
-            size='large'>
+          <Button onClick={() => handleSubmit()} variant='contained' color='primary' size='large'>
             Adaugă
           </Button>
         </div>

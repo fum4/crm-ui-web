@@ -16,8 +16,8 @@ export const serializeForm = (payload) => {
   return Object.keys(payload).reduce(
     (result, index) => ({
       ...result,
-      [payload[index].id]: payload[index].value,
+      [payload[index].id]: payload[index].value
     }),
-    [],
+    []
   );
 };

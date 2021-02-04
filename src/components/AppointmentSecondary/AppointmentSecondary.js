@@ -15,13 +15,13 @@ const AppointmentSecondary = ({entry, parentId}) => {
     const clientValue = {
       id: 'client',
       key: 'value',
-      value: parentId,
+      value: parentId
     };
 
     const clientDisableState = {
       id: 'client',
       key: 'isDisabled',
-      value: true,
+      value: true
     };
 
     formValues.push(clientValue, clientDisableState);
@@ -30,7 +30,7 @@ const AppointmentSecondary = ({entry, parentId}) => {
       formValues.push({
         id: key,
         key: 'value',
-        value: entry[key],
+        value: entry[key]
       });
     });
 
@@ -45,44 +45,38 @@ const AppointmentSecondary = ({entry, parentId}) => {
     <Fragment>
       <ListItem>
         <ListItemText
-          className="appointment-secondary appointment-secondary__appointment"
+          className='appointment-secondary appointment-secondary__appointment'
           primary={entry?.appointment}
         />
+        <ListItemText className='appointment-secondary appointment-secondary__date' primary={entry?.date} />
         <ListItemText
-          className="appointment-secondary appointment-secondary__date"
-          primary={entry?.date}
-        />
-        <ListItemText
-          className="appointment-secondary appointment-secondary__treatment"
+          className='appointment-secondary appointment-secondary__treatment'
           primary={entry?.treatment}
         />
         <ListItemText
-          className="appointment-secondary appointment-secondary__control"
+          className='appointment-secondary appointment-secondary__control'
           primary={entry?.control}
         />
         <ListItemText
-          className="appointment-secondary appointment-secondary__technician"
+          className='appointment-secondary appointment-secondary__technician'
           primary={entry?.technician}
         />
-        <ListItemText
-          className="appointment-secondary appointment-secondary__price"
-          primary={entry?.price}
-        />
-        <div className="appointment-secondary appointment-secondary__action-buttons">
+        <ListItemText className='appointment-secondary appointment-secondary__price' primary={entry?.price} />
+        <div className='appointment-secondary appointment-secondary__action-buttons'>
           <FaPen
-            className="appointment-secondary appointment-secondary__edit-icon"
+            className='appointment-secondary appointment-secondary__edit-icon'
             onClick={() => setShowEditModal(true)}
           />
           <FaTrashAlt
-            className="appointment-secondary appointment-secondary__remove-icon"
+            className='appointment-secondary appointment-secondary__remove-icon'
             onClick={() => removeEntry()}
           />
         </div>
       </ListItem>
       {showEditModal && (
         <Dialog
-          type="appointment"
-          action="edit"
+          type='appointment'
+          action='edit'
           values={formValues}
           setShowModal={setShowEditModal}
           successHandler={() => {}}

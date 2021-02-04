@@ -3,8 +3,8 @@ module.exports = {
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaFeatures: {
-      jsx: true,
-    },
+      jsx: true
+    }
   },
   extends: [
     'eslint:recommended',
@@ -14,19 +14,19 @@ module.exports = {
     'prettier/babel',
     'prettier/flowtype',
     'prettier/react',
-    'prettier/standard',
+    'prettier/standard'
   ],
   plugins: ['@typescript-eslint', 'react', 'prettier'],
   settings: {
     react: {
-      version: 'detect', // Tells eslint-plugin-react to automatically detect the version of React to use
+      version: 'detect' // Tells eslint-plugin-react to automatically detect the version of React to use
     },
     'import/resolver': {
       node: {
         extensions: ['.js', '.jsx', '.ts', '.tsx'],
-        paths: ['./src'],
-      },
-    },
+        paths: ['./src']
+      }
+    }
   },
   rules: {
     'react/prop-types': 'off',
@@ -35,6 +35,6 @@ module.exports = {
     'react/react-in-jsx-scope': 'off',
     // 'prettier/prettier': ['error', {endOfLine: 'auto'}],
     'no-unused-vars': 'warn',
-    '@typescript-eslint/no-unused-vars': 'warn',
-  },
+    '@typescript-eslint/no-unused-vars': 'warn'
+  }
 };
