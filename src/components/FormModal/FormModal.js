@@ -32,8 +32,7 @@ const useStyles = makeStyles((theme) => ({
 const FormModal = ({setShowModal, successHandler, title, fields, onSubmit}) => {
   const classes = useStyles();
   const [details, setDetails] = useState();
-  // const [autocompleteValue, setAutoComplValue] = useState();
-  const [inputValue, setInputValue] = useState('');
+
   const onInputChange = (key, value) => {
     const updatedDetails = details.map((item) => {
       if (item.id === key) {
@@ -43,7 +42,6 @@ const FormModal = ({setShowModal, successHandler, title, fields, onSubmit}) => {
       return item;
     });
 
-    // setAutoComplValue(value);
     setDetails(updatedDetails);
   };
 
@@ -71,25 +69,20 @@ const FormModal = ({setShowModal, successHandler, title, fields, onSubmit}) => {
         </div>
       </div>
       <form className={classes.root} autoComplete='off'>
-        {details?.map((field, index) => {
+        {details?.map((field) => {
+          const value = details.find((detail) => detail.id === field.id).value;
           const options = field.options?.map((option) => option._id);
           const type = field.id === 'date' ? 'datetime-local' : '';
-          const value = details.find((detail) => detail.id === field.id).value;
 
           return field.isDropdown && field.options.length ? (
             <Autocomplete
               className={classes.input}
-              defaultValue={value}
+              defaultValue={field.value}
               disabled={field.isDisabled}
               getOptionLabel={(item) => field.options?.find((option) => option._id === item)?.label}
-              inputValue={inputValue}
               key={field.id}
               value={value}
               onChange={(ev, value) => onInputChange(field.id, value)}
-              onInputChange={(ev, value) => {
-                console.log('inputchangeh pizdii', value);
-                setInputValue(value);
-              }}
               options={options}
               renderInput={(params) => <TextField {...params} label={field.label} variant='filled' />}
               required={field.isRequired}

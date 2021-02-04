@@ -18,6 +18,10 @@ export const addClientFields = [
     label: 'Programare'
   },
   {
+    id: 'date',
+    label: 'Data'
+  },
+  {
     id: 'phone',
     label: 'Telefon'
   },
@@ -36,10 +40,6 @@ export const addClientFields = [
   {
     id: 'price',
     label: 'Preț'
-  },
-  {
-    id: 'date',
-    label: 'Data'
   }
 ];
 
@@ -53,6 +53,11 @@ export const addAppointmentFields = [
   {
     id: 'appointment',
     label: 'Programare'
+  },
+  {
+    id: 'date',
+    label: 'Data',
+    isRequired: true
   },
   {
     id: 'treatment',
@@ -69,11 +74,6 @@ export const addAppointmentFields = [
   {
     id: 'price',
     label: 'Preț'
-  },
-  {
-    id: 'date',
-    label: 'Data',
-    isRequired: true
   }
 ];
 
