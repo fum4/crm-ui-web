@@ -25,20 +25,20 @@ const ClientPreview = ({entry}) => {
       <Typography>{`${entry.surname} ${entry.name}`}</Typography>
       <Button
         className='add-new-btn pull-right'
-        variant='outlined'
         color='primary'
         size='small'
+        variant='outlined'
         onClick={() => setShowModal(true)}>
         <FaPlus className='add-icon' size={13} />
         <p>{labels.APPOINTMENT}</p>
       </Button>
       {showModal && (
         <Dialog
-          type='appointment'
           action='add'
-          values={values}
           setShowModal={setShowModal}
           successHandler={() => {}}
+          type='appointment'
+          values={values}
         />
       )}
     </Fragment>

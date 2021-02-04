@@ -5,7 +5,7 @@ const AppointmentList = ({entries, type, parentId}) => {
   return (
     <div className='appointments-container'>
       {entries?.map((entry, index) => (
-        <Appointment key={index} type={type} entry={entry} parentId={parentId} />
+        <Appointment key={index} entry={entry} parentId={parentId} type={type} />
       ))}
     </div>
   );

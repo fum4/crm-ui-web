@@ -7,7 +7,7 @@ const ClientList = ({entries}) => {
     <div className='clients-container'>
       {entries?.map((entry, index) => (
         <ListEntry key={index} entry={entry}>
-          <AppointmentList type='secondary' entries={entry.appointments} parentId={entry._id} />
+          <AppointmentList entries={entry.appointments} parentId={entry._id} type='secondary' />
         </ListEntry>
       ))}
     </div>

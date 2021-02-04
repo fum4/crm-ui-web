@@ -52,16 +52,16 @@ const SearchEnAdd = ({handleSearch, actionSuccessHandler, type}) => {
         />
         <Button
           className='add-new-btn'
-          variant='contained'
           color='primary'
           size='large'
+          variant='contained'
           onClick={() => setShowModal(true)}>
           <FaPlus className='add-icon' size={13} />
           <p>{type === 'client' ? labels.ADD_CLIENT : labels.ADD_APPOINTMENT}</p>
         </Button>
       </div>
       {showModal && (
-        <Dialog type={type} action='add' setShowModal={setShowModal} successHandler={actionSuccessHandler} />
+        <Dialog action='add' setShowModal={setShowModal} successHandler={actionSuccessHandler} type={type} />
       )}
     </Fragment>
   );

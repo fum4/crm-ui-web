@@ -67,10 +67,10 @@ const FormModal = ({setShowModal, successHandler, title, fields, onSubmit}) => {
       <div className='modal-header'>
         <h2>{title}</h2>
         <div className='close-btn-container'>
-          <FaTimes onClick={() => hideModal()} className='close-btn' size={35} />
+          <FaTimes className='close-btn' size={35} onClick={() => hideModal()} />
         </div>
       </div>
-      <form className={classes.root} autoComplete='off'>
+      <form autoComplete='off' className={classes.root}>
         {details?.map((field, index) => {
           const options = field.options?.map((option) => option._id);
           const type = field.id === 'date' ? 'datetime-local' : '';
@@ -78,39 +78,39 @@ const FormModal = ({setShowModal, successHandler, title, fields, onSubmit}) => {
 
           return field.isDropdown && field.options.length ? (
             <Autocomplete
+              key={field.id}
               className={classes.input}
               defaultValue={value}
               disabled={field.isDisabled}
               getOptionLabel={(item) => field.options?.find((option) => option._id === item)?.label}
               inputValue={inputValue}
-              key={field.id}
+              options={options}
+              renderInput={(params) => <TextField {...params} label={field.label} variant='filled' />}
+              required={field.isRequired}
               value={value}
               onChange={(ev, value) => onInputChange(field.id, value)}
               onInputChange={(ev, value) => {
                 console.log('inputchangeh pizdii', value);
                 setInputValue(value);
               }}
-              options={options}
-              renderInput={(params) => <TextField {...params} label={field.label} variant='filled' />}
-              required={field.isRequired}
             />
           ) : (
             <TextField
+              key={field.id}
               className={classes.input}
               defaultValue={field.id === 'date' ? '2017-05-24T10:30' : ''}
               id={field.id}
-              key={field.id}
               label={field.label}
-              onChange={(event) => onInputChange(field.id, event.target.value)}
               required={field.isRequired}
               type={type}
               value={value}
               variant='filled'
+              onChange={(event) => onInputChange(field.id, event.target.value)}
             />
           );
         })}
         <div className='modal-footer'>
-          <Button onClick={() => handleSubmit()} variant='contained' color='primary' size='large'>
+          <Button color='primary' size='large' variant='contained' onClick={() => handleSubmit()}>
             Adaugă
           </Button>
         </div>
