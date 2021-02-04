@@ -7,7 +7,7 @@ const Dialog = ({ type, action, values, setShowModal, successHandler }) => {
       values={values}
       setShowModal={setShowModal}
       successHandler={successHandler}
-      type={type}
+      
     />
   ) : type === "appointment" ? (
     <AppointmentDialog
@@ -15,7 +15,7 @@ const Dialog = ({ type, action, values, setShowModal, successHandler }) => {
       values={values}
       setShowModal={setShowModal}
       successHandler={successHandler}
-      type={type}
+      
     />
   ) : null;
 };

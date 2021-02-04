@@ -72,7 +72,7 @@ const AppointmentDialog = ({
       successHandler={successHandler}
       title={title}
       fields={formFields}
-      type={type}
+     
     />
   );
 };

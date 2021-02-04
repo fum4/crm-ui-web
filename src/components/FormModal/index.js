@@ -35,7 +35,7 @@ const FormModal = ({
   title,
   fields,
   onSubmit,
-  type,
+
 }) => {
   const classes = useStyles();
   const [details, setDetails] = useState();
