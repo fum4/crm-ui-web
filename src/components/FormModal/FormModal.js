@@ -8,24 +8,24 @@ import {FaTimes} from 'react-icons/fa';
 import './styles.scss';
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    width: '60%',
-    display: 'flex',
-    flexDirection: 'column',
-    alignSelf: 'center',
-    padding: 10
+  heading: {
+    flexBasis: '33.33%',
+    flexShrink: 0,
+    fontSize: theme.typography.pxToRem(15)
   },
   input: {
     margin: 10
   },
-  heading: {
-    fontSize: theme.typography.pxToRem(15),
-    flexBasis: '33.33%',
-    flexShrink: 0
+  root: {
+    alignSelf: 'center',
+    display: 'flex',
+    flexDirection: 'column',
+    padding: 10,
+    width: '60%'
   },
   secondaryHeading: {
-    fontSize: theme.typography.pxToRem(15),
-    color: theme.palette.text.secondary
+    color: theme.palette.text.secondary,
+    fontSize: theme.typography.pxToRem(15)
   }
 }));
 

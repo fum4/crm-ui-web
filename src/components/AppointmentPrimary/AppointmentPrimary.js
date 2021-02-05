@@ -5,19 +5,19 @@ import Typography from '@material-ui/core/Typography';
 import './styles.scss';
 
 const useStyles = makeStyles({
-  root: {
-    minWidth: 275
-  },
   bullet: {
     display: 'inline-block',
     margin: '0 2px',
     transform: 'scale(0.8)'
   },
-  title: {
-    fontSize: 14
-  },
   pos: {
     marginBottom: 12
+  },
+  root: {
+    minWidth: 275
+  },
+  title: {
+    fontSize: 14
   }
 });
 
