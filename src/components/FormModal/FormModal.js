@@ -29,12 +29,12 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const FormModal = ({setShowModal, successHandler, title, fields, onSubmit}) => {
+const FormModal = ({setShowModal, successHandler, title, formFields, onSubmit}) => {
   const classes = useStyles();
-  const [details, setDetails] = useState();
+  const [fields, setFields] = useState();
 
   const onInputChange = (key, value) => {
-    const updatedDetails = details.map((item) => {
+    const updatedDetails = fields.map((item) => {
       if (item.id === key) {
         item.value = value;
       }
@@ -42,31 +42,31 @@ const FormModal = ({setShowModal, successHandler, title, fields, onSubmit}) => {
       return item;
     });
 
-    setDetails(updatedDetails);
+    setFields(updatedDetails);
   };
 
   useEffect(() => {
-    setDetails(fields);
-  }, [fields]);
+    setFields(formFields);
+  }, [formFields]);
 
   const hideModal = () => {
     setShowModal(false);
   };
 
   const extractIndexes = () => {
-    details.forEach((detail) => {
-      if (detail.index) {
-        details.push({ id: `${detail.id}Index`, value: detail.index });
+    fields.forEach((field) => {
+      if (field.index) {
+        fields.push({ id: `${field.id}Index`, value: field.index });
       }
     });
 
-    setDetails(details);
+    setFields(fields);
   };
 
   const handleSubmit = () => {
     extractIndexes();
 
-    onSubmit({...details}).then(() => {
+    onSubmit({...fields}).then(() => {
       hideModal();
       successHandler();
     });
@@ -81,8 +81,7 @@ const FormModal = ({setShowModal, successHandler, title, fields, onSubmit}) => {
         </div>
       </div>
       <form autoComplete='off' className={classes.root}>
-        {details?.map((field) => {
-          const value = details.find((detail) => detail.id === field.id).value;
+        {fields?.map((field) => {
           const options = field.options?.map((option) => option._id);
           const today = new Date().toISOString().slice(0, -8);
           const textFieldDefaultValue = field.id === 'date' ? today : '';
@@ -99,7 +98,7 @@ const FormModal = ({setShowModal, successHandler, title, fields, onSubmit}) => {
               options={options}
               renderInput={(params) => <TextField {...params} label={field.label} variant='filled' />}
               required={field.isRequired}
-              value={value}
+              value={field.value}
             />
           ) : (
             <TextField
@@ -111,7 +110,7 @@ const FormModal = ({setShowModal, successHandler, title, fields, onSubmit}) => {
               onChange={(event) => onInputChange(field.id, event.target.value)}
               required={field.isRequired}
               type={type}
-              value={value}
+              value={field.value}
               variant='filled'
             />
           );

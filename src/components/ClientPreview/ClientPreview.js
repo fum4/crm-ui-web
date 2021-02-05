@@ -7,7 +7,7 @@ import Typography from '@material-ui/core/Typography';
 
 const ClientPreview = ({ entry, onAddAppointment }) => {
   const [showModal, setShowModal] = useState(false);
-  const values = [
+  const formValues = [
     {
       id: 'client',
       key: 'value',
@@ -38,7 +38,7 @@ const ClientPreview = ({ entry, onAddAppointment }) => {
           setShowModal={setShowModal}
           successHandler={() => onAddAppointment()}
           type='appointment'
-          values={values}
+          values={formValues}
         />
       )}
     </Fragment>

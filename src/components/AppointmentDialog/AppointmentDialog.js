@@ -54,7 +54,7 @@ const AppointmentDialog = ({successHandler, action, setShowModal, values}) => {
 
   return (
     <FormModal
-      fields={formFields}
+      formFields={formFields}
       onSubmit={(payload) => handleSubmit(payload)}
       setShowModal={setShowModal}
       successHandler={successHandler}
