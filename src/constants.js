@@ -1,13 +1,13 @@
 export const addClientFields = [
   {
     id: 'name',
-    label: 'Nume',
-    isRequired: true
+    isRequired: true,
+    label: 'Nume'
   },
   {
     id: 'surname',
-    label: 'Prenume',
-    isRequired: true
+    isRequired: true,
+    label: 'Prenume'
   },
   {
     id: 'address',
@@ -46,9 +46,9 @@ export const addClientFields = [
 export const addAppointmentFields = [
   {
     id: 'client',
-    label: 'Pacient',
     isDropdown: true,
-    isRequired: true
+    isRequired: true,
+    label: 'Pacient'
   },
   {
     id: 'appointment',
@@ -56,8 +56,8 @@ export const addAppointmentFields = [
   },
   {
     id: 'date',
-    label: 'Data',
-    isRequired: true
+    isRequired: true,
+    label: 'Data'
   },
   {
     id: 'treatment',
@@ -78,10 +78,10 @@ export const addAppointmentFields = [
 ];
 
 export const labels = {
-  CLIENT: 'Client',
-  ADD_CLIENT: 'Adauga client',
-  EDIT_CLIENT: 'Adauga client',
-  APPOINTMENT: 'Programare',
   ADD_APPOINTMENT: 'Adauga programare',
-  EDIT_APPOINTMENT: 'Modifica programare'
+  ADD_CLIENT: 'Adauga client',
+  APPOINTMENT: 'Programare',
+  CLIENT: 'Client',
+  EDIT_APPOINTMENT: 'Modifica programare',
+  EDIT_CLIENT: 'Adauga client'
 };

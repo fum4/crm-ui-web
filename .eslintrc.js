@@ -1,15 +1,8 @@
 module.exports = {
-  root: true,
   env: {
-    browser: true,
     amd: true,
+    browser: true,
     node: true
-  },
-  parser: '@typescript-eslint/parser',
-  parserOptions: {
-    ecmaFeatures: {
-      jsx: true
-    }
   },
   extends: [
     'eslint:recommended',
@@ -21,26 +14,19 @@ module.exports = {
     'prettier/react',
     'prettier/standard'
   ],
-  plugins: ['@typescript-eslint', 'react', 'prettier'],
-  settings: {
-    react: {
-      version: 'detect' // Tells eslint-plugin-react to automatically detect the version of React to use
-    },
-    'import/resolver': {
-      node: {
-        extensions: ['.js', '.jsx', '.ts', '.tsx'],
-        paths: ['./src']
-      }
+  parser: '@typescript-eslint/parser',
+  parserOptions: {
+    ecmaFeatures: {
+      jsx: true
     }
   },
+  plugins: ['@typescript-eslint', 'react', 'prettier', 'sort-keys-fix'],
+  root: true,
   rules: {
-    'react/prop-types': 'off',
-    // 'react/jsx-uses-react': 'error',
-    // 'react/jsx-uses-vars': 'error',
-    'react/react-in-jsx-scope': 'off',
+    '@typescript-eslint/no-unused-vars': 'warn',
     // 'prettier/prettier': ['error', {endOfLine: 'auto'}],
     'no-unused-vars': 'warn',
-    '@typescript-eslint/no-unused-vars': 'warn',
+    // 'sort-keys': ['error', 'asc', {caseSensitive: true, natural: false, minKeys: 2}],
     'react/jsx-sort-props': [
       'error',
       {
@@ -51,6 +37,22 @@ module.exports = {
         // noSortAlphabetically: false,
         // reservedFirst: true
       }
-    ]
+    ],
+    'react/prop-types': 'off',
+    // 'react/jsx-uses-react': 'error',
+    // 'react/jsx-uses-vars': 'error',
+    'react/react-in-jsx-scope': 'off',
+    'sort-keys-fix/sort-keys-fix': 'warn'
+  },
+  settings: {
+    'import/resolver': {
+      node: {
+        extensions: ['.js', '.jsx', '.ts', '.tsx'],
+        paths: ['./src']
+      }
+    },
+    react: {
+      version: 'detect' // Tells eslint-plugin-react to automatically detect the version of React to use
+    }
   }
 };

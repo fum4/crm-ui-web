@@ -12,8 +12,8 @@ const AppointmentDialog = ({successHandler, action, setShowModal, values}) => {
 
   useEffect(() => {
     const clientsFieldOptions = clients.map((client) => ({
-      label: `${client.surname} ${client.name}`,
-      _id: client._id
+      _id: client._id,
+      label: `${client.surname} ${client.name}`
     }));
 
     let options = [{id: 'client', key: 'options', value: clientsFieldOptions}];
