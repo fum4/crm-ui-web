@@ -53,9 +53,9 @@ const SearchEnAdd = ({handleSearch, actionSuccessHandler, type}) => {
         <Button
           className='add-new-btn'
           color='primary'
+          onClick={() => setShowModal(true)}
           size='large'
-          variant='contained'
-          onClick={() => setShowModal(true)}>
+          variant='contained'>
           <FaPlus className='add-icon' size={13} />
           <p>{type === 'client' ? labels.ADD_CLIENT : labels.ADD_APPOINTMENT}</p>
         </Button>

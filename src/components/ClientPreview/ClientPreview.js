@@ -26,9 +26,9 @@ const ClientPreview = ({entry}) => {
       <Button
         className='add-new-btn pull-right'
         color='primary'
+        onClick={() => setShowModal(true)}
         size='small'
-        variant='outlined'
-        onClick={() => setShowModal(true)}>
+        variant='outlined'>
         <FaPlus className='add-icon' size={13} />
         <p>{labels.APPOINTMENT}</p>
       </Button>

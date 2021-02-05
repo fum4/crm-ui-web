@@ -30,10 +30,10 @@ const ClientDialog = ({successHandler, action, setShowModal}) => {
   return (
     <FormModal
       fields={formFields}
+      onSubmit={(payload) => handleSubmit(payload)}
       setShowModal={setShowModal}
       successHandler={successHandler}
       title={title}
-      onSubmit={(payload) => handleSubmit(payload)}
     />
   );
 };

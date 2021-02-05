@@ -15,9 +15,9 @@ const ListEntry = (props) => {
   return (
     <Fragment>
       <Accordion
-        key={props.key}
         expandIcon={<ExpandMoreIcon />}
         expanded={expanded === props.key}
+        key={props.key}
         onChange={handleChange(props.key)}>
         <AccordionSummary aria-controls='panel1bh-content' id='panel1bh-header'>
           <ClientPreview entry={props.entry} />

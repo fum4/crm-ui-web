@@ -65,7 +65,7 @@ const FormModal = ({setShowModal, successHandler, title, fields, onSubmit}) => {
       <div className='modal-header'>
         <h2>{title}</h2>
         <div className='close-btn-container'>
-          <FaTimes className='close-btn' size={35} onClick={() => hideModal()} />
+          <FaTimes className='close-btn' onClick={() => hideModal()} size={35} />
         </div>
       </div>
       <form autoComplete='off' className={classes.root}>
@@ -76,34 +76,34 @@ const FormModal = ({setShowModal, successHandler, title, fields, onSubmit}) => {
 
           return field.isDropdown && field.options.length ? (
             <Autocomplete
-              key={field.id}
               className={classes.input}
               defaultValue={field.value}
               disabled={field.isDisabled}
               getOptionLabel={(item) => field.options?.find((option) => option._id === item)?.label}
+              key={field.id}
+              onChange={(ev, value) => onInputChange(field.id, value)}
               options={options}
               renderInput={(params) => <TextField {...params} label={field.label} variant='filled' />}
               required={field.isRequired}
               value={value}
-              onChange={(ev, value) => onInputChange(field.id, value)}
             />
           ) : (
             <TextField
-              key={field.id}
               className={classes.input}
               defaultValue={field.id === 'date' ? '2017-05-24T10:30' : ''}
               id={field.id}
+              key={field.id}
               label={field.label}
+              onChange={(event) => onInputChange(field.id, event.target.value)}
               required={field.isRequired}
               type={type}
               value={value}
               variant='filled'
-              onChange={(event) => onInputChange(field.id, event.target.value)}
             />
           );
         })}
         <div className='modal-footer'>
-          <Button color='primary' size='large' variant='contained' onClick={() => handleSubmit()}>
+          <Button color='primary' onClick={() => handleSubmit()} size='large' variant='contained'>
             Adaugă
           </Button>
         </div>

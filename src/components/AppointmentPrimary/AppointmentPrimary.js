@@ -29,7 +29,7 @@ const AppointmentPrimary = ({entry}) => {
   return (
     <Card className='appointment-primary' variant='outlined'>
       <CardContent>
-        <Typography gutterBottom className={classes.title} color='textSecondary'>
+        <Typography className={classes.title} color='textSecondary' gutterBottom>
           {appointment}
         </Typography>
         <Typography component='h2' variant='h5'>

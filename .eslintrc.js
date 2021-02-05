@@ -34,17 +34,17 @@ module.exports = {
     // 'react/jsx-uses-vars': 'error',
     'react/react-in-jsx-scope': 'off',
     // 'prettier/prettier': ['error', {endOfLine: 'auto'}],
-    'no-unused-vars': 'warn',
+    'no-unused-vars': 'off',
     '@typescript-eslint/no-unused-vars': 'warn',
     'react/jsx-sort-props': [
       'error',
       {
-        callbacksLast: true,
-        shorthandFirst: true,
-        shorthandLast: false,
-        ignoreCase: false,
-        noSortAlphabetically: false,
-        reservedFirst: true
+        // callbacksLast: true,
+        // shorthandFirst: true,
+        // shorthandLast: false,
+        ignoreCase: false
+        // noSortAlphabetically: false,
+        // reservedFirst: true
       }
     ]
   }
