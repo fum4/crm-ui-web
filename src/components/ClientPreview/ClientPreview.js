@@ -5,9 +5,9 @@ import {Dialog} from '..';
 import {labels} from '../../constants';
 import Typography from '@material-ui/core/Typography';
 
-const ClientPreview = ({ entry, onAddAppointment }) => {
+const ClientPreview = ({entry, onAddAppointment}) => {
   const [showModal, setShowModal] = useState(false);
-  const formValues = [
+  const [formValues, setFormValues] = useState([
     {
       id: 'client',
       key: 'value',
@@ -18,7 +18,7 @@ const ClientPreview = ({ entry, onAddAppointment }) => {
       key: 'isDisabled',
       value: true
     }
-  ];
+  ]);
 
   return (
     <Fragment>

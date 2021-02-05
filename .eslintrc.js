@@ -25,8 +25,7 @@ module.exports = {
   rules: {
     '@typescript-eslint/no-unused-vars': 'warn',
     // 'prettier/prettier': ['error', {endOfLine: 'auto'}],
-    'no-unused-vars': 'warn',
-    // 'sort-keys': ['error', 'asc', {caseSensitive: true, natural: false, minKeys: 2}],
+    'no-unused-vars': 'off',
     'react/jsx-sort-props': [
       'error',
       {
@@ -38,11 +37,12 @@ module.exports = {
         // reservedFirst: true
       }
     ],
+    'react/jsx-uses-react': 'error',
+    'react/jsx-uses-vars': 'error',
     'react/prop-types': 'off',
-    // 'react/jsx-uses-react': 'error',
-    // 'react/jsx-uses-vars': 'error',
     'react/react-in-jsx-scope': 'off',
-    'sort-keys-fix/sort-keys-fix': 'warn'
+    'sort-keys-fix/sort-keys-fix': 'error'
+    // 'sort-keys': ['error', 'asc', {caseSensitive: true, natural: false, minKeys: 2}],
   },
   settings: {
     'import/resolver': {
