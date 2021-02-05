@@ -53,7 +53,19 @@ const FormModal = ({setShowModal, successHandler, title, fields, onSubmit}) => {
     setShowModal(false);
   };
 
+  const extractIndexes = () => {
+    details.forEach((detail) => {
+      if (detail.index) {
+        details.push({ id: `${detail.id}Index`, value: detail.index });
+      }
+    });
+
+    setDetails(details);
+  };
+
   const handleSubmit = () => {
+    extractIndexes();
+
     onSubmit({...details}).then(() => {
       hideModal();
       successHandler();
@@ -72,6 +84,8 @@ const FormModal = ({setShowModal, successHandler, title, fields, onSubmit}) => {
         {details?.map((field) => {
           const value = details.find((detail) => detail.id === field.id).value;
           const options = field.options?.map((option) => option._id);
+          const today = new Date().toISOString().slice(0, -8);
+          const textFieldDefaultValue = field.id === 'date' ? today : '';
           const type = field.id === 'date' ? 'datetime-local' : '';
 
           return field.isDropdown && field.options.length ? (
@@ -90,7 +104,7 @@ const FormModal = ({setShowModal, successHandler, title, fields, onSubmit}) => {
           ) : (
             <TextField
               className={classes.input}
-              defaultValue={field.id === 'date' ? '2017-05-24T10:30' : ''}
+              defaultValue={textFieldDefaultValue}
               id={field.id}
               key={field.id}
               label={field.label}

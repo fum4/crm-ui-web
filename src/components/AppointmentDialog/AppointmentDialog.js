@@ -18,6 +18,10 @@ const AppointmentDialog = ({successHandler, action, setShowModal, values}) => {
 
     let options = [{id: 'client', key: 'options', value: clientsFieldOptions}];
 
+    if (action === 'edit') {
+      options.push({ id: 'date', key: 'index', value: values.find((field) => field.id === 'date').value })
+    }
+
     if (values) {
       options = options.concat(values);
     }
