@@ -1,10 +1,10 @@
 import {AppointmentPrimary, AppointmentSecondary} from '..';
 
-const Appointment = ({entry, type, parentId}) => {
+const Appointment = ({ entry, type, parentId, onUpdate }) => {
   return type === 'primary' ? (
     <AppointmentPrimary entry={entry} />
   ) : (
-    <AppointmentSecondary entry={entry} parentId={parentId} />
+    <AppointmentSecondary entry={entry} onUpdate={onUpdate} parentId={parentId} />
   );
 };
 

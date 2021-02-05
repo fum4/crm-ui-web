@@ -5,7 +5,7 @@ import {Dialog} from '..';
 import {labels} from '../../constants';
 import Typography from '@material-ui/core/Typography';
 
-const ClientPreview = ({entry}) => {
+const ClientPreview = ({ entry, onAddAppointment }) => {
   const [showModal, setShowModal] = useState(false);
   const values = [
     {
@@ -36,7 +36,7 @@ const ClientPreview = ({entry}) => {
         <Dialog
           action='add'
           setShowModal={setShowModal}
-          successHandler={() => {}}
+          successHandler={() => onAddAppointment()}
           type='appointment'
           values={values}
         />

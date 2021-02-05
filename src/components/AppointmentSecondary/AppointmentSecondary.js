@@ -6,7 +6,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import './styles.scss';
 
-const AppointmentSecondary = ({entry, parentId}) => {
+const AppointmentSecondary = ({ entry, parentId, onUpdate }) => {
   const [showEditModal, setShowEditModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [formValues, setFormValues] = useState([]);
@@ -38,7 +38,7 @@ const AppointmentSecondary = ({entry, parentId}) => {
   }, [formValues, entry, parentId]);
 
   const removeEntry = () => {
-    deleteAppointment({clientId: parentId, date: entry.date});
+    deleteAppointment({clientId: parentId, date: entry.date}).then(() => onUpdate());
   };
 
   return (
@@ -77,7 +77,7 @@ const AppointmentSecondary = ({entry, parentId}) => {
         <Dialog
           action='edit'
           setShowModal={setShowEditModal}
-          successHandler={() => {}}
+          successHandler={() => onUpdate()}
           type='appointment'
           values={formValues}
         />
