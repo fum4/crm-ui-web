@@ -1,12 +1,8 @@
 import {useEffect, useState} from 'react';
-import {makeStyles} from '@material-ui/core/styles';
-import Autocomplete from '@material-ui/lab/Autocomplete';
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
-import {Dialog} from '@material-ui/core';
+import {Dialog, Button, makeStyles} from '@material-ui/core';
 import {FaTimes} from 'react-icons/fa';
 import './styles.scss';
-
+import DialogItem from '../DialogItem';
 const useStyles = makeStyles((theme) => ({
   heading: {
     flexBasis: '33.33%',
@@ -56,7 +52,7 @@ const FormModal = ({setShowModal, successHandler, title, formFields, onSubmit}) 
   const extractIndexes = () => {
     fields.forEach((field) => {
       if (field.index) {
-        fields.push({ id: `${field.id}Index`, value: field.index });
+        fields.push({id: `${field.id}Index`, value: field.index});
       }
     });
 
@@ -81,40 +77,13 @@ const FormModal = ({setShowModal, successHandler, title, formFields, onSubmit}) 
         </div>
       </div>
       <form autoComplete='off' className={classes.root}>
-        {fields?.map((field) => {
-          const options = field.options?.map((option) => option._id);
-          const today = new Date().toISOString().slice(0, -8);
-          const textFieldDefaultValue = field.id === 'date' ? today : '';
-          const type = field.id === 'date' ? 'datetime-local' : '';
-
-          return field.isDropdown && field.options.length ? (
-            <Autocomplete
-              className={classes.input}
-              defaultValue={field.value}
-              disabled={field.isDisabled}
-              getOptionLabel={(item) => field.options?.find((option) => option._id === item)?.label}
-              key={field.id}
-              onChange={(ev, value) => onInputChange(field.id, value)}
-              options={options}
-              renderInput={(params) => <TextField {...params} label={field.label} variant='filled' />}
-              required={field.isRequired}
-              value={field.value}
-            />
-          ) : (
-            <TextField
-              className={classes.input}
-              defaultValue={textFieldDefaultValue}
-              id={field.id}
-              key={field.id}
-              label={field.label}
-              onChange={(event) => onInputChange(field.id, event.target.value)}
-              required={field.isRequired}
-              type={type}
-              value={field.value}
-              variant='filled'
-            />
-          );
-        })}
+        {fields?.map((field) => (
+          <DialogItem
+            classes={classes}
+            field={field}
+            key={field.id}
+            onInputChange={onInputChange}></DialogItem>
+        ))}
         <div className='modal-footer'>
           <Button color='primary' onClick={() => handleSubmit()} size='large' variant='contained'>
             Adaugă

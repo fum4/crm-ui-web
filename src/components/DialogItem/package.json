@@ -1,0 +1,6 @@
+{
+    "main": "./DialogItem.js",
+    "name": "dialog-item",
+    "private": true
+  }
+  
