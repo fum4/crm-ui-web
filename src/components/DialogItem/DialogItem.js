@@ -22,16 +22,21 @@ export default function DialogItem({classes, field, onInputChange}) {
 
     setOptionsIDs(options);
     const valueInit = isDate
-      ? textFieldDefaultValue
+      ? field.value
+        ? field.value
+        : textFieldDefaultValue
       : field.isDropdown
       ? field.value
         ? field.value
         : '00'
+      : field.value
+      ? field.value
       : '';
     const inputValueInit = isDropdown
       ? field.options?.find((option) => option._id === field.value)?.label
       : 'Alegeti pacient';
     setValue(valueInit);
+    isDate && onInputChange('date', valueInit);
     !init && setInputValue(inputValueInit);
     !init && setInit(true);
   }, [field]);
