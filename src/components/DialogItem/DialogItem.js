@@ -17,9 +17,9 @@ export default function DialogItem({classes, field, onInputChange}) {
   useEffect(() => {
     const options = field.options?.map((option) => option._id);
     setOptionsIDs(options);
-    const valueInit = isDate ? (field.value ? field.value : today) : field.value ? field.value : '';
+    const valueInit = field.value ? field.value : isDate ? today : '';
     setValue(valueInit);
-    
+
     if (isDropdown) {
       const inputValueInit = field.options?.find((option) => option._id === field.value)?.label;
       setInputValue(inputValueInit);
