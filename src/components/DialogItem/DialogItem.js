@@ -6,38 +6,27 @@ import _ from 'lodash';
 export default function DialogItem({classes, field, onInputChange}) {
   const isDate = field.id === 'date';
   const today = new Date().toISOString().slice(0, -8);
-  const textFieldDefaultValue = isDate ? today : '';
   const type = isDate ? 'datetime-local' : '';
   const [init, setInit] = useState(false);
   const [value, setValue] = useState();
-  const [inputValue, setInputValue] = useState();
+  const [inputValue, setInputValue] = useState('');
   const [optionsIDs, setOptionsIDs] = useState();
 
   const isDropdown = field.isDropdown && field.options.length;
 
   useEffect(() => {
-    isDropdown && field.options.push({_id: '00', label: 'Alegeti pacient'});
-
     const options = field.options?.map((option) => option._id);
-
     setOptionsIDs(options);
-    const valueInit = isDate
-      ? field.value
-        ? field.value
-        : textFieldDefaultValue
-      : field.isDropdown
-      ? field.value
-        ? field.value
-        : '00'
-      : field.value
-      ? field.value
-      : '';
-    const inputValueInit = isDropdown
-      ? field.options?.find((option) => option._id === field.value)?.label
-      : 'Alegeti pacient';
+    const valueInit = isDate ? (field.value ? field.value : today) : field.value ? field.value : '';
     setValue(valueInit);
+    
+    if (isDropdown) {
+      const inputValueInit = field.options?.find((option) => option._id === field.value)?.label;
+      setInputValue(inputValueInit);
+    }
+
     isDate && onInputChange('date', valueInit);
-    !init && setInputValue(inputValueInit);
+
     !init && setInit(true);
   }, [field]);
   return init ? (
@@ -45,9 +34,7 @@ export default function DialogItem({classes, field, onInputChange}) {
       <Autocomplete
         className={classes.input}
         disabled={field.isDisabled}
-        getOptionLabel={(item) =>
-          item === '00' ? 'Alegeti pacient' : field.options?.find((option) => option._id === item)?.label
-        }
+        getOptionLabel={(item) => field.options?.find((option) => option._id === item)?.label}
         inputValue={inputValue}
         key={field.id}
         onChange={(ev, value) => {
