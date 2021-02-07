@@ -1,4 +1,4 @@
-import {Fragment, useEffect, useState} from 'react';
+import {useEffect, useState} from 'react';
 import {getAppointments} from '../../services/network';
 import {AppointmentList, SearchEnAdd} from '../../components';
 
@@ -26,14 +26,14 @@ function Clients() {
   const handleSearch = () => {};
 
   return (
-    <Fragment>
+    <>
       <SearchEnAdd
         actionSuccessHandler={() => refreshAppointments()}
         handleSearch={(payload) => handleSearch(payload)}
         type='appointment'
       />
       <AppointmentList entries={appointments} type='primary' />
-    </Fragment>
+    </>
   );
 }
 

@@ -5,9 +5,11 @@ module.exports = {
     node: true
   },
   extends: [
+    // 'eslint:all',
     'eslint:recommended',
     'plugin:react/recommended',
     'plugin:react-hooks/recommended',
+    // 'plugin:react/all',
     'prettier',
     'prettier/@typescript-eslint',
     'prettier/babel',
@@ -29,6 +31,8 @@ module.exports = {
     'no-unused-vars': 'off',
     'react-hooks/exhaustive-deps': 'warn',
     'react-hooks/rules-of-hooks': 'error',
+    'react/jsx-fragments': ['warn', 'syntax'],
+    'react/jsx-key': ['warn', {checkFragmentShorthand: true, checkKeyMustBeforeSpread: true}],
     'react/jsx-sort-props': [
       'error',
       {
@@ -37,12 +41,12 @@ module.exports = {
         // shorthandLast: false,
         ignoreCase: false
         // noSortAlphabetically: false,
-        // reservedFirst: true
+        // ReservedFirst: true
       }
     ],
     'react/jsx-uses-react': 'error',
     'react/jsx-uses-vars': 'error',
-    'react/no-array-index-key': 'error',
+    'react/no-array-index-key': 'warn',
     'react/prop-types': 'off',
     'react/react-in-jsx-scope': 'off',
     'react/self-closing-comp': 'error',
