@@ -2,7 +2,7 @@ import {Fragment, useEffect, useState} from 'react';
 import {getAppointments} from '../../services/network';
 import {AppointmentList, SearchEnAdd} from '../../components';
 
-const Clients = () => {
+function Clients() {
   const [allAppointments, setAllAppointments] = useState([]);
   const [filteredAppointments, setFilteredAppointments] = useState([]);
   const [appointments, setAppointments] = useState([]);
@@ -35,6 +35,6 @@ const Clients = () => {
       <AppointmentList entries={appointments} type='primary' />
     </Fragment>
   );
-};
+}
 
 export default Clients;

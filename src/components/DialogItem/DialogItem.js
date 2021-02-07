@@ -73,6 +73,6 @@ export default function DialogItem({classes, field, onInputChange}) {
       />
     )
   ) : (
-    <div></div>
+    <div />
   );
 }

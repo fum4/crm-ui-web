@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const FormModal = ({setShowModal, successHandler, title, formFields, onSubmit}) => {
+function FormModal({setShowModal, successHandler, title, formFields, onSubmit}) {
   const classes = useStyles();
   const [fields, setFields] = useState();
 
@@ -69,7 +69,7 @@ const FormModal = ({setShowModal, successHandler, title, formFields, onSubmit}) 
   };
 
   return (
-    <Dialog fullWidth={true} maxWidth='md' open={true}>
+    <Dialog fullWidth maxWidth='md' open>
       <div className='modal-header'>
         <h2>{title}</h2>
         <div className='close-btn-container'>
@@ -82,7 +82,7 @@ const FormModal = ({setShowModal, successHandler, title, formFields, onSubmit}) 
             classes={classes}
             field={field}
             key={field.id}
-            onInputChange={onInputChange}></DialogItem>
+            onInputChange={onInputChange} />
         ))}
         <div className='modal-footer'>
           <Button color='primary' onClick={() => handleSubmit()} size='large' variant='contained'>
@@ -92,6 +92,6 @@ const FormModal = ({setShowModal, successHandler, title, formFields, onSubmit}) 
       </form>
     </Dialog>
   );
-};
+}
 
 export default FormModal;
