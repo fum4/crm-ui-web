@@ -23,18 +23,14 @@ module.exports = {
       jsx: true
     }
   },
-  plugins: [
-    '@typescript-eslint',
-    'react',
-    'prettier',
-    'react-hooks',
-    'sort-keys-fix'
-  ],
+  plugins: ['@typescript-eslint', 'react', 'prettier', 'react-hooks', 'sort-keys-fix'],
   root: true,
   rules: {
     '@typescript-eslint/no-unused-vars': 'warn',
-    // 'prettier/prettier': ['error', {endOfLine: 'auto'}],
+    'no-console': 'warn',
+    'no-shadow': 'warn',
     'no-unused-vars': 'off',
+        // 'prettier/prettier': ['error', {endOfLine: 'auto'}],
     'react-hooks/exhaustive-deps': 'warn',
     'react-hooks/rules-of-hooks': 'error',
     'react/jsx-fragments': ['warn', 'syntax'],
