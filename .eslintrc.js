@@ -42,7 +42,7 @@ module.exports = {
     ],
     'react/jsx-uses-react': 'error',
     'react/jsx-uses-vars': 'error',
-    'react/no-array-index-key': 'warn',
+    'react/no-array-index-key': 'error',
     'react/prop-types': 'off',
     'react/react-in-jsx-scope': 'off',
     'react/self-closing-comp': 'error',
