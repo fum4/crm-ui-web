@@ -78,10 +78,10 @@ export const addAppointmentFields = [
 ];
 
 export const labels = {
-  ADD_APPOINTMENT: 'Adauga programare',
-  ADD_CLIENT: 'Adauga client',
+  ADD_APPOINTMENT: 'Adaugă programare',
+  ADD_CLIENT: 'Adaugă client',
   APPOINTMENT: 'Programare',
   CLIENT: 'Client',
-  EDIT_APPOINTMENT: 'Modifica programare',
-  EDIT_CLIENT: 'Adauga client'
+  EDIT_APPOINTMENT: 'Modifică programare',
+  EDIT_CLIENT: 'Modifică client'
 };

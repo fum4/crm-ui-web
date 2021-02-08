@@ -1,8 +1,9 @@
-import {useEffect, useState} from 'react';
-import {Dialog, Button, makeStyles} from '@material-ui/core';
-import {FaTimes} from 'react-icons/fa';
-import './styles.scss';
 import DialogItem from '../DialogItem';
+import { useEffect, useState } from 'react';
+import { Button, Dialog, makeStyles } from '@material-ui/core';
+import { FaTimes } from 'react-icons/fa';
+import './styles.scss';
+
 const useStyles = makeStyles((theme) => ({
   heading: {
     flexBasis: '33.33%',
@@ -25,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-function FormModal({setShowModal, successHandler, title, formFields, onSubmit}) {
+const FormModal = ({setShowModal, successHandler, title, formFields, onSubmit}) => {
   const classes = useStyles();
   const [fields, setFields] = useState();
 
@@ -69,7 +70,7 @@ function FormModal({setShowModal, successHandler, title, formFields, onSubmit}) 
   };
 
   return (
-    <Dialog fullWidth maxWidth='md' open>
+    <Dialog fullWidth maxWidth='md' open={true}>
       <div className='modal-header'>
         <h2>{title}</h2>
         <div className='close-btn-container'>

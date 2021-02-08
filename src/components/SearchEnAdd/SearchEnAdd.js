@@ -1,10 +1,10 @@
-import {Fragment, useState} from 'react';
-import {fade, withStyles} from '@material-ui/core/styles';
-import {InputBase, Button} from '@material-ui/core';
-import {Dialog} from '..';
-import {FaPlus} from 'react-icons/fa';
+import { useState } from 'react';
+import { fade, withStyles } from '@material-ui/core/styles';
+import { InputBase, Button } from '@material-ui/core';
+import { Dialog } from '..';
+import { FaPlus } from 'react-icons/fa';
+import { labels } from '../../constants';
 import './styles.scss';
-import {labels} from '../../constants';
 
 const BootstrapInput = withStyles((theme) => ({
   input: {
@@ -40,11 +40,11 @@ const BootstrapInput = withStyles((theme) => ({
   }
 }))(InputBase);
 
-const SearchEnAdd = ({handleSearch, actionSuccessHandler, type}) => {
+const SearchEnAdd = ({ handleSearch, actionSuccessHandler, type }) => {
   const [showModal, setShowModal] = useState(false);
 
   return (
-    <Fragment>
+    <>
       <div className='search-input-container'>
         <BootstrapInput
           className='search-input-container__main-input'
@@ -63,7 +63,7 @@ const SearchEnAdd = ({handleSearch, actionSuccessHandler, type}) => {
       {showModal && (
         <Dialog action='add' setShowModal={setShowModal} successHandler={actionSuccessHandler} type={type} />
       )}
-    </Fragment>
+    </>
   );
 };
 

@@ -1,60 +1,39 @@
-import {useEffect, useState} from 'react';
+import { useEffect, useState } from 'react';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import TextField from '@material-ui/core/TextField';
 
-export default function DialogItem({classes, field, onInputChange}) {
-  const isDate = field.id === 'date';
-  const today = new Date().toISOString().slice(0, -8);
-  const type = isDate ? 'datetime-local' : '';
-  const [init, setInit] = useState(false);
-  const [value, setValue] = useState();
+const DialogItem = ({ classes, field, onInputChange }) => {
+  const [isInitialized, setIsInitialized] = useState(false);
   const [inputValue, setInputValue] = useState('');
-  const [optionsIDs, setOptionsIDs] = useState();
-
-  const isDropdown = field.isDropdown && field.options.length;
+  const [optionsIDs, setOptionsIDs] = useState([]);
 
   useEffect(() => {
     const options = field.options?.map((option) => option._id);
+    const initialInputValue = field.options?.find((option) => option._id === field.value)?.label || '';
+
     setOptionsIDs(options);
-    const valueInit = field.value ? field.value : isDate ? today : '';
-    setValue(valueInit);
+    setInputValue(initialInputValue);
 
-    if (isDropdown) {
-      const inputValueInit = field.options?.find((option) => option._id === field.value)?.label || '';
-      setInputValue(inputValueInit);
+    if (!isInitialized) {
+      setIsInitialized(true);
     }
+  }, [field, isInitialized]);
 
-    isDate && onInputChange('date', valueInit);
-    !init && setInit(true);
-  }, [field]);
-
-  return init ? (
-    isDropdown ? (
+  return isInitialized ? (
+    field.isDropdown ? (
       <Autocomplete
         className={classes.input}
         disabled={field.isDisabled}
         getOptionLabel={(item) => field.options?.find((option) => option._id === item)?.label || ''}
-        getOptionSelected={(option, value) => {
-          //nothing that is put in here will cause the warning to go away
-          if (value === '') {
-            return true;
-          } else if (value === option) {
-            return true;
-          }
-        }}
+        getOptionSelected={(option, value) => value === '' || value === option}
         inputValue={inputValue}
         key={field.id}
-        onChange={(ev, value) => {
-          setValue(value);
-          onInputChange(field.id, value);
-        }}
-        onInputChange={(_, newInputValue) => {
-          setInputValue(newInputValue);
-        }}
+        onChange={(ev, value) => onInputChange(field.id, value)}
+        onInputChange={(event, value) => setInputValue(value)}
         options={optionsIDs}
         renderInput={(params) => <TextField {...params} label={field.label} variant='filled' />}
         required={field.isRequired}
-        value={value}
+        value={field.value || ''}
       />
     ) : (
       <TextField
@@ -62,13 +41,10 @@ export default function DialogItem({classes, field, onInputChange}) {
         id={field.id}
         key={field.id}
         label={field.label}
-        onChange={(event) => {
-          setValue(event.target.value);
-          onInputChange(field.id, event.target.value);
-        }}
+        onChange={(ev) => onInputChange(field.id, ev.target.value)}
         required={field.isRequired}
-        type={type}
-        value={value}
+        type={field.id === 'date' ? 'datetime-local' : ''}
+        value={field.value || ''}
         variant='filled'
       />
     )
@@ -76,3 +52,5 @@ export default function DialogItem({classes, field, onInputChange}) {
     <div />
   );
 }
+
+export default DialogItem;

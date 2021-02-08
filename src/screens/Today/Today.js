@@ -2,7 +2,7 @@ import {useEffect, useState} from 'react';
 import {getAppointments} from '../../services/network';
 import {AppointmentList, SearchEnAdd} from '../../components';
 
-function Clients() {
+const Clients = () => {
   const [allAppointments, setAllAppointments] = useState([]);
   const [filteredAppointments, setFilteredAppointments] = useState([]);
   const [appointments, setAppointments] = useState([]);
