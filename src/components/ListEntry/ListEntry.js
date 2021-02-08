@@ -1,6 +1,5 @@
-import AccordionSummary from '@material-ui/core/AccordionSummary';
 import { useState } from 'react';
-import { Accordion, AccordionDetails } from '@material-ui/core';
+import { Accordion, AccordionDetails, AccordionSummary } from '@material-ui/core';
 import { ClientPreview } from '../';
 import './styles.scss';
 

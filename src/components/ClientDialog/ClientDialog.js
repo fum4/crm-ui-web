@@ -1,19 +1,26 @@
-import {useState, useEffect} from 'react';
-import {FormModal} from '..';
-import {getFormValues, serializeForm} from '../../services/utils';
-import {addClientFields, labels} from '../../constants';
-import {addClient, updateClient} from '../../services/network';
+import { useState, useEffect } from 'react';
+import { FormModal } from '..';
+import { getFormValues, serializeForm, getCurrentDate } from '../../services/utils';
+import { addClientFields, labels } from '../../constants';
+import { addClient, updateClient } from '../../services/network';
 
-const ClientDialog = ({successHandler, action, setShowModal}) => {
+const ClientDialog = ({ successHandler, action, setShowModal }) => {
   const [formFields, setFormFields] = useState();
   const [title, setTitle] = useState();
 
   useEffect(() => {
-    const formValues = getFormValues(addClientFields);
-    const title = action === 'add' ? labels.ADD_CLIENT : labels.EDIT_CLIENT;
+    const options = [
+      {
+        id: 'date',
+        key: 'value',
+        value: getCurrentDate()
+      }
+    ];
+    const formValues = getFormValues(addClientFields, options);
+    const actionTitle = action === 'add' ? labels.ADD_CLIENT : labels.EDIT_CLIENT;
 
     setFormFields(formValues);
-    setTitle(title);
+    setTitle(actionTitle);
   }, [action]);
 
   const handleSubmit = (payload) => {

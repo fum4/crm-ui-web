@@ -21,3 +21,5 @@ export const serializeForm = (payload) => {
     []
   );
 };
+
+export const getCurrentDate = () => new Date().toISOString().slice(0, -8);

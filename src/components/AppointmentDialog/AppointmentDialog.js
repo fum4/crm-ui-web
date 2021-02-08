@@ -1,11 +1,11 @@
-import {useState, useEffect} from 'react';
-import {FormModal} from '..';
-import {getFormValues, serializeForm} from '../../services/utils';
-import {addAppointmentFields, labels} from '../../constants';
-import {addAppointment, updateAppointment, getClients} from '../../services/network';
+import { useState, useEffect } from 'react';
+import { FormModal } from '..';
+import { addAppointmentFields, labels } from '../../constants';
+import { getFormValues, serializeForm, getCurrentDate } from '../../services/utils';
+import { addAppointment, updateAppointment, getClients } from '../../services/network';
 import _ from 'lodash';
 
-const AppointmentDialog = ({successHandler, action, setShowModal, values}) => {
+const AppointmentDialog = ({ successHandler, action, setShowModal, values }) => {
   const [formFields, setFormFields] = useState();
   const [clients, setClients] = useState([]);
   const [title, setTitle] = useState();
@@ -28,17 +28,16 @@ const AppointmentDialog = ({successHandler, action, setShowModal, values}) => {
       options.push({
         id: 'date',
         key: 'index',
-        value: values.find((field) => field.id === 'date').value })
+        value: values.find((field) => field.id === 'date').value
+      });
     }
 
     if (action === 'add') {
-      const today = new Date().toISOString().slice(0, -8);
-
       options.push({
         id: 'date',
         key: 'value',
-        value: today
-      })
+        value: getCurrentDate()
+      });
     }
 
     if (values) {
@@ -46,10 +45,10 @@ const AppointmentDialog = ({successHandler, action, setShowModal, values}) => {
     }
 
     const formValues = getFormValues(addAppointmentFields, _.flatten(options));
-    const title = action === 'add' ? labels.ADD_APPOINTMENT : labels.EDIT_APPOINTMENT;
+    const actionTitle = action === 'add' ? labels.ADD_APPOINTMENT : labels.EDIT_APPOINTMENT;
 
     setFormFields(formValues);
-    setTitle(title);
+    setTitle(actionTitle);
   }, [clients, action, values]);
 
   useEffect(() => {
