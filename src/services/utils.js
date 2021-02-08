@@ -3,10 +3,17 @@ import _ from 'lodash';
 export const getFormValues = (baseFields, payload) => {
   const fields = _.cloneDeep(baseFields);
 
-  payload?.forEach((item) => {
-    const currentField = fields.find((field) => field.id === item.id);
+  payload.forEach((item) => {
+    if (item.id === '_id') {
+      fields.push({
+        id: '_id',
+        value: item.value
+      });
+    } else {
+      const currentField = fields.find((field) => field.id === item.id);
 
-    currentField[item.key] = item.value;
+      currentField[item.key] = item.value;
+    }
   });
 
   return fields;

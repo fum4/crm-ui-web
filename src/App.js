@@ -5,33 +5,26 @@ import { useState } from 'react';
 import './App.css';
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(true);
 
   return (
     <Router>
       <div>
-        {
-          isAuthenticated && <Navigation />
-        }
+        {isAuthenticated && <Navigation />}
         <Switch>
           <Route exact path='/auth'>
-            <Auth onAuthenticated={() => setIsAuthenticated(true)}/>
+            <Auth onAuthenticated={() => setIsAuthenticated(true)} />
           </Route>
-          {
-            isAuthenticated &&  (
-              <Route exact path='/today'>
-                <Today />
-              </Route>
-            )
-          }
-          {
-            isAuthenticated &&  (
-              <Route path='/clients'>
-                <Clients />
-              </Route>
-            )
-          }
-
+          {isAuthenticated && (
+            <Route exact path='/today'>
+              <Today />
+            </Route>
+          )}
+          {isAuthenticated && (
+            <Route path='/clients'>
+              <Clients />
+            </Route>
+          )}
         </Switch>
       </div>
     </Router>

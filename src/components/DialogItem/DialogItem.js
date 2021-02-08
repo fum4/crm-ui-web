@@ -19,7 +19,7 @@ const DialogItem = ({ classes, field, onInputChange }) => {
     }
   }, [field, isInitialized]);
 
-  return isInitialized ? (
+  return isInitialized && field.id !== '_id' ? (
     field.isDropdown ? (
       <Autocomplete
         className={classes.input}
@@ -51,6 +51,6 @@ const DialogItem = ({ classes, field, onInputChange }) => {
   ) : (
     <div />
   );
-}
+};
 
 export default DialogItem;

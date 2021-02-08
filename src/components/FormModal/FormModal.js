@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const FormModal = ({setShowModal, successHandler, title, formFields, onSubmit}) => {
+const FormModal = ({ setShowModal, successHandler, title, formFields, onSubmit }) => {
   const classes = useStyles();
   const [fields, setFields] = useState();
 
@@ -50,20 +50,8 @@ const FormModal = ({setShowModal, successHandler, title, formFields, onSubmit}) 
     setShowModal(false);
   };
 
-  const extractIndexes = () => {
-    fields.forEach((field) => {
-      if (field.index) {
-        fields.push({id: `${field.id}Index`, value: field.index});
-      }
-    });
-
-    setFields(fields);
-  };
-
   const handleSubmit = () => {
-    extractIndexes();
-
-    onSubmit({...fields}).then(() => {
+    onSubmit({ ...fields }).then(() => {
       hideModal();
       successHandler();
     });
@@ -79,11 +67,7 @@ const FormModal = ({setShowModal, successHandler, title, formFields, onSubmit}) 
       </div>
       <form autoComplete='off' className={classes.root}>
         {fields?.map((field) => (
-          <DialogItem
-            classes={classes}
-            field={field}
-            key={field.id}
-            onInputChange={onInputChange} />
+          <DialogItem classes={classes} field={field} key={field.id} onInputChange={onInputChange} />
         ))}
         <div className='modal-footer'>
           <Button color='primary' onClick={() => handleSubmit()} size='large' variant='contained'>
@@ -93,6 +77,6 @@ const FormModal = ({setShowModal, successHandler, title, formFields, onSubmit}) 
       </form>
     </Dialog>
   );
-}
+};
 
 export default FormModal;

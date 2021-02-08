@@ -17,17 +17,18 @@ export const deleteClient = (payload) => api.delete('/client', payload);
 export const getAppointments = () => api.get('/appointments');
 export const addAppointment = (payload) => api.post('/appointment', payload);
 export const updateAppointment = (payload) => {
-  const url = `/appointment/${payload.dateIndex}`;
+  console.log('##### should have _id set', payload);
+  const url = `/appointment/${payload._id}`;
 
   delete payload.client;
-  delete payload.dateIndex;
+  delete payload._id;
 
   return api.put(url, payload);
-}
+};
 export const deleteAppointment = (payload) => {
   const url = `/appointment/${payload.date}`;
 
   delete payload.date;
 
   return api.delete(url, { data: payload });
-}
+};
