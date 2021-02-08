@@ -17,12 +17,21 @@ function App() {
           <Route exact path='/auth'>
             <Auth onAuthenticated={() => setIsAuthenticated(true)}/>
           </Route>
-          <Route exact path='/today'>
-            <Today />
-          </Route>
-          <Route path='/clients'>
-            <Clients />
-          </Route>
+          {
+            isAuthenticated &&  (
+              <Route exact path='/today'>
+                <Today />
+              </Route>
+            )
+          }
+          {
+            isAuthenticated &&  (
+              <Route path='/clients'>
+                <Clients />
+              </Route>
+            )
+          }
+
         </Switch>
       </div>
     </Router>
