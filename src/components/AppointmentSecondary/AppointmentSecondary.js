@@ -1,9 +1,9 @@
-import {Fragment, useState, useEffect} from 'react';
-import {FaTrashAlt, FaPen} from 'react-icons/fa';
-import {deleteAppointment} from '../../services/network';
-import {Dialog} from '..';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
+import { useState, useEffect } from 'react';
+import { FaTrashAlt, FaPen } from 'react-icons/fa';
+import { deleteAppointment } from '../../services/network';
+import { Dialog } from '..';
 import './styles.scss';
 
 const AppointmentSecondary = ({ entry, parentId, onUpdate }) => {
@@ -38,11 +38,11 @@ const AppointmentSecondary = ({ entry, parentId, onUpdate }) => {
   }, [formValues, entry, parentId]);
 
   const removeEntry = () => {
-    deleteAppointment({clientId: parentId, date: entry.date}).then(() => onUpdate());
+    deleteAppointment({ date: entry.date }).then(() => onUpdate());
   };
 
   return (
-    <Fragment>
+    <>
       <ListItem>
         <ListItemText
           className='appointment-secondary appointment-secondary__appointment'
@@ -82,7 +82,7 @@ const AppointmentSecondary = ({ entry, parentId, onUpdate }) => {
           values={formValues}
         />
       )}
-    </Fragment>
+    </>
   );
 };
 

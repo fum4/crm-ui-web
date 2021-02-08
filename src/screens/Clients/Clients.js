@@ -1,6 +1,6 @@
-import {Fragment, useEffect, useState} from 'react';
-import {ClientList, SearchEnAdd} from '../../components';
-import {getClients} from '../../services/network';
+import { useEffect, useState } from 'react';
+import { ClientList, SearchEnAdd } from '../../components';
+import { getClients } from '../../services/network';
 
 const Clients = () => {
   const [allClients, setAllClients] = useState();
@@ -46,14 +46,14 @@ const Clients = () => {
   };
 
   return (
-    <Fragment>
+    <>
       <SearchEnAdd
         actionSuccessHandler={() => refreshClients()}
         handleSearch={(payload) => handleSearch(payload)}
         type='client'
       />
       <ClientList entries={clients} refreshClients={() => refreshClients()} />
-    </Fragment>
+    </>
   );
 };
 

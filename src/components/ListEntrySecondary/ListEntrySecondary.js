@@ -1,7 +1,5 @@
-import {Fragment} from 'react';
-
 const ListEntrySecondary = (props) => {
-  return <Fragment>{props.children}</Fragment>;
+  return <>{props.children}</>;
 };
 
 export default ListEntrySecondary;

@@ -16,10 +16,29 @@ const AppointmentDialog = ({successHandler, action, setShowModal, values}) => {
       label: `${client.surname} ${client.name}`
     }));
 
-    let options = [{id: 'client', key: 'options', value: clientsFieldOptions}];
+    let options = [
+      {
+        id: 'client',
+        key: 'options',
+        value: clientsFieldOptions
+      }
+    ];
 
     if (action === 'edit') {
-      options.push({ id: 'date', key: 'index', value: values.find((field) => field.id === 'date').value })
+      options.push({
+        id: 'date',
+        key: 'index',
+        value: values.find((field) => field.id === 'date').value })
+    }
+
+    if (action === 'add') {
+      const today = new Date().toISOString().slice(0, -8);
+
+      options.push({
+        id: 'date',
+        key: 'value',
+        value: today
+      })
     }
 
     if (values) {

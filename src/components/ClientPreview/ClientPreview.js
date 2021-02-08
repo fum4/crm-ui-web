@@ -1,27 +1,33 @@
-import {Fragment, useState, useEffect} from 'react';
-import {FaPlus} from 'react-icons/fa';
-import {Button} from '@material-ui/core';
-import {Dialog} from '..';
-import {labels} from '../../constants';
+import { useState, useEffect } from 'react';
+import { FaPlus } from 'react-icons/fa';
+import { Button } from '@material-ui/core';
+import { Dialog } from '..';
+import { labels } from '../../constants';
 import Typography from '@material-ui/core/Typography';
 
-const ClientPreview = ({entry, onAddAppointment}) => {
+const ClientPreview = ({ entry, onAddAppointment }) => {
   const [showModal, setShowModal] = useState(false);
-  const [formValues, setFormValues] = useState([
-    {
-      id: 'client',
-      key: 'value',
-      value: entry._id
-    },
-    {
-      id: 'client',
-      key: 'isDisabled',
-      value: true
-    }
-  ]);
+  const [formValues, setFormValues] = useState();
+
+  useEffect(() => {
+    const values = [
+      {
+        id: 'client',
+        key: 'value',
+        value: entry._id
+      },
+      {
+        id: 'client',
+        key: 'isDisabled',
+        value: true
+      }
+    ];
+
+    setFormValues(values);
+  }, [entry])
 
   return (
-    <Fragment>
+    <>
       <Typography>{`${entry.surname} ${entry.name}`}</Typography>
       <Button
         className='add-new-btn pull-right'
@@ -41,7 +47,7 @@ const ClientPreview = ({entry, onAddAppointment}) => {
           values={formValues}
         />
       )}
-    </Fragment>
+    </>
   );
 };
 
