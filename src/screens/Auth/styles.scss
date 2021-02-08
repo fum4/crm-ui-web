@@ -1,0 +1,15 @@
+.auth {
+    display: flex;
+    flex-direction: column;
+    margin-top: 100px;
+
+    .username, .password {
+        margin: auto;
+        width: 220px;
+    }
+
+    .submit {
+        max-width: 250px;
+        margin: 25px auto;
+    }
+}

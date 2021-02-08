@@ -1,15 +1,23 @@
-import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
-import {Today, Clients} from './screens';
-import {Navigation} from './components';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { Auth, Today, Clients } from './screens';
+import { Navigation } from './components';
+import { useState } from 'react';
 import './App.css';
 
 function App() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
   return (
     <Router>
       <div>
-        <Navigation />
+        {
+          isAuthenticated && <Navigation />
+        }
         <Switch>
-          <Route exact path='/'>
+          <Route exact path='/auth'>
+            <Auth onAuthenticated={() => setIsAuthenticated(true)}/>
+          </Route>
+          <Route exact path='/today'>
             <Today />
           </Route>
           <Route path='/clients'>

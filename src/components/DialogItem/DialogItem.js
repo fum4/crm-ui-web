@@ -41,7 +41,7 @@ const DialogItem = ({ classes, field, onInputChange }) => {
         id={field.id}
         key={field.id}
         label={field.label}
-        onChange={(event) => onInputChange(field.id, event.target.value)}
+        onChange={(ev) => onInputChange(field.id, ev.target.value)}
         required={field.isRequired}
         type={field.id === 'date' ? 'datetime-local' : ''}
         value={field.value || ''}

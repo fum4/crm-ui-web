@@ -6,7 +6,7 @@ const Navigation = () => {
     <nav className='navigation-container'>
       <ul>
         <li className='navigation-item'>
-          <Link to='/'>Astăzi</Link>
+          <Link to='/today'>Astăzi</Link>
         </li>
         <li className='navigation-item'>
           <Link to='/clients'>Pacienți</Link>

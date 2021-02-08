@@ -7,6 +7,8 @@ const api = axios.create({
   }
 });
 
+export const authenticate = (payload) => api.post('/auth', payload);
+
 export const getClients = () => api.get('/clients');
 export const addClient = (payload) => api.post('/client', payload);
 export const updateClient = (payload) => api.put('/client', payload);
