@@ -7,49 +7,44 @@ import _ from 'lodash';
 
 const AppointmentDialog = ({ successHandler, action, setShowModal, values }) => {
   const [formFields, setFormFields] = useState();
-  const [clients, setClients] = useState([]);
   const [title, setTitle] = useState();
 
   useEffect(() => {
-    const clientsFieldOptions = clients.map((client) => ({
-      _id: client._id,
-      label: `${client.surname} ${client.name}`
-    }));
+    getClients().then((clients) => {
+      if (clients.data.length) {
+        const clientsFieldOptions = clients.data.map((client) => ({
+          _id: client._id,
+          label: `${client.surname} ${client.name}`
+        }));
 
-    let options = [
-      {
-        id: 'client',
-        key: 'options',
-        value: clientsFieldOptions
-      }
-    ];
+        let options = [
+          {
+            id: 'client',
+            key: 'options',
+            value: clientsFieldOptions
+          }
+        ];
 
-    if (action === 'add') {
-      options.push({
-        id: 'date',
-        key: 'value',
-        value: getCurrentDate()
-      });
-    }
+        if (action === 'add') {
+          options.push({
+            id: 'date',
+            key: 'value',
+            value: getCurrentDate()
+          });
+        }
 
-    if (values) {
-      options = options.concat(values);
-    }
+        if (values) {
+          options = options.concat(values);
+        }
 
-    const formValues = getFormValues(addAppointmentFields, _.flatten(options));
-    const actionTitle = action === 'add' ? labels.ADD_APPOINTMENT : labels.EDIT_APPOINTMENT;
+        const formValues = getFormValues(addAppointmentFields, _.flatten(options));
+        const actionTitle = action === 'add' ? labels.ADD_APPOINTMENT : labels.EDIT_APPOINTMENT;
 
-    setFormFields(formValues);
-    setTitle(actionTitle);
-  }, [clients, action, values]);
-
-  useEffect(() => {
-    getClients().then((response) => {
-      if (response.data.length) {
-        setClients(response.data);
+        setFormFields(formValues);
+        setTitle(actionTitle);
       }
     });
-  }, []);
+  }, [action, values]);
 
   const handleSubmit = (payload) => {
     switch (action) {

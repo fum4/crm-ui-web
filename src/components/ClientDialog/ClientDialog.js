@@ -34,7 +34,7 @@ const ClientDialog = ({ successHandler, action, setShowModal }) => {
     }
   };
 
-  return (
+  return formFields ? (
     <FormModal
       formFields={formFields}
       onSubmit={(payload) => handleSubmit(payload)}
@@ -42,6 +42,8 @@ const ClientDialog = ({ successHandler, action, setShowModal }) => {
       successHandler={successHandler}
       title={title}
     />
+  ) : (
+    <div />
   );
 };
 
