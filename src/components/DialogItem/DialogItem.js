@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import Autocomplete from '@material-ui/lab/Autocomplete';
-import TextField from '@material-ui/core/TextField';
+import { Button, TextField } from '@material-ui/core/';
 
 const DialogItem = ({ classes, field, onInputChange }) => {
   const [isInitialized, setIsInitialized] = useState(false);
@@ -28,6 +28,17 @@ const DialogItem = ({ classes, field, onInputChange }) => {
         getOptionSelected={(option, value) => value === '' || value === option}
         inputValue={inputValue}
         key={field.id}
+        noOptionsText={
+          <Button
+            color='primary'
+            key={field.id}
+            onMouseDown={() => console.log('CLICK SUCCESSFUL')}
+            size='large'
+            variant='contained'
+          >
+            No results! Click me
+          </Button>
+        }
         onChange={(ev, value) => onInputChange(field.id, value)}
         onInputChange={(event, value) => setInputValue(value)}
         options={optionsIDs}
