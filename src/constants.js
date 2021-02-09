@@ -51,6 +51,16 @@ export const addAppointmentFields = [
     label: 'Pacient'
   },
   {
+    id: 'name',
+    isHidden: true,
+    label: 'Nume'
+  },
+  {
+    id: 'surname',
+    isHidden: true,
+    label: 'Prenume'
+  },
+  {
     id: 'appointment',
     label: 'Programare'
   },
@@ -85,3 +95,9 @@ export const labels = {
   EDIT_APPOINTMENT: 'Modifică programare',
   EDIT_CLIENT: 'Modifică client'
 };
+
+const types={
+  addappoint: [pacient,labla],
+  addapointfarapacient:[pacient, nume, prenume, adresa,]
+
+}

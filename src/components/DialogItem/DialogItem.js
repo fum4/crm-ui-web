@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { Button, TextField } from '@material-ui/core/';
 
-const DialogItem = ({ classes, field, onInputChange }) => {
+const DialogItem = ({ classes, field, onAddClient, onInputChange }) => {
   const [isInitialized, setIsInitialized] = useState(false);
   const [inputValue, setInputValue] = useState('');
   const [optionsIDs, setOptionsIDs] = useState([]);
@@ -19,7 +19,7 @@ const DialogItem = ({ classes, field, onInputChange }) => {
     }
   }, [field, isInitialized]);
 
-  return isInitialized && field.id !== '_id' ? (
+  return isInitialized && field.id !== '_id' && !field.isHidden ? (
     field.isDropdown ? (
       <Autocomplete
         className={classes.input}
@@ -32,7 +32,7 @@ const DialogItem = ({ classes, field, onInputChange }) => {
           <Button
             color='primary'
             key={field.id}
-            onMouseDown={() => console.log('CLICK SUCCESSFUL')}
+            onMouseDown={() => onAddClient()}
             size='large'
             variant='contained'
           >

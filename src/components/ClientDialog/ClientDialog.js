@@ -16,6 +16,7 @@ const ClientDialog = ({ successHandler, action, setShowModal }) => {
         value: getCurrentDate()
       }
     ];
+
     const formValues = getFormValues(addClientFields, options);
     const actionTitle = action === 'add' ? labels.ADD_CLIENT : labels.EDIT_CLIENT;
 
