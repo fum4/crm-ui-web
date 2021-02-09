@@ -1,5 +1,5 @@
 import DialogItem from '../DialogItem';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Button, Dialog, makeStyles } from '@material-ui/core';
 import { FaTimes } from 'react-icons/fa';
 import './styles.scss';
@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
 
 const FormModal = ({setShowModal, successHandler, title, formFields, onSubmit}) => {
   const classes = useStyles();
-  const [fields, setFields] = useState();
+  const [fields, setFields] = useState(formFields);
 
   const onInputChange = (key, value) => {
     const updatedDetails = fields.map((item) => {
@@ -41,10 +41,6 @@ const FormModal = ({setShowModal, successHandler, title, formFields, onSubmit}) 
 
     setFields(updatedDetails);
   };
-
-  useEffect(() => {
-    setFields(formFields);
-  }, [formFields]);
 
   const hideModal = () => {
     setShowModal(false);

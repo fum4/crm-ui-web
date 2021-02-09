@@ -24,14 +24,6 @@ const AppointmentDialog = ({ successHandler, action, setShowModal, values }) => 
       }
     ];
 
-    if (action === 'edit') {
-      options.push({
-        id: 'date',
-        key: 'index',
-        value: values.find((field) => field.id === 'date').value
-      });
-    }
-
     if (action === 'add') {
       options.push({
         id: 'date',
@@ -70,7 +62,7 @@ const AppointmentDialog = ({ successHandler, action, setShowModal, values }) => 
     }
   };
 
-  return (
+  return formFields ? (
     <FormModal
       formFields={formFields}
       onSubmit={(payload) => handleSubmit(payload)}
@@ -78,6 +70,8 @@ const AppointmentDialog = ({ successHandler, action, setShowModal, values }) => 
       successHandler={successHandler}
       title={title}
     />
+  ) : (
+    <div />
   );
 };
 
