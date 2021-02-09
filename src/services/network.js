@@ -17,7 +17,6 @@ export const deleteClient = (payload) => api.delete('/client', payload);
 export const getAppointments = () => api.get('/appointments');
 export const addAppointment = (payload) => api.post('/appointment', payload);
 export const updateAppointment = (payload) => {
-  console.log('##### should have _id set', payload);
   const url = `/appointment/${payload._id}`;
 
   delete payload.client;
