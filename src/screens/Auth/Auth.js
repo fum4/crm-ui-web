@@ -1,20 +1,30 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { AccountCircle, Lock } from '@material-ui/icons';
 import { Button, Grid, TextField } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
 import { authenticate } from '../../services/network';
 import './styles.scss';
 
-const Auth = ({ onAuthenticated }) => {
+const Auth = ({ onAuthenticated, onAuthenticationStart, isAuthenticated }) => {
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
   const history = useHistory();
 
-  const handleAuthentication = (payload) => {
-    authenticate(payload).then(() => {
-      onAuthenticated();
+  useEffect(() => {
+    if (isAuthenticated) {
       history.push('/today');
-    });
+    }
+  }, [history, isAuthenticated])
+
+  const handleAuthentication = (payload) => {
+    if (username && password) {
+      onAuthenticationStart();
+
+      authenticate(payload).then(() => {
+        onAuthenticated();
+        history.push('/today');
+      });
+    }
   }
 
   return (
