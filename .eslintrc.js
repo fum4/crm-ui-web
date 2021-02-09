@@ -41,7 +41,7 @@ module.exports = {
         // callbacksLast: true,
         // shorthandFirst: true,
         // shorthandLast: false,
-        ignoreCase: false
+        ignoreCase: true
         // noSortAlphabetically: false,
         // ReservedFirst: true
       }
