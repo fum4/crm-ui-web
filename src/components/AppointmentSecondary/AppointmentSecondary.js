@@ -38,7 +38,7 @@ const AppointmentSecondary = ({ entry, parentId, onUpdate }) => {
   }, [formValues, entry, parentId]);
 
   const removeEntry = () => {
-    deleteAppointment({ date: entry.date }).then(() => onUpdate());
+    deleteAppointment({ _id: entry._id }).then(() => onUpdate());
   };
 
   return (

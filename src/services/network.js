@@ -26,9 +26,9 @@ export const updateAppointment = (payload) => {
   return api.put(url, payload);
 };
 export const deleteAppointment = (payload) => {
-  const url = `/appointment/${payload.date}`;
+  const url = `/appointment/${payload._id}`;
 
-  delete payload.date;
+  delete payload._id;
 
-  return api.delete(url, { data: payload });
+  return api.delete(url, { _id: payload._id });
 };

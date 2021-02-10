@@ -95,9 +95,3 @@ export const labels = {
   EDIT_APPOINTMENT: 'Modifică programare',
   EDIT_CLIENT: 'Modifică client'
 };
-
-const types={
-  addappoint: [pacient,labla],
-  addapointfarapacient:[pacient, nume, prenume, adresa,]
-
-}
