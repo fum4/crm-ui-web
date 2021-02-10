@@ -33,12 +33,6 @@ const AppointmentDialog = ({ successHandler, action, setShowModal, values }) => 
           });
         }
 
-        options.push({
-          id: 'name',
-          key: 'isHidden',
-          value: false
-        });
-
         if (values) {
           options = options.concat(values);
         }
