@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { FaPlus } from 'react-icons/fa';
 import { Button } from '@material-ui/core';
-import { Dialog } from '..';
+import { AppointmentDialog } from '..';
 import { labels } from '../../constants';
 import Typography from '@material-ui/core/Typography';
 
@@ -39,11 +39,10 @@ const ClientPreview = ({ entry, onAddAppointment }) => {
         <p>{labels.APPOINTMENT}</p>
       </Button>
       {showModal && (
-        <Dialog
+        <AppointmentDialog
           action='add'
           setShowModal={setShowModal}
           successHandler={() => onAddAppointment()}
-          type='appointment'
           values={formValues}
         />
       )}

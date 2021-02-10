@@ -3,12 +3,11 @@ import ListItemText from '@material-ui/core/ListItemText';
 import { useState, useEffect } from 'react';
 import { FaTrashAlt, FaPen } from 'react-icons/fa';
 import { deleteAppointment } from '../../services/network';
-import { Dialog } from '..';
+import { AppointmentDialog } from '..';
 import './styles.scss';
 
 const AppointmentSecondary = ({ entry, parentId, onUpdate }) => {
   const [showEditModal, setShowEditModal] = useState(false);
-  const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [formValues, setFormValues] = useState([]);
 
   useEffect(() => {
@@ -74,11 +73,10 @@ const AppointmentSecondary = ({ entry, parentId, onUpdate }) => {
         </div>
       </ListItem>
       {showEditModal && (
-        <Dialog
+        <AppointmentDialog
           action='edit'
           setShowModal={setShowEditModal}
           successHandler={() => onUpdate()}
-          type='appointment'
           values={formValues}
         />
       )}

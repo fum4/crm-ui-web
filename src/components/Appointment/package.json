@@ -1,5 +1,0 @@
-{
-  "name": "appointment",
-  "private": true,
-  "main": "./Appointment.js"
-}

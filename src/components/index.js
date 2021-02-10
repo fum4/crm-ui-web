@@ -4,7 +4,6 @@ import ListEntrySecondary from './ListEntrySecondary';
 import SearchEnAdd from './SearchEnAdd';
 import FormModal from './FormModal';
 import Navigation from './Navigation';
-import Appointment from './Appointment';
 import AppointmentPrimary from './AppointmentPrimary';
 import AppointmentSecondary from './AppointmentSecondary';
 import AppointmentDialog from './AppointmentDialog';
@@ -14,7 +13,6 @@ import ClientList from './ClientList';
 import ClientPreview from './ClientPreview';
 
 export {
-  Appointment,
   AppointmentDialog,
   AppointmentPrimary,
   AppointmentSecondary,
