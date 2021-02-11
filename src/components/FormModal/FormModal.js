@@ -44,13 +44,19 @@ const FormModal = ({ setShowModal, successHandler, title, formFields, onSubmit }
       value: field.labelValues[1]
     });
 
+    field.type === 'dropdown' &&
+      options.push({
+        id: field.id,
+        key: 'value',
+        value: ''
+      });
+      
     const formValues = getFormValues(fields, options);
 
     setFields(formValues);
   };
 
   const onInputChange = (key, value) => {
-
     const options = [];
 
     const updatedDetails = fields.map((field) => {
