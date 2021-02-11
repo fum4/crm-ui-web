@@ -140,6 +140,7 @@ export const fieldsConfig = {
   },
   name: {
     id: 'name',
+    isRequired: true,
     label: labels.NAME
   },
   price: {
@@ -148,6 +149,7 @@ export const fieldsConfig = {
   },
   surname: {
     id: 'surname',
+    isRequired: true,
     label: labels.SURNAME
   },
   technician: {
@@ -156,6 +158,7 @@ export const fieldsConfig = {
   },
   telephone: {
     id: 'telephone',
+    isRequired: true,
     label: labels.TELEPHONE
   },
   treatment: {

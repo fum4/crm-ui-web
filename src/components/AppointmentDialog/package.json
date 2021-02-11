@@ -1,5 +1,0 @@
-{
-  "name": "appointment-dialog",
-  "private": true,
-  "main": "./AppointmentDialog.js"
-}

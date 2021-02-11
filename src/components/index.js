@@ -6,18 +6,14 @@ import FormModal from './FormModal';
 import Navigation from './Navigation';
 import AppointmentPrimary from './AppointmentPrimary';
 import AppointmentSecondary from './AppointmentSecondary';
-import AppointmentDialog from './AppointmentDialog';
 import AppointmentList from './AppointmentList';
-import ClientDialog from './ClientDialog';
 import ClientList from './ClientList';
 import ClientPreview from './ClientPreview';
 
 export {
-  AppointmentDialog,
   AppointmentPrimary,
   AppointmentSecondary,
   AppointmentList,
-  ClientDialog,
   ClientList,
   ClientPreview,
   FormModal,
