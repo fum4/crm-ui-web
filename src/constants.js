@@ -79,6 +79,6 @@ export const fieldsConfig = {
   }
 };
 export const formTypes = {
-  appointment: ['client', 'appointment', 'date', 'treatment', 'technician', 'control', 'price', 'address'],
+  appointment: ['client', 'appointment', 'date', 'treatment', 'technician', 'control', 'price'],
   client: ['name', 'surname', 'telephone', 'address']
 };

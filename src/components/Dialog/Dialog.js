@@ -56,8 +56,17 @@ const Dialog = ({ successHandler, action, setShowModal, type, values }) => {
         options = options.concat(values);
       }
 
-      const fields = formTypes[type].map((item) => fieldsConfig[item]);
-      const formValues = getFormValues(fields, _.flatten(options));
+      const fields = formTypes[type].map((item) => {
+        if (fieldsConfig[item].items?.length) {
+          const extraFields = fieldsConfig[item].items.map((extraItem) => fieldsConfig[extraItem]);
+
+          return [fieldsConfig[item], ...extraFields];
+        } else {
+          return fieldsConfig[item];
+        }
+      });
+
+      const formValues = getFormValues(_.flatten(fields), _.flatten(options));
       setFormFields(formValues);
 
       setTitle(actionTitle);
