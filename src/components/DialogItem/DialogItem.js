@@ -6,7 +6,7 @@ const DialogItem = ({ classes, field, onInputChange, onShowChilds }) => {
   const [isInitialized, setIsInitialized] = useState(false);
   const [inputValue, setInputValue] = useState('');
   const [optionsIDs, setOptionsIDs] = useState([]);
-
+  const [buttonState, setButtonState] = useState(true);
   useEffect(() => {
     const options = field.options?.map((option) => option._id);
     const initialInputValue = field.options?.find((option) => option._id === field.value)?.label || '';
@@ -21,6 +21,22 @@ const DialogItem = ({ classes, field, onInputChange, onShowChilds }) => {
 
   if (isInitialized && field.id !== '_id' && !field.isHidden) {
     switch (field.type) {
+      case 'button':
+        return (
+          <Button
+            color='primary'
+            onMouseDown={() => {
+              if (field.items.length) {
+                onShowChilds(field, buttonState);
+                setButtonState((state) => !state);
+              }
+            }}
+            size='large'
+            variant='contained'
+          >
+            {field.label}
+          </Button>
+        );
       case 'dropdown':
         return (
           <Autocomplete

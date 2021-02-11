@@ -2,7 +2,7 @@ import DialogItem from '../DialogItem';
 import { useState } from 'react';
 import { Button, Dialog, makeStyles } from '@material-ui/core';
 import { FaTimes } from 'react-icons/fa';
-import { getFormValues } from '../../services/utils';
+import { getFormValues, getCurrentDate } from '../../services/utils';
 import './styles.scss';
 
 const useStyles = makeStyles((theme) => ({
@@ -31,17 +31,17 @@ const FormModal = ({ setShowModal, successHandler, title, formFields, onSubmit }
   const classes = useStyles();
   const [fields, setFields] = useState(formFields);
 
-  const onShowChilds = (field) => {
+  const onShowChilds = (field, isVisible) => {
     const options = field.items?.map((item) => ({
       id: item,
       key: 'isHidden',
-      value: false
+      value: !isVisible
     }));
 
     options.push({
       id: field.id,
       key: 'label',
-      value: field.labelValues[1]
+      value: field.labelValues[isVisible ? 1 : 0]
     });
 
     field.type === 'dropdown' &&
@@ -50,7 +50,12 @@ const FormModal = ({ setShowModal, successHandler, title, formFields, onSubmit }
         key: 'value',
         value: ''
       });
-      
+    ////// AICI NU SE SALVAEZA 
+    options.push({
+      id: 'date',
+      key: 'value',
+      value: getCurrentDate()
+    });
     const formValues = getFormValues(fields, options);
 
     setFields(formValues);
@@ -62,22 +67,20 @@ const FormModal = ({ setShowModal, successHandler, title, formFields, onSubmit }
     const updatedDetails = fields.map((field) => {
       if (field.id === key) {
         field.value = value;
-      }
-
-      if (field.type === 'dropdown') {
-        field.items?.forEach((item) => {
-          options.push({
-            id: item,
-            key: 'isHidden',
-            value: true
+        if (field.type === 'dropdown') {
+          field.items?.forEach((item) => {
+            options.push({
+              id: item,
+              key: 'isHidden',
+              value: true
+            });
           });
-        });
-
-        options.push({
-          id: field.id,
-          key: 'label',
-          value: field.labelValues[0]
-        });
+          options.push({
+            id: field.id,
+            key: 'label',
+            value: field.labelValues[0]
+          });
+        }
       }
 
       return field;

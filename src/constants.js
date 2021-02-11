@@ -4,6 +4,7 @@ export const labels = {
   ADD_CLIENT: 'Adaugă client',
   ADD_EXISTING_CLIENT: 'Alegeți pacient existent',
   APPOINTMENT: 'Programare',
+  CANCEL: 'Renunță',
   CLIENT: 'Pacient',
   CONTROL: 'Control',
   DATE: 'Data',
@@ -22,6 +23,7 @@ export const fieldsConfig = {
     id: 'addAppointment',
     items: ['appointment', 'date', 'treatment', 'technician', 'control', 'price'],
     label: labels.ADD_APPOINTMENT,
+    labelValues: [labels.ADD_CLIENT, labels.CANCEL],
     type: 'button'
   },
   address: {
@@ -80,5 +82,5 @@ export const fieldsConfig = {
 };
 export const formTypes = {
   appointment: ['client', 'appointment', 'date', 'treatment', 'technician', 'control', 'price'],
-  client: ['name', 'surname', 'phone', 'address']
+  client: ['name', 'surname', 'phone', 'address', 'addAppointment']
 };
