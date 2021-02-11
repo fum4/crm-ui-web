@@ -1,14 +1,7 @@
 import { ClientDialog, AppointmentDialog } from '..';
 
 const Dialog = ({ type, action, values, setShowModal, successHandler }) => {
-  return type === 'client' ? (
-    <ClientDialog
-      action={action}
-      setShowModal={setShowModal}
-      successHandler={successHandler}
-      values={values}
-    />
-  ) : type === 'appointment' ? (
+  return (
     <AppointmentDialog
       action={action}
       setShowModal={setShowModal}
@@ -16,7 +9,7 @@ const Dialog = ({ type, action, values, setShowModal, successHandler }) => {
       type={type}
       values={values}
     />
-  ) : null;
+  );
 };
 
 export default Dialog;

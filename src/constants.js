@@ -106,7 +106,7 @@ export const labels = {
   TREATMENT: 'Tratament'
 };
 
-const fields = {
+export const fieldsConfig = {
   addAppointment: {
     id: 'addAppointment',
     items: ['appointment', 'date', 'treatment', 'technician', 'control', 'price'],
@@ -163,7 +163,7 @@ const fields = {
     label: labels.TREATMENT
   }
 };
-const fieldsConfig = {
-  appointment: ['client', 'appointment', 'date', 'treatment', 'technician', 'control', 'price'],
+export const formTypes = {
+  appointment: ['client', 'appointment', 'date', 'treatment', 'technician', 'control', 'price', 'address'],
   client: ['name', 'surname', 'telephone', 'address']
 };

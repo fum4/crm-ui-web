@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { FormModal } from '..';
-import { addAppointmentFields, labels, fields, fieldsConfig } from '../../constants';
+import { labels, fieldsConfig, formTypes } from '../../constants';
 import { getFormValues, serializeForm, getCurrentDate } from '../../services/utils';
 import {
   addAppointment,
@@ -18,9 +18,10 @@ const AppointmentDialog = ({ successHandler, action, setShowModal, type, values 
   useEffect(() => {
     const getFormOptions = async () => {
       let options = [];
-
+      let actionTitle;
       switch (type) {
         case 'appointment': {
+          actionTitle = action === 'add' ? labels.ADD_APPOINTMENT : labels.EDIT_APPOINTMENT;
           const clients = await getClients();
 
           const clientsFieldOptions =
@@ -45,17 +46,20 @@ const AppointmentDialog = ({ successHandler, action, setShowModal, type, values 
               value: getCurrentDate()
             });
           }
+          break;
         }
+        case 'client':
+          actionTitle = action === 'add' ? labels.ADD_CLIENT : labels.EDIT_CLIENT;
       }
 
       if (values) {
         options = options.concat(values);
       }
 
-      const formValues = getFormValues(addAppointmentFields, _.flatten(options));
-      const actionTitle = action === 'add' ? labels.ADD_APPOINTMENT : labels.EDIT_APPOINTMENT;
-
+      const fields = formTypes[type].map((item) => fieldsConfig[item]);
+      const formValues = getFormValues(fields, _.flatten(options));
       setFormFields(formValues);
+
       setTitle(actionTitle);
     };
     getFormOptions();

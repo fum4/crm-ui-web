@@ -20,7 +20,7 @@ const DialogItem = ({ classes, field, onInputChange }) => {
   }, [field, isInitialized]);
 
   return isInitialized && field.id !== '_id' && !field.isHidden ? (
-    field.isDropdown ? (
+    field.type === 'dropdown' ? (
       <Autocomplete
         className={classes.input}
         disabled={field.isDisabled}
@@ -53,7 +53,7 @@ const DialogItem = ({ classes, field, onInputChange }) => {
         label={field.label}
         onChange={(ev) => onInputChange(field.id, ev.target.value)}
         required={field.isRequired}
-        type={field.id === 'date' ? 'datetime-local' : ''}
+        type={field.type}
         value={field.value || ''}
         variant='filled'
       />
