@@ -1,6 +1,6 @@
-import {ClientDialog, AppointmentDialog} from '..';
+import { ClientDialog, AppointmentDialog } from '..';
 
-const Dialog = ({type, action, values, setShowModal, successHandler}) => {
+const Dialog = ({ type, action, values, setShowModal, successHandler }) => {
   return type === 'client' ? (
     <ClientDialog
       action={action}
@@ -13,6 +13,7 @@ const Dialog = ({type, action, values, setShowModal, successHandler}) => {
       action={action}
       setShowModal={setShowModal}
       successHandler={successHandler}
+      type={type}
       values={values}
     />
   ) : null;

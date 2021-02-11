@@ -4,7 +4,7 @@ import { getFormValues, serializeForm, getCurrentDate } from '../../services/uti
 import { addClientFields, labels } from '../../constants';
 import { addClient, updateClient } from '../../services/network';
 
-const ClientDialog = ({ successHandler, action, setShowModal }) => {
+const ClientDialog = ({ successHandler, action, setShowModal, values }) => {
   const [formFields, setFormFields] = useState();
   const [title, setTitle] = useState();
 

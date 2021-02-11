@@ -30,16 +30,7 @@ const FormModal = ({ setShowModal, successHandler, title, formFields, onSubmit }
   const classes = useStyles();
   const [fields, setFields] = useState(formFields);
 
-  const onAddClient = () => {
-    const updatedDetails = fields.map((item) => {
-      item.isHidden = false;
-
-      return item;
-    });
-
-    setFields(updatedDetails);
-  };
-
+  
   const onInputChange = (key, value) => {
     const updatedDetails = fields.map((item) => {
       if (item.id === key) {
@@ -77,7 +68,6 @@ const FormModal = ({ setShowModal, successHandler, title, formFields, onSubmit }
             classes={classes}
             field={field}
             key={field.id}
-            onAddClient={onAddClient}
             onInputChange={onInputChange}
           />
         ))}

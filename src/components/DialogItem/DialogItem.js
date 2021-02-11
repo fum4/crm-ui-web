@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { Button, TextField } from '@material-ui/core/';
 
-const DialogItem = ({ classes, field, onAddClient, onInputChange }) => {
+const DialogItem = ({ classes, field, onInputChange }) => {
   const [isInitialized, setIsInitialized] = useState(false);
   const [inputValue, setInputValue] = useState('');
   const [optionsIDs, setOptionsIDs] = useState([]);
@@ -31,8 +31,7 @@ const DialogItem = ({ classes, field, onAddClient, onInputChange }) => {
         noOptionsText={
           <Button
             color='primary'
-            key={field.id}
-            onMouseDown={() => onAddClient()}
+            onMouseDown={() => console.log('no options pushed')}
             size='large'
             variant='contained'
           >

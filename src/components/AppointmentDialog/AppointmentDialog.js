@@ -1,57 +1,86 @@
 import { useState, useEffect } from 'react';
 import { FormModal } from '..';
-import { addAppointmentFields, labels } from '../../constants';
+import { addAppointmentFields, labels, fields, fieldsConfig } from '../../constants';
 import { getFormValues, serializeForm, getCurrentDate } from '../../services/utils';
-import { addAppointment, updateAppointment, getClients } from '../../services/network';
+import {
+  addAppointment,
+  updateAppointment,
+  addClient,
+  updateClient,
+  getClients
+} from '../../services/network';
 import _ from 'lodash';
 
-const AppointmentDialog = ({ successHandler, action, setShowModal, values }) => {
+const AppointmentDialog = ({ successHandler, action, setShowModal, type, values }) => {
   const [formFields, setFormFields] = useState();
   const [title, setTitle] = useState();
 
   useEffect(() => {
-    getClients().then((clients) => {
-      if (clients.data.length) {
-        const clientsFieldOptions = clients.data.map((client) => ({
-          _id: client._id,
-          label: `${client.surname} ${client.name}`
-        }));
+    const getFormOptions = async () => {
+      let options = [];
 
-        let options = [
-          {
-            id: 'client',
-            key: 'options',
-            value: clientsFieldOptions
+      switch (type) {
+        case 'appointment': {
+          const clients = await getClients();
+
+          const clientsFieldOptions =
+            clients.data &&
+            clients.data.map((client) => ({
+              _id: client._id,
+              label: `${client.surname} ${client.name}`
+            }));
+
+          if (clientsFieldOptions.length) {
+            options.push({
+              id: 'client',
+              key: 'options',
+              value: clientsFieldOptions
+            });
           }
-        ];
 
-        if (action === 'add') {
-          options.push({
-            id: 'date',
-            key: 'value',
-            value: getCurrentDate()
-          });
+          if (action === 'add') {
+            options.push({
+              id: 'date',
+              key: 'value',
+              value: getCurrentDate()
+            });
+          }
         }
-
-        if (values) {
-          options = options.concat(values);
-        }
-
-        const formValues = getFormValues(addAppointmentFields, _.flatten(options));
-        const actionTitle = action === 'add' ? labels.ADD_APPOINTMENT : labels.EDIT_APPOINTMENT;
-
-        setFormFields(formValues);
-        setTitle(actionTitle);
       }
-    });
-  }, [action, values]);
+
+      if (values) {
+        options = options.concat(values);
+      }
+
+      const formValues = getFormValues(addAppointmentFields, _.flatten(options));
+      const actionTitle = action === 'add' ? labels.ADD_APPOINTMENT : labels.EDIT_APPOINTMENT;
+
+      setFormFields(formValues);
+      setTitle(actionTitle);
+    };
+    getFormOptions();
+  }, [action, type, values]);
 
   const handleSubmit = (payload) => {
     switch (action) {
       case 'add':
-        return addAppointment(serializeForm(payload));
+        switch (type) {
+          case 'appointment':
+            return addAppointment(serializeForm(payload));
+          case 'client':
+            return addClient(serializeForm(payload));
+          default:
+            return undefined;
+        }
       case 'edit':
-        return updateAppointment(serializeForm(payload));
+        switch (type) {
+          case 'appointment':
+            return updateAppointment(serializeForm(payload));
+          case 'client':
+            return updateClient(serializeForm(payload));
+          default:
+            return undefined;
+        }
       default:
         return undefined;
     }
