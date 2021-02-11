@@ -16,7 +16,13 @@ export const updateClient = (payload) => api.put('/client', payload);
 export const deleteClient = (payload) => api.delete('/client', payload);
 
 export const getAppointments = () => api.get('/appointments');
-export const addAppointment = (payload) => api.post('/appointment', payload);
+export const addAppointment = (payload) => {
+  const url = `/appointment/${payload.client || ''}`
+
+  delete payload.client;
+
+  return api.post(url, payload);
+}
 export const updateAppointment = (payload) => {
   const url = `/appointment/${payload._id}`;
 
