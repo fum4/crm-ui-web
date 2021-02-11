@@ -23,20 +23,19 @@ const Dialog = ({ successHandler, action, setShowModal, type, values }) => {
       switch (type) {
         case 'appointment': {
           actionTitle = action === 'add' ? labels.ADD_APPOINTMENT : labels.EDIT_APPOINTMENT;
+          
           const clients = await getClients();
 
-          const clientsFieldOptions =
-            clients.data &&
-            clients.data.map((client) => ({
-              _id: client._id,
-              label: `${client.surname} ${client.name}`
-            }));
+          const clientsFieldOptions = clients.data?.map((client) => ({
+            _id: client._id,
+            label: `${client.surname} ${client.name}`
+          }));
 
           if (clientsFieldOptions.length) {
             options.push({
               id: 'client',
               key: 'options',
-              value: clientsFieldOptions
+              value: clientsFieldOptions,
             });
           }
 
@@ -47,6 +46,7 @@ const Dialog = ({ successHandler, action, setShowModal, type, values }) => {
               value: getCurrentDate()
             });
           }
+
           break;
         }
         case 'client':
@@ -58,17 +58,19 @@ const Dialog = ({ successHandler, action, setShowModal, type, values }) => {
       }
 
       const fields = formTypes[type].map((item) => {
+        let extraFields = [];
+
         if (fieldsConfig[item].items?.length) {
-          const extraFields = fieldsConfig[item].items.map((extraItem) => {
+          extraFields = fieldsConfig[item].items.map((extraItem) => {
             return { ...fieldsConfig[extraItem], isHidden: true };
           });
-          return [fieldsConfig[item], ...extraFields];
-        } else {
-          return fieldsConfig[item];
         }
+
+        return [fieldsConfig[item], ...extraFields];
       });
 
       const formValues = getFormValues(_.flatten(fields), _.flatten(options));
+
       setFormFields(formValues);
       setTitle(actionTitle);
     };

@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { Button, TextField } from '@material-ui/core/';
 
-const DialogItem = ({ classes, field, onInputChange }) => {
+const DialogItem = ({ classes, field, onInputChange, onShowChilds }) => {
   const [isInitialized, setIsInitialized] = useState(false);
   const [inputValue, setInputValue] = useState('');
   const [optionsIDs, setOptionsIDs] = useState([]);
@@ -35,13 +35,13 @@ const DialogItem = ({ classes, field, onInputChange }) => {
                 color='primary'
                 onMouseDown={() => {
                   if (field.items.length) {
-                    console.log('fields that are going to ble displayed', field.items);
+                    onShowChilds(field, true);
                   }
                 }}
                 size='large'
                 variant='contained'
               >
-                No results! Click me
+                Fără rezultate! Adăugați pacient
               </Button>
             }
             onChange={(ev, value) => onInputChange(field.id, value)}

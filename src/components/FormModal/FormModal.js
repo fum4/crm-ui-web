@@ -2,6 +2,7 @@ import DialogItem from '../DialogItem';
 import { useState } from 'react';
 import { Button, Dialog, makeStyles } from '@material-ui/core';
 import { FaTimes } from 'react-icons/fa';
+import { getFormValues } from '../../services/utils';
 import './styles.scss';
 
 const useStyles = makeStyles((theme) => ({
@@ -30,17 +31,55 @@ const FormModal = ({ setShowModal, successHandler, title, formFields, onSubmit }
   const classes = useStyles();
   const [fields, setFields] = useState(formFields);
 
-  
-  const onInputChange = (key, value) => {
-    const updatedDetails = fields.map((item) => {
-      if (item.id === key) {
-        item.value = value;
-      }
+  const onShowChilds = (field) => {
+    const options = field.items?.map((item) => ({
+      id: item,
+      key: 'isHidden',
+      value: false
+    }));
 
-      return item;
+    options.push({
+      id: field.id,
+      key: 'label',
+      value: field.labelValues[1]
     });
 
-    setFields(updatedDetails);
+    const formValues = getFormValues(fields, options);
+
+    setFields(formValues);
+  };
+
+  const onInputChange = (key, value) => {
+
+    const options = [];
+
+    const updatedDetails = fields.map((field) => {
+      if (field.id === key) {
+        field.value = value;
+      }
+
+      if (field.type === 'dropdown') {
+        field.items?.forEach((item) => {
+          options.push({
+            id: item,
+            key: 'isHidden',
+            value: true
+          });
+        });
+
+        options.push({
+          id: field.id,
+          key: 'label',
+          value: field.labelValues[0]
+        });
+      }
+
+      return field;
+    });
+
+    const formValues = getFormValues(updatedDetails, options);
+
+    setFields(formValues);
   };
 
   const hideModal = () => {
@@ -69,6 +108,7 @@ const FormModal = ({ setShowModal, successHandler, title, formFields, onSubmit }
             field={field}
             key={field.id}
             onInputChange={onInputChange}
+            onShowChilds={onShowChilds}
           />
         ))}
         <div className='modal-footer'>

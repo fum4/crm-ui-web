@@ -1,20 +1,19 @@
-
 export const labels = {
   ADDRESS: 'Adresă',
   ADD_APPOINTMENT: 'Adaugă programare',
   ADD_CLIENT: 'Adaugă client',
+  ADD_EXISTING_CLIENT: 'Alegeți pacient existent',
   APPOINTMENT: 'Programare',
-  CLIENT: 'Client',
+  CLIENT: 'Pacient',
   CONTROL: 'Control',
   DATE: 'Data',
   EDIT_APPOINTMENT: 'Modifică programare',
   EDIT_CLIENT: 'Modifică client',
   NAME: 'Nume',
-  PATIENT: 'Pacient',
+  PHONE: 'Telefon',
   PRICE: 'Preț',
   SURNAME: 'Prenume',
   TECHNICIAN: 'Tehnician',
-  TELEPHONE: 'Telefon',
   TREATMENT: 'Tratament'
 };
 
@@ -36,8 +35,9 @@ export const fieldsConfig = {
   client: {
     id: 'client',
     isRequired: true,
-    items: ['name', 'surname', 'telephone', 'address'],
-    label: labels.PATIENT,
+    items: ['name', 'surname', 'phone', 'address'],
+    label: labels.CLIENT,
+    labelValues: [labels.CLIENT, labels.ADD_EXISTING_CLIENT],
     type: 'dropdown'
   },
   control: {
@@ -55,6 +55,11 @@ export const fieldsConfig = {
     isRequired: true,
     label: labels.NAME
   },
+  phone: {
+    id: 'phone',
+    isRequired: true,
+    label: labels.PHONE
+  },
   price: {
     id: 'price',
     label: labels.PRICE
@@ -68,11 +73,6 @@ export const fieldsConfig = {
     id: 'technician',
     label: labels.TECHNICIAN
   },
-  telephone: {
-    id: 'telephone',
-    isRequired: true,
-    label: labels.TELEPHONE
-  },
   treatment: {
     id: 'treatment',
     label: labels.TREATMENT
@@ -80,5 +80,5 @@ export const fieldsConfig = {
 };
 export const formTypes = {
   appointment: ['client', 'appointment', 'date', 'treatment', 'technician', 'control', 'price'],
-  client: ['name', 'surname', 'telephone', 'address']
+  client: ['name', 'surname', 'phone', 'address']
 };
