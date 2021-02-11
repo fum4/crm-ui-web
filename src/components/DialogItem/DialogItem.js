@@ -19,7 +19,7 @@ const DialogItem = ({ classes, field, onInputChange }) => {
     }
   }, [field, isInitialized]);
 
-  if (isInitialized && field.id !== '_id') {
+  if (isInitialized && field.id !== '_id' && !field.isHidden) {
     switch (field.type) {
       case 'dropdown':
         return (
@@ -70,7 +70,6 @@ const DialogItem = ({ classes, field, onInputChange }) => {
   } else {
     return <div />;
   }
- 
 };
 
 export default DialogItem;

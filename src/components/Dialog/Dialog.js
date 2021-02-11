@@ -19,6 +19,7 @@ const Dialog = ({ successHandler, action, setShowModal, type, values }) => {
     const getFormOptions = async () => {
       let options = [];
       let actionTitle;
+
       switch (type) {
         case 'appointment': {
           actionTitle = action === 'add' ? labels.ADD_APPOINTMENT : labels.EDIT_APPOINTMENT;
@@ -58,8 +59,9 @@ const Dialog = ({ successHandler, action, setShowModal, type, values }) => {
 
       const fields = formTypes[type].map((item) => {
         if (fieldsConfig[item].items?.length) {
-          const extraFields = fieldsConfig[item].items.map((extraItem) => fieldsConfig[extraItem]);
-
+          const extraFields = fieldsConfig[item].items.map((extraItem) => {
+            return { ...fieldsConfig[extraItem], isHidden: true };
+          });
           return [fieldsConfig[item], ...extraFields];
         } else {
           return fieldsConfig[item];
@@ -68,9 +70,9 @@ const Dialog = ({ successHandler, action, setShowModal, type, values }) => {
 
       const formValues = getFormValues(_.flatten(fields), _.flatten(options));
       setFormFields(formValues);
-
       setTitle(actionTitle);
     };
+
     getFormOptions();
   }, [action, type, values]);
 
