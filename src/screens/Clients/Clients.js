@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
+import { Redirect } from 'react-router-dom';
 import { ClientList, SearchEnAdd } from '../../components';
 import { getClients } from '../../services/network';
 
-const Clients = () => {
+const Clients = ({ isAuthenticated }) => {
   const [allClients, setAllClients] = useState();
   const [filteredClients, setFilteredClients] = useState([]);
   const [clients, setClients] = useState();
@@ -16,8 +17,9 @@ const Clients = () => {
   };
 
   useEffect(() => {
+    console.log('is auth', isAuthenticated)
     refreshClients();
-  }, []);
+  }, [isAuthenticated]);
 
   useEffect(() => {
     setClients(filteredClients.length ? filteredClients : allClients);
@@ -45,7 +47,7 @@ const Clients = () => {
     setFilteredClients(filtered);
   };
 
-  return (
+  return isAuthenticated ? (
     <>
       <SearchEnAdd
         actionSuccessHandler={() => refreshClients()}
@@ -54,7 +56,7 @@ const Clients = () => {
       />
       <ClientList entries={clients} refreshClients={() => refreshClients()} />
     </>
-  );
+  ) : <Redirect to={{ pathname: '/login' }} />;
 };
 
 export default Clients;

@@ -1,20 +1,13 @@
 import { useState, useEffect } from 'react';
 import { AccountCircle, Lock } from '@material-ui/icons';
 import { Button, Grid, TextField } from '@material-ui/core';
-import { useHistory } from 'react-router-dom';
 import { authenticate } from '../../services/network';
+import { Redirect } from 'react-router-dom';
 import './styles.scss';
 
 const Auth = ({ onAuthenticated, onAuthenticationStart, isAuthenticated }) => {
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
-  const history = useHistory();
-
-  useEffect(() => {
-    if (isAuthenticated) {
-      history.push('/today');
-    }
-  }, [history, isAuthenticated])
 
   const handleAuthentication = (payload) => {
     if (username && password) {
@@ -22,13 +15,16 @@ const Auth = ({ onAuthenticated, onAuthenticationStart, isAuthenticated }) => {
 
       authenticate(payload).then(() => {
         onAuthenticated();
-        history.push('/today');
       });
     }
   }
 
-  return (
-    <div className='auth'>
+  useEffect(() => {
+    console.log('#### ', isAuthenticated)
+  }, [isAuthenticated])
+
+  return !isAuthenticated ? (
+    <div className='login'>
       <Grid alignItems='flex-end' className='username' container spacing={1}>
         <Grid item>
           <AccountCircle />
@@ -60,7 +56,7 @@ const Auth = ({ onAuthenticated, onAuthenticationStart, isAuthenticated }) => {
         Autentificare
       </Button>
     </div>
-  );
+  ) : <Redirect to={{ pathname: '/today' }} />;
 }
 
 export default Auth;

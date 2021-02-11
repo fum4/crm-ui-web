@@ -1,7 +1,14 @@
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { signOut } from '../../services/network';
 import './styles.scss';
 
-const Navigation = () => {
+const Navigation = ({ onSignOut }) => {
+  const handleSignOut = () => {
+    signOut().then(() => {
+      onSignOut();
+    });
+  };
+
   return (
     <nav className='navigation-container'>
       <ul>
@@ -10,6 +17,9 @@ const Navigation = () => {
         </li>
         <li className='navigation-item'>
           <Link to='/clients'>Pacienți</Link>
+        </li>
+        <li className='navigation-item' onClick={() => handleSignOut()}>
+          Deconectează-te
         </li>
       </ul>
     </nav>

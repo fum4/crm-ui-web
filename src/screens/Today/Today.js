@@ -1,11 +1,13 @@
 import {useEffect, useState} from 'react';
 import {getAppointments} from '../../services/network';
 import {AppointmentList, SearchEnAdd} from '../../components';
+import { useHistory } from 'react-router-dom';
 
-const Clients = () => {
+const Clients = ({ isAuthenticated }) => {
   const [allAppointments, setAllAppointments] = useState([]);
   const [filteredAppointments, setFilteredAppointments] = useState([]);
   const [appointments, setAppointments] = useState([]);
+  const history = useHistory();
 
   const refreshAppointments = () => {
     getAppointments().then((response) => {
@@ -18,6 +20,12 @@ const Clients = () => {
   useEffect(() => {
     refreshAppointments();
   }, []);
+
+  useEffect(() => {
+    if (!isAuthenticated) {
+      history.push('/login');
+    }
+  }, [history, isAuthenticated]);
 
   useEffect(() => {
     setAppointments(filteredAppointments.length ? filteredAppointments : allAppointments);

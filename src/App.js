@@ -11,10 +11,13 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    getAppStatus().then((res) => {
-      if (res.status === 200) {
-        setIsAuthenticated(true);
-      } else {
+    getAppStatus()
+      .then((res) => {
+        if (res.status === 200) {
+          setIsAuthenticated(true);
+        }
+      })
+      .catch(() => {
         navigator.credentials.get({ password: true }).then((credentials) => {
           const { id, password } = credentials;
 
@@ -24,8 +27,7 @@ function App() {
             .then(() => setIsAuthenticated(true))
             .finally(() => setIsLoading(false));
         });
-      }
-    })
+      })
   }, [])
 
   const onAuthenticated = () => {
@@ -37,11 +39,11 @@ function App() {
     <Router>
       <div>
         {
-          isAuthenticated && <Navigation />
+          isAuthenticated && <Navigation onSignOut={() => setIsAuthenticated(false) } />
         }
         <Switch>
           {
-            <Route exact path='/auth'>
+            <Route exact path='/login'>
               <Auth
                 isAuthenticated={isAuthenticated}
                 onAuthenticated={() => onAuthenticated()}
@@ -51,14 +53,14 @@ function App() {
           {
             isAuthenticated && (
               <Route exact path='/today'>
-                <Today />
+                <Today isAuthenticated={isAuthenticated} />
               </Route>
             )
           }
           {
             isAuthenticated && (
               <Route path='/clients'>
-                <Clients />
+                <Clients isAuthenticated={isAuthenticated} />
               </Route>
             )
           }
