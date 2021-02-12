@@ -1,18 +1,20 @@
-import { useEffect, useState } from 'react';
 import Autocomplete from '@material-ui/lab/Autocomplete';
+import { useEffect, useState } from 'react';
 import { Button, TextField } from '@material-ui/core/';
 
-const DialogItem = ({ classes, field, onInputChange, onShowChilds }) => {
+const DialogItem = ({ classes, field, onInputChange, onFieldsExtend }) => {
   const [isInitialized, setIsInitialized] = useState(false);
-  const [inputValue, setInputValue] = useState('');
+  const [currentValue, setCurrentValue] = useState(false);
   const [optionsIDs, setOptionsIDs] = useState([]);
-  const [buttonState, setButtonState] = useState(true);
+
   useEffect(() => {
     const options = field.options?.map((option) => option._id);
-    const initialInputValue = field.options?.find((option) => option._id === field.value)?.label || '';
-
     setOptionsIDs(options);
-    setInputValue(initialInputValue);
+
+    if (field.type === 'dropdown') {
+      const initialValue = field.options?.find((option) => option._id === field.value)?.label || '';
+      setCurrentValue(initialValue);
+    }
 
     if (!isInitialized) {
       setIsInitialized(true);
@@ -21,22 +23,26 @@ const DialogItem = ({ classes, field, onInputChange, onShowChilds }) => {
 
   if (isInitialized && field.id !== '_id' && !field.isHidden) {
     switch (field.type) {
-      case 'button':
+      case 'button': {
+        const Icon = field.icon;
+
         return (
           <Button
             color='primary'
-            onMouseDown={() => {
+            onClick={() => {
               if (field.items.length) {
-                onShowChilds(field, buttonState);
-                setButtonState((state) => !state);
+                onFieldsExtend(field, currentValue);
+                setCurrentValue(!currentValue);
               }
             }}
             size='large'
-            variant='contained'
+            variant='outlined'
           >
-            {field.label}
+            <Icon />
+            { field.label }
           </Button>
         );
+      }
       case 'dropdown':
         return (
           <Autocomplete
@@ -44,14 +50,14 @@ const DialogItem = ({ classes, field, onInputChange, onShowChilds }) => {
             disabled={field.isDisabled}
             getOptionLabel={(item) => field.options?.find((option) => option._id === item)?.label || ''}
             getOptionSelected={(option, value) => value === '' || value === option}
-            inputValue={inputValue}
+            inputValue={currentValue}
             key={field.id}
             noOptionsText={
               field.items.length && (
                 <Button
                   color='primary'
                   onMouseDown={() => {
-                    onShowChilds(field, true);
+                    onFieldsExtend(field, false);
                   }}
                   size='large'
                   variant='contained'
@@ -61,7 +67,7 @@ const DialogItem = ({ classes, field, onInputChange, onShowChilds }) => {
               )
             }
             onChange={(ev, value) => onInputChange(field.id, value)}
-            onInputChange={(event, value) => setInputValue(value)}
+            onInputChange={(event, value) => setCurrentValue(value)}
             options={optionsIDs}
             renderInput={(params) => <TextField {...params} label={field.label} variant='filled' />}
             required={field.isRequired}

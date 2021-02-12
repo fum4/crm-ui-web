@@ -1,3 +1,6 @@
+import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
+import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
+
 export const labels = {
   ADDRESS: 'Adresă',
   ADD_APPOINTMENT: 'Adaugă programare',
@@ -5,6 +8,7 @@ export const labels = {
   ADD_EXISTING_CLIENT: 'Alegeți pacient existent',
   APPOINTMENT: 'Programare',
   CANCEL: 'Renunță',
+  CANCEL_ADD_APPOINTMENT: 'Fără programare',
   CLIENT: 'Pacient',
   CONTROL: 'Control',
   DATE: 'Data',
@@ -20,10 +24,12 @@ export const labels = {
 
 export const fieldsConfig = {
   addAppointment: {
+    icon: KeyboardArrowRightIcon,
+    iconValues: [KeyboardArrowRightIcon, KeyboardArrowDownIcon],
     id: 'addAppointment',
     items: ['appointment', 'date', 'treatment', 'technician', 'control', 'price'],
     label: labels.ADD_APPOINTMENT,
-    labelValues: [labels.ADD_CLIENT, labels.CANCEL],
+    labelValues: [labels.ADD_APPOINTMENT, labels.CANCEL_ADD_APPOINTMENT],
     type: 'button'
   },
   address: {
@@ -80,6 +86,7 @@ export const fieldsConfig = {
     label: labels.TREATMENT
   }
 };
+
 export const formTypes = {
   appointment: ['client', 'appointment', 'date', 'treatment', 'technician', 'control', 'price'],
   client: ['name', 'surname', 'phone', 'address', 'addAppointment']

@@ -31,17 +31,17 @@ const FormModal = ({ setShowModal, successHandler, title, formFields, onSubmit }
   const classes = useStyles();
   const [fields, setFields] = useState(formFields);
 
-  const onShowChilds = (field, isVisible) => {
+  const onFieldsExtend = (field, isHidden) => {
     const options = field.items?.map((item) => ({
       id: item,
       key: 'isHidden',
-      value: !isVisible
+      value: isHidden
     }));
 
     options.push({
       id: field.id,
       key: 'label',
-      value: field.labelValues[isVisible ? 1 : 0]
+      value: field.labelValues[isHidden ? 0 : 1]
     });
 
     field.type === 'dropdown' &&
@@ -50,6 +50,13 @@ const FormModal = ({ setShowModal, successHandler, title, formFields, onSubmit }
         key: 'value',
         value: ''
       });
+
+    field.type === 'button' &&
+    options.push({
+      id: field.id,
+      key: 'icon',
+      value: field.iconValues[isHidden ? 0 : 1]
+    });
 
     const formValues = getFormValues(fields, options);
 
@@ -62,7 +69,8 @@ const FormModal = ({ setShowModal, successHandler, title, formFields, onSubmit }
     const updatedDetails = fields.map((field) => {
       if (field.id === key) {
         field.value = value;
-        if (field.type === 'dropdown') {
+
+        if (field.items.length) {
           field.items?.forEach((item) => {
             options.push({
               id: item,
@@ -70,6 +78,7 @@ const FormModal = ({ setShowModal, successHandler, title, formFields, onSubmit }
               value: true
             });
           });
+
           options.push({
             id: field.id,
             key: 'label',
@@ -98,7 +107,7 @@ const FormModal = ({ setShowModal, successHandler, title, formFields, onSubmit }
   };
 
   return (
-    <Dialog fullWidth maxWidth='md' open={true}>
+    <Dialog className='modal' fullWidth maxWidth='md' open={true}>
       <div className='modal-header'>
         <h2>{title}</h2>
         <div className='close-btn-container'>
@@ -111,8 +120,8 @@ const FormModal = ({ setShowModal, successHandler, title, formFields, onSubmit }
             classes={classes}
             field={field}
             key={field.id}
+            onFieldsExtend={onFieldsExtend}
             onInputChange={onInputChange}
-            onShowChilds={onShowChilds}
           />
         ))}
         <div className='modal-footer'>
