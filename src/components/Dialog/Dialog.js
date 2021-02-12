@@ -23,7 +23,7 @@ const Dialog = ({ successHandler, action, setShowModal, type, values }) => {
       switch (type) {
         case 'appointment': {
           actionTitle = action === 'add' ? labels.ADD_APPOINTMENT : labels.EDIT_APPOINTMENT;
-          
+
           const clients = await getClients();
 
           const clientsFieldOptions = clients.data?.map((client) => ({
@@ -35,7 +35,7 @@ const Dialog = ({ successHandler, action, setShowModal, type, values }) => {
             options.push({
               id: 'client',
               key: 'options',
-              value: clientsFieldOptions,
+              value: clientsFieldOptions
             });
           }
 
@@ -51,6 +51,11 @@ const Dialog = ({ successHandler, action, setShowModal, type, values }) => {
         }
         case 'client':
           actionTitle = action === 'add' ? labels.ADD_CLIENT : labels.EDIT_CLIENT;
+          options.push({
+            id: 'date',
+            key: 'value',
+            value: getCurrentDate()
+          });
       }
 
       if (values) {

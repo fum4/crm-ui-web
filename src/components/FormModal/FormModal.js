@@ -2,7 +2,7 @@ import DialogItem from '../DialogItem';
 import { useState } from 'react';
 import { Button, Dialog, makeStyles } from '@material-ui/core';
 import { FaTimes } from 'react-icons/fa';
-import { getFormValues, getCurrentDate } from '../../services/utils';
+import { getFormValues } from '../../services/utils';
 import './styles.scss';
 
 const useStyles = makeStyles((theme) => ({
@@ -50,12 +50,7 @@ const FormModal = ({ setShowModal, successHandler, title, formFields, onSubmit }
         key: 'value',
         value: ''
       });
-    ////// AICI NU SE SALVAEZA 
-    options.push({
-      id: 'date',
-      key: 'value',
-      value: getCurrentDate()
-    });
+
     const formValues = getFormValues(fields, options);
 
     setFields(formValues);

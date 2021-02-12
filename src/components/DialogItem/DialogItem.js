@@ -47,18 +47,18 @@ const DialogItem = ({ classes, field, onInputChange, onShowChilds }) => {
             inputValue={inputValue}
             key={field.id}
             noOptionsText={
-              <Button
-                color='primary'
-                onMouseDown={() => {
-                  if (field.items.length) {
+              field.items.length && (
+                <Button
+                  color='primary'
+                  onMouseDown={() => {
                     onShowChilds(field, true);
-                  }
-                }}
-                size='large'
-                variant='contained'
-              >
-                Fără rezultate! Adăugați pacient
-              </Button>
+                  }}
+                  size='large'
+                  variant='contained'
+                >
+                  Fără rezultate! Adăugați pacient
+                </Button>
+              )
             }
             onChange={(ev, value) => onInputChange(field.id, value)}
             onInputChange={(event, value) => setInputValue(value)}
