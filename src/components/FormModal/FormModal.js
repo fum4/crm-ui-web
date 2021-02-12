@@ -70,7 +70,7 @@ const FormModal = ({ setShowModal, successHandler, title, formFields, onSubmit }
       if (field.id === key) {
         field.value = value;
 
-        if (field.items.length) {
+        if (field.items?.length) {
           field.items?.forEach((item) => {
             options.push({
               id: item,
