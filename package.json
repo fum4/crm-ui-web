@@ -13,6 +13,7 @@
     "axios": "^0.21.1",
     "bootstrap": "^4.6.0",
     "lodash": "^4.17.20",
+    "luxon": "^1.25.0",
     "react": "^17.0.1",
     "react-bootstrap": "^1.4.3",
     "react-calendar": "^3.3.1",
