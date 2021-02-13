@@ -39,15 +39,17 @@ const ClientPreview = ({ entry, onAddAppointment }) => {
         <FaPlus className='add-icon' size={13} />
         <p>{labels.APPOINTMENT}</p>
       </Button>
-      {showModal && (
-        <Dialog
-          action='add'
-          setShowModal={setShowModal}
-          successHandler={() => onAddAppointment()}
-          type={'appointment'}
-          values={formValues}
-        />
-      )}
+      {
+        showModal && (
+          <Dialog
+            action='add'
+            setShowModal={setShowModal}
+            successHandler={() => onAddAppointment()}
+            type={'appointment'}
+            values={formValues}
+          />
+        )
+      }
     </>
   );
 };

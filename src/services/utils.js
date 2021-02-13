@@ -1,4 +1,19 @@
 import _ from 'lodash';
+import { fieldsConfig, formTypes } from '../constants';
+
+export const extractFieldsForType = (type) => {
+  return formTypes[type].map((item) => {
+    let extraFields = [];
+
+    if (fieldsConfig[item].items?.length) {
+      extraFields = fieldsConfig[item].items.map((extraItem) => {
+        return { ...fieldsConfig[extraItem], isHidden: true };
+      });
+    }
+
+    return [fieldsConfig[item], ...extraFields];
+  })
+}
 
 export const getFormValues = (baseFields, payload) => {
   const fields = _.cloneDeep(baseFields);

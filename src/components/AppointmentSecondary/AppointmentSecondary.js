@@ -11,19 +11,17 @@ const AppointmentSecondary = ({ entry, parentId, onUpdate }) => {
   const [formValues, setFormValues] = useState([]);
 
   useEffect(() => {
-    const clientValue = {
+    formValues.push({
       id: 'client',
       key: 'value',
       value: parentId
-    };
+    });
 
-    const clientDisableState = {
+    formValues.push({
       id: 'client',
       key: 'isDisabled',
       value: true
-    };
-
-    formValues.push(clientValue, clientDisableState);
+    });
 
     Object.keys(entry).forEach((key) => {
       formValues.push({

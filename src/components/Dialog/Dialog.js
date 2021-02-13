@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { FormModal } from '..';
-import { labels, fieldsConfig, formTypes } from '../../constants';
-import { getFormValues, serializeForm, getCurrentDate } from '../../services/utils';
+import { labels } from '../../constants';
+import { getFormValues, serializeForm, getCurrentDate, extractFieldsForType } from '../../services/utils';
 import {
   addAppointment,
   updateAppointment,
@@ -62,18 +62,7 @@ const Dialog = ({ successHandler, action, setShowModal, type, values }) => {
         options = options.concat(values);
       }
 
-      const fields = formTypes[type].map((item) => {
-        let extraFields = [];
-
-        if (fieldsConfig[item].items?.length) {
-          extraFields = fieldsConfig[item].items.map((extraItem) => {
-            return { ...fieldsConfig[extraItem], isHidden: true };
-          });
-        }
-
-        return [fieldsConfig[item], ...extraFields];
-      });
-
+      const fields = extractFieldsForType(type);
       const formValues = getFormValues(_.flatten(fields), _.flatten(options));
 
       setFormFields(formValues);
