@@ -2,10 +2,10 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 import { useEffect, useState } from 'react';
 import { Button, TextField } from '@material-ui/core/';
 
-const DialogItem = ({ classes, field, onInputChange, onFieldsExtend }) => {
-  const [isInitialized, setIsInitialized] = useState(false);
+const FormItem = ({ classes, field, onInputChange, onFieldsExtend }) => {
   const [currentValue, setCurrentValue] = useState(false);
   const [optionsIDs, setOptionsIDs] = useState([]);
+  const [isValid, setIsValid] = useState(true);
 
   useEffect(() => {
     const options = field.options?.map((option) => option._id);
@@ -16,19 +16,21 @@ const DialogItem = ({ classes, field, onInputChange, onFieldsExtend }) => {
       setCurrentValue(initialValue);
     }
 
-    if (!isInitialized) {
-      setIsInitialized(true);
+    if (field.validator) {
+      if (field.shouldValidate) {
+        setIsValid(field.validator(field.value));
+      }
     }
-  }, [field, isInitialized]);
+  }, [field]);
 
-  if (isInitialized && field.id !== '_id' && !field.isHidden) {
+  if (field.id !== '_id' && !field.isHidden) {
     switch (field.type) {
       case 'button': {
         const Icon = field.icon;
 
         return (
           <Button
-            color='primary'
+            color={field.color}
             onClick={() => {
               if (field.items.length) {
                 onFieldsExtend(field, currentValue);
@@ -38,7 +40,7 @@ const DialogItem = ({ classes, field, onInputChange, onFieldsExtend }) => {
             size='large'
             variant='outlined'
           >
-            <Icon />
+            <Icon className='button-icon' />
             { field.label }
           </Button>
         );
@@ -57,7 +59,7 @@ const DialogItem = ({ classes, field, onInputChange, onFieldsExtend }) => {
                 <Button
                   color='primary'
                   onMouseDown={() => {
-                    onFieldsExtend(field, false);
+                    onFieldsExtend(field, false, currentValue);
                   }}
                   size='large'
                   variant='contained'
@@ -78,6 +80,7 @@ const DialogItem = ({ classes, field, onInputChange, onFieldsExtend }) => {
         return (
           <TextField
             className={classes.input}
+            error={field.shouldValidate && !isValid}
             id={field.id}
             key={field.id}
             label={field.label}
@@ -94,4 +97,4 @@ const DialogItem = ({ classes, field, onInputChange, onFieldsExtend }) => {
   }
 };
 
-export default DialogItem;
+export default FormItem;

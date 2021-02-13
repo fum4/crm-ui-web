@@ -1,8 +1,8 @@
-import DialogItem from '../DialogItem';
+import FormItem from '../FormItem';
 import { useState } from 'react';
 import { Button, Dialog, makeStyles } from '@material-ui/core';
 import { FaTimes } from 'react-icons/fa';
-import { getFormValues } from '../../services/utils';
+import { getFormValues, splitByDelimiter } from '../../services/utils';
 import './styles.scss';
 
 const useStyles = makeStyles((theme) => ({
@@ -31,7 +31,7 @@ const FormModal = ({ setShowModal, successHandler, title, formFields, onSubmit }
   const classes = useStyles();
   const [fields, setFields] = useState(formFields);
 
-  const onFieldsExtend = (field, isHidden) => {
+  const onFieldsExtend = (field, isHidden, value) => {
     const options = field.items?.map((item) => ({
       id: item,
       key: 'isHidden',
@@ -44,19 +44,42 @@ const FormModal = ({ setShowModal, successHandler, title, formFields, onSubmit }
       value: field.labelValues[isHidden ? 0 : 1]
     });
 
-    field.type === 'dropdown' &&
+    if (field.type === 'dropdown') {
       options.push({
         id: field.id,
         key: 'value',
         value: ''
       });
+    }
 
-    field.type === 'button' &&
-    options.push({
-      id: field.id,
-      key: 'icon',
-      value: field.iconValues[isHidden ? 0 : 1]
-    });
+    if (field.type === 'button') {
+      options.push({
+        id: field.id,
+        key: 'icon',
+        value: field.iconValues[isHidden ? 0 : 1]
+      });
+      options.push({
+        id: field.id,
+        key: 'color',
+        value: field.colorValues[isHidden ? 0 : 1]
+      })
+    }
+
+    if (field.splitOnExtend) {
+      let valueToSplit = value;
+
+      field.splitOnExtend.into.forEach((childField, index) => {
+        const extracted = splitByDelimiter(valueToSplit, field.splitOnExtend.delimiters[index]);
+
+        options.push({
+          id: childField,
+          key: 'value',
+          value: extracted.firstChunk
+        });
+
+        valueToSplit = extracted.secondChunk;
+      });
+    }
 
     const formValues = getFormValues(fields, options);
 
@@ -66,9 +89,17 @@ const FormModal = ({ setShowModal, successHandler, title, formFields, onSubmit }
   const onInputChange = (key, value) => {
     const options = [];
 
-    const updatedDetails = fields.map((field) => {
+    const updatedFields = fields.map((field) => {
       if (field.id === key) {
         field.value = value;
+
+        if (field.validator) {
+          options.push({
+            id: key,
+            key: 'shouldValidate',
+            value: true
+          });
+        }
 
         if (field.items?.length) {
           field.items?.forEach((item) => {
@@ -80,7 +111,7 @@ const FormModal = ({ setShowModal, successHandler, title, formFields, onSubmit }
           });
 
           options.push({
-            id: field.id,
+            id: key,
             key: 'label',
             value: field.labelValues[0]
           });
@@ -90,7 +121,7 @@ const FormModal = ({ setShowModal, successHandler, title, formFields, onSubmit }
       return field;
     });
 
-    const formValues = getFormValues(updatedDetails, options);
+    const formValues = getFormValues(updatedFields, options);
 
     setFields(formValues);
   };
@@ -100,11 +131,37 @@ const FormModal = ({ setShowModal, successHandler, title, formFields, onSubmit }
   };
 
   const handleSubmit = () => {
-    onSubmit({ ...fields }).then(() => {
-      hideModal();
-      successHandler();
-    });
+    const isFormValid = validateForm();
+
+    if (isFormValid) {
+      onSubmit({ ...fields }).then(() => {
+        hideModal();
+        successHandler();
+      });
+    }
   };
+
+  const validateForm = () => {
+    const options = [];
+    let isValid = true;
+
+    fields.forEach((field) => {
+      if (field.validator) {
+        isValid = isValid && field.validator(field.value);
+
+        options.push({
+          id: field.id,
+          key: 'shouldValidate',
+          value: true
+        });
+      }
+    });
+
+    const formValues = getFormValues(fields, options);
+    setFields(formValues);
+
+    return isValid;
+  }
 
   return (
     <Dialog className='modal' fullWidth maxWidth='md' open={true}>
@@ -116,7 +173,7 @@ const FormModal = ({ setShowModal, successHandler, title, formFields, onSubmit }
       </div>
       <form autoComplete='off' className={classes.root}>
         {fields?.map((field) => (
-          <DialogItem
+          <FormItem
             classes={classes}
             field={field}
             key={field.id}

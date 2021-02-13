@@ -1,5 +1,5 @@
-import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
-import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
+import { Remove, Add } from '@material-ui/icons';
+import { validations } from './services/utils';
 
 export const labels = {
   ADDRESS: 'Adresă',
@@ -24,8 +24,10 @@ export const labels = {
 
 export const fieldsConfig = {
   addAppointment: {
-    icon: KeyboardArrowRightIcon,
-    iconValues: [KeyboardArrowRightIcon, KeyboardArrowDownIcon],
+    color: 'primary',
+    colorValues: ['primary', 'secondary'],
+    icon: Add,
+    iconValues: [Add, Remove],
     id: 'addAppointment',
     items: ['appointment', 'date', 'treatment', 'technician', 'control', 'price'],
     label: labels.ADD_APPOINTMENT,
@@ -46,6 +48,10 @@ export const fieldsConfig = {
     items: ['name', 'surname', 'phone', 'address'],
     label: labels.CLIENT,
     labelValues: [labels.CLIENT, labels.ADD_EXISTING_CLIENT],
+    splitOnExtend: {
+      delimiters: [' '],
+      into: ['name', 'surname']
+    },
     type: 'dropdown'
   },
   control: {
@@ -61,7 +67,8 @@ export const fieldsConfig = {
   name: {
     id: 'name',
     isRequired: true,
-    label: labels.NAME
+    label: labels.NAME,
+    validator: validations.isPresent
   },
   phone: {
     id: 'phone',
@@ -75,7 +82,8 @@ export const fieldsConfig = {
   surname: {
     id: 'surname',
     isRequired: true,
-    label: labels.SURNAME
+    label: labels.SURNAME,
+    validator: validations.isPresent
   },
   technician: {
     id: 'technician',

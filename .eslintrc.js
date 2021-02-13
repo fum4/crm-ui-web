@@ -53,7 +53,7 @@ module.exports = {
     'react/react-in-jsx-scope': 'off',
     'react/self-closing-comp': 'error',
     'react/sort-prop-types': ['error', { ignoreCase: true }],
-    'sort-keys-fix/sort-keys-fix': 'error'
+    // 'sort-keys-fix/sort-keys-fix': 'error'
     // 'sort-keys': ['error', 'asc', {caseSensitive: true, natural: false, minKeys: 2}],
   },
   settings: {

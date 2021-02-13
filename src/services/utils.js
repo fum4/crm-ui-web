@@ -30,3 +30,20 @@ export const serializeForm = (payload) => {
 };
 
 export const getCurrentDate = () => new Date().toISOString().slice(0, -8);
+
+export const splitByDelimiter = (value, delimiter) => {
+  if (delimiter) {
+    const firstChunk = value.slice(0, value.indexOf(delimiter)).trim();
+    const secondChunk = value.slice(value.indexOf(delimiter)).trim();
+
+    return { firstChunk, secondChunk };
+  }
+
+  return { firstChunk: value };
+}
+
+export const validations = {
+  isNumber: (value) => typeof value === 'number',
+  isPhoneNumber: (value) => value.match(/^(\+4|)?(07[0-8]{1}[0-9]{1}|02[0-9]{2}|03[0-9]{2}){1}?(\s|\.|-)?([0-9]{3}(\s|\.|-|)){2}$/),
+  isPresent: (value) => value?.length
+}
