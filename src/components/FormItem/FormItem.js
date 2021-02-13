@@ -40,7 +40,7 @@ const FormItem = ({ classes, field, onInputChange, onFieldsExtend }) => {
       }
       case 'dropdown': {
         const Icon = field.noOptionsIcon;
-
+        // CHECK NEEDED IF THERE ARE NO OPTION IDS ELSE CRASHES AT APP START
         return (
           <Autocomplete
             className={classes.input}
