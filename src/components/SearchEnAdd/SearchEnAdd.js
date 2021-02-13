@@ -4,6 +4,7 @@ import { InputBase, Button } from '@material-ui/core';
 import { Dialog } from '..';
 import { FaPlus } from 'react-icons/fa';
 import { labels } from '../../constants';
+import { Add } from '@material-ui/icons';
 import './styles.scss';
 
 const BootstrapInput = withStyles((theme) => ({
@@ -55,8 +56,8 @@ const SearchEnAdd = ({ handleSearch, actionSuccessHandler, type }) => {
           color='primary'
           onClick={() => setShowModal(true)}
           size='large'
+          startIcon={<Add />}
           variant='contained'>
-          <FaPlus className='add-icon' size={13} />
           <p>{type === 'client' ? labels.ADD_CLIENT : labels.ADD_APPOINTMENT}</p>
         </Button>
       </div>
