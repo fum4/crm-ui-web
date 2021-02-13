@@ -5,7 +5,6 @@ import { Button, TextField } from '@material-ui/core/';
 const FormItem = ({ classes, field, onInputChange, onFieldsExtend }) => {
   const [currentValue, setCurrentValue] = useState(false);
   const [optionsIDs, setOptionsIDs] = useState([]);
-  const [isValid, setIsValid] = useState(true);
 
   useEffect(() => {
     const options = field.options?.map((option) => option._id);
@@ -14,12 +13,6 @@ const FormItem = ({ classes, field, onInputChange, onFieldsExtend }) => {
     if (field.type === 'dropdown') {
       const initialValue = field.options?.find((option) => option._id === field.value)?.label || '';
       setCurrentValue(initialValue);
-    }
-
-    if (field.validator) {
-      if (field.shouldValidate) {
-        setIsValid(field.validator(field.value));
-      }
     }
   }, [field]);
 
@@ -80,7 +73,7 @@ const FormItem = ({ classes, field, onInputChange, onFieldsExtend }) => {
         return (
           <TextField
             className={classes.input}
-            error={field.shouldValidate && !isValid}
+            error={field.isInvalid}
             id={field.id}
             key={field.id}
             label={field.label}

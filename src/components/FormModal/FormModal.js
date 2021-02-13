@@ -96,8 +96,8 @@ const FormModal = ({ setShowModal, successHandler, title, formFields, onSubmit }
         if (field.validator) {
           options.push({
             id: key,
-            key: 'shouldValidate',
-            value: true
+            key: 'isInvalid',
+            value: !field.validator(value)
           });
         }
 
@@ -151,8 +151,8 @@ const FormModal = ({ setShowModal, successHandler, title, formFields, onSubmit }
 
         options.push({
           id: field.id,
-          key: 'shouldValidate',
-          value: true
+          key: 'isInvalid',
+          value: !field.validator(field.value)
         });
       }
     });
