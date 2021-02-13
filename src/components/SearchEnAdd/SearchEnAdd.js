@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { fade, withStyles } from '@material-ui/core/styles';
 import { InputBase, Button } from '@material-ui/core';
 import { Dialog } from '..';
-import { FaPlus } from 'react-icons/fa';
 import { labels } from '../../constants';
 import { Add } from '@material-ui/icons';
 import './styles.scss';
