@@ -146,7 +146,7 @@ const FormModal = ({ setShowModal, successHandler, title, formFields, onSubmit }
     let isValid = true;
 
     fields.forEach((field) => {
-      if (field.validator) {
+      if (field.validator && !field.isHidden) {
         isValid = isValid && field.validator(field.value);
 
         options.push({
