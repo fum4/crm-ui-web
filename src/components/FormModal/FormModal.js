@@ -68,7 +68,7 @@ const FormModal = ({ setShowModal, successHandler, title, formFields, onSubmit }
     if (field.splitOnExtend) {
       let valueToSplit = value;
 
-      field.splitOnExtend.into.forEach((childField, index) => {
+      field.splitOnExtend.children.forEach((childField, index) => {
         const extracted = splitByDelimiter(valueToSplit, field.splitOnExtend.delimiters[index]);
 
         options.push({

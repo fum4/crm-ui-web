@@ -50,7 +50,7 @@ export const fieldsConfig = {
     labelValues: [labels.CLIENT, labels.ADD_EXISTING_CLIENT],
     splitOnExtend: {
       delimiters: [' '],
-      into: ['name', 'surname']
+      children: ['name', 'surname']
     },
     type: 'dropdown'
   },
