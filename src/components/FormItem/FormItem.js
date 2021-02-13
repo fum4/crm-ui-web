@@ -31,14 +31,16 @@ const FormItem = ({ classes, field, onInputChange, onFieldsExtend }) => {
               }
             }}
             size='large'
+            startIcon={<Icon className='button-icon' style={{ color: field.noOptionsIconColor }} />}
             variant='outlined'
           >
-            <Icon className='button-icon' />
             { field.label }
           </Button>
         );
       }
-      case 'dropdown':
+      case 'dropdown': {
+        const Icon = field.noOptionsIcon;
+
         return (
           <Autocomplete
             className={classes.input}
@@ -50,14 +52,14 @@ const FormItem = ({ classes, field, onInputChange, onFieldsExtend }) => {
             noOptionsText={
               field.items.length && (
                 <Button
-                  color='primary'
                   onMouseDown={() => {
                     onFieldsExtend(field, false, currentValue);
                   }}
                   size='large'
-                  variant='contained'
+                  startIcon={<Icon className='button-icon' style={{ color: field.noOptionsIconColor }} />}
+                  variant='outlined'
                 >
-                  Fără rezultate! Adăugați pacient
+                  { field.noOptionsText }
                 </Button>
               )
             }
@@ -69,6 +71,7 @@ const FormItem = ({ classes, field, onInputChange, onFieldsExtend }) => {
             value={field.value || ''}
           />
         );
+      }
       default:
         return (
           <TextField

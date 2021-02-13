@@ -1,10 +1,11 @@
-import { Remove, Add } from '@material-ui/icons';
-import { validations } from './services/utils';
+import { AlarmOff, AccessTime, AddCircle } from '@material-ui/icons';
+import { green } from '@material-ui/core/colors';
+import { validators } from './services/utils';
 
 export const labels = {
   ADDRESS: 'Adresă',
   ADD_APPOINTMENT: 'Adaugă programare',
-  ADD_CLIENT: 'Adaugă client',
+  ADD_CLIENT: 'Adaugă pacient',
   ADD_EXISTING_CLIENT: 'Alegeți pacient existent',
   APPOINTMENT: 'Programare',
   CANCEL: 'Renunță',
@@ -13,7 +14,7 @@ export const labels = {
   CONTROL: 'Control',
   DATE: 'Data',
   EDIT_APPOINTMENT: 'Modifică programare',
-  EDIT_CLIENT: 'Modifică client',
+  EDIT_CLIENT: 'Modifică pacient',
   NAME: 'Nume',
   PHONE: 'Telefon',
   PRICE: 'Preț',
@@ -26,8 +27,8 @@ export const fieldsConfig = {
   addAppointment: {
     color: 'primary',
     colorValues: ['primary', 'secondary'],
-    icon: Add,
-    iconValues: [Add, Remove],
+    icon: AccessTime,
+    iconValues: [AccessTime, AlarmOff],
     id: 'addAppointment',
     items: ['appointment', 'date', 'treatment', 'technician', 'control', 'price'],
     label: labels.ADD_APPOINTMENT,
@@ -48,6 +49,9 @@ export const fieldsConfig = {
     items: ['name', 'surname', 'phone', 'address'],
     label: labels.CLIENT,
     labelValues: [labels.CLIENT, labels.ADD_EXISTING_CLIENT],
+    noOptionsIcon: AddCircle,
+    noOptionsIconColor: green[500],
+    noOptionsText: labels.ADD_CLIENT,
     splitOnExtend: {
       delimiters: [' '],
       children: ['name', 'surname']
@@ -68,7 +72,7 @@ export const fieldsConfig = {
     id: 'name',
     isRequired: true,
     label: labels.NAME,
-    validator: validations.isPresent
+    validator: validators.isPresent
   },
   phone: {
     id: 'phone',
@@ -83,7 +87,7 @@ export const fieldsConfig = {
     id: 'surname',
     isRequired: true,
     label: labels.SURNAME,
-    validator: validations.isPresent
+    validator: validators.isPresent
   },
   technician: {
     id: 'technician',
