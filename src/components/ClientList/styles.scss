@@ -4,4 +4,8 @@
   max-width: 1000px;
   width: 70%;
   margin: 50px auto auto;
+
+  .MuiAccordionSummary-content {
+    justify-content: space-between;
+  }
 }
