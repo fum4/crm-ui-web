@@ -27,7 +27,7 @@ const AppointmentSecondary = ({ entry, parentId, onUpdate }) => {
       formValues.push({
         id: key,
         key: 'value',
-        value: entry[key]
+        value: key === 'date' ? entry[key].slice(0, -8) : entry[key]
       });
     });
 
@@ -70,15 +70,17 @@ const AppointmentSecondary = ({ entry, parentId, onUpdate }) => {
           />
         </div>
       </ListItem>
-      {showEditModal && (
-        <Dialog
-          action='edit'
-          setShowModal={setShowEditModal}
-          successHandler={() => onUpdate()}
-          type={'appointment'}
-          values={formValues}
-        />
-      )}
+      {
+        showEditModal && (
+          <Dialog
+            action='edit'
+            setShowModal={setShowEditModal}
+            successHandler={() => onUpdate()}
+            type={'appointment'}
+            values={formValues}
+          />
+        )
+      }
     </>
   );
 };
