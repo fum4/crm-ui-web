@@ -1,5 +1,5 @@
-import {useEffect, useState} from 'react';
-import {getAppointments} from '../../services/network';
+import { useEffect, useState } from 'react';
+import { getAppointments } from '../../services/network';
 import { AppointmentList, SearchEnAdd } from '../../components';
 
 const Clients = () => {
