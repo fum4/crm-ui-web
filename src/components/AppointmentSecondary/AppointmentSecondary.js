@@ -27,7 +27,7 @@ const AppointmentSecondary = ({ entry, parentId, onUpdate }) => {
       formValues.push({
         id: key,
         key: 'value',
-        value: key === 'date' ? entry[key].slice(0, -8) : entry[key]
+        value: entry[key]
       });
     });
 
