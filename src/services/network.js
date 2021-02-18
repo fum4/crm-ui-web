@@ -1,21 +1,50 @@
 import axios from 'axios';
 
-const api = axios.create({
-  baseURL: 'http://localhost:3000',
-  headers: {
+const getHeaders = () => {
+  const user = JSON.parse(localStorage.getItem('user'));
+  const headers = {
     'Content-Type': 'application/json'
   }
+
+  if (user && user.accessToken) {
+    headers['Authorization'] = `Bearer ${user.accessToken}`;
+  }
+
+  return headers;
+}
+
+const api = axios.create({
+  baseURL: 'http://localhost:3000',
+  headers: getHeaders()
 });
 
-export const authenticate = (payload) => api.post('/auth', payload);
+export const register = (payload) => axios.post('/register', payload);
+
+export const login = (payload) => {
+  return axios.post('/login', payload).then((response) => {
+    const data = response.data;
+
+    if (data.accessToken) {
+      data.password = payload.password;
+      localStorage.setItem('user', JSON.stringify(data));
+    }
+  });
+}
+
+export const logout = () => localStorage.removeItem('user');
+
 export const getAppStatus = () => api.get('/status');
 
 export const getClients = () => api.get('/clients');
+
 export const addClient = (payload) => api.post('/client', payload);
+
 export const updateClient = (payload) => api.put('/client', payload);
+
 export const deleteClient = (payload) => api.delete('/client', payload);
 
 export const getAppointments = () => api.get('/appointments');
+
 export const addAppointment = (payload) => {
   const url = `/appointment/${payload.client || ''}`
 
@@ -23,6 +52,7 @@ export const addAppointment = (payload) => {
 
   return api.post(url, payload);
 }
+
 export const updateAppointment = (payload) => {
   const url = `/appointment/${payload._id}`;
 
@@ -31,6 +61,7 @@ export const updateAppointment = (payload) => {
 
   return api.put(url, payload);
 };
+
 export const deleteAppointment = (payload) => {
   const url = `/appointment/${payload._id}`;
 

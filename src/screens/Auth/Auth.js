@@ -1,13 +1,15 @@
 import { useState, useEffect } from 'react';
 import { AccountCircle, Lock } from '@material-ui/icons';
-import { Button, Grid, TextField } from '@material-ui/core';
+import { Button, Grid, TextField, Snackbar } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
-import { authenticate } from '../../services/network';
+import { login, register } from '../../services/network';
+import { labels } from '../../constants';
 import './styles.scss';
 
-const Auth = ({ onAuthenticated, onAuthenticationStart, isAuthenticated }) => {
+const Auth = ({ action, onAuthenticationEnd, onAuthenticationStart, isAuthenticated }) => {
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
+  const [error, setError] = useState(false);
   const history = useHistory();
 
   useEffect(() => {
@@ -16,14 +18,46 @@ const Auth = ({ onAuthenticated, onAuthenticationStart, isAuthenticated }) => {
     }
   }, [history, isAuthenticated])
 
+  const handleLogin = (user) => {
+    login(user)
+      .then(() => {
+        // const CredentialsContainer = navigator.credentials;
+        // const options = {
+        //   id: username,
+        //   password,
+        //   type: 'password'
+        // };
+        //
+        // CredentialsContainer.create(options)
+        //   .then((credentials) => CredentialsContainer.store(credentials))
+        //   .then(() => setError(false))
+        //   .catch((err) => console.log('fkin error : ', err));
+        setError(false);
+        onAuthenticationEnd(false);
+      })
+      .catch(() => {
+        setError(true);
+        onAuthenticationEnd(true);
+      });
+  };
+
+  const handleRegister = (user) => {
+    register(user)
+      .then(() => handleLogin(user))
+      .catch(() => setError(true));
+  }
+
   const handleAuthentication = (payload) => {
     if (username && password) {
       onAuthenticationStart();
 
-      authenticate(payload).then(() => {
-        onAuthenticated();
-        history.push('/today');
-      });
+      if (action === 'login') {
+        handleLogin(payload);
+      }
+
+      if (action === 'register') {
+        handleRegister(payload);
+      }
     }
   }
 
@@ -57,8 +91,21 @@ const Auth = ({ onAuthenticated, onAuthenticationStart, isAuthenticated }) => {
         size='large'
         variant='contained'
       >
-        Autentificare
+        {
+          action === 'login'
+            ? labels.LOGIN
+            : labels.REGISTER
+        }
       </Button>
+      <Snackbar
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'left',
+        }}
+        autoHideDuration={6000}
+        message={action === 'login' ? labels.LOGIN_ERROR : labels.REGISTER_ERROR}
+        open={error}
+      />
     </div>
   );
 }

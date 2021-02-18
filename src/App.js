@@ -1,8 +1,8 @@
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import { authenticate, getAppStatus } from './services/network';
 import { Auth, Today, Clients } from './screens';
 import { Navigation } from './components';
+import { login } from './services/network';
 import { useState, useEffect } from 'react';
 import './App.css';
 
@@ -11,25 +11,19 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    getAppStatus().then((res) => {
-      if (res.status === 200) {
-        setIsAuthenticated(true);
-      } else {
-        navigator.credentials.get({ password: true }).then((credentials) => {
-          const { id, password } = credentials;
+    const { username, password } = JSON.parse(localStorage.getItem('user'));
 
-          setIsLoading(true);
+    if (username && password) {
+      setIsLoading(true);
 
-          authenticate({ password, username: id })
-            .then(() => setIsAuthenticated(true))
-            .finally(() => setIsLoading(false));
-        });
-      }
-    })
+      login({ username, password })
+        .then(() => onAuthenticationEnd(false))
+        .catch(() => onAuthenticationEnd(true));
+    }
   }, [])
 
-  const onAuthenticated = () => {
-    setIsAuthenticated(true);
+  const onAuthenticationEnd = (hasError) => {
+    setIsAuthenticated(!hasError);
     setIsLoading(false);
   }
 
@@ -41,10 +35,20 @@ function App() {
         }
         <Switch>
           {
-            <Route exact path='/auth'>
+            <Route exact path='/login'>
               <Auth
+                action='login'
                 isAuthenticated={isAuthenticated}
-                onAuthenticated={() => onAuthenticated()}
+                onAuthenticationEnd={onAuthenticationEnd}
+                onAuthenticationStart={() => setIsLoading(true)} />
+            </Route>
+          }
+          {
+            <Route exact path='/register'>
+              <Auth
+                action='register'
+                isAuthenticated={isAuthenticated}
+                onAuthenticationEnd={onAuthenticationEnd}
                 onAuthenticationStart={() => setIsLoading(true)} />
             </Route>
           }

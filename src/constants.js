@@ -20,7 +20,11 @@ export const labels = {
   PRICE: 'Preț',
   SURNAME: 'Prenume',
   TECHNICIAN: 'Tehnician',
-  TREATMENT: 'Tratament'
+  TREATMENT: 'Tratament',
+  LOGIN: 'Autentificare',
+  REGISTER: 'Înregistrare',
+  LOGIN_ERROR: 'Autentificarea a eșuat',
+  REGISTER_ERROR: 'Înregistrarea a eșuat'
 };
 
 export const fieldsConfig = {
