@@ -1,3 +1,52 @@
-.appointment-primary {
-  margin-bottom: 12px;
+.MuiPaper-root.appointment-primary {
+    background-color: #fff3e0;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+
+    .card-actions {
+        margin: 30px;
+
+        &__edit-icon, &__remove-icon {
+            margin-left: 15px;
+        }
+    }
+
+    .card-content {
+        color: #725b53;
+        padding: 25px;
+
+        .appointment, .name, {
+            align-items: center;
+            color: #4b2c20;
+            display: flex;
+
+            &__icon {
+                margin-right: 10px;
+            }
+        }
+
+        .appointment {
+            margin-bottom: 30px;
+        }
+
+        .name {
+            margin-bottom: 15px;
+        }
+
+        .info {
+            margin-bottom: 10px;
+
+            &__label {
+                margin-right: 10px;
+                width: 100px;
+            }
+
+            &__text {
+                color: #4d3b36;
+                font-size: 17px;
+            }
+        }
+    }
+
 }

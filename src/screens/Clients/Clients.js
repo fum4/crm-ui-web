@@ -52,7 +52,7 @@ const Clients = () => {
         handleSearch={(payload) => handleSearch(payload)}
         type='client'
       />
-      <ClientList entries={clients} refreshClients={() => refreshClients()} />
+      <ClientList entries={clients} onUpdate={() => refreshClients()} />
     </>
   );
 };

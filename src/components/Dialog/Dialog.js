@@ -41,7 +41,12 @@ const Dialog = ({ successHandler, action, setShowModal, type, values }) => {
 
           if (action === 'add') {
             options.push({
-              id: 'date',
+              id: 'appointment',
+              key: 'value',
+              value: getCurrentDate()
+            });
+            options.push({
+              id: 'control',
               key: 'value',
               value: getCurrentDate()
             });
@@ -51,11 +56,19 @@ const Dialog = ({ successHandler, action, setShowModal, type, values }) => {
         }
         case 'client':
           actionTitle = action === 'add' ? labels.ADD_CLIENT : labels.EDIT_CLIENT;
-          options.push({
-            id: 'date',
-            key: 'value',
-            value: getCurrentDate()
-          });
+
+          if (action === 'add') {
+            options.push({
+              id: 'appointment',
+              key: 'value',
+              value: getCurrentDate()
+            });
+            options.push({
+              id: 'control',
+              key: 'value',
+              value: getCurrentDate()
+            });
+          }
       }
 
       if (values) {
@@ -102,6 +115,7 @@ const Dialog = ({ successHandler, action, setShowModal, type, values }) => {
       formFields={formFields}
       onSubmit={(payload) => handleSubmit(payload)}
       setShowModal={setShowModal}
+      submitText={action === 'add' ? labels.ADD : labels.EDIT}
       successHandler={successHandler}
       title={title}
     />

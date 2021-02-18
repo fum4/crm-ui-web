@@ -2,6 +2,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import { useState, useEffect } from 'react';
 import { FaTrashAlt, FaPen } from 'react-icons/fa';
+import { Schedule } from '@material-ui/icons';
 import { deleteAppointment } from '../../services/network';
 import { Dialog } from '..';
 import './styles.scss';
@@ -41,6 +42,7 @@ const AppointmentSecondary = ({ entry, parentId, onUpdate }) => {
   return (
     <>
       <ListItem>
+        <Schedule />
         <ListItemText
           className='appointment-secondary appointment-secondary__appointment'
           primary={entry?.appointment}

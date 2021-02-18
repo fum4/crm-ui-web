@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const FormModal = ({ setShowModal, successHandler, title, formFields, onSubmit }) => {
+const FormModal = ({ setShowModal, successHandler, title, formFields, onSubmit, submitText }) => {
   const classes = useStyles();
   const [fields, setFields] = useState(formFields);
 
@@ -183,7 +183,7 @@ const FormModal = ({ setShowModal, successHandler, title, formFields, onSubmit }
         ))}
         <div className='modal-footer'>
           <Button color='primary' onClick={() => handleSubmit()} size='large' variant='contained'>
-            Adaugă
+            { submitText }
           </Button>
         </div>
       </form>

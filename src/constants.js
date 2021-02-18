@@ -3,6 +3,7 @@ import { green } from '@material-ui/core/colors';
 import { validators } from './services/utils';
 
 export const labels = {
+  ADD: 'Adaugă',
   ADDRESS: 'Adresă',
   ADD_APPOINTMENT: 'Adaugă programare',
   ADD_CLIENT: 'Adaugă pacient',
@@ -13,6 +14,7 @@ export const labels = {
   CLIENT: 'Pacient',
   CONTROL: 'Control',
   DATE: 'Data',
+  EDIT: 'Modifică',
   EDIT_APPOINTMENT: 'Modifică programare',
   EDIT_CLIENT: 'Modifică pacient',
   NAME: 'Nume',
@@ -34,7 +36,7 @@ export const fieldsConfig = {
     icon: AccessTime,
     iconValues: [AccessTime, AlarmOff],
     id: 'addAppointment',
-    items: ['appointment', 'date', 'treatment', 'technician', 'control', 'price'],
+    items: ['appointment', 'treatment', 'technician', 'control', 'price'],
     label: labels.ADD_APPOINTMENT,
     labelValues: [labels.ADD_APPOINTMENT, labels.CANCEL_ADD_APPOINTMENT],
     type: 'button'
@@ -45,7 +47,9 @@ export const fieldsConfig = {
   },
   appointment: {
     id: 'appointment',
-    label: labels.APPOINTMENT
+    isRequired: true,
+    label: labels.APPOINTMENT,
+    type: 'datetime-local'
   },
   client: {
     id: 'client',
@@ -64,12 +68,7 @@ export const fieldsConfig = {
   },
   control: {
     id: 'control',
-    label: labels.CONTROL
-  },
-  date: {
-    id: 'date',
-    isRequired: true,
-    label: labels.DATE,
+    label: labels.CONTROL,
     type: 'datetime-local'
   },
   name: {
@@ -104,6 +103,6 @@ export const fieldsConfig = {
 };
 
 export const formTypes = {
-  appointment: ['client', 'appointment', 'date', 'treatment', 'technician', 'control', 'price'],
+  appointment: ['client', 'appointment', 'treatment', 'technician', 'control', 'price'],
   client: ['name', 'surname', 'phone', 'address', 'addAppointment']
 };

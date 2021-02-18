@@ -1,7 +1,26 @@
-.appointments-container {
-  display: flex;
-  flex-direction: column;
-  max-width: 1000px;
-  width: 70%;
-  margin: 50px auto auto;
+.appointments-container-primary, .appointments-container-secondary {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.appointments-container-primary {
+    margin: 80px 0 100px;
+
+    &__item {
+        align-self: center;
+        width: 100%;
+        max-width: 850px;
+        margin-bottom: 12px;
+    }
+}
+
+.appointments-container-secondary {
+    &__item {
+        align-self: center;
+        background-color: #fafafa;
+        border: 1px solid #f5f5f5;
+        margin-bottom: 2px;
+        width: 90%;
+    }
 }

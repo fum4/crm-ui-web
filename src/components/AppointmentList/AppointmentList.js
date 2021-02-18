@@ -3,14 +3,20 @@ import './styles.scss';
 
 const AppointmentList = ({ entries, type, parentId, onUpdate }) => {
   return (
-    <div className='appointments-container'>
-      {entries?.map((entry) => {
-        return type === 'primary' ? (
-          <AppointmentPrimary entry={entry} key={entry.appointment._id} />
-        ) : (
-          <AppointmentSecondary entry={entry} key={entry._id} onUpdate={onUpdate} parentId={parentId} />
-        );
-      })}
+    <div className={`appointments-container-${type}`}>
+      {
+        entries?.map((entry) => {
+          return type === 'primary' ? (
+            <div className='appointments-container-primary__item'>
+              <AppointmentPrimary entry={entry} key={entry.appointment._id} onUpdate={onUpdate} />
+            </div>
+          ) : (
+            <div className='appointments-container-secondary__item'>
+              <AppointmentSecondary entry={entry} key={entry._id} onUpdate={onUpdate} parentId={parentId} />
+            </div>
+          );
+        })
+      }
     </div>
   );
 };

@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react';
 import {getAppointments} from '../../services/network';
-import {AppointmentList, SearchEnAdd} from '../../components';
+import { AppointmentList, SearchEnAdd } from '../../components';
 
 const Clients = () => {
   const [allAppointments, setAllAppointments] = useState([]);
@@ -32,7 +32,7 @@ const Clients = () => {
         handleSearch={(payload) => handleSearch(payload)}
         type='appointment'
       />
-      <AppointmentList entries={appointments} type='primary' />
+      <AppointmentList entries={appointments} onUpdate={() => refreshAppointments()} type='primary' />
     </>
   );
 }
