@@ -11,14 +11,18 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    const { username, password } = JSON.parse(localStorage.getItem('user'));
+    const user = JSON.parse(localStorage.getItem('user'));
 
-    if (username && password) {
-      setIsLoading(true);
+    if (user) {
+      const { username, password } = user;
 
-      login({ username, password })
-        .then(() => onAuthenticationEnd(false))
-        .catch(() => onAuthenticationEnd(true));
+      if (username && password) {
+        setIsLoading(true);
+
+        login({ username, password })
+          .then(() => onAuthenticationEnd(false))
+          .catch(() => onAuthenticationEnd(true));
+      }
     }
   }, [])
 
