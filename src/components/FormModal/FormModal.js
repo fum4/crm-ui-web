@@ -172,15 +172,17 @@ const FormModal = ({ setShowModal, successHandler, title, formFields, onSubmit, 
         </div>
       </div>
       <form autoComplete='off' className={classes.root}>
-        {fields?.map((field) => (
-          <FormItem
-            classes={classes}
-            field={field}
-            key={field.id}
-            onFieldsExtend={onFieldsExtend}
-            onInputChange={onInputChange}
-          />
-        ))}
+        {
+          fields?.map((field) => (
+            <FormItem
+              classes={classes}
+              field={field}
+              key={field.id}
+              onFieldsExtend={onFieldsExtend}
+              onInputChange={onInputChange}
+            />
+          ))
+        }
         <div className='modal-footer'>
           <Button color='primary' onClick={() => handleSubmit()} size='large' variant='contained'>
             { submitText }

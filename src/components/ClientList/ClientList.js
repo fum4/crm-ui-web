@@ -13,7 +13,7 @@ const ClientList = ({ entries, onUpdate }) => {
             index={index}
             key={entry._id}>
             <AppointmentList
-              entries={entry.appointments}
+              entries={[...entry.appointments, ...entry.controls]}
               onUpdate={onUpdate}
               parentId={entry._id}
               type='secondary' />

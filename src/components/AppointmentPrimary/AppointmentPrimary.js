@@ -5,19 +5,18 @@ import './styles.scss';
 import { FaPen, FaTrashAlt } from 'react-icons/fa';
 import { Dialog } from '../index';
 import { useEffect, useState } from 'react';
-import { deleteAppointment } from '../../services/network';
+import { deleteAppointment, deleteControl } from '../../services/network';
 
 const AppointmentPrimary = ({ entry, onUpdate }) => {
   const [showEditModal, setShowEditModal] = useState(false);
   const [formValues, setFormValues] = useState([]);
-  const { name, surname } = entry;
-  const { appointment, control, price, treatment, technician } = entry.appointment;
+  const { name, surname, appointment, control, price, treatment, technician } = entry;
 
   useEffect(() => {
     formValues.push({
       id: 'client',
       key: 'value',
-      value: entry._id
+      value: entry.clientId
     });
 
     formValues.push({
@@ -26,19 +25,25 @@ const AppointmentPrimary = ({ entry, onUpdate }) => {
       value: true
     });
 
-    Object.keys(entry.appointment).forEach((key) => {
-      formValues.push({
-        id: key,
-        key: 'value',
-        value: entry.appointment[key]
-      });
+    const excludeFields = ['name', 'surname', 'type', '__v', 'clientId', 'appointmentId'];
+
+    Object.keys(entry).forEach((key) => {
+      if (!excludeFields.includes(key)) {
+        formValues.push({
+          id: key,
+          key: 'value',
+          value: entry[key]
+        });
+      }
     });
 
     setFormValues(formValues);
   }, [formValues, entry]);
 
   const removeEntry = () => {
-    deleteAppointment({ _id: entry.appointment._id }).then(() => onUpdate());
+    entry.type === 'appointment'
+      ? deleteAppointment({ _id: entry._id }).then(() => onUpdate())
+      : deleteControl({ _id: entry._id }).then(() => onUpdate());
   };
 
   return (
@@ -57,26 +62,42 @@ const AppointmentPrimary = ({ entry, onUpdate }) => {
             <Schedule className='appointment__icon' />
             <Typography className='appointment__text' component='h2' variant='h6'>
               {
-                appointment
+                entry.type === 'appointment' ? appointment : control
               }
             </Typography>
           </div>
-          <Typography className='info' component='p' variant='body2'>
-            <Chip className='info__label' label={labels.TREATMENT} size='small' />
-            <span className='info__text'>{ treatment }</span>
-          </Typography>
-          <Typography className='info' component='p' variant='body2'>
-            <Chip className='info__label' label={labels.CONTROL} size='small' />
-            <span className='info__text'>{ control }</span>
-          </Typography>
-          <Typography className='info' component='p' variant='body2'>
-            <Chip className='info__label' label={labels.TECHNICIAN} size='small' />
-            <span className='info__text'>{ technician }</span>
-          </Typography>
-          <Typography className='info' component='p' variant='body2'>
-            <Chip className='info__label' label={labels.PRICE} size='small' />
-            <span className='info__text'>{ price }</span>
-          </Typography>
+          {
+            treatment && (
+              <div className='info' component='p' variant='body2'>
+                <Chip className='info__label' label={labels.TREATMENT} size='small' />
+                <span className='info__text'>{ treatment }</span>
+              </div>
+            )
+          }
+          {
+            entry.type === 'appointment' && control && (
+              <div className='info' component='p' variant='body2'>
+                <Chip className='info__label' label={labels.CONTROL} size='small' />
+                <span className='info__text'>{ control }</span>
+              </div>
+            )
+          }
+          {
+            technician && (
+              <div className='info' component='p' variant='body2'>
+                <Chip className='info__label' label={labels.TECHNICIAN} size='small' />
+                <span className='info__text'>{ technician }</span>
+              </div>
+            )
+          }
+          {
+            price && (
+              <div className='info' component='p' variant='body2'>
+                <Chip className='info__label' label={labels.PRICE} size='small' />
+                <span className='info__text'>{ price }</span>
+              </div>
+            )
+          }
         </CardContent>
         <div className='card-actions'>
           <FaPen
@@ -95,7 +116,7 @@ const AppointmentPrimary = ({ entry, onUpdate }) => {
             action='edit'
             setShowModal={setShowEditModal}
             successHandler={() => onUpdate()}
-            type={'appointment'}
+            type={entry.type}
             values={formValues}
           />
         )

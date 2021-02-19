@@ -24,12 +24,16 @@ const AppointmentSecondary = ({ entry, parentId, onUpdate }) => {
       value: true
     });
 
+    const excludeFields = ['appointmentId', 'clientId', 'type', '__v'];
+
     Object.keys(entry).forEach((key) => {
-      formValues.push({
-        id: key,
-        key: 'value',
-        value: entry[key]
-      });
+      if (!excludeFields.includes(key)) {
+        formValues.push({
+          id: key,
+          key: 'value',
+          value: entry[key]
+        });
+      }
     });
 
     setFormValues(formValues);
@@ -43,19 +47,32 @@ const AppointmentSecondary = ({ entry, parentId, onUpdate }) => {
     <>
       <ListItem>
         <Schedule />
-        <ListItemText
-          className='appointment-secondary appointment-secondary__appointment'
-          primary={entry?.appointment}
-        />
+        {
+          entry.type === 'appointment' ? (
+            <ListItemText
+              className='appointment-secondary appointment-secondary__appointment'
+              primary={entry?.appointment}
+            />
+          ) : (
+            <ListItemText
+              className='appointment-secondary appointment-secondary__control'
+              primary={entry?.control}
+            />
+          )
+        }
         <ListItemText className='appointment-secondary appointment-secondary__date' primary={entry?.date} />
         <ListItemText
           className='appointment-secondary appointment-secondary__treatment'
           primary={entry?.treatment}
         />
-        <ListItemText
-          className='appointment-secondary appointment-secondary__control'
-          primary={entry?.control}
-        />
+        {
+          entry.type === 'appointment' && (
+            <ListItemText
+              className='appointment-secondary appointment-secondary__control'
+              primary={entry?.control}
+            />
+          )
+        }
         <ListItemText
           className='appointment-secondary appointment-secondary__technician'
           primary={entry?.technician}
@@ -78,7 +95,7 @@ const AppointmentSecondary = ({ entry, parentId, onUpdate }) => {
             action='edit'
             setShowModal={setShowEditModal}
             successHandler={() => onUpdate()}
-            type={'appointment'}
+            type={entry.type}
             values={formValues}
           />
         )

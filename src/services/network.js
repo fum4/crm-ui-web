@@ -62,8 +62,30 @@ export const updateAppointment = (payload) => {
   return api.put(url, payload);
 };
 
+export const updateControl = (payload) => {
+  const url = `/control/${payload._id}`;
+
+  delete payload.client;
+  delete payload.name;
+  delete payload.surname;
+  delete payload.phone;
+  delete payload.address;
+  delete payload.appointmentId;
+  delete payload._id;
+
+  return api.put(url, payload);
+};
+
 export const deleteAppointment = (payload) => {
   const url = `/appointment/${payload._id}`;
+
+  delete payload._id;
+
+  return api.delete(url, { _id: payload._id });
+};
+
+export const deleteControl = (payload) => {
+  const url = `/control/${payload._id}`;
 
   delete payload._id;
 

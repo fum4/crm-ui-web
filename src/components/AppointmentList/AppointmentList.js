@@ -8,7 +8,7 @@ const AppointmentList = ({ entries, type, parentId, onUpdate }) => {
         entries?.map((entry) => {
           return type === 'primary' ? (
             <div className='appointments-container-primary__item'>
-              <AppointmentPrimary entry={entry} key={entry.appointment._id} onUpdate={onUpdate} />
+              <AppointmentPrimary entry={entry} key={entry._id} onUpdate={onUpdate} />
             </div>
           ) : (
             <div className='appointments-container-secondary__item'>

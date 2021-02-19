@@ -16,6 +16,7 @@ export const labels = {
   DATE: 'Data',
   EDIT: 'Modifică',
   EDIT_APPOINTMENT: 'Modifică programare',
+  EDIT_CONTROL: 'Modifică control',
   EDIT_CLIENT: 'Modifică pacient',
   NAME: 'Nume',
   PHONE: 'Telefon',
@@ -104,5 +105,6 @@ export const fieldsConfig = {
 
 export const formTypes = {
   appointment: ['client', 'appointment', 'treatment', 'technician', 'control', 'price'],
+  control: ['client', 'appointment', 'control', 'treatment', 'technician', 'price'],
   client: ['name', 'surname', 'phone', 'address', 'addAppointment']
 };

@@ -76,6 +76,7 @@ const FormItem = ({ classes, field, onInputChange, onFieldsExtend }) => {
         return (
           <TextField
             className={classes.input}
+            disabled={field.isDisabled}
             error={field.isInvalid}
             id={field.id}
             key={field.id}

@@ -5,6 +5,7 @@ import { getFormValues, serializeForm, getCurrentDate, extractFieldsForType } fr
 import {
   addAppointment,
   updateAppointment,
+  updateControl,
   addClient,
   updateClient,
   getClients
@@ -54,6 +55,32 @@ const Dialog = ({ successHandler, action, setShowModal, type, values }) => {
 
           break;
         }
+        case 'control': {
+          actionTitle = labels.EDIT_CONTROL;
+
+          const clients = await getClients();
+
+          const clientsFieldOptions = clients.data?.map((client) => ({
+            _id: client._id,
+            label: `${client.surname} ${client.name}`
+          }));
+
+          if (clientsFieldOptions.length) {
+            options.push({
+              id: 'client',
+              key: 'options',
+              value: clientsFieldOptions
+            });
+          }
+
+          options.push({
+            id: 'appointment',
+            key: 'isDisabled',
+            value: true
+          });
+
+          break;
+        }
         case 'client':
           actionTitle = action === 'add' ? labels.ADD_CLIENT : labels.EDIT_CLIENT;
 
@@ -100,6 +127,8 @@ const Dialog = ({ successHandler, action, setShowModal, type, values }) => {
         switch (type) {
           case 'appointment':
             return updateAppointment(serializeForm(payload));
+          case 'control':
+            return updateControl(serializeForm(payload));
           case 'client':
             return updateClient(serializeForm(payload));
           default:
