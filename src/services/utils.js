@@ -1,17 +1,71 @@
 import _ from 'lodash';
-import { fieldsConfig, formTypes } from '../constants';
+import { fieldsConfig } from '../constants';
 
-export const extractFieldsForType = (type) => {
-  return formTypes[type].map((item) => {
-    let extraFields = [];
+export const getOptionsForNestedFieldsVisibility = (names, shouldHide) => {
+  const options = names.map((fieldName) => {
+    const fieldOptions = [{
+      id: fieldName,
+      key: 'isHidden',
+      value: shouldHide
+    }];
 
-    if (fieldsConfig[item].items?.length) {
-      extraFields = fieldsConfig[item].items.map((extraItem) => {
-        return { ...fieldsConfig[extraItem], isHidden: true };
+    const fieldConfig = fieldsConfig[fieldName];
+    const nestedFields = fieldConfig.nestedFields;
+
+    if (shouldHide && nestedFields?.length) {
+      const nestedOptions = getOptionsForNestedFieldsVisibility(nestedFields, shouldHide);
+
+      if (fieldConfig.type === 'button') {
+        nestedOptions.push({
+          id: fieldConfig.id,
+          key: 'label',
+          value: fieldConfig.labelValues[0]
+        });
+        nestedOptions.push({
+          id: fieldConfig.id,
+          key: 'color',
+          value: fieldConfig.colorValues[0]
+        });
+        nestedOptions.push({
+          id: fieldConfig.id,
+          key: 'icon',
+          value: fieldConfig.iconValues[0]
+        });
+        nestedOptions.push({
+          id: fieldConfig.id,
+          key: 'value',
+          value: false
+        });
+      }
+
+      fieldOptions.push(...nestedOptions);
+    }
+
+    return fieldOptions;
+  });
+
+  return _.flattenDeep(options);
+}
+
+export const extractFields = (names, shouldHideParent) => {
+  return names.map((fieldName) => {
+    let nestedFields = [];
+
+    if (fieldsConfig[fieldName].nestedFields?.length) {
+      nestedFields = fieldsConfig[fieldName].nestedFields.map((nestedFieldName) => {
+        const nestedField = { ...fieldsConfig[nestedFieldName], isHidden: true };
+
+        if (nestedField.nestedFields?.length) {
+          const deeplyNestedFields = extractFields([nestedField.id], true);
+
+          return _.flatten(deeplyNestedFields);
+        }
+
+        return nestedField;
       });
     }
 
-    return [fieldsConfig[item], ...extraFields];
+    return [{ ...fieldsConfig[fieldName], isHidden: shouldHideParent }, ..._.flattenDeep(nestedFields)];
   })
 }
 

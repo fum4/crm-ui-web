@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { FormModal } from '..';
-import { labels } from '../../constants';
-import { getFormValues, serializeForm, getCurrentDate, extractFieldsForType } from '../../services/utils';
+import { labels, formTypes } from '../../constants';
+import { getFormValues, serializeForm, getCurrentDate, extractFields } from '../../services/utils';
 import {
   addAppointment,
   updateAppointment,
@@ -102,7 +102,7 @@ const Dialog = ({ successHandler, action, setShowModal, type, values }) => {
         options = options.concat(values);
       }
 
-      const fields = extractFieldsForType(type);
+      const fields = extractFields(formTypes[type]);
       const formValues = getFormValues(_.flatten(fields), _.flatten(options));
 
       setFormFields(formValues);

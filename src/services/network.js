@@ -33,8 +33,6 @@ export const login = (payload) => {
 
 export const logout = () => localStorage.removeItem('user');
 
-export const getAppStatus = () => api.get('/status');
-
 export const getClients = () => api.get('/clients');
 
 export const addClient = (payload) => api.post('/client', payload);

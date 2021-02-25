@@ -12,6 +12,7 @@ const FormItem = ({ classes, field, onInputChange, onFieldsExtend }) => {
 
     if (field.type === 'dropdown') {
       const initialValue = field.options?.find((option) => option._id === field.value)?.label || '';
+
       setCurrentValue(initialValue);
     }
   }, [field]);
@@ -25,7 +26,7 @@ const FormItem = ({ classes, field, onInputChange, onFieldsExtend }) => {
           <Button
             color={field.color}
             onClick={() => {
-              if (field.items.length) {
+              if (field.nestedFields.length) {
                 onFieldsExtend(field, currentValue);
                 setCurrentValue(!currentValue);
               }
@@ -40,7 +41,7 @@ const FormItem = ({ classes, field, onInputChange, onFieldsExtend }) => {
       }
       case 'dropdown': {
         const Icon = field.noOptionsIcon;
-        // CHECK NEEDED IF THERE ARE NO OPTION IDS ELSE CRASHES AT APP START
+        // TODO: CHECK NEEDED IF THERE ARE NO OPTION IDS ELSE CRASHES AT APP START
         return (
           <Autocomplete
             className={classes.input}
@@ -50,7 +51,7 @@ const FormItem = ({ classes, field, onInputChange, onFieldsExtend }) => {
             inputValue={currentValue}
             key={field.id}
             noOptionsText={
-              field.items.length && (
+              field.nestedFields.length && (
                 <Button
                   onMouseDown={() => {
                     onFieldsExtend(field, false, currentValue);

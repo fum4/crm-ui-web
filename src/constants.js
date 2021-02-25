@@ -7,10 +7,12 @@ export const labels = {
   ADDRESS: 'Adresă',
   ADD_APPOINTMENT: 'Adaugă programare',
   ADD_CLIENT: 'Adaugă pacient',
+  ADD_CONTROL: 'Adaugă control',
   ADD_EXISTING_CLIENT: 'Alegeți pacient existent',
   APPOINTMENT: 'Programare',
   CANCEL: 'Renunță',
   CANCEL_ADD_APPOINTMENT: 'Fără programare',
+  CANCEL_ADD_CONTROL: 'Fără control',
   CLIENT: 'Pacient',
   CONTROL: 'Control',
   DATE: 'Data',
@@ -37,9 +39,20 @@ export const fieldsConfig = {
     icon: AccessTime,
     iconValues: [AccessTime, AlarmOff],
     id: 'addAppointment',
-    items: ['appointment', 'treatment', 'technician', 'control', 'price'],
+    nestedFields: ['appointment', 'treatment', 'technician', 'price', 'addControl'],
     label: labels.ADD_APPOINTMENT,
     labelValues: [labels.ADD_APPOINTMENT, labels.CANCEL_ADD_APPOINTMENT],
+    type: 'button'
+  },
+  addControl: {
+    color: 'primary',
+    colorValues: ['primary', 'secondary'],
+    icon: AccessTime,
+    iconValues: [AccessTime, AlarmOff],
+    id: 'addControl',
+    nestedFields: ['control'],
+    label: labels.ADD_CONTROL,
+    labelValues: [labels.ADD_CONTROL, labels.CANCEL_ADD_CONTROL],
     type: 'button'
   },
   address: {
@@ -55,7 +68,7 @@ export const fieldsConfig = {
   client: {
     id: 'client',
     isRequired: true,
-    items: ['name', 'surname', 'phone', 'address'],
+    nestedFields: ['name', 'surname', 'phone', 'address'],
     label: labels.CLIENT,
     labelValues: [labels.CLIENT, labels.ADD_EXISTING_CLIENT],
     noOptionsIcon: AddCircle,
@@ -104,7 +117,7 @@ export const fieldsConfig = {
 };
 
 export const formTypes = {
-  appointment: ['client', 'appointment', 'treatment', 'technician', 'control', 'price'],
-  control: ['client', 'appointment', 'control', 'treatment', 'technician', 'price'],
+  appointment: ['client', 'appointment', 'treatment', 'technician', 'price', 'addControl'],
+  control: ['client', 'appointment', 'treatment', 'technician', 'price', 'addControl'],
   client: ['name', 'surname', 'phone', 'address', 'addAppointment']
 };

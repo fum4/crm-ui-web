@@ -2,7 +2,7 @@ import FormItem from '../FormItem';
 import { useState } from 'react';
 import { Button, Dialog, makeStyles } from '@material-ui/core';
 import { FaTimes } from 'react-icons/fa';
-import { getFormValues, splitByDelimiter } from '../../services/utils';
+import { getFormValues, splitByDelimiter, getOptionsForNestedFieldsVisibility } from '../../services/utils';
 import './styles.scss';
 
 const useStyles = makeStyles((theme) => ({
@@ -32,11 +32,7 @@ const FormModal = ({ setShowModal, successHandler, title, formFields, onSubmit, 
   const [fields, setFields] = useState(formFields);
 
   const onFieldsExtend = (field, isHidden, value) => {
-    const options = field.items?.map((item) => ({
-      id: item,
-      key: 'isHidden',
-      value: isHidden
-    }));
+    const options = getOptionsForNestedFieldsVisibility(field.nestedFields, isHidden);
 
     options.push({
       id: field.id,
@@ -101,8 +97,8 @@ const FormModal = ({ setShowModal, successHandler, title, formFields, onSubmit, 
           });
         }
 
-        if (field.items?.length) {
-          field.items?.forEach((item) => {
+        if (field.nestedFields?.length) {
+          field.nestedFields?.forEach((item) => {
             options.push({
               id: item,
               key: 'isHidden',
