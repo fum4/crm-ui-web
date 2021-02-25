@@ -40,16 +40,29 @@ const Dialog = ({ successHandler, action, setShowModal, type, values }) => {
             });
           }
 
-          if (action === 'add') {
-            options.push({
-              id: 'appointment',
-              key: 'value',
-              value: getCurrentDate()
-            });
+          options.push({
+            id: 'appointment',
+            key: 'value',
+            value: getCurrentDate()
+          });
+          options.push({
+            id: 'control',
+            key: 'value',
+            value: getCurrentDate()
+          });
+
+          const hasControl = values.find((value) => value.id === 'control')?.value;
+
+          if (hasControl) {
             options.push({
               id: 'control',
-              key: 'value',
-              value: getCurrentDate()
+              key: 'isHidden',
+              value: false
+            });
+            options.push({
+              id: 'addControl',
+              key: 'isHidden',
+              value: true
             });
           }
 
