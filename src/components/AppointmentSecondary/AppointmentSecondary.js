@@ -3,7 +3,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import { useState, useEffect } from 'react';
 import { FaTrashAlt, FaPen } from 'react-icons/fa';
 import { Schedule } from '@material-ui/icons';
-import { deleteAppointment } from '../../services/network';
+import { deleteAppointment, deleteControl } from '../../services/network';
 import { Dialog } from '..';
 import './styles.scss';
 
@@ -40,7 +40,9 @@ const AppointmentSecondary = ({ entry, parentId, onUpdate }) => {
   }, [formValues, entry, parentId]);
 
   const removeEntry = () => {
-    deleteAppointment({ _id: entry._id }).then(() => onUpdate());
+    entry.type === 'appointment'
+      ? deleteAppointment({ _id: entry._id }).then(() => onUpdate())
+      : deleteControl({ _id: entry._id }).then(() => onUpdate());
   };
 
   return (
