@@ -85,6 +85,11 @@ export const fieldsConfig = {
     label: labels.CONTROL,
     type: 'datetime-local'
   },
+  date: {
+    id: 'date',
+    label: labels.DATE,
+    type: 'datetime-local'
+  },
   name: {
     id: 'name',
     isRequired: true,
@@ -118,6 +123,6 @@ export const fieldsConfig = {
 
 export const formTypes = {
   appointment: ['client', 'appointment', 'treatment', 'technician', 'price', 'addControl'],
-  control: ['client', 'appointment', 'treatment', 'technician', 'price', 'addControl'],
+  control: ['client', 'appointment', 'treatment', 'technician', 'price', 'date', 'addControl'],
   client: ['name', 'surname', 'phone', 'address', 'addAppointment']
 };

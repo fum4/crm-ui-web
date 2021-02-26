@@ -10,7 +10,7 @@ import { deleteAppointment, deleteControl } from '../../services/network';
 const AppointmentPrimary = ({ entry, onUpdate }) => {
   const [showEditModal, setShowEditModal] = useState(false);
   const [formValues, setFormValues] = useState([]);
-  const { name, surname, appointment, control, price, treatment, technician } = entry;
+  const { name, surname, appointment, control, date, price, treatment, technician } = entry;
 
   useEffect(() => {
     formValues.push({
@@ -62,7 +62,7 @@ const AppointmentPrimary = ({ entry, onUpdate }) => {
             <Schedule className='appointment__icon' />
             <Typography className='appointment__text' component='h2' variant='h6'>
               {
-                entry.type === 'appointment' ? appointment : control
+                entry.type === 'appointment' ? appointment : date
               }
             </Typography>
           </div>

@@ -58,11 +58,15 @@ const AppointmentSecondary = ({ entry, parentId, onUpdate }) => {
           ) : (
             <ListItemText
               className='appointment-secondary appointment-secondary__control'
-              primary={entry?.control}
+              primary={entry?.date}
             />
           )
         }
-        <ListItemText className='appointment-secondary appointment-secondary__date' primary={entry?.date} />
+        {
+          entry.type === 'appointment' && (
+            <ListItemText className='appointment-secondary appointment-secondary__date' primary={entry?.date} />
+          )
+        }
         <ListItemText
           className='appointment-secondary appointment-secondary__treatment'
           primary={entry?.treatment}

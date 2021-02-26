@@ -91,6 +91,11 @@ const Dialog = ({ successHandler, action, setShowModal, type, values }) => {
             key: 'isDisabled',
             value: true
           });
+          options.push({
+            id: 'control',
+            key: 'value',
+            value: getCurrentDate()
+          });
 
           break;
         }
