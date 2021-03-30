@@ -101,14 +101,18 @@ export const serializeForm = (payload) => {
 export const getCurrentDate = () => new Date().toISOString().slice(0, -8);
 
 export const splitByDelimiter = (value, delimiter) => {
-  if (delimiter) {
-    const firstChunk = value.slice(0, value.indexOf(delimiter)).trim();
-    const secondChunk = value.slice(value.indexOf(delimiter)).trim();
+  if (value) {
+    if (delimiter) {
+      const firstChunk = value.slice(0, value.indexOf(delimiter)).trim();
+      const secondChunk = value.slice(value.indexOf(delimiter)).trim();
 
-    return { firstChunk, secondChunk };
+      return { firstChunk, secondChunk };
+    }
+
+    return { firstChunk: value };
   }
 
-  return { firstChunk: value };
+  return {};
 }
 
 export const validators = {

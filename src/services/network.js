@@ -39,7 +39,7 @@ export const addClient = (payload) => api.post('/client', payload);
 
 export const updateClient = (payload) => api.put('/client', payload);
 
-export const deleteClient = (payload) => api.delete('/client', payload);
+export const deleteClient = (payload) => api.delete(`/client/${payload._id}`)
 
 export const getAppointments = () => api.get('/appointments');
 
@@ -74,13 +74,7 @@ export const updateControl = (payload) => {
   return api.put(url, payload);
 };
 
-export const deleteAppointment = (payload) => {
-  const url = `/appointment/${payload._id}`;
-
-  delete payload._id;
-
-  return api.delete(url, { _id: payload._id });
-};
+export const deleteAppointment = (payload) => api.delete(`/appointment/${payload._id}`);
 
 export const deleteControl = (payload) => {
   const url = `/control/${payload._id}`;

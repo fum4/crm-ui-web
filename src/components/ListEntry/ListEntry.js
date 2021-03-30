@@ -17,7 +17,7 @@ const ListEntry = (props) => {
         key={props.entry._id}
         onChange={handleChange(props.index)}>
         <AccordionSummary aria-controls='panel1bh-content' id='panel1bh-header'>
-          <ClientPreview entry={props.entry} onAddAppointment={props.actionSuccessHandler} />
+          <ClientPreview entry={props.entry} onUpdate={props.actionSuccessHandler} />
         </AccordionSummary>
         <AccordionDetails>{props.children}</AccordionDetails>
       </Accordion>

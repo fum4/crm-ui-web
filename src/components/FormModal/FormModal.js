@@ -128,9 +128,10 @@ const FormModal = ({ setShowModal, successHandler, title, formFields, onSubmit, 
 
   const handleSubmit = () => {
     const isFormValid = validateForm();
+    const fieldsToSubmit = fields.filter((field) => !field.isHidden);
 
     if (isFormValid) {
-      onSubmit({ ...fields }).then(() => {
+      onSubmit({ ...fieldsToSubmit }).then(() => {
         hideModal();
         successHandler();
       });

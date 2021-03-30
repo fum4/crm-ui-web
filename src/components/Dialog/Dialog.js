@@ -51,7 +51,7 @@ const Dialog = ({ successHandler, action, setShowModal, type, values }) => {
             value: getCurrentDate()
           });
 
-          const hasControl = values.find((value) => value.id === 'control')?.value;
+          const hasControl = values?.find((value) => value.id === 'control')?.value;
 
           if (hasControl) {
             options.push({

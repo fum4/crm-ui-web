@@ -4,15 +4,14 @@ import { Button, TextField } from '@material-ui/core/';
 
 const FormItem = ({ classes, field, onInputChange, onFieldsExtend }) => {
   const [currentValue, setCurrentValue] = useState(false);
-  const [optionsIDs, setOptionsIDs] = useState([]);
+  const [optionsIds, setOptionsIds] = useState([]);
 
   useEffect(() => {
-    const options = field.options?.map((option) => option._id);
-    setOptionsIDs(options);
-
     if (field.type === 'dropdown') {
+      const options = field.options?.map((option) => option._id);
       const initialValue = field.options?.find((option) => option._id === field.value)?.label || '';
 
+      setOptionsIds(options);
       setCurrentValue(initialValue);
     }
   }, [field]);
@@ -41,8 +40,8 @@ const FormItem = ({ classes, field, onInputChange, onFieldsExtend }) => {
       }
       case 'dropdown': {
         const Icon = field.noOptionsIcon;
-        // TODO: CHECK NEEDED IF THERE ARE NO OPTION IDS ELSE CRASHES AT APP START
-        return (
+
+        return optionsIds?.length ? (
           <Autocomplete
             className={classes.input}
             disabled={field.isDisabled}
@@ -66,12 +65,12 @@ const FormItem = ({ classes, field, onInputChange, onFieldsExtend }) => {
             }
             onChange={(ev, value) => onInputChange(field.id, value)}
             onInputChange={(event, value) => setCurrentValue(value)}
-            options={optionsIDs}
+            options={optionsIds}
             renderInput={(params) => <TextField {...params} label={field.label} variant='filled' />}
             required={field.isRequired}
             value={field.value || ''}
           />
-        );
+        ) : null;
       }
       default:
         return (
