@@ -1,9 +1,28 @@
-.appointment-secondary {
-  display: flex;
-  padding: 0 10px;
+.appointments-container-secondary {
+    .MuiListItem-root {
+        justify-content: space-between;
+    }
 
-  &__edit-icon,
-  &__remove-icon {
-    padding: 0 0 0 20px;
-  }
+    .MuiSvgIcon-root {
+        height: auto;
+        margin-left: 10px;
+    }
+
+    .appointment-secondary {
+        display: flex;
+        padding: 0 12px 0 7px;
+
+        &__data {
+            display: flex;
+        }
+
+        &__action-buttons {
+            float: right;
+        }
+
+        &__edit-icon,
+        &__remove-icon {
+            padding: 0 0 0 20px;
+        }
+    }
 }
