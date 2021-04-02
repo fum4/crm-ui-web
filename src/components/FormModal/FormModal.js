@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const FormModal = ({ setShowModal, successHandler, title, formFields, onSubmit, submitText }) => {
+const FormModal = ({ buttonColor, setShowModal, successHandler, title, formFields, onSubmit, submitText }) => {
   const classes = useStyles();
   const [fields, setFields] = useState(formFields);
 
@@ -128,7 +128,7 @@ const FormModal = ({ setShowModal, successHandler, title, formFields, onSubmit, 
 
   const handleSubmit = () => {
     const isFormValid = validateForm();
-    const fieldsToSubmit = fields.filter((field) => !field.isHidden);
+    const fieldsToSubmit = fields?.filter((field) => !field.isHidden);
 
     if (isFormValid) {
       onSubmit({ ...fieldsToSubmit }).then(() => {
@@ -142,7 +142,7 @@ const FormModal = ({ setShowModal, successHandler, title, formFields, onSubmit, 
     const options = [];
     let isValid = true;
 
-    fields.forEach((field) => {
+    fields?.forEach((field) => {
       if (field.validator && !field.isHidden) {
         isValid = isValid && field.validator(field.value);
 
@@ -163,9 +163,11 @@ const FormModal = ({ setShowModal, successHandler, title, formFields, onSubmit, 
   return (
     <Dialog className='modal' fullWidth maxWidth='md' open={true}>
       <div className='modal-header'>
-        <h2>{title}</h2>
         <div className='close-btn-container'>
           <FaTimes className='close-btn' onClick={() => hideModal()} size={35} />
+        </div>
+        <div className='title-container'>
+          <h1>{title}</h1>
         </div>
       </div>
       <form autoComplete='off' className={classes.root}>
@@ -181,7 +183,7 @@ const FormModal = ({ setShowModal, successHandler, title, formFields, onSubmit, 
           ))
         }
         <div className='modal-footer'>
-          <Button color='primary' onClick={() => handleSubmit()} size='large' variant='contained'>
+          <Button color={buttonColor} onClick={() => handleSubmit()} size='large' variant='contained'>
             { submitText }
           </Button>
         </div>

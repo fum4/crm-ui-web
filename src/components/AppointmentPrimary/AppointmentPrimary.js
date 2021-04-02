@@ -1,16 +1,17 @@
 import { Card, CardContent, Typography, Chip } from '@material-ui/core';
-import { PermContactCalendar, Schedule } from '@material-ui/icons';
+import { PermContactCalendar, Schedule, Timelapse } from '@material-ui/icons';
 import { labels } from '../../constants';
 import './styles.scss';
 import { FaPen, FaTrashAlt } from 'react-icons/fa';
 import { Dialog } from '../index';
 import { useEffect, useState } from 'react';
-import { deleteAppointment, deleteControl } from '../../services/network';
 
 const AppointmentPrimary = ({ entry, onUpdate }) => {
   const [showEditModal, setShowEditModal] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [formValues, setFormValues] = useState([]);
   const { name, surname, appointment, control, date, price, treatment, technician } = entry;
+  const isAppointment = entry.type === 'appointment';
 
   useEffect(() => {
     formValues.push({
@@ -40,12 +41,6 @@ const AppointmentPrimary = ({ entry, onUpdate }) => {
     setFormValues(formValues);
   }, [formValues, entry]);
 
-  const removeEntry = () => {
-    entry.type === 'appointment'
-      ? deleteAppointment({ _id: entry._id }).then(() => onUpdate())
-      : deleteControl({ _id: entry._id }).then(() => onUpdate());
-  };
-
   return (
     <>
       <Card className='appointment-primary' variant='outlined'>
@@ -59,10 +54,12 @@ const AppointmentPrimary = ({ entry, onUpdate }) => {
             </Typography>
           </div>
           <div className='appointment'>
-            <Schedule className='appointment__icon' />
+            {
+              isAppointment ? <Schedule className='appointment__icon' /> : <Timelapse className='appointment__icon' />
+            }
             <Typography className='appointment__text' component='h2' variant='h6'>
               {
-                entry.type === 'appointment' ? appointment : date
+                isAppointment ? appointment : date
               }
             </Typography>
           </div>
@@ -75,7 +72,7 @@ const AppointmentPrimary = ({ entry, onUpdate }) => {
             )
           }
           {
-            entry.type === 'appointment' && control && (
+            isAppointment && control && (
               <div className='info' component='p' variant='body2'>
                 <Chip className='info__label' label={labels.CONTROL} size='small' />
                 <span className='info__text'>{ control }</span>
@@ -106,7 +103,7 @@ const AppointmentPrimary = ({ entry, onUpdate }) => {
           />
           <FaTrashAlt
             className='card-actions__remove-icon'
-            onClick={() => removeEntry()}
+            onClick={() => setShowDeleteModal(true)}
           />
         </div>
       </Card>
@@ -118,6 +115,17 @@ const AppointmentPrimary = ({ entry, onUpdate }) => {
             successHandler={() => onUpdate()}
             type={entry.type}
             values={formValues}
+          />
+        )
+      }
+      {
+        showDeleteModal && (
+          <Dialog
+            action='delete'
+            setShowModal={setShowDeleteModal}
+            successHandler={() => onUpdate()}
+            type={entry.type}
+            values={{ _id: entry._id }}
           />
         )
       }

@@ -18,8 +18,8 @@ const api = axios.create({
   headers: getHeaders()
 });
 
+// AUTH
 export const register = (payload) => axios.post('/register', payload);
-
 export const login = (payload) => {
   return axios.post('/login', payload).then((response) => {
     const data = response.data;
@@ -30,19 +30,16 @@ export const login = (payload) => {
     }
   });
 }
-
 export const logout = () => localStorage.removeItem('user');
 
+// CLIENTS
 export const getClients = () => api.get('/clients');
-
 export const addClient = (payload) => api.post('/client', payload);
-
 export const updateClient = (payload) => api.put('/client', payload);
-
 export const deleteClient = (payload) => api.delete(`/client/${payload._id}`)
 
+// APPOINTMENTS
 export const getAppointments = () => api.get('/appointments');
-
 export const addAppointment = (payload) => {
   const url = `/appointment/${payload.client || ''}`
 
@@ -50,7 +47,6 @@ export const addAppointment = (payload) => {
 
   return api.post(url, payload);
 }
-
 export const updateAppointment = (payload) => {
   const url = `/appointment/${payload._id}`;
 
@@ -59,7 +55,9 @@ export const updateAppointment = (payload) => {
 
   return api.put(url, payload);
 };
+export const deleteAppointment = (payload) => api.delete(`/appointment/${payload._id}`);
 
+// CONTROLS
 export const updateControl = (payload) => {
   const url = `/control/${payload._id}`;
 
@@ -73,13 +71,5 @@ export const updateControl = (payload) => {
 
   return api.put(url, payload);
 };
+export const deleteControl = (payload) => api.delete(`/control/${payload._id}`);
 
-export const deleteAppointment = (payload) => api.delete(`/appointment/${payload._id}`);
-
-export const deleteControl = (payload) => {
-  const url = `/control/${payload._id}`;
-
-  delete payload._id;
-
-  return api.delete(url, { _id: payload._id });
-};

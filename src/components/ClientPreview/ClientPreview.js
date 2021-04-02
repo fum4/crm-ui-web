@@ -3,12 +3,12 @@ import { FaPlus, FaTrashAlt } from 'react-icons/fa';
 import { Button } from '@material-ui/core';
 import { Dialog } from '..';
 import { labels } from '../../constants';
-import { deleteClient } from '../../services/network';
 import Typography from '@material-ui/core/Typography';
 import './styles.scss';
 
 const ClientPreview = ({ entry, onUpdate }) => {
-  const [showModal, setShowModal] = useState(false);
+  const [showAddModal, setShowAddModal] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [formValues, setFormValues] = useState();
 
   useEffect(() => {
@@ -28,10 +28,6 @@ const ClientPreview = ({ entry, onUpdate }) => {
     setFormValues(values);
   }, [entry]);
 
-  const removeEntry = () => {
-    deleteClient({ _id: entry._id }).then(() => onUpdate());
-  };
-
   return (
     <>
       <Typography>{`${entry.surname} ${entry.name}`}</Typography>
@@ -39,7 +35,7 @@ const ClientPreview = ({ entry, onUpdate }) => {
         <Button
           className='add-new-btn'
           color='primary'
-          onClick={() => setShowModal(true)}
+          onClick={() => setShowAddModal(true)}
           size='small'
           variant='outlined'
         >
@@ -49,20 +45,31 @@ const ClientPreview = ({ entry, onUpdate }) => {
         <Button
           className='remove-btn'
           color='secondary'
-          onClick={() => removeEntry()}
+          onClick={() => setShowDeleteModal(true)}
           size='large'
           variant='outlined'>
           <FaTrashAlt className='remove-icon' />
         </Button>
       </div>
       {
-        showModal && (
+        showAddModal && (
           <Dialog
             action='add'
-            setShowModal={setShowModal}
+            setShowModal={setShowAddModal}
             successHandler={() => onUpdate()}
             type={'appointment'}
             values={formValues}
+          />
+        )
+      }
+      {
+        showDeleteModal && (
+          <Dialog
+            action='delete'
+            setShowModal={setShowDeleteModal}
+            successHandler={() => onUpdate()}
+            type='client'
+            values={{ _id: entry._id }}
           />
         )
       }

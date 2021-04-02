@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { fieldsConfig } from '../constants';
+import { fieldsConfig, labels } from '../constants';
 
 export const getOptionsForNestedFieldsVisibility = (names, shouldHide) => {
   const options = names.map((fieldName) => {
@@ -119,4 +119,8 @@ export const validators = {
   isNumber: (value) => typeof value === 'number',
   isPhoneNumber: (value) => value.match(/^(\+4|)?(07[0-8]{1}[0-9]{1}|02[0-9]{2}|03[0-9]{2}){1}?(\s|\.|-)?([0-9]{3}(\s|\.|-|)){2}$/),
   isPresent: (value) => value?.length
+}
+
+export const getDialogTitleFromActionAndType = (action, type) => {
+  return labels[`${action.toUpperCase()}_${type.toUpperCase()}${action === 'delete' ? '_MESSAGE' : ''}`];
 }

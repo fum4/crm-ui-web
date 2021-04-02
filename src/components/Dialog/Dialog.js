@@ -1,108 +1,47 @@
 import { useState, useEffect } from 'react';
 import { FormModal } from '..';
-import { labels, formTypes } from '../../constants';
-import { getFormValues, serializeForm, getCurrentDate, extractFields } from '../../services/utils';
+import { formTypes, labels } from '../../constants';
+import { getFormValues, serializeForm, getCurrentDate, extractFields, getDialogTitleFromActionAndType } from '../../services/utils';
 import {
   addAppointment,
   updateAppointment,
   updateControl,
   addClient,
   updateClient,
-  getClients
+  getClients,
+  deleteAppointment,
+  deleteClient,
+  deleteControl
 } from '../../services/network';
 import _ from 'lodash';
 
 const Dialog = ({ successHandler, action, setShowModal, type, values }) => {
   const [formFields, setFormFields] = useState();
   const [title, setTitle] = useState();
+  const [isInitialized, setIsInitialized] = useState(false);
 
   useEffect(() => {
-    const getFormOptions = async () => {
-      let options = [];
-      let actionTitle;
+    const initializeForm = async () => {
+      if (action !== 'delete') {
+        let options = [];
 
-      switch (type) {
-        case 'appointment': {
-          actionTitle = action === 'add' ? labels.ADD_APPOINTMENT : labels.EDIT_APPOINTMENT;
+        switch (type) {
+          case 'appointment': {
+            const clients = await getClients();
 
-          const clients = await getClients();
+            const clientsFieldOptions = clients.data?.map((client) => ({
+              _id: client._id,
+              label: `${client.surname} ${client.name}`
+            }));
 
-          const clientsFieldOptions = clients.data?.map((client) => ({
-            _id: client._id,
-            label: `${client.surname} ${client.name}`
-          }));
+            if (clientsFieldOptions.length) {
+              options.push({
+                id: 'client',
+                key: 'options',
+                value: clientsFieldOptions
+              });
+            }
 
-          if (clientsFieldOptions.length) {
-            options.push({
-              id: 'client',
-              key: 'options',
-              value: clientsFieldOptions
-            });
-          }
-
-          options.push({
-            id: 'appointment',
-            key: 'value',
-            value: getCurrentDate()
-          });
-          options.push({
-            id: 'control',
-            key: 'value',
-            value: getCurrentDate()
-          });
-
-          const hasControl = values?.find((value) => value.id === 'control')?.value;
-
-          if (hasControl) {
-            options.push({
-              id: 'control',
-              key: 'isHidden',
-              value: false
-            });
-            options.push({
-              id: 'addControl',
-              key: 'isHidden',
-              value: true
-            });
-          }
-
-          break;
-        }
-        case 'control': {
-          actionTitle = labels.EDIT_CONTROL;
-
-          const clients = await getClients();
-
-          const clientsFieldOptions = clients.data?.map((client) => ({
-            _id: client._id,
-            label: `${client.surname} ${client.name}`
-          }));
-
-          if (clientsFieldOptions.length) {
-            options.push({
-              id: 'client',
-              key: 'options',
-              value: clientsFieldOptions
-            });
-          }
-
-          options.push({
-            id: 'appointment',
-            key: 'isDisabled',
-            value: true
-          });
-          options.push({
-            id: 'control',
-            key: 'value',
-            value: getCurrentDate()
-          });
-
-          break;
-        }
-        case 'client':
-          actionTitle = action === 'add' ? labels.ADD_CLIENT : labels.EDIT_CLIENT;
-
-          if (action === 'add') {
             options.push({
               id: 'appointment',
               key: 'value',
@@ -113,21 +52,86 @@ const Dialog = ({ successHandler, action, setShowModal, type, values }) => {
               key: 'value',
               value: getCurrentDate()
             });
+
+            const hasControl = values?.find((value) => value.id === 'control')?.value;
+
+            if (hasControl) {
+              options.push({
+                id: 'control',
+                key: 'isHidden',
+                value: false
+              });
+              options.push({
+                id: 'addControl',
+                key: 'isHidden',
+                value: true
+              });
+            }
+
+            break;
           }
+          case 'control': {
+            const clients = await getClients();
+
+            const clientsFieldOptions = clients.data?.map((client) => ({
+              _id: client._id,
+              label: `${client.surname} ${client.name}`
+            }));
+
+            if (clientsFieldOptions.length) {
+              options.push({
+                id: 'client',
+                key: 'options',
+                value: clientsFieldOptions
+              });
+            }
+
+            options.push({
+              id: 'appointment',
+              key: 'isDisabled',
+              value: true
+            });
+            options.push({
+              id: 'control',
+              key: 'value',
+              value: getCurrentDate()
+            });
+
+            break;
+          }
+          case 'client':
+            if (action === 'add') {
+              options.push({
+                id: 'appointment',
+                key: 'value',
+                value: getCurrentDate()
+              });
+              options.push({
+                id: 'control',
+                key: 'value',
+                value: getCurrentDate()
+              });
+            }
+
+            break;
+        }
+
+        if (values) {
+          options = options.concat(values);
+        }
+
+        const fields = extractFields(formTypes[type]);
+        const formValues = getFormValues(_.flatten(fields), _.flatten(options));
+
+        setFormFields(formValues);
       }
 
-      if (values) {
-        options = options.concat(values);
-      }
+      const dialogTitle = getDialogTitleFromActionAndType(action, type);
 
-      const fields = extractFields(formTypes[type]);
-      const formValues = getFormValues(_.flatten(fields), _.flatten(options));
-
-      setFormFields(formValues);
-      setTitle(actionTitle);
+      setTitle(dialogTitle);
     };
 
-    getFormOptions();
+    initializeForm().then(() => setIsInitialized(true));
   }, [action, type, values]);
 
   const handleSubmit = (payload) => {
@@ -152,17 +156,29 @@ const Dialog = ({ successHandler, action, setShowModal, type, values }) => {
           default:
             return undefined;
         }
+      case 'delete':
+        switch (type) {
+          case 'appointment':
+            return deleteAppointment({ _id: values._id });
+          case 'client':
+            return deleteClient({ _id: values._id });
+          case 'control':
+            return deleteControl({ _id: values._id });
+          default:
+            return undefined;
+        }
       default:
         return undefined;
     }
   };
 
-  return formFields ? (
+  return isInitialized ? (
     <FormModal
+      buttonColor={action === 'delete' ? 'secondary' : 'primary'}
       formFields={formFields}
       onSubmit={(payload) => handleSubmit(payload)}
       setShowModal={setShowModal}
-      submitText={action === 'add' ? labels.ADD : labels.EDIT}
+      submitText={labels[`${action.toUpperCase()}`]}
       successHandler={successHandler}
       title={title}
     />

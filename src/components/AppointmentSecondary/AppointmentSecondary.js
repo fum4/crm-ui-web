@@ -3,13 +3,15 @@ import ListItemText from '@material-ui/core/ListItemText';
 import { useState, useEffect } from 'react';
 import { FaTrashAlt, FaPen } from 'react-icons/fa';
 import { Schedule, Build, AttachMoney, LocalHospital, Timelapse } from '@material-ui/icons';
-import { deleteAppointment, deleteControl } from '../../services/network';
 import { Dialog } from '..';
 import './styles.scss';
 
 const AppointmentSecondary = ({ entry, parentId, onUpdate }) => {
   const [showEditModal, setShowEditModal] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [formValues, setFormValues] = useState([]);
+  const isAppointment = entry.type === 'appointment';
+  const hasControl = !!entry.control;
 
   useEffect(() => {
     formValues.push({
@@ -39,18 +41,12 @@ const AppointmentSecondary = ({ entry, parentId, onUpdate }) => {
     setFormValues(formValues);
   }, [formValues, entry, parentId]);
 
-  const removeEntry = () => {
-    entry.type === 'appointment'
-      ? deleteAppointment({ _id: entry._id }).then(() => onUpdate())
-      : deleteControl({ _id: entry._id }).then(() => onUpdate());
-  };
-
   return (
     <>
       <ListItem>
         <div className='appointment-secondary__data'>
           {
-            entry.type === 'appointment' ? (
+            isAppointment ? (
               <>
                 <Schedule />
                 <ListItemText
@@ -81,7 +77,7 @@ const AppointmentSecondary = ({ entry, parentId, onUpdate }) => {
           <AttachMoney />
           <ListItemText className='appointment-secondary appointment-secondary__price' primary={entry?.price} />
           {
-            entry.type === 'appointment' && (
+            isAppointment && hasControl && (
               <>
                 <Timelapse />
                 <ListItemText
@@ -99,7 +95,7 @@ const AppointmentSecondary = ({ entry, parentId, onUpdate }) => {
           />
           <FaTrashAlt
             className='appointment-secondary appointment-secondary__remove-icon'
-            onClick={() => removeEntry()}
+            onClick={() => setShowDeleteModal(true)}
           />
         </div>
       </ListItem>
@@ -111,6 +107,17 @@ const AppointmentSecondary = ({ entry, parentId, onUpdate }) => {
             successHandler={() => onUpdate()}
             type={entry.type}
             values={formValues}
+          />
+        )
+      }
+      {
+        showDeleteModal && (
+          <Dialog
+            action='delete'
+            setShowModal={setShowDeleteModal}
+            successHandler={() => onUpdate()}
+            type={entry.type}
+            values={{ _id: entry._id }}
           />
         )
       }
