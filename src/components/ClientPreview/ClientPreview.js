@@ -30,7 +30,7 @@ const ClientPreview = ({ entry, onUpdate }) => {
 
   return (
     <>
-      <Typography>{`${entry.surname} ${entry.name}`}</Typography>
+      <Typography align='center'>{`${entry.surname} ${entry.name}`}</Typography>
       <div className='pull-right'>
         <Button
           className='add-new-btn'

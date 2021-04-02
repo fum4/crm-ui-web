@@ -1,17 +1,24 @@
-button {
-  &.add-new-btn {
-    margin-left: 20px;
-
-    p {
-      margin: 1px 0 0 0;
-    }
-
-    .add-icon {
-      margin-right: 10px;
-    }
+.MuiAccordionSummary-content {
+  p {
+    margin-top: auto;
+    margin-bottom: auto;
   }
 
-  &.remove-btn {
-    margin-left: 5px;
+  button {
+    &.add-new-btn {
+      margin-left: 20px;
+
+      p {
+        margin: 1px 0 0 0;
+      }
+
+      .add-icon {
+        margin-right: 10px;
+      }
+    }
+
+    &.remove-btn {
+      margin-left: 5px;
+    }
   }
 }

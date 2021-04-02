@@ -47,7 +47,7 @@ const AppointmentPrimary = ({ entry, onUpdate }) => {
         <CardContent className='card-content'>
           <div className='name'>
             <PermContactCalendar className='name__icon' fontSize='large' />
-            <Typography className='name__text' component='h2' variant='h5'>
+            <Typography className='name__text' component='h2' variant='h7'>
               {
                 `${surname} ${name}`
               }
@@ -59,7 +59,7 @@ const AppointmentPrimary = ({ entry, onUpdate }) => {
             }
             <Typography className='appointment__text' component='h2' variant='h6'>
               {
-                isAppointment ? appointment : date
+                isAppointment ? `${labels.APPOINTMENT} - ${appointment}` : `${labels.CONTROL} - ${date}`
               }
             </Typography>
           </div>
