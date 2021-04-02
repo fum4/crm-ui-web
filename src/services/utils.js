@@ -121,6 +121,12 @@ export const validators = {
   isPresent: (value) => value?.length
 }
 
-export const getDialogTitleFromActionAndType = (action, type) => {
+export const getDialogTitle = (action, type) => {
   return labels[`${action.toUpperCase()}_${type.toUpperCase()}${action === 'delete' ? '_MESSAGE' : ''}`];
+}
+
+export const getDialogSubmitButtonText = (action, type) => {
+  const shouldAddLabelExtension = type !== 'client' && action === 'delete';
+
+  return labels[`${action.toUpperCase()}${shouldAddLabelExtension ? '_2' : ''}`];
 }

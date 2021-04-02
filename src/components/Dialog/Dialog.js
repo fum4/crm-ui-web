@@ -1,7 +1,14 @@
 import { useState, useEffect } from 'react';
 import { FormModal } from '..';
-import { formTypes, labels } from '../../constants';
-import { getFormValues, serializeForm, getCurrentDate, extractFields, getDialogTitleFromActionAndType } from '../../services/utils';
+import { formTypes } from '../../constants';
+import {
+  getFormValues,
+  serializeForm,
+  getCurrentDate,
+  extractFields,
+  getDialogTitle,
+  getDialogSubmitButtonText
+} from '../../services/utils';
 import {
   addAppointment,
   updateAppointment,
@@ -19,6 +26,7 @@ const Dialog = ({ successHandler, action, setShowModal, type, values }) => {
   const [formFields, setFormFields] = useState();
   const [title, setTitle] = useState();
   const [isInitialized, setIsInitialized] = useState(false);
+  const [submitText, setSubmitText] = useState(undefined);
 
   useEffect(() => {
     const initializeForm = async () => {
@@ -126,9 +134,11 @@ const Dialog = ({ successHandler, action, setShowModal, type, values }) => {
         setFormFields(formValues);
       }
 
-      const dialogTitle = getDialogTitleFromActionAndType(action, type);
+      const dialogTitle = getDialogTitle(action, type);
+      const dialogSubmitButtonText = getDialogSubmitButtonText(action, type);
 
       setTitle(dialogTitle);
+      setSubmitText(dialogSubmitButtonText);
     };
 
     initializeForm().then(() => setIsInitialized(true));
@@ -178,7 +188,7 @@ const Dialog = ({ successHandler, action, setShowModal, type, values }) => {
       formFields={formFields}
       onSubmit={(payload) => handleSubmit(payload)}
       setShowModal={setShowModal}
-      submitText={labels[`${action.toUpperCase()}`]}
+      submitText={submitText}
       successHandler={successHandler}
       title={title}
     />
