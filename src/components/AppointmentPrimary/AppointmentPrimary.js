@@ -1,5 +1,5 @@
 import { Card, CardContent, Typography, Chip } from '@material-ui/core';
-import { PermContactCalendar, Schedule, Timelapse } from '@material-ui/icons';
+import { PermContactCalendar, WatchLater, Timelapse } from '@material-ui/icons';
 import { labels } from '../../constants';
 import './styles.scss';
 import { FaPen, FaTrashAlt } from 'react-icons/fa';
@@ -55,7 +55,7 @@ const AppointmentPrimary = ({ entry, onUpdate }) => {
           </div>
           <div className='appointment'>
             {
-              isAppointment ? <Schedule className='appointment__icon' /> : <Timelapse className='appointment__icon' />
+              isAppointment ? <WatchLater className='appointment__icon' /> : <Timelapse className='appointment__icon' />
             }
             <Typography className='appointment__text' component='h2' variant='h6'>
               {
