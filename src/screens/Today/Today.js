@@ -27,7 +27,7 @@ const Clients = () => {
     const keywords = payload.split(' ');
 
     const filtered = allAppointments.filter((item) => {
-      let isMatch = false;
+      let isMatch = true;
 
       if (item) {
         keywords.forEach((keyword) => {
@@ -36,17 +36,23 @@ const Clients = () => {
           const treatment = item.treatment?.toLowerCase();
           const technician = item.technician?.toLowerCase();
           const appointment = item.appointment?.toLowerCase();
+          const price = item.price?.toLowerCase();
           const date = item.date?.toLowerCase();
 
+          const searchPool = [name, surname, treatment, technician, appointment, date, price];
           const searchTerm = keyword?.toLowerCase();
-          const searchPool = [name, surname, treatment, technician, appointment, date];
+
+          let currentItemMatched = false;
 
           searchPool.forEach((searchItem) => {
             if (searchItem?.includes(searchTerm)) {
-              isMatch = true;
+              currentItemMatched = true;
             }
           })
 
+          if (!currentItemMatched) {
+            isMatch = false;
+          }
         });
       }
 
