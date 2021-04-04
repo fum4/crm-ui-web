@@ -42,7 +42,7 @@ export const editAppointment = createAsyncThunk('appointments/edit', async (payl
 export const removeAppointment = createAsyncThunk('appointments/delete', async (payload, thunkAPI) => {
   let appointments;
 
-  if (payload.date) { // means is control, not appointment; should refactor this
+  if (payload.type === 'control') { // TODO: should refactor
     appointments = await deleteControl(payload);
   } else {
     appointments = await deleteAppointment(payload);

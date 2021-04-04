@@ -9,14 +9,8 @@ import {
   getDialogTitle,
   getDialogSubmitButtonText
 } from '../../services/utils';
-import {
-  updateControl,
-  addClient,
-  updateClient,
-  deleteClient,
-  deleteControl
-} from '../../services/network';
 import { insertAppointment, editAppointment, removeAppointment } from '../../store/appointmentsSlice';
+import { insertClient, editClient, removeClient } from '../../store/clientsSlice';
 import { useDispatch } from 'react-redux';
 import { useAllClients } from '../../store/selectors';
 import _ from 'lodash';
@@ -148,18 +142,17 @@ const Dialog = ({ successHandler, action, setShowModal, type, values }) => {
           case 'appointment':
             return dispatch(insertAppointment(serializeForm(payload)));
           case 'client':
-            return addClient(serializeForm(payload));
+            return dispatch(insertClient(serializeForm(payload)));
           default:
             return undefined;
         }
       case 'edit':
         switch (type) {
           case 'appointment':
-            return dispatch(editAppointment(serializeForm(payload)));
           case 'control':
-            return updateControl(serializeForm(payload));
+            return dispatch(editAppointment(serializeForm(payload)));
           case 'client':
-            return updateClient(serializeForm(payload));
+            return dispatch(editClient(serializeForm(payload)));
           default:
             return undefined;
         }
@@ -168,9 +161,9 @@ const Dialog = ({ successHandler, action, setShowModal, type, values }) => {
           case 'appointment':
             return dispatch(removeAppointment({ _id: values._id }));
           case 'client':
-            return deleteClient({ _id: values._id });
+            return dispatch(removeClient({ _id: values._id }));
           case 'control':
-            return deleteControl({ _id: values._id });
+            return dispatch(removeAppointment({ type: 'control', _id: values._id }));
           default:
             return undefined;
         }
