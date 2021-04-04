@@ -18,15 +18,21 @@ const Clients = () => {
     const keywords = payload.split(' ');
 
     const filtered = allClients.filter((client) => {
-      let isMatch = false;
+      let isMatch = true;
 
       keywords.forEach((keyword) => {
         const name = client.name?.toLowerCase();
         const surname = client.surname?.toLowerCase();
         const searchTerm = keyword?.toLowerCase();
 
+        let currentItemMatched = false;
+
         if (name.includes(searchTerm) || surname.includes(searchTerm)) {
-          isMatch = true;
+          currentItemMatched = true;
+        }
+
+        if (!currentItemMatched) {
+          isMatch = false;
         }
       });
 
