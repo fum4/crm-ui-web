@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const FormModal = ({ buttonColor, setShowModal, successHandler, title, formFields, onSubmit, submitText }) => {
+const FormModal = ({ buttonColor, setShowModal, title, formFields, onSubmit, submitText }) => {
   const classes = useStyles();
   const [fields, setFields] = useState(formFields);
 
@@ -135,10 +135,8 @@ const FormModal = ({ buttonColor, setShowModal, successHandler, title, formField
     const fieldsToSubmit = fields?.filter((field) => !field.isHidden);
 
     if (isFormValid) {
-      onSubmit({ ...fieldsToSubmit }).then(() => {
-        hideModal();
-        successHandler();
-      });
+      onSubmit({ ...fieldsToSubmit })
+        .then(() => hideModal());
     }
   };
 

@@ -15,7 +15,7 @@ import { useDispatch } from 'react-redux';
 import { useAllClients } from '../../store/selectors';
 import _ from 'lodash';
 
-const Dialog = ({ successHandler, action, setShowModal, type, values }) => {
+const Dialog = ({ action, setShowModal, type, values }) => {
   const [formFields, setFormFields] = useState();
   const [title, setTitle] = useState();
   const [isInitialized, setIsInitialized] = useState(false);
@@ -179,7 +179,6 @@ const Dialog = ({ successHandler, action, setShowModal, type, values }) => {
       onSubmit={(payload) => handleSubmit(payload)}
       setShowModal={setShowModal}
       submitText={submitText}
-      successHandler={successHandler}
       title={title}
     />
   ) : (

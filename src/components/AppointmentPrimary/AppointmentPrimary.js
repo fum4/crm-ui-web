@@ -6,7 +6,7 @@ import { FaPen, FaTrashAlt } from 'react-icons/fa';
 import { Dialog } from '../index';
 import { useEffect, useState } from 'react';
 
-const AppointmentPrimary = ({ entry, onUpdate }) => {
+const AppointmentPrimary = ({ entry }) => {
   const [showEditModal, setShowEditModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [formValues, setFormValues] = useState([]);
@@ -112,7 +112,6 @@ const AppointmentPrimary = ({ entry, onUpdate }) => {
           <Dialog
             action='edit'
             setShowModal={setShowEditModal}
-            successHandler={() => onUpdate()}
             type={entry.type}
             values={formValues}
           />
@@ -123,7 +122,6 @@ const AppointmentPrimary = ({ entry, onUpdate }) => {
           <Dialog
             action='delete'
             setShowModal={setShowDeleteModal}
-            successHandler={() => onUpdate()}
             type={entry.type}
             values={{ _id: entry._id }}
           />

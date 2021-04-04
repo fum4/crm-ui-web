@@ -40,7 +40,7 @@ const BootstrapInput = withStyles((theme) => ({
   }
 }))(InputBase);
 
-const SearchEnAdd = ({ handleSearch, actionSuccessHandler, type }) => {
+const SearchEnAdd = ({ handleSearch, type }) => {
   const [showModal, setShowModal] = useState(false);
 
   return (
@@ -61,7 +61,7 @@ const SearchEnAdd = ({ handleSearch, actionSuccessHandler, type }) => {
         </Button>
       </div>
       {showModal && (
-        <Dialog action='add' setShowModal={setShowModal} successHandler={actionSuccessHandler} type={type} />
+        <Dialog action='add' setShowModal={setShowModal} type={type} />
       )}
     </>
   );

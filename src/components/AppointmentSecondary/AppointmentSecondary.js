@@ -6,7 +6,7 @@ import { Schedule, Build, AttachMoney, LocalHospital, Timelapse } from '@materia
 import { Dialog } from '..';
 import './styles.scss';
 
-const AppointmentSecondary = ({ entry, parentId, onUpdate }) => {
+const AppointmentSecondary = ({ entry, parentId }) => {
   const [showEditModal, setShowEditModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [formValues, setFormValues] = useState([]);
@@ -104,7 +104,6 @@ const AppointmentSecondary = ({ entry, parentId, onUpdate }) => {
           <Dialog
             action='edit'
             setShowModal={setShowEditModal}
-            successHandler={() => onUpdate()}
             type={entry.type}
             values={formValues}
           />
@@ -115,7 +114,6 @@ const AppointmentSecondary = ({ entry, parentId, onUpdate }) => {
           <Dialog
             action='delete'
             setShowModal={setShowDeleteModal}
-            successHandler={() => onUpdate()}
             type={entry.type}
             values={{ _id: entry._id }}
           />

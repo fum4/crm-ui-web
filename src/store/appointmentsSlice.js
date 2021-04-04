@@ -12,8 +12,6 @@ import { fetchClients } from './clientsSlice';
 export const fetchAppointments = createAsyncThunk('appointments/get', async (payload, thunkAPI) => {
   const appointments = await getAppointments();
 
-  thunkAPI.dispatch(fetchClients());
-
   return appointments.data;
 });
 

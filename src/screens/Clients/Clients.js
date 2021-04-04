@@ -7,9 +7,6 @@ const Clients = () => {
   const [clients, setClients] = useState([]);
   const allClients = useAllClients();
 
-  const refreshClients = () => {
-  };
-
   useEffect(() => {
     setClients(filteredClients.length ? filteredClients : allClients);
   }, [allClients, filteredClients]);
@@ -45,11 +42,10 @@ const Clients = () => {
   return (
     <>
       <SearchEnAdd
-        actionSuccessHandler={() => refreshClients()}
         handleSearch={(payload) => handleSearch(payload)}
         type='client'
       />
-      <ClientList entries={clients} onUpdate={() => refreshClients()} />
+      <ClientList entries={clients} />
     </>
   );
 };

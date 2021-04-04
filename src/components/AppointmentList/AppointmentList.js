@@ -1,7 +1,7 @@
 import { AppointmentPrimary, AppointmentSecondary } from '..';
 import './styles.scss';
 
-const AppointmentList = ({ entries, type, parentId, onUpdate }) => {
+const AppointmentList = ({ entries, type, parentId }) => {
   return (
     <div className={`appointments-container-${type}`}>
       {
@@ -9,11 +9,11 @@ const AppointmentList = ({ entries, type, parentId, onUpdate }) => {
           if (entry) {
             return type === 'primary' ? (
               <div className='appointments-container-primary__item'>
-                <AppointmentPrimary entry={entry} key={entry._id} onUpdate={onUpdate} />
+                <AppointmentPrimary entry={entry} key={entry._id} />
               </div>
             ) : (
               <div className='appointments-container-secondary__item'>
-                <AppointmentSecondary entry={entry} key={entry._id} onUpdate={onUpdate} parentId={parentId} />
+                <AppointmentSecondary entry={entry} key={entry._id} parentId={parentId} />
               </div>
             );
           }

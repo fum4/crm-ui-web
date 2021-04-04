@@ -7,9 +7,6 @@ const Clients = () => {
   const [appointments, setAppointments] = useState([]);
   const allAppointments = useAllAppointments();
 
-  const refreshAppointments = () => {
-  };
-
   useEffect(() => {
     setAppointments(filteredAppointments.length ? filteredAppointments : allAppointments);
   }, [allAppointments, filteredAppointments]);
@@ -56,11 +53,10 @@ const Clients = () => {
   return (
     <>
       <SearchEnAdd
-        actionSuccessHandler={() => refreshAppointments()}
         handleSearch={(payload) => handleSearch(payload)}
         type='appointment'
       />
-      <AppointmentList entries={appointments} onUpdate={() => refreshAppointments()} type='primary' />
+      <AppointmentList entries={appointments} type='primary' />
     </>
   );
 }
