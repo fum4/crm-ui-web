@@ -7,7 +7,7 @@ import {
   updateControl,
   deleteControl
 } from '../services/network';
-import { fetchClients } from './clientsSlice';
+import { fetchClients } from './';
 
 export const fetchAppointments = createAsyncThunk('appointments/get', async (payload, thunkAPI) => {
   const appointments = await getAppointments();

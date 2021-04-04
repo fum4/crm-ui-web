@@ -1,11 +1,35 @@
 import store from './store';
-import { fetchClients, clientsSlice } from './clientsSlice';
-import { fetchAppointments, appointmentsSlice } from './appointmentsSlice';
+import {
+  appointmentsSlice,
+  fetchAppointments,
+  insertAppointment,
+  editAppointment,
+  removeAppointment
+} from './appointmentsSlice';
+import {
+  clientsSlice,
+  fetchClients,
+  insertClient,
+  editClient,
+  removeClient
+} from './clientsSlice';
+import {
+  useAllClients,
+  useAllAppointments,
+} from './selectors';
 
 export {
   store,
-  fetchClients,
+  appointmentsSlice,
   fetchAppointments,
+  insertAppointment,
+  editAppointment,
+  removeAppointment,
   clientsSlice,
-  appointmentsSlice
+  fetchClients,
+  insertClient,
+  editClient,
+  removeClient,
+  useAllClients,
+  useAllAppointments,
 };

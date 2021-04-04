@@ -9,10 +9,16 @@ import {
   getDialogTitle,
   getDialogSubmitButtonText
 } from '../../services/utils';
-import { insertAppointment, editAppointment, removeAppointment } from '../../store/appointmentsSlice';
-import { insertClient, editClient, removeClient } from '../../store/clientsSlice';
+import {
+  insertClient,
+  editClient,
+  removeClient,
+  useAllClients,
+  insertAppointment,
+  editAppointment,
+  removeAppointment
+} from '../../store';
 import { useDispatch } from 'react-redux';
-import { useAllClients } from '../../store/selectors';
 import _ from 'lodash';
 
 const Dialog = ({ action, setShowModal, type, values }) => {

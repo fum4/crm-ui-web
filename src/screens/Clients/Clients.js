@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { ClientList, SearchEnAdd } from '../../components';
-import { useAllClients } from '../../store/selectors';
+import { useAllClients } from '../../store';
 
 const Clients = () => {
   const [filteredClients, setFilteredClients] = useState([]);

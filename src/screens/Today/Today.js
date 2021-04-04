@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { AppointmentList, SearchEnAdd } from '../../components';
-import { useAllAppointments } from '../../store/selectors';
+import { useAllAppointments } from '../../store';
 
 const Clients = () => {
   const [filteredAppointments, setFilteredAppointments] = useState([]);
