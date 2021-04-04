@@ -28,7 +28,7 @@ export const insertAppointment = createAsyncThunk('appointments/add', async (pay
 export const editAppointment = createAsyncThunk('appointments/edit', async (payload, thunkAPI) => {
   let appointments;
 
-  if (payload.date) { // means is control, not appointment; should refactor this
+  if (payload.type === 'control') { // TODO: should refactor
     appointments = await updateControl(payload);
   } else {
     appointments = await updateAppointment(payload);
