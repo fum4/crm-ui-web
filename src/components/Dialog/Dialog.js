@@ -10,16 +10,15 @@ import {
   getDialogSubmitButtonText
 } from '../../services/utils';
 import {
-  addAppointment,
-  updateAppointment,
   updateControl,
   addClient,
   updateClient,
-  getClients,
-  deleteAppointment,
   deleteClient,
   deleteControl
 } from '../../services/network';
+import { insertAppointment, editAppointment, removeAppointment } from '../../store/appointmentsSlice';
+import { useDispatch } from 'react-redux';
+import { useAllClients } from '../../store/selectors';
 import _ from 'lodash';
 
 const Dialog = ({ successHandler, action, setShowModal, type, values }) => {
@@ -27,6 +26,8 @@ const Dialog = ({ successHandler, action, setShowModal, type, values }) => {
   const [title, setTitle] = useState();
   const [isInitialized, setIsInitialized] = useState(false);
   const [submitText, setSubmitText] = useState(undefined);
+  const clients = useAllClients();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const initializeForm = async () => {
@@ -35,14 +36,12 @@ const Dialog = ({ successHandler, action, setShowModal, type, values }) => {
 
         switch (type) {
           case 'appointment': {
-            const clients = await getClients();
-
-            const clientsFieldOptions = clients.data?.map((client) => ({
+            const clientsFieldOptions = clients?.map((client) => ({
               _id: client._id,
               label: `${client.surname} ${client.name}`
             }));
 
-            if (clientsFieldOptions.length) {
+            if (clientsFieldOptions?.length) {
               options.push({
                 id: 'client',
                 key: 'options',
@@ -79,14 +78,12 @@ const Dialog = ({ successHandler, action, setShowModal, type, values }) => {
             break;
           }
           case 'control': {
-            const clients = await getClients();
-
-            const clientsFieldOptions = clients.data?.map((client) => ({
+            const clientsFieldOptions = clients?.map((client) => ({
               _id: client._id,
               label: `${client.surname} ${client.name}`
             }));
 
-            if (clientsFieldOptions.length) {
+            if (clientsFieldOptions?.length) {
               options.push({
                 id: 'client',
                 key: 'options',
@@ -142,14 +139,14 @@ const Dialog = ({ successHandler, action, setShowModal, type, values }) => {
     };
 
     initializeForm().then(() => setIsInitialized(true));
-  }, [action, type, values]);
+  }, [action, clients, type, values]);
 
   const handleSubmit = (payload) => {
     switch (action) {
       case 'add':
         switch (type) {
           case 'appointment':
-            return addAppointment(serializeForm(payload));
+            return dispatch(insertAppointment(serializeForm(payload)));
           case 'client':
             return addClient(serializeForm(payload));
           default:
@@ -158,7 +155,7 @@ const Dialog = ({ successHandler, action, setShowModal, type, values }) => {
       case 'edit':
         switch (type) {
           case 'appointment':
-            return updateAppointment(serializeForm(payload));
+            return dispatch(editAppointment(serializeForm(payload)));
           case 'control':
             return updateControl(serializeForm(payload));
           case 'client':
@@ -169,7 +166,7 @@ const Dialog = ({ successHandler, action, setShowModal, type, values }) => {
       case 'delete':
         switch (type) {
           case 'appointment':
-            return deleteAppointment({ _id: values._id });
+            return dispatch(removeAppointment({ _id: values._id }));
           case 'client':
             return deleteClient({ _id: values._id });
           case 'control':
