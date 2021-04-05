@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { addClient, deleteClient, getClients, updateClient  } from '../services/network';
+import { fetchAppointments } from './';
 
 export const fetchClients = createAsyncThunk('clients/get', async () => {
   const clients = await getClients();
@@ -7,20 +8,26 @@ export const fetchClients = createAsyncThunk('clients/get', async () => {
   return clients.data;
 });
 
-export const insertClient = createAsyncThunk('clients/add', async (payload) => {
+export const insertClient = createAsyncThunk('clients/add', async (payload, thunkAPI) => {
   const clients = await addClient(payload);
 
+  thunkAPI.dispatch(fetchAppointments());
+
   return clients.data;
 });
 
-export const editClient = createAsyncThunk('clients/edit', async (payload) => {
+export const editClient = createAsyncThunk('clients/edit', async (payload, thunkAPI) => {
   const clients = await updateClient(payload);
 
+  thunkAPI.dispatch(fetchAppointments());
+
   return clients.data;
 });
 
-export const removeClient = createAsyncThunk('clients/delete', async (payload) => {
+export const removeClient = createAsyncThunk('clients/delete', async (payload, thunkAPI) => {
   const clients = await deleteClient(payload);
+
+  thunkAPI.dispatch(fetchAppointments());
 
   return clients.data;
 });
