@@ -29,5 +29,14 @@
     &__icon {
       margin-right: 10px;
     }
+
+    &__phone {
+      display: flex;
+      margin-left: 40px;
+
+      &__icon {
+        margin-right: 5px;
+      }
+    }
   }
 }

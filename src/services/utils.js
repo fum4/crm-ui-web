@@ -121,7 +121,15 @@ export const formatPhoneNumber = (phoneNumber) => {
     const secondChunk = phoneNumber.slice(4, 7);
     const thirdChunk = phoneNumber.slice(7, 10);
 
-    return `${firstChunk} ${secondChunk} ${thirdChunk}`;
+    return `(${firstChunk}) ${secondChunk} ${thirdChunk}`;
+  }
+
+  if (phoneNumber.length === 12) {
+    const firstChunk = phoneNumber.slice(0, 4);
+    const secondChunk = phoneNumber.slice(5, 8);
+    const thirdChunk = phoneNumber.slice(9, 12);
+
+    return `(${firstChunk}) ${secondChunk} ${thirdChunk}`;
   }
 
   return phoneNumber;

@@ -1,13 +1,14 @@
 import { useState, useEffect } from 'react';
 import { FaPlus, FaTrashAlt } from 'react-icons/fa';
 import { Button } from '@material-ui/core';
-import { PermContactCalendar } from '@material-ui/icons';
+import { PermContactCalendar, PhoneIphone } from '@material-ui/icons';
 import { Dialog } from '..';
 import { labels } from '../../constants';
+import { formatPhoneNumber } from '../../services/utils';
 import Typography from '@material-ui/core/Typography';
 import './styles.scss';
 
-const ClientPreview = ({ entry, onUpdate }) => {
+const ClientPreview = ({ entry, onUpdate, isExpanded }) => {
   const [showAddModal, setShowAddModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [formValues, setFormValues] = useState();
@@ -34,6 +35,16 @@ const ClientPreview = ({ entry, onUpdate }) => {
       <div className='name-container'>
         <PermContactCalendar className='name-container__icon' />
         <Typography align='center'>{`${entry.surname} ${entry.name}`}</Typography>
+        {
+          isExpanded && (
+            <div className='name-container__phone'>
+              <PhoneIphone className='name-container__phone__icon' />
+              <Typography align='center'>
+                { formatPhoneNumber(entry.phone) }
+              </Typography>
+            </div>
+          )
+        }
       </div>
       <div className='pull-right'>
         <Button
