@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { FaPlus, FaTrashAlt } from 'react-icons/fa';
 import { Button } from '@material-ui/core';
+import { PermContactCalendar } from '@material-ui/icons';
 import { Dialog } from '..';
 import { labels } from '../../constants';
 import Typography from '@material-ui/core/Typography';
@@ -30,7 +31,10 @@ const ClientPreview = ({ entry, onUpdate }) => {
 
   return (
     <>
-      <Typography align='center'>{`${entry.surname} ${entry.name}`}</Typography>
+      <div className='name-container'>
+        <PermContactCalendar className='name-container__icon' />
+        <Typography align='center'>{`${entry.surname} ${entry.name}`}</Typography>
+      </div>
       <div className='pull-right'>
         <Button
           className='add-new-btn'
