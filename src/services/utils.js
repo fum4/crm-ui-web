@@ -127,6 +127,14 @@ export const formatPhoneNumber = (phoneNumber) => {
   return phoneNumber;
 }
 
+export const getHourFromDate = (date) => {
+  const hourAndMinutes = date.slice(date.indexOf('T') + 1);
+  const hour = hourAndMinutes.slice(0, hourAndMinutes.indexOf(':'));
+  const minutes = hourAndMinutes.slice(hourAndMinutes.indexOf(':') + 1);
+
+  return { hour, minutes };
+}
+
 export const validators = {
   isNumber: (value) => typeof value === 'number',
   isPhoneNumber: (value) => value.match(/^(\+4|)?(07[0-8]{1}[0-9]{1}|02[0-9]{2}|03[0-9]{2}){1}?(\s|\.|-)?([0-9]{3}(\s|\.|-|)){2}$/),

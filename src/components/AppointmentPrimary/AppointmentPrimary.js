@@ -1,7 +1,7 @@
 import { Card, CardContent, Typography, Chip } from '@material-ui/core';
 import { PermContactCalendar, WatchLater, Timelapse } from '@material-ui/icons';
 import { labels } from '../../constants';
-import { formatPhoneNumber } from '../../services/utils';
+import { formatPhoneNumber, getHourFromDate } from '../../services/utils';
 import { FaPen, FaTrashAlt } from 'react-icons/fa';
 import { Dialog } from '../index';
 import { useEffect, useState } from 'react';
@@ -13,6 +13,7 @@ const AppointmentPrimary = ({ entry }) => {
   const [formValues, setFormValues] = useState([]);
   const { name, surname, appointment, control, date, price, treatment, technician, phone } = entry;
   const isAppointment = entry.type === 'appointment';
+  const hourAndMinutes = getHourFromDate(isAppointment ? appointment : date);
 
   useEffect(() => {
     formValues.push({
@@ -63,8 +64,11 @@ const AppointmentPrimary = ({ entry }) => {
                 { isAppointment ? labels.APPOINTMENT : labels.CONTROL }
               </span>
               <span>
-                { ` - ${isAppointment ? appointment : date}` }
+                { hourAndMinutes.hour }
               </span>
+              <sup>
+                { hourAndMinutes.minutes }
+              </sup>
             </Typography>
           </div>
           {

@@ -44,6 +44,7 @@ export const labels = {
     FEBRUARY: 'februarie',
     MARCH: 'martie',
     APRIL: 'aprilie',
+    MAY: 'mai',
     JUNE: 'iunie',
     JULY: 'iulie',
     AUGUST: 'august',
