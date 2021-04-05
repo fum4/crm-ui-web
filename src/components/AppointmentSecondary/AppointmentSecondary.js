@@ -2,7 +2,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import { useState, useEffect } from 'react';
 import { FaTrashAlt, FaPen } from 'react-icons/fa';
-import { Schedule, Build, AttachMoney, LocalHospital, Timelapse } from '@material-ui/icons';
+import { WatchLater, Build, AttachMoney, LocalHospital, Timelapse } from '@material-ui/icons';
 import { Dialog } from '..';
 import './styles.scss';
 
@@ -48,7 +48,7 @@ const AppointmentSecondary = ({ entry, parentId }) => {
           {
             isAppointment ? (
               <>
-                <Schedule />
+                <WatchLater />
                 <ListItemText
                   className='appointment-secondary appointment-secondary__appointment'
                   primary={entry?.appointment}

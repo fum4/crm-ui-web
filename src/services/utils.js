@@ -115,6 +115,18 @@ export const splitByDelimiter = (value, delimiter) => {
   return {};
 }
 
+export const formatPhoneNumber = (phoneNumber) => {
+  if (phoneNumber.length === 10) {
+    const firstChunk = phoneNumber.slice(0, 4);
+    const secondChunk = phoneNumber.slice(4, 7);
+    const thirdChunk = phoneNumber.slice(7, 10);
+
+    return `${firstChunk} ${secondChunk} ${thirdChunk}`;
+  }
+
+  return phoneNumber;
+}
+
 export const validators = {
   isNumber: (value) => typeof value === 'number',
   isPhoneNumber: (value) => value.match(/^(\+4|)?(07[0-8]{1}[0-9]{1}|02[0-9]{2}|03[0-9]{2}){1}?(\s|\.|-)?([0-9]{3}(\s|\.|-|)){2}$/),
