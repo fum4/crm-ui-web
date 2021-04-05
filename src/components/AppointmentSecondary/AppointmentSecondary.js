@@ -64,18 +64,39 @@ const AppointmentSecondary = ({ entry, parentId }) => {
               </>
             )
           }
-          <LocalHospital />
-          <ListItemText
-            className='appointment-secondary appointment-secondary__treatment'
-            primary={entry?.treatment}
-          />
-          <Build />
-          <ListItemText
-            className='appointment-secondary appointment-secondary__technician'
-            primary={entry?.technician}
-          />
-          <AttachMoney />
-          <ListItemText className='appointment-secondary appointment-secondary__price' primary={entry?.price} />
+          {
+            entry?.treatment && (
+              <>
+                <LocalHospital />
+                <ListItemText
+                  className='appointment-secondary appointment-secondary__treatment'
+                  primary={entry?.treatment}
+                  />
+              </>
+            )
+          }
+          {
+            entry?.technician && (
+              <>
+                <Build />
+                <ListItemText
+                  className='appointment-secondary appointment-secondary__technician'
+                  primary={entry?.technician}
+                />
+              </>
+            )
+          }
+          {
+            entry?.control && (
+              <>
+                <AttachMoney />
+                <ListItemText
+                  className='appointment-secondary appointment-secondary__price'
+                  primary={entry?.price}
+                />
+              </>
+            )
+          }
           {
             isAppointment && hasControl && (
               <>
