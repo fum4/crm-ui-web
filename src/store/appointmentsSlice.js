@@ -51,6 +51,19 @@ export const removeAppointment = createAsyncThunk('appointments/delete', async (
   return appointments.data;
 });
 
+const setLoading = (state) => {
+  state.status = 'loading';
+};
+
+const setIdle = (state) => {
+  state.status = 'idle';
+};
+
+const saveData = (state, action) => {
+  state.data = action.payload;
+  state.status = 'idle';
+}
+
 export const appointmentsSlice = createSlice({
   name: 'appointments',
   initialState: {
@@ -60,34 +73,14 @@ export const appointmentsSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(fetchAppointments.pending, (state) => {
-        state.status = 'loading';
-      })
-      .addCase(fetchAppointments.fulfilled, (state, action) => {
-        state.data = action.payload;
-        state.status = 'idle';
-      })
-      .addCase(insertAppointment.pending, (state) => {
-        state.status = 'loading';
-      })
-      .addCase(insertAppointment.fulfilled, (state, action) => {
-        state.data = action.payload;
-        state.status = 'idle';
-      })
-      .addCase(editAppointment.pending, (state) => {
-        state.status = 'loading';
-      })
-      .addCase(editAppointment.fulfilled, (state, action) => {
-        state.data = action.payload;
-        state.status = 'idle';
-      })
-      .addCase(removeAppointment.pending, (state) => {
-        state.status = 'loading';
-      })
-      .addCase(removeAppointment.fulfilled, (state, action) => {
-        state.data = action.payload;
-        state.status = 'idle';
-      })
+      .addCase(fetchAppointments.fulfilled, saveData)
+      .addCase(insertAppointment.fulfilled, saveData)
+      .addCase(editAppointment.fulfilled, saveData)
+      .addCase(removeAppointment.fulfilled, setIdle)
+      .addCase(fetchAppointments.pending, setLoading)
+      .addCase(insertAppointment.pending, setLoading)
+      .addCase(editAppointment.pending, setLoading)
+      .addCase(removeAppointment.pending, setLoading)
   },
 });
 
