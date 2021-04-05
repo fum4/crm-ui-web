@@ -1,4 +1,4 @@
-import {Link} from 'react-router-dom';
+import {NavLink} from 'react-router-dom';
 import './styles.scss';
 
 const Navigation = () => {
@@ -6,10 +6,10 @@ const Navigation = () => {
     <nav className='navigation-container'>
       <ul>
         <li className='navigation-item'>
-          <Link to='/today'>Astăzi</Link>
+          <NavLink to='/today'>Astăzi</NavLink>
         </li>
         <li className='navigation-item'>
-          <Link to='/clients'>Pacienți</Link>
+          <NavLink to='/clients'>Pacienți</NavLink>
         </li>
       </ul>
     </nav>

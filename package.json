@@ -16,6 +16,7 @@
     "bootstrap": "^4.6.0",
     "express-jwt": "^6.0.0",
     "lodash": "^4.17.20",
+    "moment": "^2.29.1",
     "react": "^17.0.1",
     "react-bootstrap": "^1.4.3",
     "react-calendar": "^3.3.1",
