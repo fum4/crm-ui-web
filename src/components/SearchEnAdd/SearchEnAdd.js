@@ -6,7 +6,7 @@ import { labels } from '../../constants';
 import { Add } from '@material-ui/icons';
 import './styles.scss';
 
-const BootstrapInput = withStyles((theme) => ({
+const BootstrapInput = withStyles((theme) => ({ // TODO: refactor this
   input: {
     '&:focus': {
       borderColor: theme.palette.primary.main,

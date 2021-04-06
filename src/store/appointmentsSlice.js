@@ -8,9 +8,21 @@ import {
   deleteControl
 } from '../services/network';
 import { fetchClients } from './';
+import { addNotification } from './notificationsSlice';
+
+const saveData = (state, action) => {
+  state.data = action.payload.data;
+  state.status = 'idle';
+}
+
+const setLoading = (state) => {
+  state.status = 'loading';
+};
 
 export const fetchAppointments = createAsyncThunk('appointments/get', async (payload, thunkAPI) => {
   const appointments = await getAppointments();
+
+  addNotification(appointments, thunkAPI);
 
   return appointments.data;
 });
@@ -19,6 +31,8 @@ export const insertAppointment = createAsyncThunk('appointments/add', async (pay
   const appointments = await addAppointment(payload);
 
   thunkAPI.dispatch(fetchClients());
+
+  addNotification(appointments, thunkAPI);
 
   return appointments.data;
 });
@@ -34,6 +48,8 @@ export const editAppointment = createAsyncThunk('appointments/edit', async (payl
 
   thunkAPI.dispatch(fetchClients());
 
+  addNotification(appointments, thunkAPI);
+
   return appointments.data;
 });
 
@@ -48,21 +64,10 @@ export const removeAppointment = createAsyncThunk('appointments/delete', async (
 
   thunkAPI.dispatch(fetchClients());
 
+  addNotification(appointments, thunkAPI);
+
   return appointments.data;
 });
-
-const setLoading = (state) => {
-  state.status = 'loading';
-};
-
-const setIdle = (state) => {
-  state.status = 'idle';
-};
-
-const saveData = (state, action) => {
-  state.data = action.payload;
-  state.status = 'idle';
-}
 
 export const appointmentsSlice = createSlice({
   name: 'appointments',
@@ -76,7 +81,7 @@ export const appointmentsSlice = createSlice({
       .addCase(fetchAppointments.fulfilled, saveData)
       .addCase(insertAppointment.fulfilled, saveData)
       .addCase(editAppointment.fulfilled, saveData)
-      .addCase(removeAppointment.fulfilled, setIdle)
+      .addCase(removeAppointment.fulfilled, saveData)
       .addCase(fetchAppointments.pending, setLoading)
       .addCase(insertAppointment.pending, setLoading)
       .addCase(editAppointment.pending, setLoading)

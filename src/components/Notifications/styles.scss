@@ -1,0 +1,25 @@
+.notification-banner {
+  z-index: 999;
+
+  &__success {
+    background-color: #28a745;
+  }
+
+  &__error {
+    background-color: #dc3545;
+  }
+
+  &__success, &__error {
+    div {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin: auto;
+      padding: 0 30px;
+
+      p {
+        color: white;
+      }
+    }
+  }
+}

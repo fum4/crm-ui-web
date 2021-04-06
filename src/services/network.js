@@ -21,13 +21,14 @@ const api = axios.create({
 // AUTH
 export const register = (payload) => axios.post('/register', payload);
 export const login = (payload) => {
-  return axios.post('/login', payload).then((response) => {
-    const data = response.data;
+  return axios.post('/login', payload)
+    .then((response) => {
+      const data = response.data;
 
-    if (data.accessToken) {
-      data.password = payload.password;
-      localStorage.setItem('user', JSON.stringify(data));
-    }
+      if (data.accessToken) {
+        data.password = payload.password;
+        localStorage.setItem('user', JSON.stringify(data));
+      }
   });
 }
 export const logout = () => localStorage.removeItem('user');

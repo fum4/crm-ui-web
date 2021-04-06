@@ -1,7 +1,7 @@
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Auth, Today, Clients } from './screens';
-import { Navigation } from './components';
+import { Navigation, Notifications } from './components';
 import { login } from './services/network';
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
@@ -42,7 +42,8 @@ function App() {
 
   return isLoading ? <CircularProgress /> : (
     <Router>
-      <div>
+      <Notifications>
+        <div>
         {
           isAuthenticated && <Navigation />
         }
@@ -81,6 +82,7 @@ function App() {
           }
         </Switch>
       </div>
+      </Notifications>
     </Router>
   );
 }

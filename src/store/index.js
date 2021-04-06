@@ -14,22 +14,28 @@ import {
   removeClient
 } from './clientsSlice';
 import {
+  notificationsSlice,
+  addNotification
+} from './notificationsSlice';
+import {
   useAllClients,
   useAllAppointments,
 } from './selectors';
 
 export {
   store,
+  notificationsSlice,
   appointmentsSlice,
-  fetchAppointments,
-  insertAppointment,
-  editAppointment,
-  removeAppointment,
   clientsSlice,
+  fetchAppointments,
   fetchClients,
+  insertAppointment,
   insertClient,
+  editAppointment,
   editClient,
+  removeAppointment,
   removeClient,
+  addNotification,
   useAllClients,
-  useAllAppointments,
+  useAllAppointments
 };

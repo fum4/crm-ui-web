@@ -1,9 +1,21 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { addClient, deleteClient, getClients, updateClient  } from '../services/network';
 import { fetchAppointments } from './';
+import { addNotification } from './notificationsSlice';
 
-export const fetchClients = createAsyncThunk('clients/get', async () => {
+const saveData = (state, action) => {
+  state.data = action.payload.data;
+  state.status = 'idle';
+}
+
+const setLoading = (state) => {
+  state.status = 'loading';
+};
+
+export const fetchClients = createAsyncThunk('clients/get', async (payload, thunkAPI) => {
   const clients = await getClients();
+
+  addNotification(clients, thunkAPI);
 
   return clients.data;
 });
@@ -13,6 +25,8 @@ export const insertClient = createAsyncThunk('clients/add', async (payload, thun
 
   thunkAPI.dispatch(fetchAppointments());
 
+  addNotification(clients, thunkAPI);
+
   return clients.data;
 });
 
@@ -20,6 +34,8 @@ export const editClient = createAsyncThunk('clients/edit', async (payload, thunk
   const clients = await updateClient(payload);
 
   thunkAPI.dispatch(fetchAppointments());
+
+  addNotification(clients, thunkAPI);
 
   return clients.data;
 });
@@ -29,21 +45,10 @@ export const removeClient = createAsyncThunk('clients/delete', async (payload, t
 
   thunkAPI.dispatch(fetchAppointments());
 
+  addNotification(clients, thunkAPI);
+
   return clients.data;
 });
-
-const setLoading = (state) => {
-  state.status = 'loading';
-};
-
-const setIdle = (state) => {
-  state.status = 'idle';
-};
-
-const saveData = (state, action) => {
-  state.data = action.payload;
-  state.status = 'idle';
-}
 
 export const clientsSlice = createSlice({
   name: 'clients',
@@ -57,7 +62,7 @@ export const clientsSlice = createSlice({
       .addCase(fetchClients.fulfilled, saveData)
       .addCase(insertClient.fulfilled, saveData)
       .addCase(editClient.fulfilled, saveData)
-      .addCase(removeClient.fulfilled, setIdle)
+      .addCase(removeClient.fulfilled, saveData)
       .addCase(fetchClients.pending, setLoading)
       .addCase(insertClient.pending, setLoading)
       .addCase(editClient.pending, setLoading)
