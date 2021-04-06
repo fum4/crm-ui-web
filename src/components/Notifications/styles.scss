@@ -1,5 +1,5 @@
 .notification-banner {
-  z-index: 999;
+  height: 50px;
 
   &__success {
     background-color: #28a745;
@@ -22,4 +22,9 @@
       }
     }
   }
+}
+
+.main-content__show-notification {
+  position: relative;
+  top: -50px;
 }
