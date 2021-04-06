@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { labels } from '../constants';
 
 export const notificationsSlice = createSlice({
   name: 'notifications',
@@ -24,8 +25,17 @@ const actions = { ...notificationsSlice.actions };
 export const addNotification = (response, thunkAPI) => {
   const responseMessage = {
     message: response.data.message,
-    type: response.data.type,
+    type: response.data.type
   }
+
+  thunkAPI.dispatch(actions.add(responseMessage));
+}
+
+export const addErrorNotification = (thunkAPI, message = labels.GENERIC_ERROR_MESSAGE) => {
+  const responseMessage = {
+    message,
+    type: 'error'
+  };
 
   thunkAPI.dispatch(actions.add(responseMessage));
 }

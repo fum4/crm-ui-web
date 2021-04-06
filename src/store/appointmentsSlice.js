@@ -8,10 +8,14 @@ import {
   deleteControl
 } from '../services/network';
 import { fetchClients } from './';
-import { addNotification } from './notificationsSlice';
+import { addNotification, addErrorNotification } from './notificationsSlice';
+import { labels } from '../constants';
 
 const saveData = (state, action) => {
-  state.data = action.payload.data;
+  if (action?.payload?.data) {
+    state.data = action.payload.data;
+  }
+
   state.status = 'idle';
 }
 
@@ -20,53 +24,71 @@ const setLoading = (state) => {
 };
 
 export const fetchAppointments = createAsyncThunk('appointments/get', async (payload, thunkAPI) => {
-  const appointments = await getAppointments();
+  try {
+    const appointments = await getAppointments();
 
-  addNotification(appointments, thunkAPI);
+    addNotification(appointments, thunkAPI);
 
-  return appointments.data;
+    return appointments.data;
+  } catch(err) {
+    addErrorNotification(thunkAPI, labels.ERROR_MESSAGES.FETCH_APPOINTMENTS);
+  }
 });
 
 export const insertAppointment = createAsyncThunk('appointments/add', async (payload, thunkAPI) => {
-  const appointments = await addAppointment(payload);
+  try {
+    const appointments = await addAppointment(payload);
 
-  thunkAPI.dispatch(fetchClients());
+    thunkAPI.dispatch(fetchClients());
 
-  addNotification(appointments, thunkAPI);
+    addNotification(appointments, thunkAPI);
 
-  return appointments.data;
+    return appointments.data;
+  } catch(err) {
+    addErrorNotification(thunkAPI, labels.ERROR_MESSAGES.INSERT_APPOINTMENT);
+  }
 });
 
 export const editAppointment = createAsyncThunk('appointments/edit', async (payload, thunkAPI) => {
+  const isControl = payload.type === 'control';
   let appointments;
 
-  if (payload.type === 'control') { // TODO: should refactor
-    appointments = await updateControl(payload);
-  } else {
-    appointments = await updateAppointment(payload);
+  try {
+    if (isControl) {
+      appointments = await updateControl(payload);
+    } else {
+      appointments = await updateAppointment(payload);
+    }
+
+    thunkAPI.dispatch(fetchClients());
+
+    addNotification(appointments, thunkAPI);
+
+    return appointments.data;
+  } catch(err) {
+    addErrorNotification(thunkAPI, labels.ERROR_MESSAGES[isControl ? 'EDIT_CONTROL' : 'EDIT_APPOINTMENT']);
   }
-
-  thunkAPI.dispatch(fetchClients());
-
-  addNotification(appointments, thunkAPI);
-
-  return appointments.data;
 });
 
 export const removeAppointment = createAsyncThunk('appointments/delete', async (payload, thunkAPI) => {
+  const isControl = payload.type === 'control';
   let appointments;
 
-  if (payload.type === 'control') { // TODO: should refactor
-    appointments = await deleteControl(payload);
-  } else {
-    appointments = await deleteAppointment(payload);
+  try {
+    if (isControl) {
+      appointments = await deleteControl(payload);
+    } else {
+      appointments = await deleteAppointment(payload);
+    }
+
+    thunkAPI.dispatch(fetchClients());
+
+    addNotification(appointments, thunkAPI);
+
+    return appointments.data;
+  } catch(err) {
+    addErrorNotification(thunkAPI, labels.ERROR_MESSAGES[isControl ? 'REMOVE_CONTROL' : 'REMOVE_APPOINTMENT']);
   }
-
-  thunkAPI.dispatch(fetchClients());
-
-  addNotification(appointments, thunkAPI);
-
-  return appointments.data;
 });
 
 export const appointmentsSlice = createSlice({

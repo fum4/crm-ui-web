@@ -1,10 +1,14 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { addClient, deleteClient, getClients, updateClient  } from '../services/network';
 import { fetchAppointments } from './';
-import { addNotification } from './notificationsSlice';
+import { addErrorNotification, addNotification } from './notificationsSlice';
+import { labels } from '../constants';
 
 const saveData = (state, action) => {
-  state.data = action.payload.data;
+  if (action?.payload?.data) {
+    state.data = action.payload.data;
+  }
+
   state.status = 'idle';
 }
 
@@ -13,41 +17,57 @@ const setLoading = (state) => {
 };
 
 export const fetchClients = createAsyncThunk('clients/get', async (payload, thunkAPI) => {
-  const clients = await getClients();
+  try {
+    const clients = await getClients();
 
-  addNotification(clients, thunkAPI);
+    addNotification(clients, thunkAPI);
 
-  return clients.data;
+    return clients.data;
+  } catch(err) {
+    addErrorNotification(thunkAPI, labels.ERROR_MESSAGES.FETCH_CLIENTS);
+  }
 });
 
 export const insertClient = createAsyncThunk('clients/add', async (payload, thunkAPI) => {
-  const clients = await addClient(payload);
+  try {
+    const clients = await addClient(payload);
 
-  thunkAPI.dispatch(fetchAppointments());
+    thunkAPI.dispatch(fetchAppointments());
 
-  addNotification(clients, thunkAPI);
+    addNotification(clients, thunkAPI);
 
-  return clients.data;
+    return clients.data;
+  } catch(err) {
+    addErrorNotification(thunkAPI, labels.ERROR_MESSAGES.INSERT_CLIENT);
+  }
 });
 
 export const editClient = createAsyncThunk('clients/edit', async (payload, thunkAPI) => {
-  const clients = await updateClient(payload);
+  try {
+    const clients = await updateClient(payload);
 
-  thunkAPI.dispatch(fetchAppointments());
+    thunkAPI.dispatch(fetchAppointments());
 
-  addNotification(clients, thunkAPI);
+    addNotification(clients, thunkAPI);
 
-  return clients.data;
+    return clients.data;
+  } catch(err) {
+    addErrorNotification(thunkAPI, labels.ERROR_MESSAGES.EDIT_CLIENT);
+  }
 });
 
 export const removeClient = createAsyncThunk('clients/delete', async (payload, thunkAPI) => {
-  const clients = await deleteClient(payload);
+  try {
+    const clients = await deleteClient(payload);
 
-  thunkAPI.dispatch(fetchAppointments());
+    thunkAPI.dispatch(fetchAppointments());
 
-  addNotification(clients, thunkAPI);
+    addNotification(clients, thunkAPI);
 
-  return clients.data;
+    return clients.data;
+  } catch(err) {
+    addErrorNotification(thunkAPI, labels.ERROR_MESSAGES.REMOVE_CLIENT);
+  }
 });
 
 export const clientsSlice = createSlice({
