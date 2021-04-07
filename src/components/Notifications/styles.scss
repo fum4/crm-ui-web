@@ -10,6 +10,11 @@
   }
 
   &__success, &__error {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 999;
+
     div {
       display: flex;
       align-items: center;
@@ -26,9 +31,4 @@
       }
     }
   }
-}
-
-.main-content__show-notification {
-  position: relative;
-  top: -50px;
 }

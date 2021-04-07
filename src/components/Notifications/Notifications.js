@@ -49,7 +49,7 @@ const Notifications = (props) => {
           </div>
         )
       }
-      <div className={`main-content${showNotification ? '__show-notification' : ''}`}>
+      <div className='main-content'>
         { props.children }
       </div>
     </div>
