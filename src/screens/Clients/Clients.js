@@ -1,23 +1,11 @@
 import { useEffect, useState } from 'react';
 import { ClientList, SearchEnAdd } from '../../components';
-import { getClients } from '../../services/network';
+import { useAllClients } from '../../store';
 
 const Clients = () => {
-  const [allClients, setAllClients] = useState();
   const [filteredClients, setFilteredClients] = useState([]);
-  const [clients, setClients] = useState();
-
-  const refreshClients = () => {
-    getClients().then((response) => {
-      if (response.data.length) {
-        setAllClients(response.data);
-      }
-    });
-  };
-
-  useEffect(() => {
-    refreshClients();
-  }, []);
+  const [clients, setClients] = useState([]);
+  const allClients = useAllClients();
 
   useEffect(() => {
     setClients(filteredClients.length ? filteredClients : allClients);
@@ -54,11 +42,10 @@ const Clients = () => {
   return (
     <>
       <SearchEnAdd
-        actionSuccessHandler={() => refreshClients()}
         handleSearch={(payload) => handleSearch(payload)}
         type='client'
       />
-      <ClientList entries={clients} onUpdate={() => refreshClients()} />
+      <ClientList entries={clients} />
     </>
   );
 };

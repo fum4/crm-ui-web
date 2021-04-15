@@ -1,14 +1,17 @@
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Auth, Today, Clients } from './screens';
-import { Navigation } from './components';
+import { Navigation, Notifications } from './components';
 import { login } from './services/network';
 import { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { fetchClients } from './store';
 import './App.css';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem('user'));
@@ -26,6 +29,12 @@ function App() {
     }
   }, [])
 
+  useEffect(() => {
+    if (isAuthenticated) {
+      dispatch(fetchClients());
+    }
+  }, [dispatch, isAuthenticated])
+
   const onAuthenticationEnd = (hasError) => {
     setIsAuthenticated(!hasError);
     setIsLoading(false);
@@ -33,7 +42,8 @@ function App() {
 
   return isLoading ? <CircularProgress /> : (
     <Router>
-      <div>
+      <Notifications>
+        <div>
         {
           isAuthenticated && <Navigation />
         }
@@ -72,6 +82,7 @@ function App() {
           }
         </Switch>
       </div>
+      </Notifications>
     </Router>
   );
 }

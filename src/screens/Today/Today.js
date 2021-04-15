@@ -1,23 +1,11 @@
 import { useEffect, useState } from 'react';
-import { getAppointments } from '../../services/network';
 import { AppointmentList, SearchEnAdd } from '../../components';
+import { useAllAppointments } from '../../store';
 
 const Clients = () => {
-  const [allAppointments, setAllAppointments] = useState([]);
   const [filteredAppointments, setFilteredAppointments] = useState([]);
   const [appointments, setAppointments] = useState([]);
-
-  const refreshAppointments = () => {
-    getAppointments().then((response) => {
-      if (response.data.length) {
-        setAllAppointments(response.data);
-      }
-    });
-  };
-
-  useEffect(() => {
-    refreshAppointments();
-  }, []);
+  const allAppointments = useAllAppointments();
 
   useEffect(() => {
     setAppointments(filteredAppointments.length ? filteredAppointments : allAppointments);
@@ -65,11 +53,10 @@ const Clients = () => {
   return (
     <>
       <SearchEnAdd
-        actionSuccessHandler={() => refreshAppointments()}
         handleSearch={(payload) => handleSearch(payload)}
         type='appointment'
       />
-      <AppointmentList entries={appointments} onUpdate={() => refreshAppointments()} type='primary' />
+      <AppointmentList entries={appointments} type='primary' />
     </>
   );
 }

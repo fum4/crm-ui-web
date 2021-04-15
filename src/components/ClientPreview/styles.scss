@@ -21,4 +21,22 @@
       margin-left: 5px;
     }
   }
+
+  .name-container {
+    display: flex;
+    align-items: center;
+
+    &__icon {
+      margin-right: 10px;
+    }
+
+    &__phone {
+      display: flex;
+      margin-left: 30px;
+
+      &__icon {
+        margin-right: 5px;
+      }
+    }
+  }
 }

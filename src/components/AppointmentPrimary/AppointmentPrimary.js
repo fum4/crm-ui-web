@@ -1,17 +1,19 @@
 import { Card, CardContent, Typography, Chip } from '@material-ui/core';
 import { PermContactCalendar, WatchLater, Timelapse } from '@material-ui/icons';
 import { labels } from '../../constants';
-import './styles.scss';
+import { formatPhoneNumber, getHourFromDate } from '../../services/utils';
 import { FaPen, FaTrashAlt } from 'react-icons/fa';
 import { Dialog } from '../index';
 import { useEffect, useState } from 'react';
+import './styles.scss';
 
-const AppointmentPrimary = ({ entry, onUpdate }) => {
+const AppointmentPrimary = ({ entry }) => {
   const [showEditModal, setShowEditModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [formValues, setFormValues] = useState([]);
-  const { name, surname, appointment, control, date, price, treatment, technician } = entry;
+  const { name, surname, appointment, control, date, price, treatment, technician, phone } = entry;
   const isAppointment = entry.type === 'appointment';
+  const hourAndMinutes = getHourFromDate(isAppointment ? appointment : date);
 
   useEffect(() => {
     formValues.push({
@@ -58,15 +60,39 @@ const AppointmentPrimary = ({ entry, onUpdate }) => {
               isAppointment ? <WatchLater className='appointment__icon' /> : <Timelapse className='appointment__icon' />
             }
             <Typography className='appointment__text' component='h2' variant='h6'>
-              {
-                isAppointment ? `${labels.APPOINTMENT} - ${appointment}` : `${labels.CONTROL} - ${date}`
-              }
+              <span className='appointment__type'>
+                { isAppointment ? labels.APPOINTMENT : labels.CONTROL }
+              </span>
+              <span>
+                { hourAndMinutes.hour }
+              </span>
+              <sup>
+                { hourAndMinutes.minutes }
+              </sup>
             </Typography>
           </div>
           {
+            phone && (
+              <div className='info' component='p' variant='body2'>
+                <Chip
+                  className='info__label'
+                  // icon={<Phone />}
+                  label={labels.PHONE}
+                  size='small'
+                />
+                <span className='info__text__phone'>{ formatPhoneNumber(phone) }</span>
+              </div>
+            )
+          }
+          {
             treatment && (
               <div className='info' component='p' variant='body2'>
-                <Chip className='info__label' label={labels.TREATMENT} size='small' />
+                <Chip
+                  className='info__label'
+                  // icon={<LocalHospital />}
+                  label={labels.TREATMENT}
+                  size='small'
+                />
                 <span className='info__text'>{ treatment }</span>
               </div>
             )
@@ -74,7 +100,12 @@ const AppointmentPrimary = ({ entry, onUpdate }) => {
           {
             isAppointment && control && (
               <div className='info' component='p' variant='body2'>
-                <Chip className='info__label' label={labels.CONTROL} size='small' />
+                <Chip
+                  className='info__label'
+                  // icon={<Timelapse />}
+                  label={labels.CONTROL}
+                  size='small'
+                />
                 <span className='info__text'>{ control }</span>
               </div>
             )
@@ -82,7 +113,12 @@ const AppointmentPrimary = ({ entry, onUpdate }) => {
           {
             technician && (
               <div className='info' component='p' variant='body2'>
-                <Chip className='info__label' label={labels.TECHNICIAN} size='small' />
+                <Chip
+                  className='info__label'
+                  // icon={<Build />}
+                  label={labels.TECHNICIAN}
+                  size='small'
+                />
                 <span className='info__text'>{ technician }</span>
               </div>
             )
@@ -90,7 +126,12 @@ const AppointmentPrimary = ({ entry, onUpdate }) => {
           {
             price && (
               <div className='info' component='p' variant='body2'>
-                <Chip className='info__label' label={labels.PRICE} size='small' />
+                <Chip
+                  className='info__label'
+                  // icon={<AttachMoney />}
+                  label={labels.PRICE}
+                  size='small'
+                />
                 <span className='info__text'>{ price }</span>
               </div>
             )
@@ -112,7 +153,6 @@ const AppointmentPrimary = ({ entry, onUpdate }) => {
           <Dialog
             action='edit'
             setShowModal={setShowEditModal}
-            successHandler={() => onUpdate()}
             type={entry.type}
             values={formValues}
           />
@@ -123,7 +163,6 @@ const AppointmentPrimary = ({ entry, onUpdate }) => {
           <Dialog
             action='delete'
             setShowModal={setShowDeleteModal}
-            successHandler={() => onUpdate()}
             type={entry.type}
             values={{ _id: entry._id }}
           />

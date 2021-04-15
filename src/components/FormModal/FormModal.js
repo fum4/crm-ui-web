@@ -1,5 +1,5 @@
 import FormItem from '../FormItem';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Button, Dialog, makeStyles } from '@material-ui/core';
 import { FaTimes } from 'react-icons/fa';
 import { getFormValues, splitByDelimiter, getOptionsForNestedFieldsVisibility } from '../../services/utils';
@@ -27,9 +27,13 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const FormModal = ({ buttonColor, setShowModal, successHandler, title, formFields, onSubmit, submitText }) => {
+const FormModal = ({ buttonColor, setShowModal, title, formFields, onSubmit, submitText }) => {
   const classes = useStyles();
   const [fields, setFields] = useState(formFields);
+
+  useEffect(() => {
+    setFields(formFields);
+  }, [formFields, setFields])
 
   const onFieldsExtend = (field, isHidden, value) => {
     const options = getOptionsForNestedFieldsVisibility(field.nestedFields, isHidden);
@@ -131,10 +135,8 @@ const FormModal = ({ buttonColor, setShowModal, successHandler, title, formField
     const fieldsToSubmit = fields?.filter((field) => !field.isHidden);
 
     if (isFormValid) {
-      onSubmit({ ...fieldsToSubmit }).then(() => {
-        hideModal();
-        successHandler();
-      });
+      onSubmit({ ...fieldsToSubmit })
+        .then(() => hideModal());
     }
   };
 
