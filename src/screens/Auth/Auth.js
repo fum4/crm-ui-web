@@ -16,7 +16,7 @@ const Auth = ({ action, onAuthenticationEnd, onAuthenticationStart, isAuthentica
     if (isAuthenticated) {
       history.push('/today');
     }
-  }, [history, isAuthenticated])
+  }, [history, isAuthenticated]);
 
   const handleLogin = (user) => {
     login(user)
@@ -45,7 +45,7 @@ const Auth = ({ action, onAuthenticationEnd, onAuthenticationStart, isAuthentica
     register(user)
       .then(() => handleLogin(user))
       .catch(() => setError(true));
-  }
+  };
 
   const handleAuthentication = (payload) => {
     if (username && password) {
@@ -59,29 +59,24 @@ const Auth = ({ action, onAuthenticationEnd, onAuthenticationStart, isAuthentica
         handleRegister(payload);
       }
     }
-  }
+  };
 
   return (
     <div className='auth'>
-      <Grid alignItems='flex-end' className='username' container spacing={1}>
+      <Grid alignItems='flex-end' className='username' container>
         <Grid item>
           <AccountCircle />
         </Grid>
-        <Grid item>
-          <TextField
-            label='Utilizator'
-            onChange={(ev) => setUsername(ev.target.value)} />
+        <Grid className='usernameInput' item>
+          <TextField label='Utilizator' onChange={(ev) => setUsername(ev.target.value)} />
         </Grid>
       </Grid>
-      <Grid alignItems='flex-end' className='password' container spacing={1}>
+      <Grid alignItems='flex-end' className='password' container>
         <Grid item>
           <Lock />
         </Grid>
-        <Grid item>
-          <TextField
-            label='Parolă'
-            onChange={(ev) => setPassword(ev.target.value)}
-            type='password' />
+        <Grid className='passwordInput' item>
+          <TextField label='Parolă' onChange={(ev) => setPassword(ev.target.value)} type='password' />
         </Grid>
       </Grid>
       <Button
@@ -91,16 +86,12 @@ const Auth = ({ action, onAuthenticationEnd, onAuthenticationStart, isAuthentica
         size='large'
         variant='contained'
       >
-        {
-          action === 'login'
-            ? labels.LOGIN
-            : labels.REGISTER
-        }
+        {action === 'login' ? labels.LOGIN : labels.REGISTER}
       </Button>
       <Snackbar
         anchorOrigin={{
           vertical: 'bottom',
-          horizontal: 'left',
+          horizontal: 'left'
         }}
         autoHideDuration={6000}
         message={action === 'login' ? labels.LOGIN_ERROR : labels.REGISTER_ERROR}
@@ -108,6 +99,6 @@ const Auth = ({ action, onAuthenticationEnd, onAuthenticationStart, isAuthentica
       />
     </div>
   );
-}
+};
 
 export default Auth;
