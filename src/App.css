@@ -46,6 +46,10 @@
     visibility: hidden;
   }
 
+  .main-content {
+    overflow: hidden;
+  }
+
   .MuiButton-startIcon {
     margin: 0!important;
   }
