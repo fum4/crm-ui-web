@@ -19,10 +19,10 @@ const api = axios.create({
 });
 
 // AUTH
-export const register = (payload) => axios.post('/register', payload);
+export const register = (payload) => api.post('/register', payload);
 
 export const login = (payload) => {
-  return axios.post('/login', payload).then((response) => {
+  return api.post('/login', payload).then((response) => {
     const data = response.data;
 
     if (data.accessToken) {
