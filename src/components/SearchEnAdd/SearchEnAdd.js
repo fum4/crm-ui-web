@@ -3,7 +3,8 @@ import { fade, withStyles } from '@material-ui/core/styles';
 import { InputBase, Button } from '@material-ui/core';
 import { Dialog } from '..';
 import { labels } from '../../constants';
-import { Add } from '@material-ui/icons';
+import { isMobile } from '../../services/utils';
+import { Add, AddAlarm, PersonAdd } from '@material-ui/icons';
 import './styles.scss';
 
 const BootstrapInput = withStyles((theme) => ({ // TODO: refactor this
@@ -55,9 +56,11 @@ const SearchEnAdd = ({ handleSearch, type }) => {
           color='primary'
           onClick={() => setShowModal(true)}
           size='large'
-          startIcon={<Add />}
+          startIcon={type === 'client' ? <PersonAdd /> : <AddAlarm />}
           variant='contained'>
-          <p>{type === 'client' ? labels.ADD_CLIENT : labels.ADD_APPOINTMENT}</p>
+          {
+            !isMobile() && <p>{type === 'client' ? labels.ADD_CLIENT : labels.ADD_APPOINTMENT}</p>
+          }
         </Button>
       </div>
       {showModal && (

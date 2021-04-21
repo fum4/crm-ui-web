@@ -36,3 +36,44 @@
     transform: rotate(360deg);
   }
 }
+
+@media only screen and (max-width: 1099px) {
+  .mobile-only {
+    visibility: visible;
+  }
+
+  .desktop-only {
+    visibility: hidden;
+  }
+
+  .MuiButton-startIcon {
+    margin: 0!important;
+  }
+
+  .appointments-container-primary {
+    margin: auto;
+    width: 90%
+  }
+
+  .search-input-container {
+    padding: 0 7% 0;
+  }
+
+  .appointments-container-primary .MuiFormControlLabel-root {
+    margin: 30px 0 0;
+  }
+
+  .appointments-container-primary__item {
+    margin-right: 2px;
+    width: 95%;
+  }
+}
+
+@media only screen and (min-width: 1100px) {
+  .mobile-only {
+    visibility: hidden;
+  }
+  .desktop-only {
+    visibility: visible;
+  }
+}

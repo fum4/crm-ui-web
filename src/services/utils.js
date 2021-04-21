@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { fieldsConfig, labels } from '../constants';
+import { fieldsConfig, labels, mobileMediaQueryBreakpoint } from '../constants';
 
 export const getOptionsForNestedFieldsVisibility = (names, shouldHide) => {
   const options = names.map((fieldName) => {
@@ -157,4 +157,9 @@ export const getDialogSubmitButtonText = (action, type) => {
   const shouldAddLabelExtension = type !== 'client' && action === 'delete';
 
   return labels[`${action.toUpperCase()}${shouldAddLabelExtension ? '_2' : ''}`];
+}
+
+export const isMobile = () => {
+  console.log('### ', window.matchMedia(`(max-width: ${mobileMediaQueryBreakpoint}px)`))
+  return window.matchMedia(`(max-width: ${mobileMediaQueryBreakpoint}px)`).matches;
 }

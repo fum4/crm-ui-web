@@ -172,3 +172,5 @@ export const formTypes = {
   control: ['client', 'appointment', 'treatment', 'technician', 'price', 'date', 'addControl'],
   client: ['name', 'surname', 'phone', 'address', 'addAppointment']
 };
+
+export const mobileMediaQueryBreakpoint = 1099;
