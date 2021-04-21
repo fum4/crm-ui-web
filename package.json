@@ -1,9 +1,8 @@
 {
-  "name": "client-control-panel",
+  "name": "e-programare",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://e-programare-web.web.app/login",
-  "proxy": "https://e-programare-api.herokuapp.com/",
+  "homepage": ".",
   "dependencies": {
     "@material-ui/core": "^4.11.2",
     "@material-ui/icons": "^4.11.2",
