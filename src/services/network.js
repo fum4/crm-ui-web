@@ -14,7 +14,7 @@ const getHeaders = () => {
 }
 
 const api = axios.create({
-  baseURL: 'http://localhost:3000',
+  baseURL: 'https://e-programare-api.herokuapp.com/',
   headers: getHeaders()
 });
 
