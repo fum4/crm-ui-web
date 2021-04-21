@@ -47,7 +47,7 @@
   }
 
   .navigation-container {
-    margin-right: 30px;
+    margin: 40px 30px 20px 0;
   }
 
   .navigation-container ul li {
@@ -58,8 +58,20 @@
     overflow: hidden;
   }
 
+  .card-actions svg {
+    margin-bottom: 10px;
+  }
+
   .MuiButton-startIcon {
     margin: 0!important;
+  }
+
+  .MuiPaper-root.appointment-primary .card-actions {
+    margin: 16px -5px 0 0;
+  }
+
+  .MuiPaper-root.appointment-primary .card-content {
+    padding: 12px;
   }
 
   .appointments-container-primary {
