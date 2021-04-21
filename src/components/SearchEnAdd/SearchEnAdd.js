@@ -4,7 +4,7 @@ import { InputBase, Button } from '@material-ui/core';
 import { Dialog } from '..';
 import { labels } from '../../constants';
 import { isMobile } from '../../services/utils';
-import { Add, AddAlarm, PersonAdd } from '@material-ui/icons';
+import { AddAlarm, PersonAdd } from '@material-ui/icons';
 import './styles.scss';
 
 const BootstrapInput = withStyles((theme) => ({ // TODO: refactor this

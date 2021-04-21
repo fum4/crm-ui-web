@@ -159,7 +159,4 @@ export const getDialogSubmitButtonText = (action, type) => {
   return labels[`${action.toUpperCase()}${shouldAddLabelExtension ? '_2' : ''}`];
 }
 
-export const isMobile = () => {
-  console.log('### ', window.matchMedia(`(max-width: ${mobileMediaQueryBreakpoint}px)`))
-  return window.matchMedia(`(max-width: ${mobileMediaQueryBreakpoint}px)`).matches;
-}
+export const isMobile = () => window.matchMedia(`(max-width: ${mobileMediaQueryBreakpoint}px)`).matches;
