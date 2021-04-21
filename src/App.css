@@ -46,6 +46,14 @@
     visibility: hidden;
   }
 
+  .navigation-container {
+    margin-right: 30px;
+  }
+
+  .navigation-container ul li {
+    padding: 30px;
+  }
+
   .main-content {
     overflow: hidden;
   }
@@ -56,11 +64,11 @@
 
   .appointments-container-primary {
     margin: auto;
-    width: 90%
+    width: 96%
   }
 
   .search-input-container {
-    padding: 0 7% 0;
+    padding: 0 4% 0;
   }
 
   .appointments-container-primary .MuiFormControlLabel-root {
