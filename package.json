@@ -38,6 +38,10 @@
     "lint:fix": "eslint --fix .",
     "prettier": "prettier --write ."
   },
+  "engines": {
+    "node": "14.x",
+    "npm": "6.x"
+  },
   "eslintConfig": {
     "extends": [
       "react-app",
