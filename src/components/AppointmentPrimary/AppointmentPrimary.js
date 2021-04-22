@@ -8,6 +8,7 @@ import { useEffect, useState } from 'react';
 import './styles.scss';
 
 const AppointmentPrimary = ({ entry }) => {
+
   const [showEditModal, setShowEditModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [formValues, setFormValues] = useState([]);
