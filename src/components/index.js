@@ -1,6 +1,7 @@
 import Dialog from './Dialog';
 import ListEntry from './ListEntry';
 import ListEntrySecondary from './ListEntrySecondary';
+import LoadingIndicator from './LoadingIndicator';
 import SearchEnAdd from './SearchEnAdd';
 import FormModal from './FormModal';
 import Navigation from './Navigation';
@@ -20,6 +21,7 @@ export {
   FormModal,
   ListEntry,
   ListEntrySecondary,
+  LoadingIndicator,
   SearchEnAdd,
   Navigation,
   Notifications,

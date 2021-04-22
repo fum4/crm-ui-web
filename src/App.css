@@ -62,20 +62,6 @@
     margin-bottom: 10px;
   }
 
-  .MuiButton-startIcon {
-    margin: 0!important;
-  }
-
-  .MuiPaper-root.appointment-primary .card-actions {
-    display: flex;
-    flex-direction: column;
-    margin: 16px 16px 0 0;
-  }
-
-  .MuiPaper-root.appointment-primary .card-content {
-    padding: 12px;
-  }
-
   .name__icon {
     margin-left: -3px;
   }
@@ -87,10 +73,6 @@
 
   .search-input-container {
     padding: 0 4% 0;
-  }
-
-  .MuiFormControlLabel-root {
-    display: flex;
   }
 
   .appointments-container-primary .MuiFormControlLabel-root {
@@ -112,6 +94,24 @@
 
   .modal .modal-footer {
     padding: 20px 0;
+  }
+
+  .MuiFormControlLabel-root {
+    display: flex;
+  }
+
+  .MuiButton-startIcon {
+    margin: 0!important;
+  }
+
+  .MuiPaper-root.appointment-primary .card-actions {
+    display: flex;
+    flex-direction: column;
+    margin: 16px 16px 0 0;
+  }
+
+  .MuiPaper-root.appointment-primary .card-content {
+    padding: 12px;
   }
 }
 
