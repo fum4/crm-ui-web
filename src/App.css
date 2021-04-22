@@ -122,6 +122,14 @@
   .MuiPaper-root.appointment-primary .card-content {
     padding: 12px;
   }
+
+  .MuiDialog-paper {
+    margin: auto;
+  }
+
+  .MuiDialog-paperFullWidth {
+    width: calc(100% - 24px);
+  }
 }
 
 @media only screen and (min-width: 1100px) {
