@@ -101,6 +101,22 @@
     margin-right: 2px;
     width: 95%;
   }
+
+  .MuiPaper-root .makeStyles-root-9 {
+    width: 90%;
+  }
+
+  .modal button.MuiButton-sizeLarge {
+    width: 97%!important;
+  }
+
+  .modal button.MuiButton-outlined {
+    margin: 10px auto auto;
+  }
+
+  .modal .modal-footer {
+    padding: 20px 0;
+  }
 }
 
 @media only screen and (min-width: 1100px) {
