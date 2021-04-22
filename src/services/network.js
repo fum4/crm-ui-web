@@ -13,8 +13,10 @@ const getHeaders = () => {
   return headers;
 };
 
+const baseURL = process.env.NODE_ENV === 'production' ? 'https://e-programare-api.herokuapp.com/' : 'http://localhost:3000';
+
 const api = axios.create({
-  baseURL: 'https://e-programare-api.herokuapp.com/',
+  baseURL,
   headers: getHeaders()
 });
 
