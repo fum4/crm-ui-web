@@ -124,11 +124,11 @@
   }
 
   .MuiDialog-paper {
-    margin: auto;
+    margin: auto!important;
   }
 
   .MuiDialog-paperFullWidth {
-    width: calc(100% - 24px);
+    width: calc(100% - 24px)!important;
   }
 }
 
