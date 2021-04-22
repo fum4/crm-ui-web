@@ -2,7 +2,7 @@ import FormItem from '../FormItem';
 import { useState, useEffect } from 'react';
 import { Button, Dialog, makeStyles } from '@material-ui/core';
 import { FaTimes } from 'react-icons/fa';
-import { getFormValues, splitByDelimiter, getOptionsForNestedFieldsVisibility } from '../../services/utils';
+import { getFormValues, splitByDelimiter, getOptionsForNestedFieldsVisibility, isMobile } from '../../services/utils';
 import './styles.scss';
 
 const useStyles = makeStyles((theme) => ({
@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
     padding: 10,
-    width: '60%'
+    width: `${isMobile() ? 90 : 60}%`
   },
   secondaryHeading: {
     color: theme.palette.text.secondary,
