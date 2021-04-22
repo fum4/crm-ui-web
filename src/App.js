@@ -67,18 +67,14 @@ function App() {
             </Route>
           }
           {
-            isAuthenticated && (
-              <Route exact path='/today'>
-                <Today />
-              </Route>
-            )
+            <Route exact path='/'>
+              <Today isAuthenticated={isAuthenticated} />
+            </Route>
           }
           {
-            isAuthenticated && (
-              <Route path='/clients'>
-                <Clients />
-              </Route>
-            )
+            <Route path='/clients'>
+              <Clients isAuthenticated={isAuthenticated} />
+            </Route>
           }
         </Switch>
       </div>

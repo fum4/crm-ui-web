@@ -6,7 +6,7 @@ const Navigation = () => {
     <nav className='navigation-container'>
       <ul>
         <li className='navigation-item'>
-          <NavLink to='/today'>Astăzi</NavLink>
+          <NavLink to='/'>Astăzi</NavLink>
         </li>
         <li className='navigation-item'>
           <NavLink to='/clients'>Pacienți</NavLink>

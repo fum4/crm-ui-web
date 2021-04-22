@@ -14,7 +14,7 @@ const Auth = ({ action, onAuthenticationEnd, onAuthenticationStart, isAuthentica
 
   useEffect(() => {
     if (isAuthenticated) {
-      history.push('/today');
+      history.push('/');
     }
   }, [history, isAuthenticated]);
 

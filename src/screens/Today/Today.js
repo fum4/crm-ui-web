@@ -1,11 +1,19 @@
 import { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { AppointmentList, SearchEnAdd } from '../../components';
 import { useAllAppointments } from '../../store';
 
-const Clients = () => {
+const Today = ({ isAuthenticated }) => {
   const [filteredAppointments, setFilteredAppointments] = useState([]);
   const [appointments, setAppointments] = useState([]);
-  const allAppointments = useAllAppointments();
+  const allAppointments = useAllAppointments(isAuthenticated);
+  const history = useHistory();
+
+  useEffect(() => {
+    if (!isAuthenticated) {
+      history.push('/login')
+    }
+  }, [history, isAuthenticated]);
 
   useEffect(() => {
     setAppointments(filteredAppointments.length ? filteredAppointments : allAppointments);
@@ -50,7 +58,7 @@ const Clients = () => {
     setFilteredAppointments(filtered);
   };
 
-  return (
+  return isAuthenticated && (
     <>
       <SearchEnAdd
         handleSearch={(payload) => handleSearch(payload)}
@@ -61,4 +69,4 @@ const Clients = () => {
   );
 }
 
-export default Clients;
+export default Today;

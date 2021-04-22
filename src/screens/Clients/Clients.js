@@ -1,11 +1,19 @@
 import { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { ClientList, SearchEnAdd } from '../../components';
 import { useAllClients } from '../../store';
 
-const Clients = () => {
+const Clients = ({ isAuthenticated }) => {
   const [filteredClients, setFilteredClients] = useState([]);
   const [clients, setClients] = useState([]);
-  const allClients = useAllClients();
+  const allClients = useAllClients(isAuthenticated);
+  const history = useHistory();
+
+  useEffect(() => {
+    if (!isAuthenticated) {
+      history.push('/login')
+    }
+  }, [history, isAuthenticated]);
 
   useEffect(() => {
     setClients(filteredClients.length ? filteredClients : allClients);
@@ -39,7 +47,7 @@ const Clients = () => {
     setFilteredClients(filtered);
   };
 
-  return (
+  return isAuthenticated && (
     <>
       <SearchEnAdd
         handleSearch={(payload) => handleSearch(payload)}
