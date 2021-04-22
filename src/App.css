@@ -96,6 +96,10 @@
     padding: 20px 0;
   }
 
+  .notification-banner__success div, .notification-banner__error div {
+    padding: 0 5px;
+  }
+
   .MuiFormControlLabel-root {
     display: flex;
   }
