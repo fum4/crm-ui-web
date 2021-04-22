@@ -67,11 +67,17 @@
   }
 
   .MuiPaper-root.appointment-primary .card-actions {
-    margin: 16px -5px 0 0;
+    display: flex;
+    flex-direction: column;
+    margin: 16px 16px 0 0;
   }
 
   .MuiPaper-root.appointment-primary .card-content {
     padding: 12px;
+  }
+
+  .name__icon {
+    margin-left: -3px;
   }
 
   .appointments-container-primary {
