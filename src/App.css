@@ -85,7 +85,7 @@
   }
 
   .modal button.MuiButton-sizeLarge {
-    width: 97%!important;
+    width: 93%!important;
   }
 
   .modal button.MuiButton-outlined {
@@ -94,6 +94,11 @@
 
   .modal .modal-footer {
     padding: 20px 0;
+  }
+
+  .modal .modal-header .title-container {
+    width: 84%;
+    margin: 15px auto auto;
   }
 
   .notification-banner__success div, .notification-banner__error div {
