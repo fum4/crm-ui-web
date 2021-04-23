@@ -59,7 +59,7 @@
   }
 
   .card-actions svg {
-    margin-bottom: 10px;
+    margin-bottom: 15px;
   }
 
   .name__icon {
@@ -75,8 +75,14 @@
     padding: 0 4% 0;
   }
 
+  .appointments-container-primary__day-header {
+    justify-content: center;
+    padding-left: 0;
+  }
+
   .appointments-container-primary .MuiFormControlLabel-root {
     margin: 30px 0 0;
+    justify-content: center;
   }
 
   .appointments-container-primary__item {
