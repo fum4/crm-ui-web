@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Fragment } from 'react';
 import { FormControlLabel, Switch } from '@material-ui/core';
 import { AssignmentTurnedIn } from '@material-ui/icons';
 import { AppointmentPrimary, AppointmentSecondary } from '..';
@@ -10,11 +10,13 @@ const AppointmentList = ({ entries, type, parentId }) => {
   const [shouldDisplayInactive, setShouldDisplayInactive] = useState(false);
 
   const buildHeader = (entry, index) => {
-    const previousItem = entries[index-1];
+    const previousItem = entries[index - 1];
     const currentItemDateAndTime = entry.type === 'appointment' ? entry.appointment : entry.date;
-    const previousItemDateAndTime = previousItem && (previousItem.type === 'appointment' ? previousItem.appointment : previousItem.date);
+    const previousItemDateAndTime =
+      previousItem && (previousItem.type === 'appointment' ? previousItem.appointment : previousItem.date);
     const currentItemDate = currentItemDateAndTime.slice(0, currentItemDateAndTime.indexOf('T'));
-    const previousItemDate = previousItemDateAndTime && previousItemDateAndTime.slice(0, previousItemDateAndTime.indexOf('T'));
+    const previousItemDate =
+      previousItemDateAndTime && previousItemDateAndTime.slice(0, previousItemDateAndTime.indexOf('T'));
     const shouldDisplayHeader = !previousItem || currentItemDate !== previousItemDate;
 
     if (shouldDisplayHeader) {
@@ -25,10 +27,10 @@ const AppointmentList = ({ entries, type, parentId }) => {
 
       return (
         <div className='appointments-container-primary__day-header'>
-          <p className='appointments-container-primary__day-header__day'>{ `${labels.DAYS[currentDayText]},` }</p>
-          <p className='appointments-container-primary__day-header__date'>{ `${currentDayNumber} ${labels.MONTHS[currentMonth]}` }</p>
+          <p className='appointments-container-primary__day-header__day'>{`${labels.DAYS[currentDayText]},`}</p>
+          <p className='appointments-container-primary__day-header__date'>{`${currentDayNumber} ${labels.MONTHS[currentMonth]}`}</p>
         </div>
-      )
+      );
     }
   };
 
@@ -41,7 +43,7 @@ const AppointmentList = ({ entries, type, parentId }) => {
 
   const shouldDisplayEntry = (entry) => {
     return entry && (shouldDisplayInactive || isActive(entry));
-  }
+  };
 
   useEffect(() => {
     setShouldDisplayInactive(type === 'secondary');
@@ -57,32 +59,28 @@ const AppointmentList = ({ entries, type, parentId }) => {
         labelPlacement='start'
         onChange={() => setShouldDisplayInactive(!shouldDisplayInactive)}
       />
-      {
-        entries?.map((entry, index) => {
-          if (shouldDisplayEntry(entry)) {
-            return type === 'primary' ? (
-              <>
-                { buildHeader(entry, index) }
-                <div className='appointments-container-primary__item'>
-                  <AppointmentPrimary entry={entry} key={entry._id} />
-                </div>
-              </>
-            ) : (
-              <div className='appointments-container-secondary__item'>
-                <AppointmentSecondary entry={entry} key={entry._id} parentId={parentId} />
+      {entries?.map((entry, index) => {
+        if (shouldDisplayEntry(entry)) {
+          return type === 'primary' ? (
+            <Fragment key={entry._id}>
+              {buildHeader(entry, index)}
+              <div className='appointments-container-primary__item'>
+                <AppointmentPrimary entry={entry} />
               </div>
-            );
-          }
-        })
-      }
-      {
-        type === 'primary' && (
-          <div className={`appointments-container-${type}__no-active-appointments`}>
-            <AssignmentTurnedIn color='primary' fontSize='large' />
-            <p>{ labels.NO_ACTIVE_APPOINTMENTS }</p>
-          </div>
-        )
-      }
+            </Fragment>
+          ) : (
+            <div className='appointments-container-secondary__item' key={entry._id}>
+              <AppointmentSecondary entry={entry} parentId={parentId} />
+            </div>
+          );
+        }
+      })}
+      {type === 'primary' && (
+        <div className={`appointments-container-${type}__no-active-appointments`}>
+          <AssignmentTurnedIn color='primary' fontSize='large' />
+          <p>{labels.NO_ACTIVE_APPOINTMENTS}</p>
+        </div>
+      )}
     </div>
   );
 };
