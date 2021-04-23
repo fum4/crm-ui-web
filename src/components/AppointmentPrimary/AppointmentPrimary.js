@@ -16,14 +16,11 @@ const AppointmentPrimary = ({ entry }) => {
   const isAppointment = entry.type === 'appointment';
   const hourAndMinutes = getHourFromDate(isAppointment ? appointment : date);
 
-  const THEME = createMuiTheme({
+  const theme = createMuiTheme({
     typography: {
-      // fontFamily: '"MyCustomFont"',
-      // fontSize: 20,
       lineHeight: 1.5,
       letterSpacing: 0.32,
       useNextVariants: true,
-      // suppressDeprecationWarnings: true,
       h5: {
         fontWeight: 750
       }
@@ -64,7 +61,7 @@ const AppointmentPrimary = ({ entry }) => {
         <CardContent className='card-content'>
           <div className='name'>
             <PermContactCalendar className='name__icon' fontSize='large' />
-            <MuiThemeProvider theme={THEME}>
+            <MuiThemeProvider theme={theme}>
               <Typography className='name__text' component='h2' variant='h5'>
                 {`${surname} ${name}`}
               </Typography>

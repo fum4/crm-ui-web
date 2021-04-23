@@ -3,6 +3,7 @@ import { FormControlLabel, Switch } from '@material-ui/core';
 import { AssignmentTurnedIn } from '@material-ui/icons';
 import { AppointmentPrimary, AppointmentSecondary } from '..';
 import { labels } from '../../constants';
+import { isMobile } from 'services/utils';
 import moment from 'moment';
 import './styles.scss';
 
@@ -56,6 +57,7 @@ const AppointmentList = ({ entries, type, parentId }) => {
         className={`appointments-container-${type}__switch`}
         control={<Switch color='primary' />}
         label={labels.SHOW_INACTIVE_APPOINTMENTS}
+        labelPlacement={isMobile() ? undefined : 'start'}
         onChange={() => setShouldDisplayInactive(!shouldDisplayInactive)}
       />
       {entries?.map((entry, index) => {
