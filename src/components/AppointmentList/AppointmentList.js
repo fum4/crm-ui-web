@@ -18,7 +18,9 @@ const AppointmentList = ({ entries, type, parentId }) => {
     const currentItemDate = currentItemDateAndTime.slice(0, currentItemDateAndTime.indexOf('T'));
     const previousItemDate =
       previousItemDateAndTime && previousItemDateAndTime.slice(0, previousItemDateAndTime.indexOf('T'));
-    const shouldDisplayHeader = !previousItem || currentItemDate !== previousItemDate;
+    const isFirstEntry = !isActive(previousItem) || !previousItem;
+    const isDifferentDay = currentItemDate !== previousItemDate;
+    const shouldDisplayHeader = isFirstEntry || isDifferentDay;
 
     if (shouldDisplayHeader) {
       const currentDate = moment(currentItemDate);
