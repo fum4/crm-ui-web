@@ -3,7 +3,7 @@ import { Card, CardContent, Typography, Chip } from '@material-ui/core';
 import { PermContactCalendar, WatchLater, Timelapse } from '@material-ui/icons';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { labels } from '../../constants';
-import { formatPhoneNumber, getHourFromDate } from '../../services/utils';
+import { formatPhoneNumber, getHourFromDate } from 'services/utils';
 import { FaPen, FaTrashAlt } from 'react-icons/fa';
 import { Dialog } from '../index';
 import './styles.scss';
