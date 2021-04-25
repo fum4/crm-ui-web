@@ -40,15 +40,22 @@ const Today = ({ isAuthenticated }) => {
         const monthNumber = date.slice(5, 7);
         const monthNameEn = moment(monthNumber, 'MM').format('MMMM').toUpperCase();
         const monthNameRo = labels.MONTHS[monthNameEn];
+        let searchByDate = false
 
         keywords.forEach((keyword) => {
-          const searchPool = [name, surname, treatment, technician, appointment, price, time, day, monthNameRo];
           const searchTerm = keyword?.toLowerCase();
+          const searchPool = searchByDate
+              ? [monthNameRo, day]
+              : [monthNameRo, name, surname, treatment, technician, appointment, price, time, day];
 
           let currentItemMatched = false;
 
           searchPool.forEach((searchItem) => {
             if (searchItem?.includes(searchTerm)) {
+              if (searchItem === monthNameRo) {
+                searchByDate = true;
+              }
+
               currentItemMatched = true;
             }
           })
