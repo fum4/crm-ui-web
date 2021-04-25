@@ -11,15 +11,15 @@ const AppointmentList = ({ entries, type, parentId }) => {
   const [shouldDisplayInactive, setShouldDisplayInactive] = useState(false);
 
   const buildHeader = (entry, index) => {
-    const previousItem = entries[index - 1];
+    const previousEntry = entries[index - 1];
     const currentItemDateAndTime = entry.type === 'appointment' ? entry.appointment : entry.date;
-    const previousItemDateAndTime =
-      previousItem && (previousItem.type === 'appointment' ? previousItem.appointment : previousItem.date);
+    const previousEntryDateAndTime =
+      previousEntry && (previousEntry.type === 'appointment' ? previousEntry.appointment : previousEntry.date);
     const currentItemDate = currentItemDateAndTime.slice(0, currentItemDateAndTime.indexOf('T'));
-    const previousItemDate =
-      previousItemDateAndTime && previousItemDateAndTime.slice(0, previousItemDateAndTime.indexOf('T'));
-    const isFirstEntry = !isActive(previousItem) && !shouldDisplayInactive || !previousItem;
-    const isDifferentDay = currentItemDate !== previousItemDate;
+    const previousEntryDate =
+      previousEntryDateAndTime && previousEntryDateAndTime.slice(0, previousEntryDateAndTime.indexOf('T'));
+    const isFirstEntry = !previousEntry || !isActive(previousEntry) && isActive(entry);
+    const isDifferentDay = currentItemDate !== previousEntryDate;
     const shouldDisplayHeader = isFirstEntry || isDifferentDay;
 
     if (shouldDisplayHeader) {
