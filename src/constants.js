@@ -64,7 +64,7 @@ export const labels = {
     SEPTEMBER: 'septembrie',
     OCTOBER: 'octombrie',
     NOVEMBER: 'noiembrie',
-    DECEMBER: 'decembrie',
+    DECEMBER: 'decembrie'
   },
   NAME: 'Nume',
   NO_ACTIVE_APPOINTMENTS: 'Nu mai aveți nicio programare.',

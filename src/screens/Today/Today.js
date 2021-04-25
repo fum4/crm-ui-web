@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { AppointmentList, SearchEnAdd } from '../../components';
 import { useAllAppointments } from '../../store';
+import { labels } from '../../constants';
+import moment from 'moment';
 
 const Today = ({ isAuthenticated }) => {
   const [filteredAppointments, setFilteredAppointments] = useState([]);
@@ -26,16 +28,21 @@ const Today = ({ isAuthenticated }) => {
       let isMatch = true;
 
       if (item) {
-        keywords.forEach((keyword) => {
-          const name = item.name?.toLowerCase();
-          const surname = item.surname?.toLowerCase();
-          const treatment = item.treatment?.toLowerCase();
-          const technician = item.technician?.toLowerCase();
-          const appointment = item.appointment?.toLowerCase();
-          const price = item.price?.toLowerCase();
-          const date = item.date?.toLowerCase();
+        const name = item.name?.toLowerCase();
+        const surname = item.surname?.toLowerCase();
+        const treatment = item.treatment?.toLowerCase();
+        const technician = item.technician?.toLowerCase();
+        const appointment = item.appointment?.toLowerCase();
+        const price = item.price?.toLowerCase();
+        const date = item.appointment?.toLowerCase() || item.date?.toLowerCase();
+        const time = date.slice(date.indexOf('t') + 1);
+        const day = (+date.slice(8, 10)).toString();
+        const monthNumber = date.slice(5, 7);
+        const monthNameEn = moment(monthNumber, 'MM').format('MMMM').toUpperCase();
+        const monthNameRo = labels.MONTHS[monthNameEn];
 
-          const searchPool = [name, surname, treatment, technician, appointment, date, price];
+        keywords.forEach((keyword) => {
+          const searchPool = [name, surname, treatment, technician, appointment, price, time, day, monthNameRo];
           const searchTerm = keyword?.toLowerCase();
 
           let currentItemMatched = false;
