@@ -34,7 +34,7 @@ const ClientPreview = ({ entry, onUpdate, isExpanded }) => {
     <div className='client-preview'>
       <div className='name-container'>
         <PermContactCalendar className='name-container__icon' />
-        <Typography align='center'>{`${entry.surname} ${entry.name}`}</Typography>
+        <Typography align='left'>{`${entry.surname} ${entry.name}`}</Typography>
         {
           isExpanded && !isMobile() && (
             <div className='name-container__phone'>
