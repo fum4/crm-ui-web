@@ -70,7 +70,7 @@
     width: 91%;
   }
 
-  .client-preview {
+  .client-preview, .appointment-collapsable .MuiAccordionSummary-content {
     align-items: center;
   }
 
