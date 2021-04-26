@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { FormModal } from '..';
+import { Form } from '..';
 import { formTypes } from '../../constants';
 import {
   getFormValues,
@@ -19,7 +19,10 @@ import {
   removeAppointment
 } from '../../store';
 import { useDispatch } from 'react-redux';
+import { FaTimes } from "react-icons/fa";
+import { Button } from "@material-ui/core";
 import _ from 'lodash';
+import './styles.scss';
 
 const Dialog = ({ action, setShowModal, type, values }) => {
   const [formFields, setFormFields] = useState();
@@ -141,52 +144,78 @@ const Dialog = ({ action, setShowModal, type, values }) => {
     initializeForm().then(() => setIsInitialized(true));
   }, [action, clients, type, values]);
 
+  const hideModal = () => {
+    setShowModal(false);
+  }
+
   const handleSubmit = (payload) => {
     switch (action) {
       case 'add':
         switch (type) {
           case 'appointment':
-            return dispatch(insertAppointment(serializeForm(payload)));
+            dispatch(insertAppointment(serializeForm(payload)));
+            break;
           case 'client':
-            return dispatch(insertClient(serializeForm(payload)));
-          default:
-            return undefined;
+            dispatch(insertClient(serializeForm(payload)));
+            break;
         }
+        break;
       case 'edit':
         switch (type) {
           case 'appointment':
           case 'control':
-            return dispatch(editAppointment(serializeForm(payload)));
+            dispatch(editAppointment(serializeForm(payload)));
+            break;
           case 'client':
-            return dispatch(editClient(serializeForm(payload)));
-          default:
-            return undefined;
+            dispatch(editClient(serializeForm(payload)));
+            break;
         }
+        break;
       case 'delete':
         switch (type) {
           case 'appointment':
-            return dispatch(removeAppointment({ _id: values._id }));
+            dispatch(removeAppointment({ _id: values._id }));
+            break;
           case 'client':
-            return dispatch(removeClient({ _id: values._id }));
+            dispatch(removeClient({ _id: values._id }));
+            break;
           case 'control':
-            return dispatch(removeAppointment({ type: 'control', _id: values._id }));
-          default:
-            return undefined;
+            dispatch(removeAppointment({ type: 'control', _id: values._id }));
+            break;
         }
-      default:
-        return undefined;
+        break;
     }
+
+    hideModal();
   };
 
   return isInitialized ? (
-    <FormModal
-      buttonColor={action === 'delete' ? 'secondary' : 'primary'}
-      formFields={formFields}
-      onSubmit={(payload) => handleSubmit(payload)}
-      setShowModal={setShowModal}
-      submitText={submitText}
-      title={title}
-    />
+    <Dialog className='modal' fullWidth maxWidth='md' open={true}>
+      <div className='modal-header'>
+        <div className='close-btn-container'>
+          <FaTimes className='close-btn' onClick={() => hideModal()} size={35} />
+        </div>
+        <div className='title-container'>
+          <h1>{title}</h1>
+        </div>
+      </div>
+      {
+        action === 'delete' ? (
+          <div className='modal-footer'>
+            <Button color='primary' onClick={() => handleSubmit()} size='large' variant='contained'>
+              { submitText }
+            </Button>
+          </div>
+        ) : (
+          <Form
+            formFields={formFields}
+            onSubmit={(payload) => handleSubmit(payload)}
+            submitText={submitText}
+            title={title}
+          />
+        )
+      }
+    </Dialog>
   ) : (
     <div />
   );

@@ -2,7 +2,7 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 import { useEffect, useState } from 'react';
 import { Button, TextField } from '@material-ui/core/';
 
-const FormItem = ({ classes, field, onInputChange, onFieldsExtend }) => {
+const Field = ({ classes, field, onInputChange, onFieldsExtend }) => {
   const [currentValue, setCurrentValue] = useState(false);
   const [optionsIds, setOptionsIds] = useState([]);
 
@@ -94,4 +94,4 @@ const FormItem = ({ classes, field, onInputChange, onFieldsExtend }) => {
   }
 };
 
-export default FormItem;
+export default Field;

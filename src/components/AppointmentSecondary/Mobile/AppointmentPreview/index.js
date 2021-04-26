@@ -1,24 +1,29 @@
 import { useState, useEffect } from 'react';
-import { FaPlus, FaTrashAlt } from 'react-icons/fa';
+import { FaPen, FaTrashAlt } from 'react-icons/fa';
 import { Button } from '@material-ui/core';
-import { PermContactCalendar, PhoneIphone } from '@material-ui/icons';
-import { Dialog } from '..';
-import { labels } from '../../constants';
-import { formatPhoneNumber } from '../../services/utils';
+import {PermContactCalendar, Timelapse, WatchLater} from '@material-ui/icons';
+import { Dialog } from '../../../index';
+import { labels } from '../../../../constants';
+import { formatPhoneNumber } from 'services/utils';
 import Typography from '@material-ui/core/Typography';
 import './styles.scss';
 
-const ClientPreview = ({ entry, onUpdate, isExpanded }) => {
+const AppointmentPreview = ({ entry, onUpdate, isExpanded }) => {
   const [showAddModal, setShowAddModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
-  const [formValues, setFormValues] = useState();
+  const [formValues, setFormValues] = useState([]);
 
   useEffect(() => {
     const values = [
       {
-        id: 'client',
+        id: 'appointment',
         key: 'value',
         value: entry._id
+      },
+      {
+        id: 'client',
+        key: 'value',
+        value: entry.clientId
       },
       {
         id: 'client',
@@ -27,35 +32,42 @@ const ClientPreview = ({ entry, onUpdate, isExpanded }) => {
       }
     ];
 
+    const excludeFields = ['_id', 'type', '__v'];
+
+    Object.keys(entry).forEach((key) => {
+      if (!excludeFields.includes(key)) {
+        values.push({
+          id: key,
+          key: 'value',
+          value: entry[key]
+        });
+      }
+    });
+
     setFormValues(values);
   }, [entry]);
 
   return (
     <>
       <div className='name-container'>
-        <PermContactCalendar className='name-container__icon' />
-        <Typography align='center'>{`${entry.surname} ${entry.name}`}</Typography>
         {
-          isExpanded && (
-            <div className='name-container__phone'>
-              <PhoneIphone className='name-container__phone__icon' />
-              <Typography align='center'>
-                { formatPhoneNumber(entry.phone) }
-              </Typography>
-            </div>
+          entry.type === 'appointment' ? (
+            <WatchLater className='name-container__icon' />
+          ) : (
+            <Timelapse className='name-container__icon' />
           )
         }
+        <Typography align='center'>{entry.appointment || entry.date}</Typography>
       </div>
-      <div className='pull-right'>
+      <div className='action-buttons'>
         <Button
           className='add-new-btn'
           color='primary'
           onClick={() => setShowAddModal(true)}
-          size='small'
+          size='large'
           variant='outlined'
         >
-          <FaPlus className='add-icon' size={13} />
-          <p>{labels.APPOINTMENT}</p>
+          <FaPen className='add-icon' size={13} />
         </Button>
         <Button
           className='remove-btn'
@@ -69,7 +81,7 @@ const ClientPreview = ({ entry, onUpdate, isExpanded }) => {
       {
         showAddModal && (
           <Dialog
-            action='add'
+            action='edit'
             setShowModal={setShowAddModal}
             successHandler={() => onUpdate()}
             type={'appointment'}
@@ -92,4 +104,4 @@ const ClientPreview = ({ entry, onUpdate, isExpanded }) => {
   );
 };
 
-export default ClientPreview;
+export default AppointmentPreview;

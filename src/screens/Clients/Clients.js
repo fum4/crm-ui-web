@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { ClientList, SearchEnAdd } from '../../components';
+import { ClientList, Header } from '../../components';
 import { useAllClients } from '../../store';
 
 const Clients = ({ isAuthenticated }) => {
@@ -49,7 +49,7 @@ const Clients = ({ isAuthenticated }) => {
 
   return isAuthenticated && (
     <>
-      <SearchEnAdd
+      <Header
         handleSearch={(payload) => handleSearch(payload)}
         type='client'
       />

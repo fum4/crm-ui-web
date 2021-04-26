@@ -3,11 +3,11 @@ import { fade, withStyles } from '@material-ui/core/styles';
 import { InputBase, Button } from '@material-ui/core';
 import { Dialog } from '..';
 import { labels } from '../../constants';
-import { isMobile } from '../../services/utils';
+import { isMobile } from 'services/utils';
 import { AddAlarm, PersonAdd } from '@material-ui/icons';
 import './styles.scss';
 
-const BootstrapInput = withStyles((theme) => ({ // TODO: refactor this
+const BootstrapInput = withStyles((theme) => ({
   input: {
     '&:focus': {
       borderColor: theme.palette.primary.main,
@@ -41,7 +41,7 @@ const BootstrapInput = withStyles((theme) => ({ // TODO: refactor this
   }
 }))(InputBase);
 
-const SearchEnAdd = ({ handleSearch, type }) => {
+const Header = ({ handleSearch, type }) => {
   const [showModal, setShowModal] = useState(false);
 
   return (
@@ -70,4 +70,4 @@ const SearchEnAdd = ({ handleSearch, type }) => {
   );
 };
 
-export default SearchEnAdd;
+export default Header;

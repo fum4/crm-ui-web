@@ -35,17 +35,6 @@ module.exports = {
     'react-hooks/rules-of-hooks': 'error',
     'react/jsx-fragments': ['warn', 'syntax'],
     'react/jsx-key': ['warn', { checkFragmentShorthand: true, checkKeyMustBeforeSpread: true }],
-    'react/jsx-sort-props': [
-      'error',
-      {
-        // callbacksLast: true,
-        // shorthandFirst: true,
-        // shorthandLast: false,
-        ignoreCase: true
-        // noSortAlphabetically: false,
-        // ReservedFirst: true
-      }
-    ],
     'react/jsx-uses-react': 'error',
     'react/jsx-uses-vars': 'error',
     'react/no-array-index-key': 'warn',

@@ -1,9 +1,7 @@
-import FormItem from '../FormItem';
+import Field from './Field';
 import { useState, useEffect } from 'react';
-import { Button, Dialog, makeStyles } from '@material-ui/core';
-import { FaTimes } from 'react-icons/fa';
+import { Button, makeStyles } from '@material-ui/core';
 import { getFormValues, splitByDelimiter, getOptionsForNestedFieldsVisibility, isMobile } from '../../services/utils';
-import './styles.scss';
 
 const useStyles = makeStyles((theme) => ({
   heading: {
@@ -24,10 +22,14 @@ const useStyles = makeStyles((theme) => ({
   secondaryHeading: {
     color: theme.palette.text.secondary,
     fontSize: theme.typography.pxToRem(15)
+  },
+  footer: {
+    padding: 20,
+    display: 'flex'
   }
 }));
 
-const FormModal = ({ buttonColor, setShowModal, title, formFields, onSubmit, submitText }) => {
+const Form = ({ onSubmit, formFields, submitText }) => {
   const classes = useStyles();
   const [fields, setFields] = useState(formFields);
 
@@ -126,20 +128,6 @@ const FormModal = ({ buttonColor, setShowModal, title, formFields, onSubmit, sub
     setFields(formValues);
   };
 
-  const hideModal = () => {
-    setShowModal(false);
-  };
-
-  const handleSubmit = () => {
-    const isFormValid = validateForm();
-    const fieldsToSubmit = fields?.filter((field) => !field.isHidden);
-
-    if (isFormValid) {
-      onSubmit({ ...fieldsToSubmit })
-        .then(() => hideModal());
-    }
-  };
-
   const validateForm = () => {
     const options = [];
     let isValid = true;
@@ -162,36 +150,35 @@ const FormModal = ({ buttonColor, setShowModal, title, formFields, onSubmit, sub
     return isValid;
   }
 
+  const handleSubmit = () => {
+    const isFormValid = validateForm();
+    const fieldsToSubmit = fields?.filter((field) => !field.isHidden);
+
+    if (isFormValid) {
+      onSubmit({ ...fieldsToSubmit });
+    }
+  };
+
   return (
-    <Dialog className='modal' fullWidth maxWidth='md' open={true}>
-      <div className='modal-header'>
-        <div className='close-btn-container'>
-          <FaTimes className='close-btn' onClick={() => hideModal()} size={35} />
-        </div>
-        <div className='title-container'>
-          <h1>{title}</h1>
-        </div>
+    <form autoComplete='off' className={classes.root}>
+      {
+        fields?.map((field) => (
+          <Field
+            classes={classes}
+            field={field}
+            key={field.id}
+            onFieldsExtend={onFieldsExtend}
+            onInputChange={onInputChange}
+          />
+        ))
+      }
+      <div className={classes.footer}>
+        <Button color='primary' onClick={() => handleSubmit()} size='large' variant='contained'>
+          { submitText }
+        </Button>
       </div>
-      <form autoComplete='off' className={classes.root}>
-        {
-          fields?.map((field) => (
-            <FormItem
-              classes={classes}
-              field={field}
-              key={field.id}
-              onFieldsExtend={onFieldsExtend}
-              onInputChange={onInputChange}
-            />
-          ))
-        }
-        <div className='modal-footer'>
-          <Button color={buttonColor} onClick={() => handleSubmit()} size='large' variant='contained'>
-            { submitText }
-          </Button>
-        </div>
-      </form>
-    </Dialog>
+    </form>
   );
 };
 
-export default FormModal;
+export default Form;

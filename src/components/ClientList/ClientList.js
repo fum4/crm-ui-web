@@ -1,5 +1,5 @@
 import { AppointmentList } from '..';
-import { ListEntry } from '..';
+import ClientCollapsable from './ClientCollapsable';
 import './styles.scss';
 
 const ClientList = ({ entries, onUpdate }) => {
@@ -7,7 +7,7 @@ const ClientList = ({ entries, onUpdate }) => {
     <div className='clients-container'>
       {
         entries?.map((entry, index) => (
-          <ListEntry
+          <ClientCollapsable
             actionSuccessHandler={onUpdate}
             entry={entry}
             index={index}
@@ -17,7 +17,7 @@ const ClientList = ({ entries, onUpdate }) => {
               onUpdate={onUpdate}
               parentId={entry._id}
               type='secondary' />
-          </ListEntry>
+          </ClientCollapsable>
         ))
       }
     </div>

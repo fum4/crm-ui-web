@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { AppointmentList, SearchEnAdd } from '../../components';
+import { AppointmentList, Header } from '../../components';
 import { useAllAppointments } from '../../store';
 import { labels } from '../../constants';
 import moment from 'moment';
@@ -74,7 +74,7 @@ const Today = ({ isAuthenticated }) => {
 
   return isAuthenticated && (
     <>
-      <SearchEnAdd
+      <Header
         handleSearch={(payload) => handleSearch(payload)}
         type='appointment'
       />

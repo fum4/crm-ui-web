@@ -1,17 +1,14 @@
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
 import { useState, useEffect } from 'react';
-import { FaTrashAlt, FaPen } from 'react-icons/fa';
-import { WatchLater, Build, AttachMoney, LocalHospital, Timelapse } from '@material-ui/icons';
 import { Dialog } from '..';
+import { isMobile } from 'services/utils';
+import AppointmentCollapsable from "./Mobile/AppointmentCollapsable";
+import AppointmentExpanded from "./Desktop/AppointmentExpanded";
 import './styles.scss';
 
 const AppointmentSecondary = ({ entry, parentId }) => {
   const [showEditModal, setShowEditModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [formValues, setFormValues] = useState([]);
-  const isAppointment = entry.type === 'appointment';
-  const hasControl = !!entry.control;
 
   useEffect(() => {
     formValues.push({
@@ -43,83 +40,21 @@ const AppointmentSecondary = ({ entry, parentId }) => {
 
   return (
     <>
-      <ListItem>
-        <div className='appointment-secondary__data'>
-          {
-            isAppointment ? (
-              <>
-                <WatchLater />
-                <ListItemText
-                  className='appointment-secondary appointment-secondary__appointment'
-                  primary={entry?.appointment}
-                />
-              </>
-            ) : (
-              <>
-                <Timelapse />
-                <ListItemText
-                  className='appointment-secondary appointment-secondary__control'
-                  primary={entry?.date}
-                />
-              </>
-            )
-          }
-          {
-            entry?.treatment && (
-              <>
-                <LocalHospital />
-                <ListItemText
-                  className='appointment-secondary appointment-secondary__treatment'
-                  primary={entry?.treatment}
-                  />
-              </>
-            )
-          }
-          {
-            entry?.technician && (
-              <>
-                <Build />
-                <ListItemText
-                  className='appointment-secondary appointment-secondary__technician'
-                  primary={entry?.technician}
-                />
-              </>
-            )
-          }
-          {
-            entry?.control && (
-              <>
-                <AttachMoney />
-                <ListItemText
-                  className='appointment-secondary appointment-secondary__price'
-                  primary={entry?.price}
-                />
-              </>
-            )
-          }
-          {
-            isAppointment && hasControl && (
-              <>
-                <Timelapse />
-                <ListItemText
-                  className='appointment-secondary appointment-secondary__control'
-                  primary={entry?.control}
-                />
-              </>
-            )
-          }
-        </div>
-        <div className='appointment-secondary appointment-secondary__action-buttons'>
-          <FaPen
-            className='appointment-secondary appointment-secondary__edit-icon'
-            onClick={() => setShowEditModal(true)}
+      {
+        isMobile() ? (
+          <AppointmentCollapsable
+            entry={entry}
+            setShowEditModal={setShowEditModal}
+            setShowDeleteModal={setShowDeleteModal}
           />
-          <FaTrashAlt
-            className='appointment-secondary appointment-secondary__remove-icon'
-            onClick={() => setShowDeleteModal(true)}
+        ) : (
+          <AppointmentExpanded
+            entry={entry}
+            setShowEditModal={setShowEditModal}
+            setShowDeleteModal={setShowDeleteModal}
           />
-        </div>
-      </ListItem>
+        )
+      }
       {
         showEditModal && (
           <Dialog

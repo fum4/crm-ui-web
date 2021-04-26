@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { Accordion, AccordionDetails, AccordionSummary } from '@material-ui/core';
-import { ClientPreview } from '../';
+import ClientPreview from './ClientPreview';
 import './styles.scss';
 
-const ListEntry = (props) => {
+const ClientCollapsable = (props) => {
   const [expanded, setExpanded] = useState(false);
 
   const handleChange = (panel) => (event, isExpanded) => {
@@ -15,7 +15,8 @@ const ListEntry = (props) => {
       <Accordion
         expanded={expanded === props.index}
         key={props.entry._id}
-        onChange={handleChange(props.index)}>
+        onChange={handleChange(props.index)}
+      >
         <AccordionSummary aria-controls='panel1bh-content' id='panel1bh-header'>
           <ClientPreview entry={props.entry} isExpanded={expanded === props.index} onUpdate={props.actionSuccessHandler} />
         </AccordionSummary>
@@ -25,4 +26,4 @@ const ListEntry = (props) => {
   );
 };
 
-export default ListEntry;
+export default ClientCollapsable;

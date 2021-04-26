@@ -66,6 +66,10 @@
     margin-left: -3px;
   }
 
+  .clients-container {
+    width: 91%;
+  }
+
   .appointments-container-primary {
     margin: auto;
     width: 96%

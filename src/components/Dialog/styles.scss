@@ -1,0 +1,37 @@
+.modal {
+  .modal-header {
+    display: flex;
+    flex-direction: column;
+
+    .title-container {
+      display: flex;
+      margin-bottom: 20px;
+
+      h1 {
+        margin: auto;
+      }
+    }
+
+    .close-btn-container {
+      .close-btn {
+        float: right;
+        margin: 30px 30px 0 0;
+        cursor: pointer;
+      }
+    }
+  }
+
+  button {
+    width: 50%;
+    margin: auto auto 20px;
+
+    &.MuiButton-outlined {
+      margin: auto;
+    }
+  }
+
+  .modal-footer {
+    padding: 20px;
+    display: flex;
+  }
+}

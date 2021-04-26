@@ -68,89 +68,104 @@ const AppointmentPrimary = ({ entry }) => {
             </MuiThemeProvider>
           </div>
           <div className='appointment'>
-            {isAppointment ? (
-              <WatchLater className='appointment__icon' />
-            ) : (
-              <Timelapse className='appointment__icon' />
-            )}
+            {
+              isAppointment ? (
+                <WatchLater className='appointment__icon' />
+              ) : (
+                <Timelapse className='appointment__icon' />
+              )
+            }
             <Typography className='appointment__text' component='h2' variant='h6'>
               <span className='appointment__type'>{isAppointment ? labels.APPOINTMENT : labels.CONTROL}</span>
               <span>{hourAndMinutes.hour}</span>
               <sup>{hourAndMinutes.minutes}</sup>
             </Typography>
           </div>
-          {phone && (
-            <div className='info' component='p' variant='body2'>
-              <Chip
-                className='info__label'
-                // icon={<Phone />}
-                label={labels.PHONE}
-                size='small'
-              />
-              <span className='info__text__phone'>{formatPhoneNumber(phone)}</span>
-            </div>
-          )}
-          {treatment && (
-            <div className='info' component='p' variant='body2'>
-              <Chip
-                className='info__label'
-                // icon={<LocalHospital />}
-                label={labels.TREATMENT}
-                size='small'
-              />
-              <span className='info__text'>{treatment}</span>
-            </div>
-          )}
-          {isAppointment && control && (
-            <div className='info' component='p' variant='body2'>
-              <Chip
-                className='info__label'
-                // icon={<Timelapse />}
-                label={labels.CONTROL}
-                size='small'
-              />
-              <span className='info__text'>{control}</span>
-            </div>
-          )}
-          {technician && (
-            <div className='info' component='p' variant='body2'>
-              <Chip
-                className='info__label'
-                // icon={<Build />}
-                label={labels.TECHNICIAN}
-                size='small'
-              />
-              <span className='info__text'>{technician}</span>
-            </div>
-          )}
-          {price && (
-            <div className='info' component='p' variant='body2'>
-              <Chip
-                className='info__label'
-                // icon={<AttachMoney />}
-                label={labels.PRICE}
-                size='small'
-              />
-              <span className='info__text'>{price}</span>
-            </div>
-          )}
+          {
+            phone && (
+              <div className='info' component='p' variant='body2'>
+                <Chip
+                  className='info__label'
+                  label={labels.PHONE}
+                  size='small'
+                />
+                <span className='info__text__phone'>{formatPhoneNumber(phone)}</span>
+              </div>
+            )
+          }
+          {
+            treatment && (
+              <div className='info' component='p' variant='body2'>
+                <Chip
+                  className='info__label'
+                  // icon={<LocalHospital />}
+                  label={labels.TREATMENT}
+                  size='small'
+                />
+                <span className='info__text'>{treatment}</span>
+              </div>
+            )
+          }
+          {
+            isAppointment && control && (
+              <div className='info' component='p' variant='body2'>
+                <Chip
+                  className='info__label'
+                  // icon={<Timelapse />}
+                  label={labels.CONTROL}
+                  size='small'
+                />
+                <span className='info__text'>{control}</span>
+              </div>
+            )
+          }
+          {
+            technician && (
+              <div className='info' component='p' variant='body2'>
+                <Chip
+                  className='info__label'
+                  // icon={<Build />}
+                  label={labels.TECHNICIAN}
+                  size='small'
+                />
+                <span className='info__text'>{technician}</span>
+              </div>
+            )
+          }
+          {
+            price && (
+              <div className='info' component='p' variant='body2'>
+                <Chip
+                  className='info__label'
+                  // icon={<AttachMoney />}
+                  label={labels.PRICE}
+                  size='small'
+                />
+                <span className='info__text'>{price}</span>
+              </div>
+            )
+          }
         </CardContent>
         <div className='card-actions'>
           <FaPen className='card-actions__edit-icon' onClick={() => setShowEditModal(true)} />
           <FaTrashAlt className='card-actions__remove-icon' onClick={() => setShowDeleteModal(true)} />
         </div>
       </Card>
-      {showEditModal && (
-        <Dialog action='edit' setShowModal={setShowEditModal} type={entry.type} values={formValues} />
-      )}
-      {showDeleteModal && (
-        <Dialog
-          action='delete'
-          setShowModal={setShowDeleteModal}
-          type={entry.type}
-          values={{ _id: entry._id }}
-        />
-      )}
+      {
+        showEditModal && (
+          <Dialog action='edit' setShowModal={setShowEditModal} type={entry.type} values={formValues} />
+        )
+      }
+      {
+        showDeleteModal && (
+          <Dialog
+            action='delete'
+            setShowModal={setShowDeleteModal}
+            type={entry.type}
+            values={{ _id: entry._id }}
+          />
+        )
+      }
     </>
   );
 };
