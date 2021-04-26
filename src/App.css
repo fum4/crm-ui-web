@@ -94,6 +94,15 @@
     width: 95%;
   }
 
+  .appointments-container-secondary {
+    padding-bottom: 0;
+  }
+
+  .appointments-container-secondary__item, .appointments-container-secondary__switch {
+    margin-right: 2px;
+    width: 100%;
+  }
+
   .modal button.MuiButton-sizeLarge {
     width: 93%!important;
   }
@@ -113,6 +122,10 @@
 
   .notification-banner__success div, .notification-banner__error div {
     padding: 0 5px;
+  }
+
+  .MuiAccordionSummary-content button.add-new-btn .add-icon {
+    margin-right: 0;
   }
 
   .MuiFormControlLabel-root {
