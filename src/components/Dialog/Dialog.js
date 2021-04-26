@@ -19,8 +19,8 @@ import {
   removeAppointment
 } from '../../store';
 import { useDispatch } from 'react-redux';
-import { FaTimes } from "react-icons/fa";
-import { Button } from "@material-ui/core";
+import { FaTimes } from 'react-icons/fa';
+import { Button, Dialog as Modal } from '@material-ui/core';
 import _ from 'lodash';
 import './styles.scss';
 
@@ -146,7 +146,7 @@ const Dialog = ({ action, setShowModal, type, values }) => {
 
   const hideModal = () => {
     setShowModal(false);
-  }
+  };
 
   const handleSubmit = (payload) => {
     switch (action) {
@@ -190,7 +190,7 @@ const Dialog = ({ action, setShowModal, type, values }) => {
   };
 
   return isInitialized ? (
-    <Dialog className='modal' fullWidth maxWidth='md' open={true}>
+    <Modal className='modal' fullWidth maxWidth='md' open={true}>
       <div className='modal-header'>
         <div className='close-btn-container'>
           <FaTimes className='close-btn' onClick={() => hideModal()} size={35} />
@@ -199,23 +199,21 @@ const Dialog = ({ action, setShowModal, type, values }) => {
           <h1>{title}</h1>
         </div>
       </div>
-      {
-        action === 'delete' ? (
-          <div className='modal-footer'>
-            <Button color='primary' onClick={() => handleSubmit()} size='large' variant='contained'>
-              { submitText }
-            </Button>
-          </div>
-        ) : (
-          <Form
-            formFields={formFields}
-            onSubmit={(payload) => handleSubmit(payload)}
-            submitText={submitText}
-            title={title}
-          />
-        )
-      }
-    </Dialog>
+      {action === 'delete' ? (
+        <div className='modal-footer'>
+          <Button color='primary' onClick={() => handleSubmit()} size='large' variant='contained'>
+            {submitText}
+          </Button>
+        </div>
+      ) : (
+        <Form
+          formFields={formFields}
+          onSubmit={(payload) => handleSubmit(payload)}
+          submitText={submitText}
+          title={title}
+        />
+      )}
+    </Modal>
   ) : (
     <div />
   );
