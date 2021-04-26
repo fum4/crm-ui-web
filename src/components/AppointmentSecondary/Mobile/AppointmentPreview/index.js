@@ -1,14 +1,12 @@
 import { useState, useEffect } from 'react';
 import { FaPen, FaTrashAlt } from 'react-icons/fa';
 import { Button } from '@material-ui/core';
-import {PermContactCalendar, Timelapse, WatchLater} from '@material-ui/icons';
+import {Timelapse, WatchLater} from '@material-ui/icons';
 import { Dialog } from '../../../index';
-import { labels } from '../../../../constants';
-import { formatPhoneNumber } from 'services/utils';
 import Typography from '@material-ui/core/Typography';
 import './styles.scss';
 
-const AppointmentPreview = ({ entry, onUpdate, isExpanded }) => {
+const AppointmentPreview = ({ entry, onUpdate }) => {
   const [showAddModal, setShowAddModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [formValues, setFormValues] = useState([]);
