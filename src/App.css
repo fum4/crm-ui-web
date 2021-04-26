@@ -78,6 +78,10 @@
     max-height: 40px;
   }
 
+  .appointment-collapsable .action-buttons {
+    max-height: 30px;
+  }
+
   .appointments-container-primary {
     margin: auto;
     width: 96%
