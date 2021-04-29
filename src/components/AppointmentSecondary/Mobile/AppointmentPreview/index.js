@@ -95,7 +95,7 @@ const AppointmentPreview = ({ entry, onUpdate }) => {
             action='delete'
             setShowModal={setShowDeleteModal}
             successHandler={() => onUpdate()}
-            type='client'
+            type='appointment'
             values={{ _id: entry._id }}
           />
         )
