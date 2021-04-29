@@ -22,7 +22,11 @@ const AppointmentCollapsable = (props) => {
         onChange={handleChange(props.index)}
       >
         <AccordionSummary aria-controls='panel1bh-content' id='panel1bh-header'>
-          <AppointmentPreview entry={props.entry} isExpanded={expanded === props.index} onUpdate={props.actionSuccessHandler} />
+          <AppointmentPreview
+            entry={props.entry}
+            isExpanded={expanded === props.index}
+            onUpdate={props.actionSuccessHandler}
+          />
         </AccordionSummary>
         <AccordionDetails>
           {
