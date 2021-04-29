@@ -90,10 +90,15 @@
 
   .wrapper .search-input-container {
     width: auto;
+    padding: 0 5% 0;
   }
 
   .wrapper .search-input-container.fullWidth {
     width: 100%;
+  }
+
+  .wrapper.fixed {
+    height: 60px;
   }
 
   .search-input-container {
