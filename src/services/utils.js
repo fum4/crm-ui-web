@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import moment from 'moment';
 import { fieldsConfig, labels, mobileMediaQueryBreakpoint } from '../constants';
 
 export const getOptionsForNestedFieldsVisibility = (names, shouldHide) => {
@@ -98,7 +99,7 @@ export const serializeForm = (payload) => {
   );
 };
 
-export const getCurrentDate = () => new Date().toISOString().slice(0, -8);
+export const getCurrentDate = () => moment().format('YYYY-MM-DTHH:mm');
 
 export const splitByDelimiter = (value, delimiter) => {
   if (value) {

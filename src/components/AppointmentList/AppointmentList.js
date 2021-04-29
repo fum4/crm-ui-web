@@ -26,7 +26,7 @@ const AppointmentList = ({ entries, type, parentId }) => {
       const currentDate = moment(currentItemDate);
       const currentMonth = currentDate.format('MMMM').toUpperCase();
       const currentDayText = currentDate.format('dddd').toUpperCase();
-      const currentDayNumber = +currentDate.format('d') + 1; // TODO: refactor this
+      const currentDayNumber = currentDate.date();
 
       return (
         <div className='appointments-container-primary__day-header'>
@@ -38,7 +38,7 @@ const AppointmentList = ({ entries, type, parentId }) => {
   };
 
   const isActive = (entry) => {
-    const currentDate = moment().format('YYYY-MM-DThh:mm');
+    const currentDate = moment().format('YYYY-MM-DTHH:mm');
     const entryDate = entry.type === 'appointment' ? entry.appointment : entry.date;
 
     return entryDate > currentDate;
