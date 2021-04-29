@@ -32,7 +32,7 @@ const AppointmentPreview = ({ entry, onUpdate }) => {
       }
     ];
 
-    const excludeFields = ['_id', 'type', '__v'];
+    const excludeFields = ['clientId', '_id', 'type', '__v'];
 
     Object.keys(entry).forEach((key) => {
       if (!excludeFields.includes(key)) {
