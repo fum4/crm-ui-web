@@ -105,10 +105,6 @@
     padding: 0 4% 0;
   }
 
-  .appointment-collapsable .action-buttons {
-    max-height: 30px;
-  }
-
   .appointments-container-primary {
     margin: auto;
     width: 96%
@@ -152,6 +148,14 @@
     max-width: 80px;
   }
 
+  .appointment-collapsable .action-buttons {
+    max-height: 30px;
+  }
+
+  .appointment-collapsable .MuiAccordionSummary-content button.add-new-btn {
+    margin-left: 0;
+  }
+
   .modal button.MuiButton-sizeLarge {
     width: 93%!important;
   }
@@ -178,16 +182,12 @@
     margin-right: 0;
   }
 
-  .appointment-collapsable .MuiAccordionSummary-content button.add-new-btn {
-    margin-left: 0;
-  }
-
   .MuiFormControlLabel-root {
     display: flex;
   }
 
-  .MuiButton-startIcon {
-    margin: 0!important;
+  .search-input-container .MuiButton-startIcon {
+    margin: 0;
   }
 
   .MuiPaper-root.appointment-primary .card-actions {

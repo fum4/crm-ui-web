@@ -37,6 +37,8 @@ const Today = ({ isAuthenticated }) => {
         const date = item.appointment?.toLowerCase() || item.date?.toLowerCase();
         const time = date.slice(date.indexOf('t') + 1);
         const day = (+date.slice(8, 10)).toString();
+        const dayNameEn = moment(date).format('dddd').toUpperCase();
+        const dayNameRo = labels.DAYS[`${dayNameEn}_NO_SPECIAL_CHARS`];
         const monthNumber = date.slice(5, 7);
         const monthNameEn = moment(monthNumber, 'MM').format('MMMM').toUpperCase();
         const monthNameRo = labels.MONTHS[monthNameEn];
@@ -45,8 +47,8 @@ const Today = ({ isAuthenticated }) => {
         keywords.forEach((keyword) => {
           const searchTerm = keyword?.toLowerCase();
           const searchPool = searchByDate
-              ? [monthNameRo, day]
-              : [monthNameRo, name, surname, treatment, technician, appointment, price, time, day];
+              ? [monthNameRo, day, dayNameRo]
+              : [monthNameRo, name, surname, treatment, technician, appointment, price, time, day, dayNameRo];
 
           let currentItemMatched = false;
 
