@@ -3,10 +3,21 @@ import { Card, CardContent, Typography, Chip } from '@material-ui/core';
 import { PermContactCalendar, WatchLater, Timelapse } from '@material-ui/icons';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { labels } from '../../constants';
-import { formatPhoneNumber, getHourFromDate } from 'services/utils';
+import { formatPhoneNumber, getHourFromDate, formatPrettyDate } from 'services/utils';
 import { FaPen, FaTrashAlt } from 'react-icons/fa';
 import { Dialog } from '../index';
 import './styles.scss';
+
+const theme = createMuiTheme({
+  typography: {
+    lineHeight: 1.5,
+    letterSpacing: 0.32,
+    useNextVariants: true,
+    h5: {
+      fontWeight: 750
+    }
+  }
+});
 
 const AppointmentPrimary = ({ entry }) => {
   const [showEditModal, setShowEditModal] = useState(false);
@@ -15,17 +26,6 @@ const AppointmentPrimary = ({ entry }) => {
   const { name, surname, appointment, control, date, price, treatment, technician, phone } = entry;
   const isAppointment = entry.type === 'appointment';
   const hourAndMinutes = getHourFromDate(isAppointment ? appointment : date);
-
-  const theme = createMuiTheme({
-    typography: {
-      lineHeight: 1.5,
-      letterSpacing: 0.32,
-      useNextVariants: true,
-      h5: {
-        fontWeight: 750
-      }
-    }
-  });
 
   useEffect(() => {
     formValues.push({
@@ -115,7 +115,7 @@ const AppointmentPrimary = ({ entry }) => {
                   label={labels.CONTROL}
                   size='small'
                 />
-                <span className='info__text'>{control}</span>
+                <span className='info__text'>{ formatPrettyDate(control) }</span>
               </div>
             )
           }

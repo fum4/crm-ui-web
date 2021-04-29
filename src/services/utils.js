@@ -136,6 +136,15 @@ export const formatPhoneNumber = (phoneNumber) => {
   return phoneNumber;
 }
 
+export const formatPrettyDate = (dateAsString) => {
+  const date = moment(dateAsString);
+  const month = date.format('MMMM').toUpperCase();
+  const dayText = date.format('dddd').toUpperCase();
+  const dayNumber = date.date();
+
+  return `${labels.DAYS[dayText]}, ${dayNumber} ${labels.MONTHS[month]}`;
+}
+
 export const getHourFromDate = (date) => {
   const hourAndMinutes = date.slice(date.indexOf('T') + 1);
   const hour = hourAndMinutes.slice(0, hourAndMinutes.indexOf(':'));

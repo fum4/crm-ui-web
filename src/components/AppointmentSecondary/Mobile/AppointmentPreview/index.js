@@ -4,12 +4,14 @@ import { Button } from '@material-ui/core';
 import {Timelapse, WatchLater} from '@material-ui/icons';
 import { Dialog } from '../../../index';
 import Typography from '@material-ui/core/Typography';
+import { formatPrettyDate } from 'services/utils';
 import './styles.scss';
 
 const AppointmentPreview = ({ entry, onUpdate }) => {
   const [showAddModal, setShowAddModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [formValues, setFormValues] = useState([]);
+  const date = entry.appointment || entry.date;
 
   useEffect(() => {
     const values = [
@@ -55,7 +57,7 @@ const AppointmentPreview = ({ entry, onUpdate }) => {
             <Timelapse className='name-container__icon' />
           )
         }
-        <Typography align='center'>{entry.appointment || entry.date}</Typography>
+        <Typography align='center'>{ formatPrettyDate(date) }</Typography>
       </div>
       <div className='action-buttons'>
         <Button
