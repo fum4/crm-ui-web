@@ -116,6 +116,10 @@
     padding-bottom: 0;
   }
 
+  .appointments-container-secondary .MuiSvgIcon-root {
+    margin-left: 0;
+  }
+
   .appointments-container-secondary__item, .appointments-container-secondary__switch {
     margin-right: 2px;
     width: 100%;
