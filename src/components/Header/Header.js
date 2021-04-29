@@ -48,7 +48,7 @@ const Header = ({ handleSearch, type }) => {
     const wrapper = document.getElementsByClassName('wrapper')[0];
     const searchInput = wrapper.getElementsByClassName('search-input-container')[0];
 
-    if (window.pageYOffset > 175) {
+    if (window.pageYOffset > (isMobile() ? 154 : 175)) {
       wrapper.classList.add('fixed');
       searchInput.classList.add('fullWidth');
     }
