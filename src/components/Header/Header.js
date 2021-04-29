@@ -45,14 +45,17 @@ const Header = ({ handleSearch, type }) => {
   const [showModal, setShowModal] = useState(false);
 
   window.addEventListener('scroll', () => {
-    const component = document.getElementsByClassName('wrapper')[0];
+    const wrapper = document.getElementsByClassName('wrapper')[0];
+    const searchInput = wrapper.getElementsByClassName('search-input-container')[0];
 
     if (window.pageYOffset > 175) {
-      component.classList.add('fixed');
+      wrapper.classList.add('fixed');
+      searchInput.classList.add('fullWidth');
     }
 
     if (window.pageYOffset < 150) {
-      component.classList.remove('fixed');
+      wrapper.classList.remove('fixed');
+      searchInput.classList.remove('fullWidth');
     }
   });
 

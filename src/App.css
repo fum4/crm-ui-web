@@ -88,6 +88,14 @@
     max-height: 40px;
   }
 
+  .wrapper .search-input-container {
+    width: auto;
+  }
+
+  .wrapper .search-input-container.fullWidth {
+    width: 100%;
+  }
+
   .search-input-container {
     padding: 0 4% 0;
   }
