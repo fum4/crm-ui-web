@@ -1,40 +1,23 @@
 .MuiAccordionSummary-content {
-  justify-content: space-between;
-
-  .action-buttons {
+  .appointment-preview {
     display: flex;
-  }
-
-  p {
-    margin-top: auto;
-    margin-bottom: auto;
-  }
-
-  button {
-    &.add-new-btn, &.remove-btn {
-      margin-left: 5px;
-
-      .add-icon {
-        margin-right: 5px;
-      }
-    }
-  }
-
-  .name-container {
-    display: flex;
-    align-items: center;
+    justify-content: space-between;
     width: 100%;
 
-    &__icon {
-      margin-right: 10px;
+    .action-buttons {
+      display: flex;
     }
 
-    &__phone {
-      display: flex;
-      margin-left: 30px;
+    p {
+      margin-top: auto;
+      margin-bottom: auto;
+    }
 
-      &__icon {
-        margin-right: 5px;
+    button {
+      &.add-new-btn, &.remove-btn {
+        min-width: 30px;
+        max-width: 30px;
+        padding: 5px;
       }
     }
   }

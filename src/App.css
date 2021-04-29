@@ -70,6 +70,12 @@
     width: 91%;
   }
 
+  .clients-container button.add-new-btn, .clients-container button.remove-btn {
+    min-width: 50px;
+    max-width: 50px;
+    padding: 5px;
+  }
+
   .client-preview, .appointment-collapsable .MuiAccordionSummary-content {
     align-items: center;
   }

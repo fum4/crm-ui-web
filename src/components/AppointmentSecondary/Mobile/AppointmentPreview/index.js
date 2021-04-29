@@ -48,7 +48,7 @@ const AppointmentPreview = ({ entry, onUpdate }) => {
   }, [entry]);
 
   return (
-    <>
+    <div className='appointment-preview'>
       <div className='name-container'>
         {
           entry.type === 'appointment' ? (
@@ -100,7 +100,7 @@ const AppointmentPreview = ({ entry, onUpdate }) => {
           />
         )
       }
-    </>
+    </div>
   );
 };
 

@@ -1,11 +1,28 @@
-button.add-new-btn {
-  margin-left: 20px;
+.name-container {
+  display: flex;
+  align-items: center;
+  width: 100%;
 
-  p {
-    margin: 1px 0 0 0;
+  &__icon {
+    margin-right: 10px;
   }
 
-  .add-icon {
-    margin-right: 10px;
+  &__phone {
+    display: flex;
+    margin-left: 30px;
+
+    &__icon {
+      margin-right: 5px;
+    }
+  }
+}
+
+button {
+  &.add-new-btn, &.remove-btn {
+    margin-left: 5px;
+
+    .add-icon {
+      margin-right: 5px;
+    }
   }
 }
