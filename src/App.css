@@ -70,6 +70,10 @@
     width: 91%;
   }
 
+  .clients-container .MuiAccordionDetails-root {
+    padding-left: 22px;
+  }
+
   .clients-container button.add-new-btn, .clients-container button.remove-btn {
     min-width: 50px;
     max-width: 50px;
@@ -84,6 +88,10 @@
     max-height: 40px;
   }
 
+  .search-input-container {
+    padding: 0 4% 0;
+  }
+
   .appointment-collapsable .action-buttons {
     max-height: 30px;
   }
@@ -91,10 +99,6 @@
   .appointments-container-primary {
     margin: auto;
     width: 96%
-  }
-
-  .search-input-container {
-    padding: 0 4% 0;
   }
 
   .appointments-container-primary__day-header {
@@ -120,9 +124,19 @@
     margin-left: 0;
   }
 
-  .appointments-container-secondary__item, .appointments-container-secondary__switch {
+  .appointments-container-secondary__item,
+  .appointments-container-secondary__switch {
     margin-right: 2px;
     width: 100%;
+  }
+
+  .appointment-primary.MuiPaper-root .card-content .appointment,
+  .appointment-primary.MuiPaper-root .card-content .info {
+    margin-left: 5px;
+  }
+
+  .appointment-primary.MuiPaper-root .card-content .info__label {
+    max-width: 80px;
   }
 
   .modal button.MuiButton-sizeLarge {
@@ -142,7 +156,8 @@
     margin: 15px auto auto;
   }
 
-  .notification-banner__success div, .notification-banner__error div {
+  .notification-banner__success div,
+  .notification-banner__error div {
     padding: 0 5px;
   }
 
