@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { FaPen, FaTrashAlt } from 'react-icons/fa';
 import { Button } from '@material-ui/core';
-import {Timelapse, WatchLater, Info} from '@material-ui/icons';
+import {Timelapse, WatchLater} from '@material-ui/icons';
 import { Dialog } from '../../../index';
 import Typography from '@material-ui/core/Typography';
 import { formatPrettyDate } from 'services/utils';
@@ -52,13 +52,10 @@ const AppointmentPreview = ({ entry, onUpdate, isNext }) => {
       <div className='name-container'>
         {
           entry.type === 'appointment' ? (
-            <WatchLater className='name-container__icon' />
+            <WatchLater className={`name-container__icon ${isNext ? 'active' : ''}`} />
           ) : (
-            <Timelapse className='name-container__icon' />
+            <Timelapse className={`name-container__icon ${isNext ? 'active' : ''}`} />
           )
-        }
-        {
-          isNext && <Info className='name-container__icon icon-now' />
         }
         <Typography align='center'>{ formatPrettyDate(date) }</Typography>
       </div>
