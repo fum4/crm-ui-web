@@ -32,7 +32,7 @@ const AppointmentPreview = ({ entry, onUpdate }) => {
       }
     ];
 
-    const excludeFields = ['clientId', '_id', 'type', '__v'];
+    const excludeFields = ['appointmentId', 'clientId', '_id', 'type', '__v'];
 
     Object.keys(entry).forEach((key) => {
       if (!excludeFields.includes(key)) {
@@ -84,7 +84,7 @@ const AppointmentPreview = ({ entry, onUpdate }) => {
             action='edit'
             setShowModal={setShowAddModal}
             successHandler={() => onUpdate()}
-            type={'appointment'}
+            type={entry.type}
             values={formValues}
           />
         )
@@ -95,7 +95,7 @@ const AppointmentPreview = ({ entry, onUpdate }) => {
             action='delete'
             setShowModal={setShowDeleteModal}
             successHandler={() => onUpdate()}
-            type='appointment'
+            type={entry.type}
             values={{ _id: entry._id }}
           />
         )

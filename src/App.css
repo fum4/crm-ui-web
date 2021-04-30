@@ -216,4 +216,8 @@
   .desktop-only {
     visibility: visible;
   }
+
+  .delete-modal button {
+    width: 30%;
+  }
 }
