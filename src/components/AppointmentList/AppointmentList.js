@@ -12,17 +12,17 @@ const AppointmentList = ({ entries, type, parentId }) => {
   const [sortedEntries, setSortedEntries] = useState([]);
   const [itemExpanded, setItemExpanded] = useState(false);
 
-  const checkIfExpanded = (entries) => {
+  useEffect(() => {
     const currentDate = moment().format('YYYY-MM-DTHH:mm');
 
-    entries.forEach((entry, index) => {
+    sortedEntries.forEach((entry, index) => {
       const entryDate = entry.appointment || entry.date;
 
-      if (entryDate > currentDate) {
+      if (itemExpanded === false && entryDate > currentDate) {
         setItemExpanded(index);
       }
     })
-  };
+  }, [ sortedEntries, itemExpanded ]);
 
   useEffect(() => {
     const sorted = entries.slice().sort((a, b) => {
@@ -44,8 +44,7 @@ const AppointmentList = ({ entries, type, parentId }) => {
     }).reverse();
 
     setSortedEntries(sorted);
-    checkIfExpanded(sorted);
-  }, [ entries, checkIfExpanded ]);
+  }, [ entries ]);
 
   const buildHeader = (entry, index) => {
     const previousEntry = entries[index - 1];
