@@ -9,6 +9,29 @@ import './styles.scss';
 
 const AppointmentList = ({ entries, type, parentId }) => {
   const [shouldDisplayInactive, setShouldDisplayInactive] = useState(false);
+  const [sortedEntries, setSortedEntries] = useState([]);
+
+  useEffect(() => {
+    const sorted = entries.slice().sort((a, b) => {
+      if (a.type === 'control' && b.type === 'appointment') {
+        return a.date < b.appointment ? -1 : 1;
+      }
+
+      if (a.type === 'appointment' && b.type === 'control') {
+        return a.appointment < b.date ? -1 : 1;
+      }
+
+      if (a.type === 'appointment' && b.type === 'appointment') {
+        return a.appointment < b.appointment ? -1 : 1;
+      }
+
+      if (a.type === 'control' && b.type === 'control') {
+        return a.date < b.date ? -1 : 1;
+      }
+    }).reverse();
+
+    setSortedEntries(sorted);
+  }, [ entries ]);
 
   const buildHeader = (entry, index) => {
     const previousEntry = entries[index - 1];
@@ -62,7 +85,7 @@ const AppointmentList = ({ entries, type, parentId }) => {
         labelPlacement={isMobile() ? undefined : 'start'}
         onChange={() => setShouldDisplayInactive(!shouldDisplayInactive)}
       />
-      {entries?.map((entry, index) => {
+      {sortedEntries?.map((entry, index) => {
         if (shouldDisplayEntry(entry)) {
           return type === 'primary' ? (
             <Fragment key={entry._id}>
