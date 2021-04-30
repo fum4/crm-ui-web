@@ -10,6 +10,19 @@ import './styles.scss';
 const AppointmentList = ({ entries, type, parentId }) => {
   const [shouldDisplayInactive, setShouldDisplayInactive] = useState(false);
   const [sortedEntries, setSortedEntries] = useState([]);
+  const [itemExpanded, setItemExpanded] = useState(false);
+
+  const checkIfExpanded = (entries) => {
+    const currentDate = moment().format('YYYY-MM-DTHH:mm');
+
+    entries.forEach((entry, index) => {
+      const entryDate = entry.appointment || entry.date;
+
+      if (entryDate > currentDate) {
+        setItemExpanded(index);
+      }
+    })
+  };
 
   useEffect(() => {
     const sorted = entries.slice().sort((a, b) => {
@@ -31,7 +44,8 @@ const AppointmentList = ({ entries, type, parentId }) => {
     }).reverse();
 
     setSortedEntries(sorted);
-  }, [ entries ]);
+    checkIfExpanded(sorted);
+  }, [ entries, checkIfExpanded ]);
 
   const buildHeader = (entry, index) => {
     const previousEntry = entries[index - 1];
@@ -96,7 +110,7 @@ const AppointmentList = ({ entries, type, parentId }) => {
             </Fragment>
           ) : (
             <div className='appointments-container-secondary__item' key={entry._id}>
-              <AppointmentSecondary entry={entry} parentId={parentId} />
+              <AppointmentSecondary isExpanded={index === itemExpanded} entry={entry} parentId={parentId} />
             </div>
           );
         }

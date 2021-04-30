@@ -17,14 +17,13 @@ const AppointmentCollapsable = (props) => {
     <>
       <Accordion
         className='appointment-collapsable'
-        expanded={expanded === props.index}
+        expanded={expanded === props.index || props.isExpanded}
         key={props.entry._id}
         onChange={handleChange(props.index)}
       >
         <AccordionSummary aria-controls='panel1bh-content' id='panel1bh-header'>
           <AppointmentPreview
             entry={props.entry}
-            isExpanded={expanded === props.index}
             onUpdate={props.actionSuccessHandler}
           />
         </AccordionSummary>
