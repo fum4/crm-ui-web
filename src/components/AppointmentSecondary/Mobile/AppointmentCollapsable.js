@@ -17,7 +17,7 @@ const AppointmentCollapsable = (props) => {
     <>
       <Accordion
         className='appointment-collapsable'
-        expanded={expanded === props.index || props.isExpanded}
+        expanded={expanded === props.index || props.isNext}
         key={props.entry._id}
         onChange={handleChange(props.index)}
       >
@@ -25,6 +25,7 @@ const AppointmentCollapsable = (props) => {
           <AppointmentPreview
             entry={props.entry}
             onUpdate={props.actionSuccessHandler}
+            isNext={props.isNext}
           />
         </AccordionSummary>
         <AccordionDetails>

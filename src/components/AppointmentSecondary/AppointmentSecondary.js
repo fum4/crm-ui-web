@@ -5,7 +5,7 @@ import AppointmentCollapsable from "./Mobile/AppointmentCollapsable";
 import AppointmentExpanded from "./Desktop/AppointmentExpanded";
 import './styles.scss';
 
-const AppointmentSecondary = ({ entry, parentId, isExpanded }) => {
+const AppointmentSecondary = ({ entry, parentId, isNext }) => {
   const [showEditModal, setShowEditModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [formValues, setFormValues] = useState([]);
@@ -44,13 +44,14 @@ const AppointmentSecondary = ({ entry, parentId, isExpanded }) => {
         isMobile() ? (
           <AppointmentCollapsable
             entry={entry}
-            isExpanded={isExpanded}
+            isNext={isNext}
             setShowEditModal={setShowEditModal}
             setShowDeleteModal={setShowDeleteModal}
           />
         ) : (
           <AppointmentExpanded
             entry={entry}
+            isNext={isNext}
             setShowEditModal={setShowEditModal}
             setShowDeleteModal={setShowDeleteModal}
           />

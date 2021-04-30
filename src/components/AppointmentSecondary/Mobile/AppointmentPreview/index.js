@@ -1,13 +1,13 @@
 import { useState, useEffect } from 'react';
 import { FaPen, FaTrashAlt } from 'react-icons/fa';
 import { Button } from '@material-ui/core';
-import {Timelapse, WatchLater} from '@material-ui/icons';
+import {Timelapse, WatchLater, Info} from '@material-ui/icons';
 import { Dialog } from '../../../index';
 import Typography from '@material-ui/core/Typography';
 import { formatPrettyDate } from 'services/utils';
 import './styles.scss';
 
-const AppointmentPreview = ({ entry, onUpdate }) => {
+const AppointmentPreview = ({ entry, onUpdate, isNext }) => {
   const [showAddModal, setShowAddModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [formValues, setFormValues] = useState([]);
@@ -56,6 +56,9 @@ const AppointmentPreview = ({ entry, onUpdate }) => {
           ) : (
             <Timelapse className='name-container__icon' />
           )
+        }
+        {
+          isNext && <Info className='name-container__icon icon-now' />
         }
         <Typography align='center'>{ formatPrettyDate(date) }</Typography>
       </div>
