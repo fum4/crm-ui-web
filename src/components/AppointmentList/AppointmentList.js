@@ -10,15 +10,17 @@ import './styles.scss';
 const AppointmentList = ({ entries, type, parentId }) => {
   const [shouldDisplayInactive, setShouldDisplayInactive] = useState(false);
   const [sortedEntries, setSortedEntries] = useState([]);
-  const [nextAppointment, setNextAppointment] = useState(null);
+  const [nextAppointment, setNextAppointment] = useState();
 
   useEffect(() => {
-    const currentDate = moment().format('YYYY-MM-DTHH:mm');
+    const currentDate = moment().format('YYYY-MM-DDTHH:mm');
 
     sortedEntries.forEach((entry, index) => {
-      const entryDate = entry.appointment || entry.date;
+      const entryDate = entry.type === 'appointment'
+        ? entry.appointment
+        : entry.date;
 
-      if (nextAppointment === null && entryDate > currentDate) {
+      if (entryDate > currentDate) {
         setNextAppointment(index);
       }
     })
@@ -74,7 +76,7 @@ const AppointmentList = ({ entries, type, parentId }) => {
   };
 
   const isActive = (entry) => {
-    const currentDate = moment().format('YYYY-MM-DTHH:mm');
+    const currentDate = moment().format('YYYY-MM-DDTHH:mm');
     const entryDate = entry.type === 'appointment' ? entry.appointment : entry.date;
 
     return entryDate > currentDate;

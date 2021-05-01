@@ -99,7 +99,7 @@ export const serializeForm = (payload) => {
   );
 };
 
-export const getCurrentDate = () => moment().format('YYYY-MM-DTHH:mm');
+export const getCurrentDate = () => moment().format('YYYY-MM-DDTHH:mm');
 
 export const splitByDelimiter = (value, delimiter) => {
   if (value) {

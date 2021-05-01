@@ -57,6 +57,7 @@ export const labels = {
     FETCH_CLIENTS: 'Pacienții nu au putut fi actualizați.',
   },
   GENERIC_ERROR_MESSAGE: 'Ne pare rău, a apărut o eroare.',
+  HOUR: 'Ora',
   LOGIN: 'Autentificare',
   LOGIN_ERROR: 'Autentificarea a eșuat',
   MONTHS: {

@@ -1,7 +1,8 @@
-import ListItemText from "@material-ui/core/ListItemText";
-import ListItem from "@material-ui/core/ListItem";
-import { AttachMoney, Build, LocalHospital, Timelapse, WatchLater } from "@material-ui/icons";
-import { FaPen, FaTrashAlt } from "react-icons/fa";
+import ListItemText from '@material-ui/core/ListItemText';
+import ListItem from '@material-ui/core/ListItem';
+import { AttachMoney, Build, LocalHospital, Timelapse, WatchLater } from '@material-ui/icons';
+import { FaPen, FaTrashAlt } from 'react-icons/fa';
+import { formatPrettyDate } from 'services/utils';
 import './styles.scss';
 
 const AppointmentExpanded = ({ entry, setShowEditModal, setShowDeleteModal }) => {
@@ -17,7 +18,7 @@ const AppointmentExpanded = ({ entry, setShowEditModal, setShowDeleteModal }) =>
               <WatchLater />
               <ListItemText
                 className='appointment-secondary appointment-secondary__appointment'
-                primary={entry?.appointment}
+                primary={formatPrettyDate(entry?.appointment)}
               />
             </>
             ) : (
@@ -25,7 +26,7 @@ const AppointmentExpanded = ({ entry, setShowEditModal, setShowDeleteModal }) =>
               <Timelapse />
               <ListItemText
                 className='appointment-secondary appointment-secondary__control'
-                primary={entry?.date}
+                primary={formatPrettyDate(entry?.date)}
               />
             </>
           )
@@ -53,7 +54,7 @@ const AppointmentExpanded = ({ entry, setShowEditModal, setShowDeleteModal }) =>
           )
         }
         {
-          entry?.control && (
+          entry?.price && (
             <>
               <AttachMoney />
               <ListItemText
@@ -69,7 +70,7 @@ const AppointmentExpanded = ({ entry, setShowEditModal, setShowDeleteModal }) =>
               <Timelapse />
               <ListItemText
                 className='appointment-secondary appointment-secondary__control'
-                primary={entry?.control}
+                primary={formatPrettyDate(entry?.control)}
               />
             </>
           )

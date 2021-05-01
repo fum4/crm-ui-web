@@ -2,12 +2,14 @@ import { useState } from 'react';
 import {Accordion, AccordionDetails, AccordionSummary, Chip} from '@material-ui/core';
 import AppointmentPreview from './AppointmentPreview';
 import './styles.scss';
-import {labels} from "../../../constants";
+import {labels} from '../../../constants';
+import {getHourFromDate} from 'services/utils';
 
 const AppointmentCollapsable = (props) => {
   const [expanded, setExpanded] = useState(false);
   const { control, price, treatment, technician } = props.entry;
   const isAppointment = props.entry.type === 'appointment';
+  const { hour, minutes } = getHourFromDate(isAppointment ? props.entry.appointment : props.entry.date);
 
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
@@ -29,6 +31,15 @@ const AppointmentCollapsable = (props) => {
           />
         </AccordionSummary>
         <AccordionDetails>
+          <div className='info' component='p' variant='body2'>
+            <Chip
+                className='info__label'
+                // icon={<AccessTime />}
+                label={labels.HOUR}
+                size='small'
+            />
+            <span className='info__text'>{ `${hour}:${minutes}` }</span>
+          </div>
           {
             treatment && (
               <div className='info' component='p' variant='body2'>

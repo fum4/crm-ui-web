@@ -11,7 +11,9 @@ const AppointmentPreview = ({ entry, onUpdate, isNext }) => {
   const [showAddModal, setShowAddModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [formValues, setFormValues] = useState([]);
-  const date = entry.appointment || entry.date;
+  const date = entry.type === 'appointment'
+    ? entry.appointment
+    : entry.date;
 
   useEffect(() => {
     const values = [
