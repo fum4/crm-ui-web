@@ -157,7 +157,11 @@
   }
 
   .modal button.MuiButton-sizeLarge {
-    width: 93%!important;
+    width: 93%;
+  }
+
+  .modal .delete-modal button.MuiButton-sizeLarge {
+    width: 75%;
   }
 
   .modal button.MuiButton-outlined {
@@ -171,6 +175,8 @@
   .modal .modal-header .title-container {
     width: 84%;
     margin: 15px auto auto;
+    font-size: 14px;
+    text-align: center;
   }
 
   .notification-banner__success div,
