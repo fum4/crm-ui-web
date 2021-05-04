@@ -13,12 +13,16 @@ const getHeaders = () => {
   return headers;
 };
 
+const buildReqObj = () => {
+  return axios.create({
+    baseURL,
+    headers: getHeaders()
+  });
+};
+
 const baseURL = process.env.NODE_ENV === 'production' ? 'https://e-programare-api.herokuapp.com/' : 'http://localhost:3000';
 
-const api = axios.create({
-  baseURL,
-  headers: getHeaders()
-});
+let api = buildReqObj();
 
 // AUTH
 export const register = (payload) => api.post('/register', payload);
@@ -30,6 +34,8 @@ export const login = (payload) => {
     if (data.accessToken) {
       data.password = payload.password;
       localStorage.setItem('user', JSON.stringify(data));
+
+      api = buildReqObj();
     }
   });
 };
