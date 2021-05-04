@@ -201,7 +201,7 @@ const Dialog = ({ action, setShowModal, type, values }) => {
       </div>
       {action === 'delete' ? (
         <div className='modal-footer delete-modal'>
-          <Button color='primary' onClick={() => handleSubmit()} size='large' variant='contained'>
+          <Button color='secondary' onClick={() => handleSubmit()} size='large' variant='contained'>
             {submitText}
           </Button>
         </div>
