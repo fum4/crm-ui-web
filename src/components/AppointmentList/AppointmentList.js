@@ -86,10 +86,6 @@ const AppointmentList = ({ entries, type, parentId }) => {
     return entry && (shouldDisplayInactive || isActive(entry));
   };
 
-  useEffect(() => {
-    setShouldDisplayInactive(type === 'secondary');
-  }, [type]);
-
   return (
     <div className={`appointments-container-${type}`}>
       <FormControlLabel
