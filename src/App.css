@@ -146,6 +146,7 @@
 
   .appointments-container-secondary__switch.MuiFormControlLabel-root {
     margin: auto auto 10px;
+    justify-content: center;
   }
 
   .appointment-primary.MuiPaper-root .card-content .appointment,
