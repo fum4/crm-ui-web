@@ -194,6 +194,10 @@
     padding: 0 5px;
   }
 
+  .appointments-container-secondary__item.isNext .MuiAccordionSummary-content.Mui-expanded {
+    margin-top: 16px;
+  }
+
   .MuiAccordionSummary-content button.add-new-btn .add-icon {
     margin-right: 0;
   }

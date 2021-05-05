@@ -14,13 +14,15 @@ const AppointmentList = ({ entries, type, parentId }) => {
 
   useEffect(() => {
     const currentDate = moment().format('YYYY-MM-DDTHH:mm');
+    let searchForNextAppointment = true;
 
     sortedEntries.forEach((entry, index) => {
       const entryDate = entry.type === 'appointment'
         ? entry.appointment
         : entry.date;
 
-      if (entryDate > currentDate) {
+      if (searchForNextAppointment && entryDate > currentDate) {
+        searchForNextAppointment = false;
         setNextAppointment(index);
       }
     })
@@ -45,8 +47,8 @@ const AppointmentList = ({ entries, type, parentId }) => {
       }
     });
 
-    setSortedEntries(type === 'primary' ? sorted : sorted.reverse());
-  }, [ type, entries ]);
+    setSortedEntries(sorted);
+  }, [ entries ]);
 
   const buildHeader = (entry, index) => {
     const previousEntry = entries[index - 1];

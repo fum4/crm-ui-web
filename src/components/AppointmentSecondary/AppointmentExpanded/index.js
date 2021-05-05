@@ -2,14 +2,17 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ListItem from '@material-ui/core/ListItem';
 import { AttachMoney, Build, LocalHospital, Timelapse, WatchLater } from '@material-ui/icons';
 import { FaPen, FaTrashAlt } from 'react-icons/fa';
-import { formatPrettyDate } from 'services/utils';
+import { formatPrettyDate, getHourFromDate } from 'services/utils';
 import './styles.scss';
 
 const AppointmentExpanded = ({ entry, setShowEditDialog, setShowDeleteDialog }) => {
-  const isAppointment = entry.type === 'appointment';
   const hasControl = !!entry.control;
+  const isAppointment = entry.type === 'appointment';
+  const entryDate = isAppointment ? entry.appointment : entry.date;
+  const { hour, minutes } = getHourFromDate(entryDate);
+  const fullDate = `${formatPrettyDate(entryDate)} - ${hour}:${minutes}`;
 
-  return (
+    return (
     <ListItem>
       <div className='appointment-secondary__data'>
         {
@@ -18,7 +21,7 @@ const AppointmentExpanded = ({ entry, setShowEditDialog, setShowDeleteDialog }) 
               <WatchLater />
               <ListItemText
                 className='appointment-secondary appointment-secondary__appointment'
-                primary={formatPrettyDate(entry?.appointment)}
+                primary={fullDate}
               />
             </>
             ) : (
@@ -26,7 +29,7 @@ const AppointmentExpanded = ({ entry, setShowEditDialog, setShowDeleteDialog }) 
               <Timelapse />
               <ListItemText
                 className='appointment-secondary appointment-secondary__control'
-                primary={formatPrettyDate(entry?.date)}
+                primary={fullDate}
               />
             </>
           )
