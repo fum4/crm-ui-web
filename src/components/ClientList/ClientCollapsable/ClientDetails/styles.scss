@@ -1,0 +1,54 @@
+.client-details-container {
+  background-color: #F8F8F8;
+  display: flex;
+  margin-bottom: 15px;
+  width: 100%;
+
+  button {
+    border-color: #909090;
+
+    &.edit-btn {
+      min-width: 30px;
+      max-width: 30px;
+      padding: 5px;
+      margin: 13px 15px 0 0;
+      color: #909090;
+    }
+  }
+
+  .client-details {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    .phone-container,
+    .comments-container,
+    .address-container {
+      display: flex;
+      align-items: center;
+      margin: 10px 10px 0;
+
+      &:last-of-type {
+        margin-bottom: 10px;
+      }
+
+      .phone-icon,
+      .comments-icon,
+      .address-icon {
+        font-size: 22px;
+        margin: 5px 10px 0 7px;
+
+        &:last-of-type {
+          margin-bottom: 5px;
+        }
+      }
+
+      .phone-number,
+      .comments-text,
+      .address {
+        color: black;
+        text-decoration: none;
+      }
+    }
+  }
+}

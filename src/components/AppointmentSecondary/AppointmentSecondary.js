@@ -1,13 +1,13 @@
 import { useState, useEffect } from 'react';
 import { Dialog } from '..';
 import { isMobile } from 'services/utils';
-import AppointmentCollapsable from "./Mobile/AppointmentCollapsable";
-import AppointmentExpanded from "./Desktop/AppointmentExpanded";
+import AppointmentCollapsable from "./AppointmentCollapsable";
+import AppointmentExpanded from "./AppointmentExpanded";
 import './styles.scss';
 
 const AppointmentSecondary = ({ entry, parentId, isNext }) => {
-  const [showEditModal, setShowEditModal] = useState(false);
-  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [showEditDialog, setShowEditDialog] = useState(false);
+  const [showDeleteDialog, setShowDeleteDialog] = useState(false);
   const [formValues, setFormValues] = useState([]);
 
   useEffect(() => {
@@ -45,33 +45,33 @@ const AppointmentSecondary = ({ entry, parentId, isNext }) => {
           <AppointmentCollapsable
             entry={entry}
             isNext={isNext}
-            setShowEditModal={setShowEditModal}
-            setShowDeleteModal={setShowDeleteModal}
+            setShowEditDialog={setShowEditDialog}
+            setShowDeleteDialog={setShowDeleteDialog}
           />
         ) : (
           <AppointmentExpanded
             entry={entry}
             isNext={isNext}
-            setShowEditModal={setShowEditModal}
-            setShowDeleteModal={setShowDeleteModal}
+            setShowEditDialog={setShowEditDialog}
+            setShowDeleteDialog={setShowDeleteDialog}
           />
         )
       }
       {
-        showEditModal && (
+        showEditDialog && (
           <Dialog
             action='edit'
-            setShowModal={setShowEditModal}
+            setShowModal={setShowEditDialog}
             type={entry.type}
             values={formValues}
           />
         )
       }
       {
-        showDeleteModal && (
+        showDeleteDialog && (
           <Dialog
             action='delete'
-            setShowModal={setShowDeleteModal}
+            setShowModal={setShowDeleteDialog}
             type={entry.type}
             values={{ _id: entry._id }}
           />

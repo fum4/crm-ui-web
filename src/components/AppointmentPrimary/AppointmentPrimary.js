@@ -20,8 +20,8 @@ const theme = createMuiTheme({
 });
 
 const AppointmentPrimary = ({ entry }) => {
-  const [showEditModal, setShowEditModal] = useState(false);
-  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [showEditDialog, setShowEditDialog] = useState(false);
+  const [showDeleteDialog, setShowDeleteDialog] = useState(false);
   const [formValues, setFormValues] = useState([]);
   const { name, surname, appointment, control, date, price, treatment, technician, phone } = entry;
   const isAppointment = entry.type === 'appointment';
@@ -89,7 +89,7 @@ const AppointmentPrimary = ({ entry }) => {
                   label={labels.PHONE}
                   size='small'
                 />
-                <span className='info__text__phone'>{formatPhoneNumber(phone)}</span>
+                <a className='info__text__phone' href={`tel:${phone}`}>{formatPhoneNumber(phone)}</a>
               </div>
             )
           }
@@ -147,20 +147,20 @@ const AppointmentPrimary = ({ entry }) => {
           }
         </CardContent>
         <div className='card-actions'>
-          <FaPen className='card-actions__edit-icon' onClick={() => setShowEditModal(true)} />
-          <FaTrashAlt className='card-actions__remove-icon' onClick={() => setShowDeleteModal(true)} />
+          <FaPen className='card-actions__edit-icon' onClick={() => setShowEditDialog(true)} />
+          <FaTrashAlt className='card-actions__remove-icon' onClick={() => setShowDeleteDialog(true)} />
         </div>
       </Card>
       {
-        showEditModal && (
-          <Dialog action='edit' setShowModal={setShowEditModal} type={entry.type} values={formValues} />
+        showEditDialog && (
+          <Dialog action='edit' setShowModal={setShowEditDialog} type={entry.type} values={formValues} />
         )
       }
       {
-        showDeleteModal && (
+        showDeleteDialog && (
           <Dialog
             action='delete'
-            setShowModal={setShowDeleteModal}
+            setShowModal={setShowDeleteDialog}
             type={entry.type}
             values={{ _id: entry._id }}
           />

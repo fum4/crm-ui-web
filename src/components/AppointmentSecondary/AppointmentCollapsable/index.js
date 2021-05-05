@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import {Accordion, AccordionDetails, AccordionSummary, Chip} from '@material-ui/core';
 import AppointmentPreview from './AppointmentPreview';
-import './styles.scss';
 import {labels} from '../../../constants';
-import {getHourFromDate} from 'services/utils';
+import {getHourFromDate, formatPrettyDate} from 'services/utils';
+import './styles.scss';
 
 const AppointmentCollapsable = (props) => {
   const [expanded, setExpanded] = useState(false);
@@ -26,8 +26,9 @@ const AppointmentCollapsable = (props) => {
         <AccordionSummary aria-controls='panel1bh-content' id='panel1bh-header'>
           <AppointmentPreview
             entry={props.entry}
-            onUpdate={props.actionSuccessHandler}
             isNext={props.isNext}
+            setShowEditDialog={props.setShowEditDialog}
+            setShowDeleteDialog={props.setShowDeleteDialog}
           />
         </AccordionSummary>
         <AccordionDetails>
@@ -62,7 +63,7 @@ const AppointmentCollapsable = (props) => {
                   label={labels.CONTROL}
                   size='small'
                 />
-                <span className='info__text'>{control}</span>
+                <span className='info__text'>{formatPrettyDate(control)}</span>
               </div>
             )
           }

@@ -128,7 +128,7 @@ const Dialog = ({ action, setShowModal, type, values }) => {
           options = options.concat(values);
         }
 
-        const fields = extractFields(formTypes[type]);
+        const fields = extractFields(formTypes[`${type}_${action}`]);
         const formValues = getFormValues(_.flatten(fields), _.flatten(options));
 
         setFormFields(formValues);

@@ -70,7 +70,7 @@
     width: 91%;
   }
 
-  .clients-container .MuiAccordionDetails-root {
+  .clients-container .appointments-container-secondary .MuiAccordionDetails-root {
     padding-left: 22px;
   }
 
@@ -135,8 +135,12 @@
 
   .appointments-container-secondary__item,
   .appointments-container-secondary__switch {
-    margin-right: 2px;
+    margin-right: 0;
     width: 100%;
+  }
+
+  .appointments-container-secondary__switch.MuiFormControlLabel-root {
+    margin: auto auto 10px;
   }
 
   .appointment-primary.MuiPaper-root .card-content .appointment,
@@ -225,5 +229,9 @@
 
   .delete-modal button {
     width: 30%;
+  }
+
+  .client-content .client-details-container {
+    width: 90%;
   }
 }

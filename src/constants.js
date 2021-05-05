@@ -10,10 +10,12 @@ export const labels = {
   ADD_CONTROL: 'Adaugă control',
   ADD_EXISTING_CLIENT: 'Alegeți pacient existent',
   APPOINTMENT: 'Programare',
+  APPOINTMENTS: 'Programări',
   CANCEL: 'Renunță',
   CANCEL_ADD_APPOINTMENT: 'Fără programare',
   CANCEL_ADD_CONTROL: 'Fără control',
   CLIENT: 'Pacient',
+  COMMENTS: 'Comentarii',
   CONTROL: 'Control',
   DATE: 'Data',
   DAYS: {
@@ -40,6 +42,7 @@ export const labels = {
   DELETE_CONTROL_MESSAGE: 'Ești sigur că vrei să anulezi controlul?',
   DELETE_CLIENT: 'Șterge client',
   DELETE_CLIENT_MESSAGE: 'Ești sigur că vrei să ștergi clientul?',
+  DETAILS: 'Detalii',
   EDIT: 'Modifică',
   EDIT_APPOINTMENT: 'Modifică programare',
   EDIT_CONTROL: 'Modifică control',
@@ -172,13 +175,20 @@ export const fieldsConfig = {
   treatment: {
     id: 'treatment',
     label: labels.TREATMENT
+  },
+  comments: {
+    id: 'comments',
+    label: labels.COMMENTS
   }
 };
 
 export const formTypes = {
-  appointment: ['client', 'appointment', 'treatment', 'technician', 'price', 'addControl'],
-  control: ['client', 'appointment', 'treatment', 'technician', 'price', 'date', 'addControl'],
-  client: ['name', 'surname', 'phone', 'address', 'addAppointment']
+  appointment_add: ['client', 'appointment', 'treatment', 'technician', 'price', 'addControl'],
+  appointment_edit: ['client', 'appointment', 'treatment', 'technician', 'price', 'addControl'],
+  control_add: ['client', 'appointment', 'treatment', 'technician', 'price', 'date', 'addControl'],
+  control_edit: ['client', 'appointment', 'treatment', 'technician', 'price', 'date', 'addControl'],
+  client_add: ['name', 'surname', 'phone', 'address', 'addAppointment'],
+  client_edit: ['name', 'surname', 'phone', 'address', 'comments']
 };
 
 export const mobileMediaQueryBreakpoint = 1099;

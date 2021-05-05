@@ -8,4 +8,14 @@
   .MuiAccordionDetails-root {
     padding: 8px 16px 10px;
   }
+
+  button {
+    &.add-new-btn, &.remove-btn {
+      margin-left: 5px;
+
+      .add-icon {
+        margin-right: 5px;
+      }
+    }
+  }
 }

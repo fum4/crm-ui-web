@@ -47,7 +47,14 @@ export const getClients = () => api.get('/clients');
 
 export const addClient = (payload) => api.post('/client', payload);
 
-export const updateClient = (payload) => api.put('/client', payload);
+export const updateClient = (payload) => {
+  const url = `/client/${payload._id}`;
+
+  delete payload.client;
+  delete payload._id;
+
+  return api.put(url, payload);
+};
 
 export const deleteClient = (payload) => api.delete(`/client/${payload._id}`);
 

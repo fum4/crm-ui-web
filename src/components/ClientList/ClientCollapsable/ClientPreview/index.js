@@ -1,16 +1,16 @@
 import { useState, useEffect } from 'react';
 import { FaPlus, FaTrashAlt } from 'react-icons/fa';
 import { Button } from '@material-ui/core';
-import {AddAlarm, PermContactCalendar, PhoneIphone} from '@material-ui/icons';
+import {AddAlarm, PermContactCalendar} from '@material-ui/icons';
 import { Dialog } from '../../../index';
 import { labels } from '../../../../constants';
-import { formatPhoneNumber, isMobile } from '../../../../services/utils';
+import { isMobile } from '../../../../services/utils';
 import Typography from '@material-ui/core/Typography';
 import './styles.scss';
 
-const ClientPreview = ({ entry, onUpdate, isExpanded }) => {
-  const [showAddModal, setShowAddModal] = useState(false);
-  const [showDeleteModal, setShowDeleteModal] = useState(false);
+const ClientPreview = ({ entry }) => {
+  const [showAddDialog, setShowAddDialog] = useState(false);
+  const [showDeleteDialog, setShowDeleteDialog] = useState(false);
   const [formValues, setFormValues] = useState();
 
   useEffect(() => {
@@ -35,22 +35,12 @@ const ClientPreview = ({ entry, onUpdate, isExpanded }) => {
       <div className='name-container'>
         <PermContactCalendar className='name-container__icon' />
         <Typography align='left'>{`${entry.surname} ${entry.name}`}</Typography>
-        {
-          isExpanded && !isMobile() && (
-            <div className='name-container__phone'>
-              <PhoneIphone className='name-container__phone__icon' />
-              <Typography align='center'>
-                { formatPhoneNumber(entry.phone) }
-              </Typography>
-            </div>
-          )
-        }
       </div>
       <div className='action-buttons'>
         <Button
           className='add-new-btn'
           color='primary'
-          onClick={() => setShowAddModal(true)}
+          onClick={() => setShowAddDialog(true)}
           size='small'
           variant='outlined'
         >
@@ -68,29 +58,27 @@ const ClientPreview = ({ entry, onUpdate, isExpanded }) => {
         <Button
           className='remove-btn'
           color='secondary'
-          onClick={() => setShowDeleteModal(true)}
+          onClick={() => setShowDeleteDialog(true)}
           size='large'
           variant='outlined'>
           <FaTrashAlt className='remove-icon' />
         </Button>
       </div>
       {
-        showAddModal && (
+        showAddDialog && (
           <Dialog
             action='add'
-            setShowModal={setShowAddModal}
-            successHandler={() => onUpdate()}
+            setShowModal={setShowAddDialog}
             type={'appointment'}
             values={formValues}
           />
         )
       }
       {
-        showDeleteModal && (
+        showDeleteDialog && (
           <Dialog
             action='delete'
-            setShowModal={setShowDeleteModal}
-            successHandler={() => onUpdate()}
+            setShowModal={setShowDeleteDialog}
             type='client'
             values={{ _id: entry._id }}
           />

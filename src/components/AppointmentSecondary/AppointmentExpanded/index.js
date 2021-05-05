@@ -5,7 +5,7 @@ import { FaPen, FaTrashAlt } from 'react-icons/fa';
 import { formatPrettyDate } from 'services/utils';
 import './styles.scss';
 
-const AppointmentExpanded = ({ entry, setShowEditModal, setShowDeleteModal }) => {
+const AppointmentExpanded = ({ entry, setShowEditDialog, setShowDeleteDialog }) => {
   const isAppointment = entry.type === 'appointment';
   const hasControl = !!entry.control;
 
@@ -79,11 +79,11 @@ const AppointmentExpanded = ({ entry, setShowEditModal, setShowDeleteModal }) =>
       <div className='appointment-secondary appointment-secondary__action-buttons'>
         <FaPen
           className='appointment-secondary appointment-secondary__edit-icon'
-          onClick={() => setShowEditModal(true)}
+          onClick={() => setShowEditDialog(true)}
         />
         <FaTrashAlt
           className='appointment-secondary appointment-secondary__remove-icon'
-          onClick={() => setShowDeleteModal(true)}
+          onClick={() => setShowDeleteDialog(true)}
         />
       </div>
     </ListItem>
