@@ -164,7 +164,7 @@ const Dialog = ({ action, setShowModal, type, values }) => {
         switch (type) {
           case 'appointment':
           case 'control':
-            dispatch(editAppointment(serializeForm(payload)));
+            dispatch(editAppointment({ type: 'control', ...serializeForm(payload) }));
             break;
           case 'client':
             dispatch(editClient(serializeForm(payload)));
@@ -176,11 +176,11 @@ const Dialog = ({ action, setShowModal, type, values }) => {
           case 'appointment':
             dispatch(removeAppointment({ _id: values._id }));
             break;
-          case 'client':
-            dispatch(removeClient({ _id: values._id }));
-            break;
           case 'control':
             dispatch(removeAppointment({ type: 'control', _id: values._id }));
+            break;
+          case 'client':
+            dispatch(removeClient({ _id: values._id }));
             break;
         }
         break;
