@@ -1,8 +1,11 @@
 .client-details-container {
-  background-color: #F8F8F8;
   display: flex;
   margin-bottom: 15px;
   width: 100%;
+
+  &.MuiPaper-root {
+    background-color: #FCFCFC;
+  }
 
   button {
     border-color: #909090;
