@@ -10,6 +10,22 @@
     margin-left: 10px;
   }
 
+  &__item {
+    align-self: center;
+    background-color: #fafafa;
+    border: 1px solid #f5f5f5;
+    margin-bottom: 7px;
+  }
+
+  &__switch {
+    margin-bottom: 15px;
+  }
+
+  &__item, &__switch {
+    align-self: center;
+    width: 90%;
+  }
+
   .appointment-secondary {
     display: flex;
     padding: 0 12px 0 7px;

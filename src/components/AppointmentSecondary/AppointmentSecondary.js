@@ -39,7 +39,7 @@ const AppointmentSecondary = ({ entry, parentId, isNext }) => {
   }, [formValues, entry, parentId]);
 
   return (
-    <>
+    <div className={`appointments-container-secondary__item ${isNext ? 'isNext' : ''}`}>
       {
         isMobile() ? (
           <AppointmentCollapsable
@@ -51,7 +51,6 @@ const AppointmentSecondary = ({ entry, parentId, isNext }) => {
         ) : (
           <AppointmentExpanded
             entry={entry}
-            isNext={isNext}
             setShowEditDialog={setShowEditDialog}
             setShowDeleteDialog={setShowDeleteDialog}
           />
@@ -77,7 +76,7 @@ const AppointmentSecondary = ({ entry, parentId, isNext }) => {
           />
         )
       }
-    </>
+    </div>
   );
 };
 

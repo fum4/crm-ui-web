@@ -101,14 +101,15 @@ const AppointmentList = ({ entries, type, parentId }) => {
           return type === 'primary' ? (
             <Fragment key={entry._id}>
               {buildHeader(entry, index)}
-              <div className='appointments-container-primary__item'>
-                <AppointmentPrimary entry={entry} />
-              </div>
+              <AppointmentPrimary entry={entry} />
             </Fragment>
           ) : (
-            <div className='appointments-container-secondary__item' key={entry._id}>
-              <AppointmentSecondary isNext={index === nextAppointment} entry={entry} parentId={parentId} />
-            </div>
+            <AppointmentSecondary
+              key={entry._id}
+              isNext={index === nextAppointment}
+              entry={entry}
+              parentId={parentId}
+            />
           );
         }
       })}

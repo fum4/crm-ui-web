@@ -72,6 +72,7 @@ const Field = ({ classes, field, onInputChange, onFieldsExtend }) => {
           />
         ) : null;
       }
+      case 'multiline':
       default:
         return (
           <TextField
@@ -81,6 +82,7 @@ const Field = ({ classes, field, onInputChange, onFieldsExtend }) => {
             id={field.id}
             key={field.id}
             label={field.label}
+            multiline={field.type === 'multiline'}
             onChange={(ev) => onInputChange(field.id, ev.target.value)}
             required={field.isRequired}
             type={field.type}

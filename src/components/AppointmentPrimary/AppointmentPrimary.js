@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import {useEffect, useState} from 'react';
 import { Card, CardContent, Typography, Chip } from '@material-ui/core';
 import { PermContactCalendar, WatchLater, Timelapse } from '@material-ui/icons';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
@@ -56,7 +56,7 @@ const AppointmentPrimary = ({ entry }) => {
   }, [formValues, entry]);
 
   return (
-    <>
+    <div className='appointments-container-primary__item'>
       <Card className='appointment-primary' variant='outlined'>
         <CardContent className='card-content'>
           <div className='name'>
@@ -166,7 +166,7 @@ const AppointmentPrimary = ({ entry }) => {
           />
         )
       }
-    </>
+    </div>
   );
 };
 

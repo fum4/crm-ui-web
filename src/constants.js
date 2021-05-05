@@ -178,7 +178,8 @@ export const fieldsConfig = {
   },
   comments: {
     id: 'comments',
-    label: labels.COMMENTS
+    label: labels.COMMENTS,
+    type: 'multiline'
   }
 };
 
@@ -187,7 +188,7 @@ export const formTypes = {
   appointment_edit: ['client', 'appointment', 'treatment', 'technician', 'price', 'addControl'],
   control_add: ['client', 'appointment', 'treatment', 'technician', 'price', 'date', 'addControl'],
   control_edit: ['client', 'appointment', 'treatment', 'technician', 'price', 'date', 'addControl'],
-  client_add: ['name', 'surname', 'phone', 'address', 'addAppointment'],
+  client_add: ['name', 'surname', 'phone', 'address', 'comments', 'addAppointment'],
   client_edit: ['name', 'surname', 'phone', 'address', 'comments']
 };
 
