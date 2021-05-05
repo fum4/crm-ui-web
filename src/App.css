@@ -125,6 +125,11 @@
     width: 95%;
   }
 
+  .appointments-container-secondary__item.isNext {
+    margin: 10px 0 18px;
+    width: 96%;
+  }
+
   .appointments-container-secondary {
     padding-bottom: 0;
   }
@@ -233,10 +238,5 @@
 
   .client-content .client-details-container {
     width: 90%;
-  }
-
-  .appointments-container-secondary__item.isNext {
-    border-color: #3f51b5;
-    border-style: dashed;
   }
 }

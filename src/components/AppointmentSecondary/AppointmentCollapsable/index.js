@@ -5,11 +5,11 @@ import {labels} from '../../../constants';
 import {getHourFromDate, formatPrettyDate} from 'services/utils';
 import './styles.scss';
 
-const AppointmentCollapsable = (props) => {
+const AppointmentCollapsable = ({ entry, index, isNext, setShowEditDialog, setShowDeleteDialog }) => {
   const [expanded, setExpanded] = useState(false);
-  const { control, price, treatment, technician } = props.entry;
-  const isAppointment = props.entry.type === 'appointment';
-  const { hour, minutes } = getHourFromDate(isAppointment ? props.entry.appointment : props.entry.date);
+  const { control, price, treatment, technician } = entry;
+  const isAppointment = entry.type === 'appointment';
+  const { hour, minutes } = getHourFromDate(isAppointment ? entry.appointment : entry.date);
 
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
@@ -19,16 +19,16 @@ const AppointmentCollapsable = (props) => {
     <>
       <Accordion
         className='appointment-collapsable'
-        expanded={expanded === props.index || props.isNext}
-        key={props.entry._id}
-        onChange={handleChange(props.index)}
+        expanded={expanded === index || isNext}
+        key={entry._id}
+        onChange={handleChange(index)}
       >
         <AccordionSummary aria-controls='panel1bh-content' id='panel1bh-header'>
           <AppointmentPreview
-            entry={props.entry}
-            isNext={props.isNext}
-            setShowEditDialog={props.setShowEditDialog}
-            setShowDeleteDialog={props.setShowDeleteDialog}
+            entry={entry}
+            isNext={isNext}
+            setShowEditDialog={setShowEditDialog}
+            setShowDeleteDialog={setShowDeleteDialog}
           />
         </AccordionSummary>
         <AccordionDetails>
