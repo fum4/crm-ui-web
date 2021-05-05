@@ -3,6 +3,11 @@
   margin-bottom: 15px;
   width: 100%;
 
+  &.MuiPaper-outlined {
+    border-style: dotted;
+    border-color: grey;
+  }
+
   &.MuiPaper-root {
     background-color: #FCFCFC;
   }
