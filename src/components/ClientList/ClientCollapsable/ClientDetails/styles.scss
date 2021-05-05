@@ -22,7 +22,6 @@
     width: 100%;
 
     .phone-container,
-    .comments-container,
     .address-container {
       display: flex;
       align-items: center;
@@ -33,7 +32,6 @@
       }
 
       .phone-icon,
-      .comments-icon,
       .address-icon {
         font-size: 22px;
         margin: 5px 10px 0 7px;
@@ -48,6 +46,17 @@
       .address {
         color: black;
         text-decoration: none;
+      }
+    }
+
+    .comments-container {
+      display: flex;
+      align-items: center;
+      margin: 10px 10px 15px;
+
+      .comments-icon {
+        font-size: 22px;
+        margin: 5px 10px 0 7px;
       }
     }
   }
