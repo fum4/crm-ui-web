@@ -145,7 +145,7 @@
   }
 
   .appointments-container-secondary__switch.MuiFormControlLabel-root {
-    margin: auto auto 10px;
+    margin: auto auto 10px -8px;
     justify-content: center;
   }
 
