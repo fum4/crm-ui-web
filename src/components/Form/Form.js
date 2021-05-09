@@ -1,7 +1,7 @@
 import Field from './Field';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Button, makeStyles } from '@material-ui/core';
-import { getFormValues, splitByDelimiter, getOptionsForNestedFieldsVisibility, isMobile } from '../../services/utils';
+import { getFormConfig, splitByDelimiter, getOptionsForNestedFieldsVisibility, isMobile } from '../../services/utils';
 
 const useStyles = makeStyles((theme) => ({
   heading: {
@@ -32,10 +32,6 @@ const useStyles = makeStyles((theme) => ({
 const Form = ({ onSubmit, formFields, submitText }) => {
   const classes = useStyles();
   const [fields, setFields] = useState(formFields);
-
-  useEffect(() => {
-    setFields(formFields);
-  }, [formFields, setFields])
 
   const onFieldsExtend = (field, isHidden, value) => {
     const options = getOptionsForNestedFieldsVisibility(field.nestedFields, isHidden);
@@ -83,9 +79,7 @@ const Form = ({ onSubmit, formFields, submitText }) => {
       });
     }
 
-    const formValues = getFormValues(fields, options);
-
-    setFields(formValues);
+    setFields(getFormConfig(fields, options));
   };
 
   const onInputChange = (key, value) => {
@@ -123,9 +117,7 @@ const Form = ({ onSubmit, formFields, submitText }) => {
       return field;
     });
 
-    const formValues = getFormValues(updatedFields, options);
-
-    setFields(formValues);
+    setFields(getFormConfig(updatedFields, options));
   };
 
   const validateForm = () => {
@@ -144,8 +136,7 @@ const Form = ({ onSubmit, formFields, submitText }) => {
       }
     });
 
-    const formValues = getFormValues(fields, options);
-    setFields(formValues);
+    setFields(getFormConfig(fields, options));
 
     return isValid;
   }
@@ -173,7 +164,12 @@ const Form = ({ onSubmit, formFields, submitText }) => {
         ))
       }
       <div className={classes.footer}>
-        <Button color='primary' onClick={() => handleSubmit()} size='large' variant='contained'>
+        <Button
+          color='primary'
+          onClick={handleSubmit}
+          size='large'
+          variant='contained'
+        >
           { submitText }
         </Button>
       </div>

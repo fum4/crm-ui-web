@@ -5,10 +5,9 @@ const ClientList = ({ entries }) => {
   return (
     <div className='clients-container'>
       {
-        entries?.map((entry, index) => (
+        entries?.map((entry) => (
           <ClientCollapsable
             entry={entry}
-            index={index}
             key={entry._id}
           />
         ))

@@ -85,6 +85,8 @@ export const labels = {
   SURNAME: 'Prenume',
   TECHNICIAN: 'Tehnician',
   TREATMENT: 'Tratament',
+  USER: 'Utilizator',
+  PASSWORD: 'Parolă',
   REGISTER: 'Înregistrare',
   REGISTER_ERROR: 'Înregistrarea a eșuat',
 };

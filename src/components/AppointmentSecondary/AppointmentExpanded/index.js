@@ -3,20 +3,22 @@ import ListItem from '@material-ui/core/ListItem';
 import { AttachMoney, Build, LocalHospital, Timelapse, WatchLater } from '@material-ui/icons';
 import { FaPen, FaTrashAlt } from 'react-icons/fa';
 import { formatPrettyDate, getHourFromDate } from 'services/utils';
+import { useMemo } from 'react';
 import './styles.scss';
 
 const AppointmentExpanded = ({ entry, setShowEditDialog, setShowDeleteDialog }) => {
-  const hasControl = !!entry.control;
-  const isAppointment = entry.type === 'appointment';
-  const entryDate = isAppointment ? entry.appointment : entry.date;
-  const { hour, minutes } = getHourFromDate(entryDate);
-  const fullDate = `${formatPrettyDate(entryDate)} - ${hour}:${minutes}`;
+  const fullDate = useMemo(() => {
+    const date = entry.type === 'appointment' ? entry.appointment : entry.date;
+    const { hour, minutes } = getHourFromDate(date);
 
-    return (
+    return `${formatPrettyDate(date)} - ${hour}:${minutes}`;
+  }, [ entry ]);
+
+  return (
     <ListItem>
       <div className='appointment-secondary__data'>
         {
-          isAppointment ? (
+          entry.type === 'appointment' ? (
             <>
               <WatchLater />
               <ListItemText
@@ -35,45 +37,45 @@ const AppointmentExpanded = ({ entry, setShowEditDialog, setShowDeleteDialog }) 
           )
         }
         {
-          entry?.treatment && (
+          entry.treatment && (
             <>
               <LocalHospital />
               <ListItemText
                 className='appointment-secondary appointment-secondary__treatment'
-                primary={entry?.treatment}
+                primary={entry.treatment}
               />
             </>
           )
         }
         {
-          entry?.technician && (
+          entry.technician && (
             <>
               <Build />
               <ListItemText
                 className='appointment-secondary appointment-secondary__technician'
-                primary={entry?.technician}
+                primary={entry.technician}
               />
             </>
           )
         }
         {
-          entry?.price && (
+          entry.price && (
             <>
               <AttachMoney />
               <ListItemText
                 className='appointment-secondary appointment-secondary__price'
-                primary={entry?.price}
+                primary={entry.price}
               />
             </>
           )
         }
         {
-          isAppointment && hasControl && (
+          entry.type === 'appointment' && entry.control && (
             <>
               <Timelapse />
               <ListItemText
                 className='appointment-secondary appointment-secondary__control'
-                primary={formatPrettyDate(entry?.control)}
+                primary={formatPrettyDate(entry.control)}
               />
             </>
           )

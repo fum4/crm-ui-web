@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Form } from '..';
 import { formTypes } from '../../constants';
 import {
-  getFormValues,
+  getFormConfig,
   serializeForm,
   getCurrentDate,
   extractFields,
@@ -13,7 +13,7 @@ import {
   insertClient,
   editClient,
   removeClient,
-  useAllClients,
+  useClients,
   insertAppointment,
   editAppointment,
   removeAppointment
@@ -24,17 +24,18 @@ import { Button, Dialog as Modal } from '@material-ui/core';
 import _ from 'lodash';
 import './styles.scss';
 
-const Dialog = ({ action, setShowModal, type, values }) => {
+const Dialog = ({ action, type, config, setShowModal }) => {
   const [formFields, setFormFields] = useState();
   const [title, setTitle] = useState();
   const [isInitialized, setIsInitialized] = useState(false);
   const [submitText, setSubmitText] = useState(undefined);
-  const clients = useAllClients();
+  const clients = useClients();
   const dispatch = useDispatch();
 
   useEffect(() => {
     const initializeForm = async () => {
       if (action !== 'delete') {
+        const currentDate = getCurrentDate();
         let options = [];
 
         switch (type) {
@@ -55,15 +56,15 @@ const Dialog = ({ action, setShowModal, type, values }) => {
             options.push({
               id: 'appointment',
               key: 'value',
-              value: getCurrentDate()
+              value: currentDate
             });
             options.push({
               id: 'control',
               key: 'value',
-              value: getCurrentDate()
+              value: currentDate
             });
 
-            const hasControl = values?.find((value) => value.id === 'control')?.value;
+            const hasControl = config?.find((value) => value.id === 'control')?.value;
 
             if (hasControl) {
               options.push({
@@ -102,7 +103,7 @@ const Dialog = ({ action, setShowModal, type, values }) => {
             options.push({
               id: 'control',
               key: 'value',
-              value: getCurrentDate()
+              value: currentDate
             });
 
             break;
@@ -112,41 +113,33 @@ const Dialog = ({ action, setShowModal, type, values }) => {
               options.push({
                 id: 'appointment',
                 key: 'value',
-                value: getCurrentDate()
+                value: currentDate
               });
               options.push({
                 id: 'control',
                 key: 'value',
-                value: getCurrentDate()
+                value: currentDate
               });
             }
 
             break;
         }
 
-        if (values) {
-          options = options.concat(values);
+        if (config) {
+          options = options.concat(config);
         }
 
         const fields = extractFields(formTypes[`${type}_${action}`]);
-        const formValues = getFormValues(_.flatten(fields), _.flatten(options));
 
-        setFormFields(formValues);
+        setFormFields(getFormConfig(_.flatten(fields), _.flatten(options)));
       }
 
-      const dialogTitle = getDialogTitle(action, type);
-      const dialogSubmitButtonText = getDialogSubmitButtonText(action, type);
-
-      setTitle(dialogTitle);
-      setSubmitText(dialogSubmitButtonText);
+      setTitle(getDialogTitle(action, type));
+      setSubmitText(getDialogSubmitButtonText(action, type));
     };
 
     initializeForm().then(() => setIsInitialized(true));
-  }, [action, clients, type, values]);
-
-  const hideModal = () => {
-    setShowModal(false);
-  };
+  }, [action, clients, type, config]);
 
   const handleSubmit = (payload) => {
     switch (action) {
@@ -174,13 +167,13 @@ const Dialog = ({ action, setShowModal, type, values }) => {
       case 'delete':
         switch (type) {
           case 'appointment':
-            dispatch(removeAppointment({ _id: values._id }));
+            dispatch(removeAppointment({ _id: config._id }));
             break;
           case 'control':
-            dispatch(removeAppointment({ type: 'control', _id: values._id }));
+            dispatch(removeAppointment({ type: 'control', _id: config._id }));
             break;
           case 'client':
-            dispatch(removeClient({ _id: values._id }));
+            dispatch(removeClient({ _id: config._id }));
             break;
         }
         break;
@@ -189,33 +182,44 @@ const Dialog = ({ action, setShowModal, type, values }) => {
     hideModal();
   };
 
-  return isInitialized ? (
+  const hideModal = () => setShowModal(false);
+
+  return isInitialized && (
     <Modal className='modal' fullWidth maxWidth='md' open={true}>
       <div className='modal-header'>
         <div className='close-btn-container'>
-          <FaTimes className='close-btn' onClick={() => hideModal()} size={35} />
+          <FaTimes
+            className='close-btn'
+            onClick={hideModal}
+            size={35}
+          />
         </div>
         <div className='title-container'>
           <h1>{title}</h1>
         </div>
       </div>
-      {action === 'delete' ? (
-        <div className='modal-footer delete-modal'>
-          <Button color='secondary' onClick={() => handleSubmit()} size='large' variant='contained'>
-            {submitText}
-          </Button>
-        </div>
-      ) : (
-        <Form
-          formFields={formFields}
-          onSubmit={(payload) => handleSubmit(payload)}
-          submitText={submitText}
-          title={title}
-        />
-      )}
+      {
+        action === 'delete' ? (
+          <div className='modal-footer delete-modal'>
+            <Button
+              color='secondary'
+              onClick={handleSubmit}
+              size='large'
+              variant='contained'
+            >
+              { submitText }
+            </Button>
+          </div>
+        ) : (
+          <Form
+            formFields={formFields}
+            onSubmit={handleSubmit}
+            submitText={submitText}
+            title={title}
+          />
+        )
+      }
     </Modal>
-  ) : (
-    <div />
   );
 };
 

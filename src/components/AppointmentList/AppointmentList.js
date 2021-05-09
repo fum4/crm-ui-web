@@ -7,7 +7,7 @@ import { isMobile } from 'services/utils';
 import moment from 'moment';
 import './styles.scss';
 
-const AppointmentList = ({ entries, type, parentId }) => {
+const AppointmentList = ({ entries, type }) => {
   const [shouldDisplayInactive, setShouldDisplayInactive] = useState(false);
   const [sortedEntries, setSortedEntries] = useState([]);
   const [nextAppointment, setNextAppointment] = useState();
@@ -88,6 +88,10 @@ const AppointmentList = ({ entries, type, parentId }) => {
     return entry && (shouldDisplayInactive || isActive(entry));
   };
 
+  const toggleShouldDisplayInactive = () => {
+    setShouldDisplayInactive(!shouldDisplayInactive);
+  };
+
   return (
     <div className={`appointments-container-${type}`}>
       <FormControlLabel
@@ -96,7 +100,7 @@ const AppointmentList = ({ entries, type, parentId }) => {
         control={<Switch color='primary' />}
         label={labels.SHOW_INACTIVE_APPOINTMENTS}
         labelPlacement={isMobile() ? undefined : 'start'}
-        onChange={() => setShouldDisplayInactive(!shouldDisplayInactive)}
+        onChange={toggleShouldDisplayInactive}
       />
       {sortedEntries?.map((entry, index) => {
         if (shouldDisplayEntry(entry)) {
@@ -110,7 +114,6 @@ const AppointmentList = ({ entries, type, parentId }) => {
               key={entry._id}
               isNext={index === nextAppointment}
               entry={entry}
-              parentId={parentId}
             />
           );
         }

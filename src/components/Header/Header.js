@@ -65,7 +65,7 @@ const Header = ({ handleSearch, type }) => {
         <div className='search-input-container'>
           <BootstrapInput
             className='search-input-container__main-input'
-            onChange={(ev) => handleSearch(ev.target.value)}
+            onChange={handleSearch}
           />
           <Button
             className='add-new-btn'

@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { ClientList, Header } from '../../components';
-import { useAllClients } from '../../store';
+import { useClients } from '../../store';
 
 const Clients = ({ isAuthenticated }) => {
   const [filteredClients, setFilteredClients] = useState([]);
   const [clients, setClients] = useState([]);
-  const allClients = useAllClients(isAuthenticated);
+  const allClients = useClients(isAuthenticated);
   const history = useHistory();
 
   useEffect(() => {
@@ -19,7 +19,8 @@ const Clients = ({ isAuthenticated }) => {
     setClients(filteredClients.length ? filteredClients : allClients);
   }, [allClients, filteredClients]);
 
-  const handleSearch = (payload) => {
+  const handleSearch = (event) => {
+    const payload = event.target.value;
     const keywords = payload.split(' ');
 
     const filtered = allClients.filter((client) => {
@@ -50,7 +51,7 @@ const Clients = ({ isAuthenticated }) => {
   return isAuthenticated && (
     <>
       <Header
-        handleSearch={(payload) => handleSearch(payload)}
+        handleSearch={handleSearch}
         type='client'
       />
       <ClientList entries={clients} />

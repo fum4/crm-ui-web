@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { AppointmentList, Header } from '../../components';
-import { useAllAppointments } from '../../store';
+import { useAppointments } from '../../store';
 import { labels } from '../../constants';
 import moment from 'moment';
 
 const Today = ({ isAuthenticated }) => {
   const [filteredAppointments, setFilteredAppointments] = useState([]);
   const [appointments, setAppointments] = useState([]);
-  const allAppointments = useAllAppointments(isAuthenticated);
+  const allAppointments = useAppointments(isAuthenticated);
   const history = useHistory();
 
   useEffect(() => {
@@ -47,8 +47,8 @@ const Today = ({ isAuthenticated }) => {
         keywords.forEach((keyword) => {
           const searchTerm = keyword?.toLowerCase();
           const searchPool = searchByDate
-              ? [monthNameRo, day, dayNameRo]
-              : [monthNameRo, name, surname, treatment, technician, appointment, price, time, day, dayNameRo];
+            ? [monthNameRo, day, dayNameRo]
+            : [monthNameRo, name, surname, treatment, technician, appointment, price, time, day, dayNameRo];
 
           let currentItemMatched = false;
 
@@ -77,7 +77,7 @@ const Today = ({ isAuthenticated }) => {
   return isAuthenticated && (
     <>
       <Header
-        handleSearch={(payload) => handleSearch(payload)}
+        handleSearch={handleSearch}
         type='appointment'
       />
       <AppointmentList entries={appointments} type='primary' />
