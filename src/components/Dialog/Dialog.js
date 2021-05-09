@@ -184,7 +184,7 @@ const Dialog = ({ action, type, config, setShowModal }) => {
 
   const hideModal = () => setShowModal(false);
 
-  return isInitialized && (
+  return isInitialized ? (
     <Modal className='modal' fullWidth maxWidth='md' open={true}>
       <div className='modal-header'>
         <div className='close-btn-container'>
@@ -220,6 +220,8 @@ const Dialog = ({ action, type, config, setShowModal }) => {
         )
       }
     </Modal>
+  ) : (
+    <div /> // TODO
   );
 };
 

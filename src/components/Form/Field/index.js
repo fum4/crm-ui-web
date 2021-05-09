@@ -91,6 +91,8 @@ const Field = ({ classes, field, onInputChange, onFieldsExtend }) => {
           />
         );
     }
+  } else {
+    return <div />; // TODO
   }
 };
 
