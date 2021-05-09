@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import {useEffect, useState, useMemo} from 'react';
 import { Card, CardContent, Typography, Chip } from '@material-ui/core';
 import { PermContactCalendar, WatchLater, Timelapse } from '@material-ui/icons';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
@@ -22,29 +22,31 @@ const theme = createMuiTheme({
 const AppointmentPrimary = ({ entry }) => {
   const [showEditDialog, setShowEditDialog] = useState(false);
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
-  const [formValues, setFormValues] = useState([]);
-  const { name, surname, appointment, control, date, price, treatment, technician, phone } = entry;
-  const isAppointment = entry.type === 'appointment';
-  const hourAndMinutes = getHourFromDate(isAppointment ? appointment : date);
+  const [dialogConfig, setDialogConfig] = useState([]);
+
+  const { hour, minutes } = useMemo(() =>
+    getHourFromDate(entry.type === 'appointment' ? entry.appointment : entry.date)
+  , [ entry ]);
 
   useEffect(() => {
-    formValues.push({
-      id: 'client',
-      key: 'value',
-      value: entry.clientId
-    });
-
-    formValues.push({
-      id: 'client',
-      key: 'isDisabled',
-      value: true
-    });
+    const config = [
+      {
+        id: 'client',
+        key: 'value',
+        value: entry.clientId
+      },
+      {
+        id: 'client',
+        key: 'isDisabled',
+        value: true
+      }
+    ];
 
     const excludeFields = ['name', 'surname', 'type', '__v', 'clientId', 'appointmentId'];
 
     Object.keys(entry).forEach((key) => {
       if (!excludeFields.includes(key)) {
-        formValues.push({
+        config.push({
           id: key,
           key: 'value',
           value: entry[key]
@@ -52,8 +54,8 @@ const AppointmentPrimary = ({ entry }) => {
       }
     });
 
-    setFormValues(formValues);
-  }, [formValues, entry]);
+    setDialogConfig(config);
+  }, [entry]);
 
   return (
     <div className='appointments-container-primary__item'>
@@ -63,85 +65,85 @@ const AppointmentPrimary = ({ entry }) => {
             <PermContactCalendar className='name__icon' fontSize='large' />
             <MuiThemeProvider theme={theme}>
               <Typography className='name__text' component='h2' variant='h5'>
-                {`${surname} ${name}`}
+                {`${entry.surname} ${entry.name}`}
               </Typography>
             </MuiThemeProvider>
           </div>
           <div className='appointment'>
             {
-              isAppointment ? (
+              entry.type === 'appointment' ? (
                 <WatchLater className='appointment__icon' />
               ) : (
                 <Timelapse className='appointment__icon' />
               )
             }
             <Typography className='appointment__text' component='h2' variant='h6'>
-              <span className='appointment__type'>{isAppointment ? labels.APPOINTMENT : labels.CONTROL}</span>
-              <span>{hourAndMinutes.hour}</span>
-              <sup>{hourAndMinutes.minutes}</sup>
+              <span className='appointment__type'>{entry.type === 'appointment' ? labels.APPOINTMENT : labels.CONTROL}</span>
+              <span>{hour}</span>
+              <sup>{minutes}</sup>
             </Typography>
           </div>
           {
-            phone && (
-              <div className='info' component='p' variant='body2'>
+            entry.phone && (
+              <div className='info'>
                 <Chip
                   className='info__label'
                   label={labels.PHONE}
                   size='small'
                 />
-                <a className='info__text__phone' href={`tel:${phone}`}>{formatPhoneNumber(phone)}</a>
+                <a className='info__text__phone' href={`tel:${entry.phone}`}>{formatPhoneNumber(entry.phone)}</a>
               </div>
             )
           }
           {
-            treatment && (
-              <div className='info' component='p' variant='body2'>
+            entry.treatment && (
+              <div className='info'>
                 <Chip
                   className='info__label'
                   // icon={<LocalHospital />}
                   label={labels.TREATMENT}
                   size='small'
                 />
-                <span className='info__text'>{treatment}</span>
+                <span className='info__text'>{entry.treatment}</span>
               </div>
             )
           }
           {
-            isAppointment && control && (
-              <div className='info' component='p' variant='body2'>
+            entry.type === 'appointment' && entry.control && (
+              <div className='info'>
                 <Chip
                   className='info__label'
                   // icon={<Timelapse />}
                   label={labels.CONTROL}
                   size='small'
                 />
-                <span className='info__text'>{ formatPrettyDate(control) }</span>
+                <span className='info__text'>{ formatPrettyDate(entry.control) }</span>
               </div>
             )
           }
           {
-            technician && (
-              <div className='info' component='p' variant='body2'>
+            entry.technician && (
+              <div className='info'>
                 <Chip
                   className='info__label'
                   // icon={<Build />}
                   label={labels.TECHNICIAN}
                   size='small'
                 />
-                <span className='info__text'>{technician}</span>
+                <span className='info__text'>{entry.technician}</span>
               </div>
             )
           }
           {
-            price && (
-              <div className='info' component='p' variant='body2'>
+            entry.price && (
+              <div className='info'>
                 <Chip
                   className='info__label'
                   // icon={<AttachMoney />}
                   label={labels.PRICE}
                   size='small'
                 />
-                <span className='info__text'>{price}</span>
+                <span className='info__text'>{entry.price}</span>
               </div>
             )
           }
@@ -153,7 +155,7 @@ const AppointmentPrimary = ({ entry }) => {
       </Card>
       {
         showEditDialog && (
-          <Dialog action='edit' setShowModal={setShowEditDialog} type={entry.type} values={formValues} />
+          <Dialog action='edit' setShowModal={setShowEditDialog} type={entry.type} config={dialogConfig} />
         )
       }
       {
@@ -162,7 +164,7 @@ const AppointmentPrimary = ({ entry }) => {
             action='delete'
             setShowModal={setShowDeleteDialog}
             type={entry.type}
-            values={{ _id: entry._id }}
+            config={{ _id: entry._id }}
           />
         )
       }

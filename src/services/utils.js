@@ -68,9 +68,9 @@ export const extractFields = (names, shouldHideParent) => {
 
     return [{ ...fieldsConfig[fieldName], isHidden: shouldHideParent }, ..._.flattenDeep(nestedFields)];
   })
-}
+};
 
-export const getFormValues = (baseFields, payload) => {
+export const getFormConfig = (baseFields, payload) => {
   const fields = _.cloneDeep(baseFields);
 
   payload.forEach((item) => {
@@ -91,11 +91,11 @@ export const getFormValues = (baseFields, payload) => {
 
 export const serializeForm = (payload) => {
   return Object.keys(payload).reduce(
-    (result, index) => ({
-      ...result,
-      [payload[index].id]: payload[index].value
-    }),
-    []
+      (result, index) => ({
+        ...result,
+        [payload[index].id]: payload[index].value
+      }),
+      []
   );
 };
 
@@ -114,7 +114,7 @@ export const splitByDelimiter = (value, delimiter) => {
   }
 
   return {};
-}
+};
 
 export const formatPhoneNumber = (phoneNumber) => {
   if (phoneNumber.length === 10) {
@@ -134,7 +134,7 @@ export const formatPhoneNumber = (phoneNumber) => {
   }
 
   return phoneNumber;
-}
+};
 
 export const formatPrettyDate = (dateAsString) => {
   const date = moment(dateAsString);
@@ -143,7 +143,7 @@ export const formatPrettyDate = (dateAsString) => {
   const dayNumber = date.date();
 
   return `${labels.DAYS[dayText]}, ${dayNumber} ${labels.MONTHS[month]}`;
-}
+};
 
 export const getHourFromDate = (date) => {
   const hourAndMinutes = date.slice(date.indexOf('T') + 1);
@@ -151,22 +151,22 @@ export const getHourFromDate = (date) => {
   const minutes = hourAndMinutes.slice(hourAndMinutes.indexOf(':') + 1);
 
   return { hour, minutes };
-}
+};
 
 export const validators = {
   isNumber: (value) => typeof value === 'number',
   isPhoneNumber: (value) => value.match(/^(\+4|)?(07[0-8]{1}[0-9]{1}|02[0-9]{2}|03[0-9]{2}){1}?(\s|\.|-)?([0-9]{3}(\s|\.|-|)){2}$/),
   isPresent: (value) => value?.length
-}
+};
 
 export const getDialogTitle = (action, type) => {
   return labels[`${action.toUpperCase()}_${type.toUpperCase()}${action === 'delete' ? '_MESSAGE' : ''}`];
-}
+};
 
 export const getDialogSubmitButtonText = (action, type) => {
   const shouldAddLabelExtension = type !== 'client' && action === 'delete';
 
   return labels[`${action.toUpperCase()}${shouldAddLabelExtension ? '_2' : ''}`];
-}
+};
 
 export const isMobile = () => window.matchMedia(`(max-width: ${mobileMediaQueryBreakpoint}px)`).matches;
