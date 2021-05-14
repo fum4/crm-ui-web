@@ -42,7 +42,7 @@ const AppointmentPrimary = ({ entry }) => {
       }
     ];
 
-    const excludeFields = ['name', 'surname', 'type', '__v', 'clientId', 'appointmentId'];
+    const excludeFields = ['name', 'surname', 'type', 'clientId', 'appointmentId'];
 
     Object.keys(entry).forEach((key) => {
       if (!excludeFields.includes(key)) {

@@ -24,7 +24,7 @@ const AppointmentSecondary = ({ entry, isNext }) => {
       }
     ];
 
-    const excludeFields = ['appointmentId', 'clientId', 'type', '__v'];
+    const excludeFields = ['appointmentId', 'clientId', 'type'];
 
     Object.keys(entry).forEach((key) => {
       if (!excludeFields.includes(key)) {
