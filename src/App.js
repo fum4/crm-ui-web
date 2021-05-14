@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Auth, Today, Clients } from './screens';
-import { Navigation, Notifications, LoadingIndicator } from './components';
+import { DesktopNavigation, MobileNavigation, Notifications, LoadingIndicator } from './components';
 import { login } from './services/network';
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
@@ -44,7 +44,7 @@ function App() {
       <Notifications>
         <div>
         {
-          isAuthenticated && <Navigation />
+          isAuthenticated && <DesktopNavigation />
         }
         <Switch>
           {
@@ -76,6 +76,9 @@ function App() {
             </Route>
           }
         </Switch>
+        {
+          isAuthenticated && <MobileNavigation />
+        }
       </div>
       </Notifications>
     </Router>

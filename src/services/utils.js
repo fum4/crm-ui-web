@@ -1,6 +1,11 @@
 import _ from 'lodash';
 import moment from 'moment';
-import { fieldsConfig, labels, mobileMediaQueryBreakpoint } from '../constants';
+import {
+  fieldsConfig,
+  labels,
+  mobileMediaQueryBreakpoint,
+  desktopMediaQueryBreakpoint
+} from '../constants';
 
 export const getOptionsForNestedFieldsVisibility = (names, shouldHide) => {
   const options = names.map((fieldName) => {
@@ -170,3 +175,4 @@ export const getDialogSubmitButtonText = (action, type) => {
 };
 
 export const isMobile = () => window.matchMedia(`(max-width: ${mobileMediaQueryBreakpoint}px)`).matches;
+export const isDesktop = () => window.matchMedia(`(min-width: ${desktopMediaQueryBreakpoint}px)`).matches;

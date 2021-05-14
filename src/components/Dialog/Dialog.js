@@ -221,7 +221,7 @@ const Dialog = ({ action, type, config, setShowModal }) => {
       }
     </Modal>
   ) : (
-    <div /> // TODO
+    <div />
   );
 };
 
