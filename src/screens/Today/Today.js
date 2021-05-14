@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { AppointmentList, Header } from '../../components';
-import { useAllAppointments } from '../../store';
+import { useAppointments } from '../../store';
 import { labels } from '../../constants';
 import moment from 'moment';
 
 const Today = ({ isAuthenticated }) => {
   const [filteredAppointments, setFilteredAppointments] = useState([]);
   const [appointments, setAppointments] = useState([]);
-  const allAppointments = useAllAppointments(isAuthenticated);
+  const allAppointments = useAppointments(isAuthenticated);
   const history = useHistory();
 
   useEffect(() => {

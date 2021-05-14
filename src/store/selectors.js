@@ -10,7 +10,7 @@ export const useClients = (isAuthenticated) => {
     if (isAuthenticated && !data?.length) {
       dispatch(fetchClients());
     }
-  }, [data, isAuthenticated, dispatch])
+  }, [isAuthenticated, dispatch])
 
   return data;
 }
@@ -23,7 +23,7 @@ export const useAppointments = (isAuthenticated) => {
     if (isAuthenticated && !data?.length) {
       dispatch(fetchAppointments());
     }
-  }, [data, isAuthenticated, dispatch])
+  }, [isAuthenticated, dispatch])
 
   return data;
 }

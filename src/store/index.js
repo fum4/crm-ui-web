@@ -18,8 +18,8 @@ import {
   addNotification
 } from './notificationsSlice';
 import {
-  useAllClients,
-  useAllAppointments,
+  useClients,
+  useAppointments,
 } from './selectors';
 
 export {
@@ -36,6 +36,6 @@ export {
   removeAppointment,
   removeClient,
   addNotification,
-  useAllClients,
-  useAllAppointments
+  useClients,
+  useAppointments
 };

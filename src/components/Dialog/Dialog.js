@@ -13,7 +13,7 @@ import {
   insertClient,
   editClient,
   removeClient,
-  useAllClients,
+  useClients,
   insertAppointment,
   editAppointment,
   removeAppointment
@@ -29,7 +29,7 @@ const Dialog = ({ action, setShowModal, type, values }) => {
   const [title, setTitle] = useState();
   const [isInitialized, setIsInitialized] = useState(false);
   const [submitText, setSubmitText] = useState(undefined);
-  const clients = useAllClients();
+  const clients = useClients();
   const dispatch = useDispatch();
 
   useEffect(() => {

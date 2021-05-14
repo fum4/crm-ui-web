@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { ClientList, Header } from '../../components';
-import { useAllClients } from '../../store';
+import { useClients } from '../../store';
 
 const Clients = ({ isAuthenticated }) => {
   const [filteredClients, setFilteredClients] = useState([]);
   const [clients, setClients] = useState([]);
-  const allClients = useAllClients(isAuthenticated);
+  const allClients = useClients(isAuthenticated);
   const history = useHistory();
 
   useEffect(() => {
