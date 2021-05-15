@@ -1,17 +1,32 @@
 .auth {
   display: flex;
   flex-direction: column;
-  margin-top: 100px;
+  margin-top: 80px;
+  min-width: 250px;
+
+  h1 {
+    font-size: 40px;
+    color: #263791;
+    text-align: center;
+    margin-bottom: 0;
+  }
+
+  h2 {
+    color: #212121;
+    text-align: center;
+    margin: 20px auto 30px;
+  }
 
   .username,
   .password {
-    margin: auto;
+    margin: 5px auto;
     width: 260px;
+
+    .visibility-icon {
+      cursor: pointer;
+    }
   }
-  .usernameInput,
-  .passwordInput {
-    padding-left: 24px;
-  }
+
   .submit {
     max-width: 250px;
     margin: 25px auto;

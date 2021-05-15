@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { AccountCircle, Lock } from '@material-ui/icons';
-import { Button, Grid, TextField } from '@material-ui/core';
+import { AccountCircle, Lock, Visibility, VisibilityOff } from '@material-ui/icons';
+import { Button, InputAdornment, OutlinedInput } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
 import { login, register } from '../../services/network';
 import { authenticate, setLoading } from '../../store';
@@ -12,6 +12,7 @@ const Auth = ({ action }) => {
   const isAuthenticated = useSelector((state) => state.general.isAuthenticated);
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
+  const [showPassword, setShowPassword] = useState(false);
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -21,13 +22,11 @@ const Auth = ({ action }) => {
     }
   }, [history, isAuthenticated]);
 
-  const handlePasswordChange = (event) => {
-    setPassword(event.target.value);
-  };
+  const handlePasswordChange = (event) => setPassword(event.target.value);
 
-  const handleUsernameChange = (event) => {
-    setUsername(event.target.value);
-  };
+  const handleUsernameChange = (event) => setUsername(event.target.value);
+
+  const toggleShowPassword = () => setShowPassword(!showPassword);
 
   const handleLogin = (user) => {
     login(user)
@@ -55,29 +54,40 @@ const Auth = ({ action }) => {
 
   return (
     <div className='auth'>
-      <Grid alignItems='flex-end' className='username' container>
-        <Grid item>
-          <AccountCircle />
-        </Grid>
-        <Grid className='usernameInput' item>
-          <TextField
-            label={labels.USER}
-            onChange={handleUsernameChange}
-          />
-        </Grid>
-      </Grid>
-      <Grid alignItems='flex-end' className='password' container>
-        <Grid item>
-          <Lock />
-        </Grid>
-        <Grid className='passwordInput' item>
-          <TextField
-            label={labels.PASSWORD}
-            onChange={handlePasswordChange}
-            type='password'
-          />
-        </Grid>
-      </Grid>
+      <h1>e-Programare</h1>
+      <h2>{action === 'login' ? labels.LOGIN : labels.REGISTER}</h2>
+      <OutlinedInput
+        className='username'
+        placeholder={labels.USER}
+        variant='outlined'
+        onChange={handleUsernameChange}
+        startAdornment={
+          <InputAdornment position='start'>
+            <AccountCircle/>
+          </InputAdornment>
+        }
+      />
+      <OutlinedInput
+        className='password'
+        placeholder={labels.PASSWORD}
+        type={showPassword ? 'text' : 'password'}
+        value={password}
+        onChange={handlePasswordChange}
+        startAdornment={
+          <InputAdornment position='start'>
+            <Lock/>
+          </InputAdornment>
+        }
+        endAdornment={
+          <InputAdornment position="end">
+            {
+              showPassword
+                ? <Visibility className='visibility-icon' onClick={toggleShowPassword}/>
+                : <VisibilityOff className='visibility-icon' onClick={toggleShowPassword}/>
+            }
+          </InputAdornment>
+        }
+      />
       <Button
         className='submit'
         color='primary'
