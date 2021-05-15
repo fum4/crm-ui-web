@@ -1,14 +1,20 @@
 .wrapper {
   &.fixed {
     align-items: center;
-    background-color: white;
+    background-color: black;
     border: 1px solid #D0D0D0;
     display: flex;
-    height: 90px;
+    height: 80px;
     position: fixed;
     top: -1px;
     width: 100%;
     z-index: 10;
+
+    .search-input-container {
+      button.add-new-btn {
+        margin-left: 13px;
+      }
+    }
   }
 
   .search-input-container {

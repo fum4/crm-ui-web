@@ -59,7 +59,7 @@ const AppointmentPrimary = ({ entry }) => {
 
   return (
     <div className='appointments-container-primary__item'>
-      <Card className='appointment-primary' variant='outlined'>
+      <Card className='appointment-primary'>
         <CardContent className='card-content'>
           <div className='name'>
             <PermContactCalendar className='name__icon' fontSize='large' />
