@@ -69,9 +69,13 @@ const MobileNavigation = () => {
           label={ labels.TODAY }
           icon={<Today />}
         />
-        <Fab color='primary'>
-          { icons[history.location.pathname] || defaults.icon }
-        </Fab>
+        <BottomNavigationAction
+          icon={
+            <Fab color='primary'>
+              { icons[history.location.pathname] || defaults.icon }
+            </Fab>
+          }
+        />
         <BottomNavigationAction
           label={ labels.CLIENTS }
           icon={<PeopleAlt />}
