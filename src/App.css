@@ -68,7 +68,7 @@
 
   .clients-container {
     margin-top: 77px;
-    width: 93%;
+    width: 90%;
   }
 
   .clients-container .appointments-container-secondary .MuiAccordionDetails-root {
@@ -91,7 +91,7 @@
 
   .wrapper .search-input-container {
     width: auto;
-    padding: 10px 3%;
+    padding: 10px 5%;
   }
 
   .wrapper .search-input-container.fullWidth {
@@ -109,7 +109,7 @@
 
   .appointments-container-primary {
     margin: 65px auto auto auto;
-    width: 96%;
+    width: 93%;
   }
 
   .appointments-container-primary__day-header {
