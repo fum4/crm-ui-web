@@ -41,7 +41,7 @@ const BootstrapInput = withStyles((theme) => ({
   }
 }))(InputBase);
 
-const Header = ({ handleSearch, type }) => {
+const Header = ({ onSearch, type }) => {
   const [showDialog, setShowDialog] = useState(false);
   const isDesktop = useMemo(() => !isMobile(), []);
 
@@ -68,7 +68,7 @@ const Header = ({ handleSearch, type }) => {
         <div className={`search-input-container ${!isDesktop ? 'fullWidth' : ''}`}>
           <BootstrapInput
             className='search-input-container__main-input'
-            onChange={handleSearch}
+            onChange={onSearch}
           />
           {
             isDesktop && (

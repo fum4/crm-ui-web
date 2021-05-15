@@ -4,23 +4,15 @@ import { labels } from '../../constants';
 import { isMobile } from 'services/utils';
 import { PeopleAlt, Today, AddAlarm, PersonAdd } from '@material-ui/icons';
 
-import {BottomNavigation, BottomNavigationAction, makeStyles} from '@material-ui/core';
+import {BottomNavigation, BottomNavigationAction, Fab, makeStyles} from '@material-ui/core';
 import {Dialog} from "../index";
 
 const useStyles = makeStyles(() => ({
   root: {
     backgroundColor: '#fafafa',
     bottom: 0,
-    height: 65,
     position: 'fixed',
     width: '100%'
-  },
-  addButton: {
-    backgroundColor: '#3f51b5',
-    borderRadius: 50,
-    color: 'white',
-    maxWidth: 70,
-    minWidth: 70,
   }
 }));
 
@@ -77,10 +69,9 @@ const MobileNavigation = () => {
           label={ labels.TODAY }
           icon={<Today />}
         />
-        <BottomNavigationAction
-          className={classes.addButton}
-          icon={icons[history.location.pathname] || defaults.icon}
-        />
+        <Fab color='primary'>
+          { icons[history.location.pathname] || defaults.icon }
+        </Fab>
         <BottomNavigationAction
           label={ labels.CLIENTS }
           icon={<PeopleAlt />}

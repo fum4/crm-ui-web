@@ -53,7 +53,7 @@ const Clients = () => {
   return isAuthenticated && (
     <>
       <Header
-        handleSearch={handleSearch}
+        onSearch={handleSearch}
         type='client'
       />
       <ClientList entries={clients} />

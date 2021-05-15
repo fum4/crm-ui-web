@@ -79,7 +79,7 @@ const Today = () => {
   return isAuthenticated && (
     <>
       <Header
-        handleSearch={handleSearch}
+        onSearch={handleSearch}
         type='appointment'
       />
       <AppointmentList entries={appointments} type='primary' />

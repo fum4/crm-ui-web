@@ -82,6 +82,7 @@ export const labels = {
   NO_ACTIVE_APPOINTMENTS: 'Nu mai aveți nicio programare.',
   PHONE: 'Telefon',
   PRICE: 'Preț',
+  SEARCH: 'Caută',
   SHOW_INACTIVE_APPOINTMENTS: 'Afișează programările inactive',
   SURNAME: 'Prenume',
   TECHNICIAN: 'Tehnician',
