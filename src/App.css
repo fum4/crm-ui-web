@@ -91,7 +91,7 @@
 
   .wrapper .search-input-container {
     width: auto;
-    padding: 0 3% 0;
+    padding: 10px 3%;
   }
 
   .wrapper .search-input-container.fullWidth {
@@ -100,7 +100,7 @@
   }
 
   .wrapper.fixed {
-    height: 60px;
+    height: 75px;
   }
 
   .search-input-container {
