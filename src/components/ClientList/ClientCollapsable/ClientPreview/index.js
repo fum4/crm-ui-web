@@ -11,10 +11,10 @@ import './styles.scss';
 const ClientPreview = ({ entry }) => {
   const [showAddDialog, setShowAddDialog] = useState(false);
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
-  const [formValues, setFormValues] = useState();
+  const [dialogConfig, setDialogConfig] = useState();
 
   useEffect(() => {
-    const values = [
+    const config = [
       {
         id: 'client',
         key: 'value',
@@ -27,7 +27,7 @@ const ClientPreview = ({ entry }) => {
       }
     ];
 
-    setFormValues(values);
+    setDialogConfig(config);
   }, [entry]);
 
   return (
@@ -70,7 +70,7 @@ const ClientPreview = ({ entry }) => {
             action='add'
             setShowModal={setShowAddDialog}
             type={'appointment'}
-            values={formValues}
+            config={dialogConfig}
           />
         )
       }
@@ -80,7 +80,7 @@ const ClientPreview = ({ entry }) => {
             action='delete'
             setShowModal={setShowDeleteDialog}
             type='client'
-            values={{ _id: entry._id }}
+            config={{ _id: entry._id }}
           />
         )
       }

@@ -18,20 +18,17 @@ const Auth = ({ action, onAuthenticationEnd, onAuthenticationStart, isAuthentica
     }
   }, [history, isAuthenticated]);
 
+  const handlePasswordChange = (event) => {
+    setPassword(event.target.value);
+  };
+
+  const handleUsernameChange = (event) => {
+    setUsername(event.target.value);
+  };
+
   const handleLogin = (user) => {
     login(user)
       .then(() => {
-        // const CredentialsContainer = navigator.credentials;
-        // const options = {
-        //   id: username,
-        //   password,
-        //   type: 'password'
-        // };
-        //
-        // CredentialsContainer.create(options)
-        //   .then((credentials) => CredentialsContainer.store(credentials))
-        //   .then(() => setError(false))
-        //   .catch((err) => console.log('fkin error : ', err));
         setError(false);
         onAuthenticationEnd(false);
       })
@@ -47,8 +44,10 @@ const Auth = ({ action, onAuthenticationEnd, onAuthenticationStart, isAuthentica
       .catch(() => setError(true));
   };
 
-  const handleAuthentication = (payload) => {
+  const handleAuthentication = () => {
     if (username && password) {
+      const payload = { username, password };
+
       onAuthenticationStart();
 
       if (action === 'login') {
@@ -68,7 +67,10 @@ const Auth = ({ action, onAuthenticationEnd, onAuthenticationStart, isAuthentica
           <AccountCircle />
         </Grid>
         <Grid className='usernameInput' item>
-          <TextField label='Utilizator' onChange={(ev) => setUsername(ev.target.value)} />
+          <TextField
+            label={labels.USER}
+            onChange={handleUsernameChange}
+          />
         </Grid>
       </Grid>
       <Grid alignItems='flex-end' className='password' container>
@@ -76,13 +78,17 @@ const Auth = ({ action, onAuthenticationEnd, onAuthenticationStart, isAuthentica
           <Lock />
         </Grid>
         <Grid className='passwordInput' item>
-          <TextField label='Parolă' onChange={(ev) => setPassword(ev.target.value)} type='password' />
+          <TextField
+            label={labels.PASSWORD}
+            onChange={handlePasswordChange}
+            type='password'
+          />
         </Grid>
       </Grid>
       <Button
         className='submit'
         color='primary'
-        onClick={() => handleAuthentication({ password, username })}
+        onClick={handleAuthentication}
         size='large'
         variant='contained'
       >

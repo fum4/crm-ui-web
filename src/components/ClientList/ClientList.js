@@ -1,3 +1,5 @@
+import { labels } from '../../constants';
+import { isMobile } from 'services/utils';
 import ClientCollapsable from './ClientCollapsable';
 import './styles.scss';
 
@@ -5,10 +7,12 @@ const ClientList = ({ entries }) => {
   return (
     <div className='clients-container'>
       {
-        entries?.map((entry, index) => (
+        isMobile() && <h1>{ labels.CLIENTS }</h1>
+      }
+      {
+        entries?.map((entry) => (
           <ClientCollapsable
             entry={entry}
-            index={index}
             key={entry._id}
           />
         ))

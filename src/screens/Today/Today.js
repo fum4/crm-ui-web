@@ -47,8 +47,8 @@ const Today = ({ isAuthenticated }) => {
         keywords.forEach((keyword) => {
           const searchTerm = keyword?.toLowerCase();
           const searchPool = searchByDate
-              ? [monthNameRo, day, dayNameRo]
-              : [monthNameRo, name, surname, treatment, technician, appointment, price, time, day, dayNameRo];
+            ? [monthNameRo, day, dayNameRo]
+            : [monthNameRo, name, surname, treatment, technician, appointment, price, time, day, dayNameRo];
 
           let currentItemMatched = false;
 
@@ -77,7 +77,7 @@ const Today = ({ isAuthenticated }) => {
   return isAuthenticated && (
     <>
       <Header
-        handleSearch={(payload) => handleSearch(payload)}
+        handleSearch={handleSearch}
         type='appointment'
       />
       <AppointmentList entries={appointments} type='primary' />

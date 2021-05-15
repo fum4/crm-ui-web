@@ -5,29 +5,30 @@ import AppointmentCollapsable from "./AppointmentCollapsable";
 import AppointmentExpanded from "./AppointmentExpanded";
 import './styles.scss';
 
-const AppointmentSecondary = ({ entry, parentId, isNext }) => {
+const AppointmentSecondary = ({ entry, isNext }) => {
   const [showEditDialog, setShowEditDialog] = useState(false);
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
-  const [formValues, setFormValues] = useState([]);
+  const [dialogConfig, setDialogConfig] = useState([]);
 
   useEffect(() => {
-    formValues.push({
-      id: 'client',
-      key: 'value',
-      value: parentId
-    });
+    const config = [
+      {
+        id: 'client',
+        key: 'value',
+        value: entry.clientId
+      },
+      {
+        id: 'client',
+        key: 'isDisabled',
+        value: true
+      }
+    ];
 
-    formValues.push({
-      id: 'client',
-      key: 'isDisabled',
-      value: true
-    });
-
-    const excludeFields = ['appointmentId', 'clientId', 'type', '__v'];
+    const excludeFields = ['appointmentId', 'clientId', 'type'];
 
     Object.keys(entry).forEach((key) => {
       if (!excludeFields.includes(key)) {
-        formValues.push({
+        config.push({
           id: key,
           key: 'value',
           value: entry[key]
@@ -35,8 +36,8 @@ const AppointmentSecondary = ({ entry, parentId, isNext }) => {
       }
     });
 
-    setFormValues(formValues);
-  }, [formValues, entry, parentId]);
+    setDialogConfig(config);
+  }, [entry]);
 
   return (
     <div className={`appointments-container-secondary__item ${isNext ? 'isNext' : ''}`}>
@@ -62,7 +63,7 @@ const AppointmentSecondary = ({ entry, parentId, isNext }) => {
             action='edit'
             setShowModal={setShowEditDialog}
             type={entry.type}
-            values={formValues}
+            config={dialogConfig}
           />
         )
       }
@@ -72,7 +73,7 @@ const AppointmentSecondary = ({ entry, parentId, isNext }) => {
             action='delete'
             setShowModal={setShowDeleteDialog}
             type={entry.type}
-            values={{ _id: entry._id }}
+            config={{ _id: entry._id }}
           />
         )
       }

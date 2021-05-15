@@ -67,6 +67,7 @@
   }
 
   .clients-container {
+    margin-top: 77px;
     width: 91%;
   }
 
@@ -106,8 +107,8 @@
   }
 
   .appointments-container-primary {
-    margin: auto;
-    width: 96%
+    margin: 65px auto auto auto;
+    width: 96%;
   }
 
   .appointments-container-primary__day-header {

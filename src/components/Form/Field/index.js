@@ -1,6 +1,6 @@
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { useEffect, useState } from 'react';
-import { Button, TextField } from '@material-ui/core/';
+import { Button, TextField } from '@material-ui/core';
 
 const Field = ({ classes, field, onInputChange, onFieldsExtend }) => {
   const [currentValue, setCurrentValue] = useState(false);
@@ -92,7 +92,7 @@ const Field = ({ classes, field, onInputChange, onFieldsExtend }) => {
         );
     }
   } else {
-    return <div />;
+    return <div />; // TODO
   }
 };
 

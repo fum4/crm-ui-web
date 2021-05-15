@@ -6,7 +6,8 @@ import Dialog from './Dialog';
 import Form from './Form';
 import Header from './Header';
 import LoadingIndicator from './LoadingIndicator';
-import Navigation from './Navigation';
+import DesktopNavigation from './DesktopNavigation';
+import MobileNavigation from './MobileNavigation/MobileNavigation';
 import Notifications from './Notifications';
 
 export {
@@ -18,6 +19,7 @@ export {
   Form,
   Header,
   LoadingIndicator,
-  Navigation,
+  DesktopNavigation,
+  MobileNavigation,
   Notifications
 };

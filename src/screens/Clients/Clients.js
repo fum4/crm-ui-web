@@ -19,7 +19,8 @@ const Clients = ({ isAuthenticated }) => {
     setClients(filteredClients.length ? filteredClients : allClients);
   }, [allClients, filteredClients]);
 
-  const handleSearch = (payload) => {
+  const handleSearch = (event) => {
+    const payload = event.target.value;
     const keywords = payload.split(' ');
 
     const filtered = allClients.filter((client) => {
@@ -50,7 +51,7 @@ const Clients = ({ isAuthenticated }) => {
   return isAuthenticated && (
     <>
       <Header
-        handleSearch={(payload) => handleSearch(payload)}
+        handleSearch={handleSearch}
         type='client'
       />
       <ClientList entries={clients} />

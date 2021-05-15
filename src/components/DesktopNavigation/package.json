@@ -1,0 +1,5 @@
+{
+  "name": "desktop-navigation",
+  "private": true,
+  "main": "DesktopNavigation.js"
+}

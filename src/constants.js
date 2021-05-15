@@ -15,6 +15,7 @@ export const labels = {
   CANCEL_ADD_APPOINTMENT: 'Fără programare',
   CANCEL_ADD_CONTROL: 'Fără control',
   CLIENT: 'Pacient',
+  CLIENTS: 'Pacienți',
   COMMENTS: 'Comentarii',
   CONTROL: 'Control',
   DATE: 'Data',
@@ -85,6 +86,9 @@ export const labels = {
   SURNAME: 'Prenume',
   TECHNICIAN: 'Tehnician',
   TREATMENT: 'Tratament',
+  TODAY: 'Astăzi',
+  USER: 'Utilizator',
+  PASSWORD: 'Parolă',
   REGISTER: 'Înregistrare',
   REGISTER_ERROR: 'Înregistrarea a eșuat',
 };
@@ -155,7 +159,6 @@ export const fieldsConfig = {
   },
   phone: {
     id: 'phone',
-    isRequired: true,
     label: labels.PHONE
   },
   price: {
@@ -193,3 +196,4 @@ export const formTypes = {
 };
 
 export const mobileMediaQueryBreakpoint = 1099;
+export const desktopMediaQueryBreakpoint = 1100;

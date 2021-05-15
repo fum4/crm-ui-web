@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { fade, withStyles } from '@material-ui/core/styles';
 import { InputBase, Button } from '@material-ui/core';
 import { Dialog } from '..';
@@ -43,29 +43,32 @@ const BootstrapInput = withStyles((theme) => ({
 
 const Header = ({ handleSearch, type }) => {
   const [showModal, setShowModal] = useState(false);
+  const isDesktop = useMemo(() => !isMobile(), []);
 
-  window.addEventListener('scroll', () => {
-    const wrapper = document.getElementsByClassName('wrapper')[0];
-    const searchInput = wrapper.getElementsByClassName('search-input-container')[0];
+  if (isDesktop) {
+    window.addEventListener('scroll', () => {
+      const wrapper = document.getElementsByClassName('wrapper')[0];
+      const searchInput = wrapper.getElementsByClassName('search-input-container')[0];
 
-    if (window.pageYOffset > (isMobile() ? 154 : 175)) {
-      wrapper.classList.add('fixed');
-      searchInput.classList.add('fullWidth');
-    }
+      if (window.pageYOffset > 175) {
+        wrapper.classList.add('fixed');
+        searchInput.classList.add('fullWidth');
+      }
 
-    if (window.pageYOffset < 150) {
-      wrapper.classList.remove('fixed');
-      searchInput.classList.remove('fullWidth');
-    }
-  });
+      if (window.pageYOffset < 150) {
+        wrapper.classList.remove('fixed');
+        searchInput.classList.remove('fullWidth');
+      }
+    });
+  }
 
   return (
     <>
-      <div className='wrapper'>
-        <div className='search-input-container'>
+      <div className={`wrapper ${!isDesktop ? 'fixed' : ''}`}>
+        <div className={`search-input-container ${!isDesktop ? 'fullWidth' : ''}`}>
           <BootstrapInput
             className='search-input-container__main-input'
-            onChange={(ev) => handleSearch(ev.target.value)}
+            onChange={handleSearch}
           />
           <Button
             className='add-new-btn'
