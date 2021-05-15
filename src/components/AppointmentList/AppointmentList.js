@@ -3,7 +3,7 @@ import { FormControlLabel, Switch } from '@material-ui/core';
 import { AssignmentTurnedIn } from '@material-ui/icons';
 import { AppointmentPrimary, AppointmentSecondary } from '..';
 import { labels } from '../../constants';
-import { isMobile } from 'services/utils';
+import { isMobile, isActiveAppointment } from 'services/utils';
 import moment from 'moment';
 import './styles.scss';
 
@@ -26,7 +26,7 @@ const AppointmentList = ({ entries, type }) => {
         setNextAppointment(index);
       }
     })
-  }, [ sortedEntries, nextAppointment ]);
+  }, [ sortedEntries ]);
 
   useEffect(() => {
     const sorted = entries.slice().sort((a, b) => {
@@ -58,7 +58,7 @@ const AppointmentList = ({ entries, type }) => {
     const currentItemDate = currentItemDateAndTime.slice(0, currentItemDateAndTime.indexOf('T'));
     const previousEntryDate =
       previousEntryDateAndTime && previousEntryDateAndTime.slice(0, previousEntryDateAndTime.indexOf('T'));
-    const isFirstEntry = !previousEntry || !isActive(previousEntry) && isActive(entry);
+    const isFirstEntry = !previousEntry || !isActiveAppointment(previousEntry) && isActiveAppointment(entry);
     const isDifferentDay = currentItemDate !== previousEntryDate;
     const shouldDisplayHeader = isFirstEntry || isDifferentDay;
 
@@ -77,15 +77,8 @@ const AppointmentList = ({ entries, type }) => {
     }
   };
 
-  const isActive = (entry) => {
-    const currentDate = moment().format('YYYY-MM-DDTHH:mm');
-    const entryDate = entry.type === 'appointment' ? entry.appointment : entry.date;
-
-    return entryDate > currentDate;
-  };
-
   const shouldDisplayEntry = (entry) => {
-    return entry && (shouldDisplayInactive || isActive(entry));
+    return entry && (shouldDisplayInactive || isActiveAppointment(entry));
   };
 
   const toggleShouldDisplayInactive = () => {

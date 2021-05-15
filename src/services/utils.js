@@ -174,5 +174,12 @@ export const getDialogSubmitButtonText = (action, type) => {
   return labels[`${action.toUpperCase()}${shouldAddLabelExtension ? '_2' : ''}`];
 };
 
+export const isActiveAppointment = (entry) => {
+  const currentDate = moment().format('YYYY-MM-DDTHH:mm');
+  const entryDate = entry.type === 'appointment' ? entry.appointment : entry.date;
+
+  return entryDate > currentDate;
+};
+
 export const isMobile = () => window.matchMedia(`(max-width: ${mobileMediaQueryBreakpoint}px)`).matches;
 export const isDesktop = () => window.matchMedia(`(min-width: ${desktopMediaQueryBreakpoint}px)`).matches;

@@ -3,7 +3,7 @@ import { Card, CardContent, Typography, Chip } from '@material-ui/core';
 import { PermContactCalendar, WatchLater, Timelapse } from '@material-ui/icons';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { labels } from '../../constants';
-import { formatPhoneNumber, getHourFromDate, formatPrettyDate } from 'services/utils';
+import { formatPhoneNumber, getHourFromDate, formatPrettyDate, isActiveAppointment } from 'services/utils';
 import { FaPen, FaTrashAlt } from 'react-icons/fa';
 import { Dialog } from '../index';
 import './styles.scss';
@@ -23,6 +23,7 @@ const AppointmentPrimary = ({ entry }) => {
   const [showEditDialog, setShowEditDialog] = useState(false);
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
   const [dialogConfig, setDialogConfig] = useState([]);
+  const isActive = isActiveAppointment(entry);
 
   const { hour, minutes } = useMemo(() =>
     getHourFromDate(entry.type === 'appointment' ? entry.appointment : entry.date)
@@ -59,10 +60,13 @@ const AppointmentPrimary = ({ entry }) => {
 
   return (
     <div className='appointments-container-primary__item'>
-      <Card className='appointment-primary'>
+      <Card
+        className={`appointment-primary ${isActive ? 'active' : 'inactive'}`}
+        variant={isActive ? 'elevated' : 'outlined'}
+      >
         <CardContent className='card-content'>
           <div className='name'>
-            <PermContactCalendar className='name__icon' fontSize='large' />
+            <PermContactCalendar className='name__icon' fontSize='large'/>
             <MuiThemeProvider theme={theme}>
               <Typography className='name__text' component='h2' variant='h5'>
                 {`${entry.surname} ${entry.name}`}

@@ -49,10 +49,23 @@
   }
 
   .appointment-primary {
-    background-color: #F2DE77;
     display: flex;
     justify-content: space-between;
-    margin-bottom: 12px;
+    margin-bottom: 25px;
+
+    &.active {
+      background-color: #F2DE77;
+    }
+
+    &.inactive {
+      background-color: #ededed;
+
+      .card-content {
+        .info__label {
+          background-color: #dbdbdb;
+        }
+      }
+    }
 
     .card-actions {
       margin: 30px;
