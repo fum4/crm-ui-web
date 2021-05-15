@@ -96,10 +96,7 @@
 
   .wrapper .search-input-container.fullWidth {
     width: 100%;
-  }
-
-  .wrapper .search-input-container button.add-new-btn {
-    margin-left: 10px;
+    margin-left: -2px;
   }
 
   .wrapper.fixed {
