@@ -5,11 +5,9 @@ module.exports = {
     node: true
   },
   extends: [
-    // 'eslint:all',
     'eslint:recommended',
     'plugin:react/recommended',
     'plugin:react-hooks/recommended',
-    // 'plugin:react/all',
     'prettier',
     'prettier/@typescript-eslint',
     'prettier/babel',
@@ -30,7 +28,6 @@ module.exports = {
     'no-console': 'warn',
     'no-shadow': 'warn',
     'no-unused-vars': 'off',
-        // 'prettier/prettier': ['error', {endOfLine: 'auto'}],
     'react-hooks/exhaustive-deps': 'warn',
     'react-hooks/rules-of-hooks': 'error',
     'react/jsx-fragments': ['warn', 'syntax'],
@@ -42,8 +39,6 @@ module.exports = {
     'react/react-in-jsx-scope': 'off',
     'react/self-closing-comp': 'error',
     'react/sort-prop-types': ['error', { ignoreCase: true }],
-    // 'sort-keys-fix/sort-keys-fix': 'error'
-    // 'sort-keys': ['error', 'asc', {caseSensitive: true, natural: false, minKeys: 2}],
   },
   settings: {
     'import/resolver': {
@@ -53,7 +48,7 @@ module.exports = {
       }
     },
     react: {
-      version: 'detect' // Tells eslint-plugin-react to automatically detect the version of React to use
+      version: 'detect'
     }
   }
 };
