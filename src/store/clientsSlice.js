@@ -20,8 +20,6 @@ export const fetchClients = createAsyncThunk('clients/get', async (payload, thun
   try {
     const clients = await getClients();
 
-    addNotification(clients, thunkAPI);
-
     return clients.data;
   } catch(err) {
     addErrorNotification(thunkAPI, labels.ERROR_MESSAGES.FETCH_CLIENTS);

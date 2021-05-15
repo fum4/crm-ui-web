@@ -27,8 +27,6 @@ export const fetchAppointments = createAsyncThunk('appointments/get', async (pay
   try {
     const appointments = await getAppointments();
 
-    addNotification(appointments, thunkAPI);
-
     return appointments.data;
   } catch(err) {
     addErrorNotification(thunkAPI, labels.ERROR_MESSAGES.FETCH_APPOINTMENTS);
