@@ -5,22 +5,24 @@ export const notificationsSlice = createSlice({
   name: 'notifications',
   initialState: {
     message: null,
-    type: null
+    type: null,
+    show: false
   },
   reducers: {
     add: (state, action) => {
       state.type = action.payload.type;
       state.message = action.payload.message;
+      state.show = true;
     },
     clear: (state) => {
       state.type = null;
       state.message = null;
+      state.show = false;
     }
   }
 });
 
-const reducer = notificationsSlice.reducer;
-const actions = { ...notificationsSlice.actions };
+export const clearNotification = notificationsSlice.actions.clear;
 
 export const addNotification = (response, thunkAPI) => {
   const responseMessage = {
@@ -28,7 +30,7 @@ export const addNotification = (response, thunkAPI) => {
     type: response.data.type
   }
 
-  thunkAPI.dispatch(actions.add(responseMessage));
+  thunkAPI.dispatch(notificationsSlice.actions.add(responseMessage));
 }
 
 export const addErrorNotification = (thunkAPI, message = labels.GENERIC_ERROR_MESSAGE) => {
@@ -37,10 +39,5 @@ export const addErrorNotification = (thunkAPI, message = labels.GENERIC_ERROR_ME
     type: 'error'
   };
 
-  thunkAPI.dispatch(actions.add(responseMessage));
+  thunkAPI.dispatch(notificationsSlice.actions.add(responseMessage));
 }
-
-export default {
-  actions,
-  reducer
-};

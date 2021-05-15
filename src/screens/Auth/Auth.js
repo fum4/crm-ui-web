@@ -1,15 +1,18 @@
 import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { AccountCircle, Lock } from '@material-ui/icons';
-import { Button, Grid, TextField, Snackbar } from '@material-ui/core';
+import { Button, Grid, TextField } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
 import { login, register } from '../../services/network';
+import { authenticate, setLoading } from '../../store';
 import { labels } from '../../constants';
 import './styles.scss';
 
-const Auth = ({ action, onAuthenticationEnd, onAuthenticationStart, isAuthenticated }) => {
+const Auth = ({ action }) => {
+  const isAuthenticated = useSelector((state) => state.general.isAuthenticated);
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
-  const [error, setError] = useState(false);
+  const dispatch = useDispatch();
   const history = useHistory();
 
   useEffect(() => {
@@ -28,27 +31,17 @@ const Auth = ({ action, onAuthenticationEnd, onAuthenticationStart, isAuthentica
 
   const handleLogin = (user) => {
     login(user)
-      .then(() => {
-        setError(false);
-        onAuthenticationEnd(false);
-      })
-      .catch(() => {
-        setError(true);
-        onAuthenticationEnd(true);
-      });
+      .then(() => dispatch(authenticate()))
+      .finally(() => dispatch(setLoading(false)));
   };
 
-  const handleRegister = (user) => {
-    register(user)
-      .then(() => handleLogin(user))
-      .catch(() => setError(true));
-  };
+  const handleRegister = (user) => register(user).then(() => handleLogin(user));
 
   const handleAuthentication = () => {
     if (username && password) {
       const payload = { username, password };
 
-      onAuthenticationStart();
+      dispatch(setLoading(true));
 
       if (action === 'login') {
         handleLogin(payload);
@@ -94,15 +87,6 @@ const Auth = ({ action, onAuthenticationEnd, onAuthenticationStart, isAuthentica
       >
         {action === 'login' ? labels.LOGIN : labels.REGISTER}
       </Button>
-      <Snackbar
-        anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'left'
-        }}
-        autoHideDuration={6000}
-        message={action === 'login' ? labels.LOGIN_ERROR : labels.REGISTER_ERROR}
-        open={error}
-      />
     </div>
   );
 };

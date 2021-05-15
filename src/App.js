@@ -2,14 +2,14 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Auth, Today, Clients } from './screens';
 import { DesktopNavigation, MobileNavigation, Notifications, LoadingIndicator } from './components';
 import { login } from './services/network';
-import { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { fetchClients } from './store';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { authenticate, setLoading, fetchClients } from './store';
 import './App.css';
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const isAuthenticated = useSelector((state) => state.general.isAuthenticated);
+  const isLoading = useSelector((state) => state.general.isLoading);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -19,25 +19,20 @@ function App() {
       const { username, password } = user;
 
       if (username && password) {
-        setIsLoading(true);
+        dispatch(setLoading(true));
 
         login({ username, password })
-          .then(() => onAuthenticationEnd(false))
-          .catch(() => onAuthenticationEnd(true));
+          .then(() => dispatch(authenticate()))
+          .finally(() => dispatch(setLoading(false)));
       }
     }
-  }, [])
+  }, [dispatch]);
 
   useEffect(() => {
     if (isAuthenticated) {
       dispatch(fetchClients());
     }
   }, [dispatch, isAuthenticated])
-
-  const onAuthenticationEnd = (hasError) => {
-    setIsAuthenticated(!hasError);
-    setIsLoading(false);
-  }
 
   return isLoading ? <LoadingIndicator /> : (
     <Router>
@@ -49,35 +44,27 @@ function App() {
         <Switch>
           {
             <Route exact path='/login'>
-              <Auth
-                action='login'
-                isAuthenticated={isAuthenticated}
-                onAuthenticationEnd={onAuthenticationEnd}
-                onAuthenticationStart={() => setIsLoading(true)} />
+              <Auth action='login'/>
             </Route>
           }
           {
             <Route exact path='/register'>
-              <Auth
-                action='register'
-                isAuthenticated={isAuthenticated}
-                onAuthenticationEnd={onAuthenticationEnd}
-                onAuthenticationStart={() => setIsLoading(true)} />
+              <Auth action='register'/>
             </Route>
           }
           {
             <Route exact path='/'>
-              <Today isAuthenticated={isAuthenticated} />
+              <Today/>
             </Route>
           }
           {
             <Route path='/clients'>
-              <Clients isAuthenticated={isAuthenticated} />
+              <Clients/>
             </Route>
           }
         </Switch>
         {
-          isAuthenticated && <MobileNavigation />
+          isAuthenticated && <MobileNavigation/>
         }
       </div>
       </Notifications>

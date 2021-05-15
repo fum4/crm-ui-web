@@ -96,11 +96,11 @@ export const getFormConfig = (baseFields, payload) => {
 
 export const serializeForm = (payload) => {
   return Object.keys(payload).reduce(
-      (result, index) => ({
-        ...result,
-        [payload[index].id]: payload[index].value
-      }),
-      []
+    (result, index) => ({
+      ...result,
+      [payload[index].id]: payload[index].value
+    }),
+    []
   );
 };
 
