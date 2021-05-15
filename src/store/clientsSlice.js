@@ -13,7 +13,9 @@ const saveData = (state, action) => {
 }
 
 const setLoading = (state) => {
-  state.status = 'loading';
+  if (!state.data?.length) {
+    state.status = 'loading';
+  }
 };
 
 export const fetchClients = createAsyncThunk('clients/get', async (payload, thunkAPI) => {

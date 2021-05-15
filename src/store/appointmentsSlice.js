@@ -20,7 +20,9 @@ const saveData = (state, action) => {
 }
 
 const setLoading = (state) => {
-  state.status = 'loading';
+  if (!state.data?.length) {
+    state.status = 'loading';
+  }
 };
 
 export const fetchAppointments = createAsyncThunk('appointments/get', async (payload, thunkAPI) => {
