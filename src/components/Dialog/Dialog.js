@@ -156,6 +156,8 @@ const Dialog = ({ action, type, config, setShowModal }) => {
       case 'edit':
         switch (type) {
           case 'appointment':
+            dispatch(editAppointment(serializeForm(payload)));
+            break;
           case 'control':
             dispatch(editAppointment({ type: 'control', ...serializeForm(payload) }));
             break;
