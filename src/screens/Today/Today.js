@@ -34,9 +34,8 @@ const Today = () => {
         const surname = item.surname?.toLowerCase();
         const treatment = item.treatment?.toLowerCase();
         const technician = item.technician?.toLowerCase();
-        const appointment = item.appointment?.toLowerCase();
         const price = item.price?.toLowerCase();
-        const date = item.appointment?.toLowerCase() || item.date?.toLowerCase();
+        const date = item.type === 'appointment' && item.appointment?.toLowerCase() || item.date?.toLowerCase();
         const time = date.slice(date.indexOf('t') + 1);
         const day = (+date.slice(8, 10)).toString();
         const dayNameEn = moment(date).format('dddd').toUpperCase();
@@ -50,7 +49,7 @@ const Today = () => {
           const searchTerm = keyword?.toLowerCase();
           const searchPool = searchByDate
             ? [monthNameRo, day, dayNameRo]
-            : [monthNameRo, name, surname, treatment, technician, appointment, price, time, day, dayNameRo];
+            : [monthNameRo, name, surname, treatment, technician, price, time, day, dayNameRo];
 
           let currentItemMatched = false;
 

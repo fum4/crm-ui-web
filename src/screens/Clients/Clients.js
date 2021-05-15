@@ -21,8 +21,7 @@ const Clients = () => {
     setClients(filteredClients.length ? filteredClients : allClients);
   }, [allClients, filteredClients]);
 
-  const handleSearch = (event) => {
-    const payload = event.target.value;
+  const handleSearch = (payload) => {
     const keywords = payload.split(' ');
 
     const filtered = allClients.filter((client) => {
@@ -31,11 +30,13 @@ const Clients = () => {
       keywords.forEach((keyword) => {
         const name = client.name?.toLowerCase();
         const surname = client.surname?.toLowerCase();
+        const phone = client.phone?.toLowerCase();
+        const searchPool = [name, surname, phone];
         const searchTerm = keyword?.toLowerCase();
 
         let currentItemMatched = false;
 
-        if (name.includes(searchTerm) || surname.includes(searchTerm)) {
+        if (searchPool.includes(searchTerm)) {
           currentItemMatched = true;
         }
 
