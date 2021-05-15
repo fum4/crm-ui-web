@@ -66,7 +66,14 @@ const Field = ({ classes, field, onInputChange, onFieldsExtend }) => {
             onChange={(ev, value) => onInputChange(field.id, value)}
             onInputChange={(event, value) => setCurrentValue(value)}
             options={optionsIds}
-            renderInput={(params) => <TextField {...params} label={field.label} variant='filled' />}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                error={field.isInvalid}
+                label={field.label}
+                variant='filled'
+              />
+            )}
             required={field.isRequired}
             value={field.value || ''}
           />

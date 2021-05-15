@@ -141,7 +141,8 @@ export const fieldsConfig = {
       delimiters: [' '],
       children: ['name', 'surname']
     },
-    type: 'dropdown'
+    type: 'dropdown',
+    validator: validators.isPresent
   },
   control: {
     id: 'control',
