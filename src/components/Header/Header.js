@@ -42,7 +42,7 @@ const BootstrapInput = withStyles((theme) => ({
 }))(InputBase);
 
 const Header = ({ handleSearch, type }) => {
-  const [showModal, setShowModal] = useState(false);
+  const [showDialog, setShowDialog] = useState(false);
   const isDesktop = useMemo(() => !isMobile(), []);
 
   if (isDesktop) {
@@ -70,21 +70,25 @@ const Header = ({ handleSearch, type }) => {
             className='search-input-container__main-input'
             onChange={handleSearch}
           />
-          <Button
-            className='add-new-btn'
-            color='primary'
-            onClick={() => setShowModal(true)}
-            size='large'
-            startIcon={type === 'client' ? <PersonAdd /> : <AddAlarm />}
-            variant='contained'>
-            {
-              !isMobile() && <p>{type === 'client' ? labels.ADD_CLIENT : labels.ADD_APPOINTMENT}</p>
-            }
-          </Button>
+          {
+            isDesktop && (
+              <Button
+                  className='add-new-btn'
+                  color='primary'
+                  onClick={() => setShowDialog(true)}
+                  size='large'
+                  startIcon={type === 'client' ? <PersonAdd /> : <AddAlarm />}
+                  variant='contained'>
+                {
+                  <p>{type === 'client' ? labels.ADD_CLIENT : labels.ADD_APPOINTMENT}</p>
+                }
+              </Button>
+            )
+          }
         </div>
       </div>
-      {showModal && (
-        <Dialog action='add' setShowModal={setShowModal} type={type} />
+      {showDialog && (
+        <Dialog action='add' setShowModal={setShowDialog} type={type} />
       )}
     </>
   );
