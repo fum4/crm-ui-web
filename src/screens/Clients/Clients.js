@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { ClientList, Header } from '../../components';
+import { ClientList, Header, LoadingIndicator } from '../../components';
 import { useClients } from '../../store';
 import { useSelector } from 'react-redux';
 
@@ -9,6 +9,7 @@ const Clients = () => {
   const [filteredClients, setFilteredClients] = useState([]);
   const [clients, setClients] = useState([]);
   const allClients = useClients(isAuthenticated);
+  const isLoading = useSelector((state) => state.clients.status === 'loading');
   const history = useHistory();
 
   useEffect(() => {
@@ -57,7 +58,9 @@ const Clients = () => {
         onSearch={handleSearch}
         type='client'
       />
-      <ClientList entries={clients} />
+      {
+        isLoading ? <LoadingIndicator /> : <ClientList entries={clients}/>
+      }
     </>
   );
 };

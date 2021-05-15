@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { AppointmentList, Header } from '../../components';
+import {AppointmentList, Header, LoadingIndicator} from '../../components';
 import { useAppointments } from '../../store';
 import { labels } from '../../constants';
 import moment from 'moment';
@@ -12,6 +12,7 @@ const Today = () => {
   const [filteredAppointments, setFilteredAppointments] = useState([]);
   const [appointments, setAppointments] = useState([]);
   const allAppointments = useAppointments(isAuthenticated);
+  const isLoading = useSelector((state) => state.appointments.status === 'loading');
   const history = useHistory();
 
   useEffect(() => {
@@ -50,8 +51,8 @@ const Today = () => {
           keywords.forEach((keyword) => {
             const searchTerm = keyword?.toLowerCase();
             const searchPool = searchByDate
-                ? [monthNameRo, day, dayNameRo]
-                : [monthNameRo, name, surname, treatment, technician, price, time, day, dayNameRo];
+              ? [monthNameRo, day, dayNameRo]
+              : [monthNameRo, name, surname, treatment, technician, price, time, day, dayNameRo];
 
             let currentItemMatched = false;
 
@@ -87,7 +88,9 @@ const Today = () => {
         onSearch={handleSearch}
         type='appointment'
       />
-      <AppointmentList entries={appointments} type='primary' />
+      {
+        isLoading ? <LoadingIndicator /> : <AppointmentList entries={appointments} type='primary'/>
+      }
     </>
   );
 }
