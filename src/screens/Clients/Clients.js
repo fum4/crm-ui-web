@@ -2,8 +2,10 @@ import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { ClientList, Header } from '../../components';
 import { useClients } from '../../store';
+import { useSelector } from 'react-redux';
 
-const Clients = ({ isAuthenticated }) => {
+const Clients = () => {
+  const isAuthenticated = useSelector((state) => state.general.isAuthenticated);
   const [filteredClients, setFilteredClients] = useState([]);
   const [clients, setClients] = useState([]);
   const allClients = useClients(isAuthenticated);

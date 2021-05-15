@@ -15,8 +15,14 @@ import {
 } from './clientsSlice';
 import {
   notificationsSlice,
-  addNotification
+  addNotification,
+  clearNotification
 } from './notificationsSlice';
+import {
+  generalSlice,
+  authenticate,
+  setLoading,
+} from './generalSlice';
 import {
   useClients,
   useAppointments,
@@ -24,6 +30,7 @@ import {
 
 export {
   store,
+  generalSlice,
   notificationsSlice,
   appointmentsSlice,
   clientsSlice,
@@ -35,7 +42,10 @@ export {
   editClient,
   removeAppointment,
   removeClient,
+  authenticate,
+  setLoading,
   addNotification,
+  clearNotification,
   useClients,
   useAppointments
 };

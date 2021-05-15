@@ -4,8 +4,10 @@ import { AppointmentList, Header } from '../../components';
 import { useAppointments } from '../../store';
 import { labels } from '../../constants';
 import moment from 'moment';
+import {useSelector} from "react-redux";
 
-const Today = ({ isAuthenticated }) => {
+const Today = () => {
+  const isAuthenticated = useSelector((state) => state.general.isAuthenticated);
   const [filteredAppointments, setFilteredAppointments] = useState([]);
   const [appointments, setAppointments] = useState([]);
   const allAppointments = useAppointments(isAuthenticated);
