@@ -9,7 +9,7 @@ const useStyles = makeStyles(() => ({
   root: {
     backgroundColor: '#fafafa',
     bottom: 0,
-    padding: '7px 0',
+    height: 65,
     position: 'fixed',
     width: '100%'
   }
@@ -39,8 +39,14 @@ const MobileNavigation = () => {
       showLabels
       className={classes.root}
     >
-      <BottomNavigationAction label={ labels.TODAY } icon={<Today />} />
-      <BottomNavigationAction label={ labels.CLIENTS } icon={<PeopleAlt />} />
+      <BottomNavigationAction
+          label={ labels.TODAY }
+          icon={<Today />}
+      />
+      <BottomNavigationAction
+          label={ labels.CLIENTS }
+          icon={<PeopleAlt />}
+      />
     </BottomNavigation>
   ) : (
     <div/>

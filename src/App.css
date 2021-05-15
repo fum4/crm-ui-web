@@ -68,7 +68,7 @@
 
   .clients-container {
     margin-top: 77px;
-    width: 91%;
+    width: 93%;
   }
 
   .clients-container .appointments-container-secondary .MuiAccordionDetails-root {
@@ -91,11 +91,15 @@
 
   .wrapper .search-input-container {
     width: auto;
-    padding: 0 5% 0;
+    padding: 0 3% 0;
   }
 
   .wrapper .search-input-container.fullWidth {
     width: 100%;
+  }
+
+  .wrapper .search-input-container button.add-new-btn {
+    margin-left: 10px;
   }
 
   .wrapper.fixed {
@@ -122,8 +126,9 @@
   }
 
   .appointments-container-primary__item {
+    margin-bottom: 0;
     margin-right: 2px;
-    width: 95%;
+    width: 98%;
   }
 
   .appointments-container-secondary__item.isNext {
