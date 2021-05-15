@@ -7,8 +7,9 @@ import {
   getCurrentDate,
   extractFields,
   getDialogTitle,
-  getDialogSubmitButtonText
-} from '../../services/utils';
+  getDialogSubmitButtonText,
+  validators
+} from 'services/utils';
 import {
   insertClient,
   editClient,
@@ -50,6 +51,14 @@ const Dialog = ({ action, type, config, setShowModal }) => {
                 id: 'client',
                 key: 'options',
                 value: clientsFieldOptions
+              });
+            }
+
+            if (action === 'add') {
+              options.push({
+                id: 'appointment',
+                key: 'validator',
+                value: validators.isFutureDate
               });
             }
 
