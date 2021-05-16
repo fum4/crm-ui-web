@@ -86,7 +86,7 @@
   }
 
   .clients-container .MuiAccordion-root.Mui-expanded p {
-    font-size: 20px;
+    font-weight: bold;
   }
 
   .client-preview, .appointment-collapsable .MuiAccordionSummary-content {
@@ -208,7 +208,7 @@
   }
 
   .MuiAccordion-root.Mui-expanded .appointment-preview .name-container p {
-    font-size: 16px;
+    font-weight: normal;
   }
 
   .isNext .MuiAccordion-root.Mui-expanded .appointment-preview .name-container p {
