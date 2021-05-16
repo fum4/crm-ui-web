@@ -198,16 +198,14 @@ const Dialog = ({ action, type, config, setShowModal }) => {
   return isInitialized ? (
     <Modal className='modal' fullWidth maxWidth='md' open={true}>
       <div className='modal-header'>
-        <div className='close-btn-container'>
-          <FaTimes
-            className='close-btn'
-            onClick={hideModal}
-            size={35}
-          />
-        </div>
-        <div className='title-container'>
+        <div className='title'>
           <h1>{title}</h1>
         </div>
+        <FaTimes
+          className='close-btn'
+          onClick={hideModal}
+          size={35}
+        />
       </div>
       {
         action === 'delete' ? (

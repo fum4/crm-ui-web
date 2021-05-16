@@ -185,10 +185,8 @@
     padding: 20px 0;
   }
 
-  .modal .modal-header .title-container {
-    width: 84%;
-    margin: 15px auto auto;
-    font-size: 14px;
+  .modal .modal-header .title {
+    font-size: 12px;
     text-align: center;
   }
 
