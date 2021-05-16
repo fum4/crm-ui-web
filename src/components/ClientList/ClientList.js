@@ -6,7 +6,8 @@ import ClientCollapsable from './ClientCollapsable';
 import './styles.scss';
 
 const ClientList = ({ entries }) => {
-  const [expanded, setExpanded] = useState(false);
+  const [expanded, setExpanded] = useState(null);
+  const handleExpand = (panelId) => setExpanded(panelId === expanded ? null : panelId);
 
   return (
     <div className='clients-container'>
@@ -19,10 +20,10 @@ const ClientList = ({ entries }) => {
         )
       }
       {
-        entries?.map((entry, index) => (
+        entries?.map((entry) => (
           <ClientCollapsable
-            isExpanded={index === expanded}
-            onExpand={() => setExpanded(index)}
+            isExpanded={entry._id === expanded}
+            onExpand={handleExpand}
             entry={entry}
             key={entry._id}
           />
