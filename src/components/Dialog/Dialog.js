@@ -193,7 +193,10 @@ const Dialog = ({ action, type, config, setShowModal }) => {
     hideModal();
   };
 
-  const hideModal = () => setShowModal(false);
+  const hideModal = (event) => {
+    event.stopPropagation();
+    setShowModal(false);
+  };
 
   return isInitialized ? (
     <Modal className='modal' fullWidth maxWidth='md' open={true}>

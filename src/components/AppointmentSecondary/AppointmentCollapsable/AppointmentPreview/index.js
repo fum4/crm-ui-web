@@ -10,6 +10,16 @@ const AppointmentPreview = ({ entry, isNext, setShowEditDialog, setShowDeleteDia
     ? entry.appointment
     : entry.date;
 
+    const handleShowEditDialog = (event) => {
+      event.stopPropagation();
+      setShowEditDialog(true);
+    };
+
+    const handleShowDeleteDialog = (event) => {
+      event.stopPropagation();
+      setShowDeleteDialog(true);
+    };
+
   return (
     <div className='appointment-preview'>
       <div className='name-container'>
@@ -26,7 +36,7 @@ const AppointmentPreview = ({ entry, isNext, setShowEditDialog, setShowDeleteDia
         <Button
           className='edit-btn'
           color='primary'
-          onClick={() => setShowEditDialog(true)}
+          onClick={handleShowEditDialog}
           size='large'
           variant='outlined'
         >
@@ -35,7 +45,7 @@ const AppointmentPreview = ({ entry, isNext, setShowEditDialog, setShowDeleteDia
         <Button
           className='remove-btn'
           color='secondary'
-          onClick={() => setShowDeleteDialog(true)}
+          onClick={handleShowDeleteDialog}
           size='large'
           variant='outlined'>
           <FaTrashAlt className='remove-icon' />

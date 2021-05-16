@@ -30,6 +30,16 @@ const ClientPreview = ({ entry }) => {
     setDialogConfig(config);
   }, [entry]);
 
+  const handleShowAddDialog = (event) => {
+    event.stopPropagation();
+    setShowAddDialog(true);
+  };
+
+  const handleShowDeleteDialog = (event) => {
+    event.stopPropagation();
+    setShowDeleteDialog(true);
+  };
+
   return (
     <div className='client-preview'>
       <div className='name-container'>
@@ -40,7 +50,7 @@ const ClientPreview = ({ entry }) => {
         <Button
           className='add-new-btn'
           color='primary'
-          onClick={() => setShowAddDialog(true)}
+          onClick={handleShowAddDialog}
           size='small'
           variant='outlined'
         >
@@ -58,7 +68,7 @@ const ClientPreview = ({ entry }) => {
         <Button
           className='remove-btn'
           color='secondary'
-          onClick={() => setShowDeleteDialog(true)}
+          onClick={handleShowDeleteDialog}
           size='large'
           variant='outlined'>
           <FaTrashAlt className='remove-icon' />
