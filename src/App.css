@@ -214,7 +214,7 @@
   .MuiPaper-root.appointment-primary .card-actions {
     display: flex;
     flex-direction: column;
-    margin: 16px 16px 0 0;
+    margin: 18px 16px 0 0;
   }
 
   .MuiPaper-root.appointment-primary .card-content {
