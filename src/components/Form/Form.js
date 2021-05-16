@@ -1,7 +1,7 @@
 import Field from './Field';
 import { useState } from 'react';
 import { Button, makeStyles } from '@material-ui/core';
-import { getFormConfig, splitByDelimiter, getOptionsForNestedFieldsVisibility, isMobile } from '../../services/utils';
+import { getFormConfig, splitByDelimiter, getOptionsForNestedFieldsVisibility, isMobile } from 'services/utils';
 
 const useStyles = makeStyles((theme) => ({
   heading: {

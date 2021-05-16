@@ -28,7 +28,7 @@
     }
 
     p {
-      font-size: 2em;
+      font-size: 1.7em;
       margin-top: 10px
     }
   }
@@ -85,10 +85,6 @@
         align-items: center;
         color: #4b2c20;
         display: flex;
-
-        &__icon {
-          margin-right: 10px;
-        }
       }
 
       .appointment {
@@ -100,6 +96,10 @@
           margin-right: 12px;
         }
 
+        &__icon {
+          margin: 4px 10px 0 0;
+        }
+
         sup {
           margin-left: 3px;
         }
@@ -107,6 +107,10 @@
 
       .name {
         margin-bottom: 15px;
+
+        &__icon {
+          margin-right: 10px;
+        }
       }
 
       .info {
@@ -125,7 +129,16 @@
 
           &__phone {
             color: #4b2c20;
+            font-size: 17px;
             text-decoration: none;
+          }
+
+          &.MuiTypography-h5 {
+            font-size: 1.3rem;
+          }
+
+          &.MuiTypography-h6 {
+            font-size: 1.2rem;
           }
         }
       }
