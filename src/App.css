@@ -81,6 +81,14 @@
     padding: 5px;
   }
 
+  .clients-container .MuiAccordion-root.Mui-expanded {
+    margin: 0
+  }
+
+  .clients-container .MuiAccordion-root.Mui-expanded p {
+    font-size: 20px;
+  }
+
   .client-preview, .appointment-collapsable .MuiAccordionSummary-content {
     align-items: center;
   }
@@ -197,6 +205,14 @@
 
   .appointments-container-secondary__item.isNext .MuiAccordionSummary-content.Mui-expanded {
     margin-top: 15px;
+  }
+
+  .MuiAccordion-root.Mui-expanded .appointment-preview .name-container p {
+    font-size: 16px;
+  }
+
+  .isNext .MuiAccordion-root.Mui-expanded .appointment-preview .name-container p {
+    font-size: 18px;
   }
 
   .MuiAccordionSummary-content button.add-new-btn .add-icon {
