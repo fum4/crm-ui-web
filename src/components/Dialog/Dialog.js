@@ -194,12 +194,18 @@ const Dialog = ({ action, type, config, setShowModal }) => {
   };
 
   const hideModal = (event) => {
-    event.stopPropagation();
+    event?.stopPropagation();
     setShowModal(false);
   };
 
   return isInitialized ? (
-    <Modal className='modal' fullWidth maxWidth='md' open={true}>
+    <Modal
+      fullWidth
+      className='modal'
+      maxWidth='md'
+      open={true}
+      onClick={(ev) => ev.stopPropagation()}
+    >
       <div className='modal-header'>
         <div className='title'>
           <h1>{title}</h1>

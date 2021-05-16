@@ -16,6 +16,13 @@ const Field = ({ classes, field, onInputChange, onFieldsExtend }) => {
     }
   }, [field]);
 
+  const handleButtonClick = () => {
+    if (field.nestedFields.length) {
+      onFieldsExtend(field, currentValue);
+      setCurrentValue(!currentValue);
+    }
+  };
+
   if (field.id !== '_id' && !field.isHidden) {
     switch (field.type) {
       case 'button': {
@@ -24,12 +31,7 @@ const Field = ({ classes, field, onInputChange, onFieldsExtend }) => {
         return (
           <Button
             color={field.color}
-            onClick={() => {
-              if (field.nestedFields.length) {
-                onFieldsExtend(field, currentValue);
-                setCurrentValue(!currentValue);
-              }
-            }}
+            onClick={handleButtonClick}
             size='large'
             startIcon={<Icon className='button-icon' style={{ color: field.noOptionsIconColor }} />}
             variant='outlined'
