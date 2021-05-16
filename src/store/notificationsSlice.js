@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { labels } from '../constants';
+import { labels } from '../utils/constants';
 
 export const notificationsSlice = createSlice({
   name: 'notifications',

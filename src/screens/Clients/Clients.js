@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { ClientList, Header, LoadingIndicator } from '../../components';
-import { useClients } from '../../store';
+import { ClientList, Header, LoadingIndicator } from 'components';
+import { useClients } from 'store';
 import { useSelector } from 'react-redux';
 
 const Clients = () => {

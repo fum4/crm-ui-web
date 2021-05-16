@@ -1,7 +1,12 @@
-import Field from './Field';
 import { useState } from 'react';
 import { Button, makeStyles } from '@material-ui/core';
-import { getFormConfig, splitByDelimiter, getOptionsForNestedFieldsVisibility, isMobile } from 'services/utils';
+import { Field } from 'components';
+import {
+  getFormConfig,
+  splitByDelimiter,
+  getOptionsForNestedFieldsVisibility,
+  isMobile
+} from 'utils/helpers';
 
 const useStyles = makeStyles((theme) => ({
   heading: {
@@ -29,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const Form = ({ onSubmit, formFields, submitText }) => {
+export const Form = ({ onSubmit, formFields, submitText }) => {
   const classes = useStyles();
   const [fields, setFields] = useState(formFields);
 
@@ -176,5 +181,3 @@ const Form = ({ onSubmit, formFields, submitText }) => {
     </form>
   );
 };
-
-export default Form;

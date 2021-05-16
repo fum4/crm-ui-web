@@ -1,11 +1,10 @@
 import { useState, useEffect, useMemo } from 'react';
 import { useHistory } from 'react-router-dom';
-import { labels } from '../../constants';
-import { isMobile } from 'services/utils';
+import { BottomNavigation, BottomNavigationAction, Fab, makeStyles } from '@material-ui/core';
 import { PeopleAlt, Today, AddAlarm, PersonAdd } from '@material-ui/icons';
-
-import {BottomNavigation, BottomNavigationAction, Fab, makeStyles} from '@material-ui/core';
-import {Dialog} from "../index";
+import { Dialog } from 'components';
+import { labels } from 'utils/constants';
+import { isMobile } from 'utils/helpers';
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -36,7 +35,7 @@ const defaults = {
   icon: <AddAlarm/>
 };
 
-const MobileNavigation = () => {
+export const MobileNavigation = () => {
   const shouldDisplay = useMemo(() => isMobile(), []);
   const [value, setValue] = useState(0);
   const [currentRoute, setCurrentRoute] = useState('/');
@@ -93,5 +92,3 @@ const MobileNavigation = () => {
     <div/>
   );
 };
-
-export default MobileNavigation;

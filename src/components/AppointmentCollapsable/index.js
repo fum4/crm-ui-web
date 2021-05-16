@@ -1,11 +1,11 @@
-import {useMemo, useState} from 'react';
-import {Accordion, AccordionDetails, AccordionSummary, Chip} from '@material-ui/core';
-import AppointmentPreview from './AppointmentPreview';
-import {labels} from '../../../constants';
-import {getHourFromDate, formatPrettyDate} from 'services/utils';
+import { useMemo, useState } from 'react';
+import { Accordion, AccordionDetails, AccordionSummary, Chip } from '@material-ui/core';
+import { AppointmentPreview } from 'components';
+import { labels } from 'utils/constants';
+import { getHourFromDate, formatPrettyDate } from 'utils/helpers';
 import './styles.scss';
 
-const AppointmentCollapsable = ({ entry, isNext, setShowEditDialog, setShowDeleteDialog }) => {
+export const AppointmentCollapsable = ({ entry, isNext, setShowEditDialog, setShowDeleteDialog }) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   const { hour, minutes } = useMemo(() =>
@@ -97,5 +97,3 @@ const AppointmentCollapsable = ({ entry, isNext, setShowEditDialog, setShowDelet
     </Accordion>
   );
 };
-
-export default AppointmentCollapsable;

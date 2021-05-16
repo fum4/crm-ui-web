@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import {AppointmentList, Header, LoadingIndicator} from '../../components';
-import { useAppointments } from '../../store';
-import { labels } from '../../constants';
+import { useSelector } from 'react-redux';
+import { AppointmentList, Header, LoadingIndicator } from 'components';
+import { useAppointments } from 'store';
+import { labels } from 'utils/constants';
 import moment from 'moment';
-import {useSelector} from "react-redux";
 
 const Today = () => {
   const isAuthenticated = useSelector((state) => state.general.isAuthenticated);

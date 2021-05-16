@@ -1,11 +1,9 @@
 import { useState, useEffect } from 'react';
-import { Dialog } from '..';
-import { isMobile } from 'services/utils';
-import AppointmentCollapsable from "./AppointmentCollapsable";
-import AppointmentExpanded from "./AppointmentExpanded";
+import { AppointmentCollapsable, AppointmentExpanded, Dialog } from 'components';
+import { isMobile } from 'utils/helpers';
 import './styles.scss';
 
-const AppointmentSecondary = ({ entry, isNext }) => {
+export const AppointmentSecondary = ({ entry, isNext }) => {
   const [showEditDialog, setShowEditDialog] = useState(false);
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
   const [dialogConfig, setDialogConfig] = useState([]);
@@ -80,5 +78,3 @@ const AppointmentSecondary = ({ entry, isNext }) => {
     </div>
   );
 };
-
-export default AppointmentSecondary;

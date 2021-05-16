@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { addClient, deleteClient, getClients, updateClient  } from '../services/network';
 import { fetchAppointments } from './';
 import { addErrorNotification, addNotification } from './notificationsSlice';
-import { labels } from '../constants';
+import { labels } from '../utils/constants';
 
 const saveData = (state, action) => {
   if (action?.payload?.data) {

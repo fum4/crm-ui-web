@@ -26,7 +26,7 @@ import {
 import {
   useClients,
   useAppointments,
-} from './selectors';
+} from '../utils/hooks';
 
 export {
   store,

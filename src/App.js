@@ -1,11 +1,11 @@
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import { Auth, Today, Clients } from './screens';
-import { DesktopNavigation, MobileNavigation, Notifications, LoadingIndicator } from './components';
-import { login } from './services/network';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { authenticate, setLoading, fetchClients } from './store';
-import './App.css';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { Auth, Today, Clients } from 'screens';
+import { DesktopNavigation, MobileNavigation, Notifications, LoadingIndicator } from './components';
+import { login } from 'services/network';
+import { authenticate, setLoading, fetchClients } from 'store';
+import './App.scss';
 
 function App() {
   const isAuthenticated = useSelector((state) => state.general.isAuthenticated);

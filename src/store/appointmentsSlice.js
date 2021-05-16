@@ -9,7 +9,7 @@ import {
 } from '../services/network';
 import { fetchClients } from './';
 import { addNotification, addErrorNotification } from './notificationsSlice';
-import { labels } from '../constants';
+import { labels } from '../utils/constants';
 
 const saveData = (state, action) => {
   if (action?.payload?.data) {

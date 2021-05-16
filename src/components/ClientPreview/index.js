@@ -1,14 +1,14 @@
 import { useState, useEffect } from 'react';
 import { FaPlus, FaTrashAlt } from 'react-icons/fa';
 import { Button } from '@material-ui/core';
-import {AddAlarm, PermContactCalendar} from '@material-ui/icons';
-import { Dialog } from '../../../index';
-import { labels } from '../../../../constants';
-import { isMobile } from '../../../../services/utils';
 import Typography from '@material-ui/core/Typography';
+import { AddAlarm, PermContactCalendar } from '@material-ui/icons';
+import { Dialog } from 'components';
+import { labels } from 'utils/constants';
+import { isMobile } from 'utils/helpers';
 import './styles.scss';
 
-const ClientPreview = ({ entry }) => {
+export const ClientPreview = ({ entry }) => {
   const [showAddDialog, setShowAddDialog] = useState(false);
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
   const [dialogConfig, setDialogConfig] = useState();
@@ -97,5 +97,3 @@ const ClientPreview = ({ entry }) => {
     </div>
   );
 };
-
-export default ClientPreview;

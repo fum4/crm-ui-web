@@ -1,11 +1,11 @@
-import {useEffect, useState, useMemo} from 'react';
+import { useEffect, useState, useMemo } from 'react';
+import { FaPen, FaTrashAlt } from 'react-icons/fa';
 import { Card, CardContent, Typography, Chip } from '@material-ui/core';
 import { PermContactCalendar, WatchLater, Timelapse } from '@material-ui/icons';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import { labels } from '../../constants';
-import { formatPhoneNumber, getHourFromDate, formatPrettyDate, isActiveAppointment } from 'services/utils';
-import { FaPen, FaTrashAlt } from 'react-icons/fa';
-import { Dialog } from '../index';
+import { labels } from 'utils/constants';
+import { formatPhoneNumber, getHourFromDate, formatPrettyDate, isActiveAppointment } from 'utils/helpers';
+import { Dialog } from 'components';
 import './styles.scss';
 
 const theme = createMuiTheme({
@@ -19,7 +19,7 @@ const theme = createMuiTheme({
   }
 });
 
-const AppointmentPrimary = ({ entry }) => {
+export const AppointmentPrimary = ({ entry }) => {
   const [showEditDialog, setShowEditDialog] = useState(false);
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
   const [dialogConfig, setDialogConfig] = useState([]);
@@ -175,5 +175,3 @@ const AppointmentPrimary = ({ entry }) => {
     </div>
   );
 };
-
-export default AppointmentPrimary;

@@ -1,13 +1,13 @@
 import { useState, useEffect, Fragment } from 'react';
 import { FormControlLabel, Switch } from '@material-ui/core';
 import { AssignmentTurnedIn } from '@material-ui/icons';
-import { AppointmentPrimary, AppointmentSecondary } from '..';
-import { labels } from '../../constants';
-import { isMobile, isActiveAppointment } from 'services/utils';
+import { AppointmentPrimary, AppointmentSecondary } from 'components';
+import { isMobile, isActiveAppointment } from 'utils/helpers';
+import { labels } from 'utils/constants';
 import moment from 'moment';
 import './styles.scss';
 
-const AppointmentList = ({ entries, type }) => {
+export const AppointmentList = ({ entries, type }) => {
   const [shouldDisplayInactive, setShouldDisplayInactive] = useState(false);
   const [sortedEntries, setSortedEntries] = useState([]);
   const [nextAppointment, setNextAppointment] = useState();
@@ -120,5 +120,3 @@ const AppointmentList = ({ entries, type }) => {
     </div>
   );
 };
-
-export default AppointmentList;

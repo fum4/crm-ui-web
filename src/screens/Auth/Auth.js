@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { AccountCircle, Lock, Visibility, VisibilityOff } from '@material-ui/icons';
 import { Button, InputAdornment, OutlinedInput } from '@material-ui/core';
-import { useHistory } from 'react-router-dom';
-import { login, register } from '../../services/network';
-import { authenticate, setLoading } from '../../store';
-import { labels } from '../../constants';
+import { login, register } from 'services/network';
+import { authenticate, setLoading } from 'store';
+import { labels } from 'utils/constants';
 import './styles.scss';
 
 const Auth = ({ action }) => {

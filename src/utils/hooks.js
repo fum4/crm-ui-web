@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchClients, fetchAppointments } from './';
+import { fetchClients, fetchAppointments } from '../store';
 
 export const useClients = (isAuthenticated) => {
   const dispatch = useDispatch();

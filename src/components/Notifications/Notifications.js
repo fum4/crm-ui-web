@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Cancel, Check, ErrorOutline } from '@material-ui/icons';
-import { clearNotification } from '../../store';
+import { clearNotification } from 'store';
 import './styles.scss';
 
-const Notifications = (props) => {
+export const Notifications = (props) => {
   const dispatch = useDispatch();
   const { message, type, show } = useSelector((state) => state.notifications);
   const iconColor = type === 'success' ? 'action' : 'error';
@@ -43,6 +43,4 @@ const Notifications = (props) => {
       </div>
     </div>
   );
-}
-
-export default Notifications;
+};

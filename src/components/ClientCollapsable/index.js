@@ -1,12 +1,10 @@
 import { Accordion, AccordionDetails, AccordionSummary } from '@material-ui/core';
-import { AppointmentList } from '../../';
-import { labels } from '../../../constants';
-import { isMobile } from 'services/utils';
-import ClientDetails from './ClientDetails';
-import ClientPreview from './ClientPreview';
+import { AppointmentList, ClientDetails, ClientPreview } from 'components';
+import { isMobile } from 'utils/helpers';
+import { labels } from 'utils/constants';
 import './styles.scss';
 
-const ClientCollapsable = ({ entry, isExpanded, onExpand }) => (
+export const ClientCollapsable = ({ entry, isExpanded, onExpand }) => (
   <Accordion
     expanded={isExpanded}
     key={entry._id}
@@ -30,5 +28,3 @@ const ClientCollapsable = ({ entry, isExpanded, onExpand }) => (
     </AccordionDetails>
   </Accordion>
 );
-
-export default ClientCollapsable;

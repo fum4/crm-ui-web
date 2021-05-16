@@ -1,11 +1,10 @@
 import { FaPen, FaTrashAlt } from 'react-icons/fa';
-import { Button } from '@material-ui/core';
-import {Timelapse, WatchLater} from '@material-ui/icons';
-import Typography from '@material-ui/core/Typography';
-import { formatPrettyDate } from 'services/utils';
+import { Button, Typography } from '@material-ui/core';
+import { Timelapse, WatchLater } from '@material-ui/icons';
+import { formatPrettyDate } from 'utils/helpers';
 import './styles.scss';
 
-const AppointmentPreview = ({ entry, isNext, setShowEditDialog, setShowDeleteDialog }) => {
+export const AppointmentPreview = ({ entry, isNext, setShowEditDialog, setShowDeleteDialog }) => {
   const date = entry.type === 'appointment'
     ? entry.appointment
     : entry.date;
@@ -54,5 +53,3 @@ const AppointmentPreview = ({ entry, isNext, setShowEditDialog, setShowDeleteDia
     </div>
   );
 };
-
-export default AppointmentPreview;

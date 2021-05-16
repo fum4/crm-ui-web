@@ -5,7 +5,7 @@ import {
   labels,
   mobileMediaQueryBreakpoint,
   desktopMediaQueryBreakpoint
-} from '../constants';
+} from './constants';
 
 export const getOptionsForNestedFieldsVisibility = (names, shouldHide) => {
   const options = names.map((fieldName) => {

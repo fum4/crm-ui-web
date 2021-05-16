@@ -1,11 +1,11 @@
 import { useState } from 'react';
-import { labels } from '../../constants';
-import { isMobile } from 'services/utils';
 import { PeopleAlt } from '@material-ui/icons';
-import ClientCollapsable from './ClientCollapsable';
+import { ClientCollapsable } from 'components';
+import { labels } from 'utils/constants';
+import { isMobile } from 'utils/helpers';
 import './styles.scss';
 
-const ClientList = ({ entries }) => {
+export const ClientList = ({ entries }) => {
   const [expanded, setExpanded] = useState(null);
   const handleExpand = (panelId) => setExpanded(panelId === expanded ? null : panelId);
 
@@ -32,5 +32,3 @@ const ClientList = ({ entries }) => {
     </div>
   );
 };
-
-export default ClientList;

@@ -1,12 +1,12 @@
 import { useState } from 'react';
+import { FaPen } from 'react-icons/fa';
 import { Button, Paper } from '@material-ui/core';
 import { Phone, Comment, Home } from '@material-ui/icons';
-import { formatPhoneNumber } from 'services/utils';
-import { Dialog } from "../../../";
-import { FaPen } from "react-icons/fa";
+import { formatPhoneNumber } from 'utils/helpers';
+import { Dialog } from 'components';
 import './styles.scss';
 
-const ClientDetails = ({ entry }) => {
+export const ClientDetails = ({ entry }) => {
   const [showEditDialog, setShowEditDialog] = useState(false);
   const dialogConfig = [
     {
@@ -95,5 +95,3 @@ const ClientDetails = ({ entry }) => {
     </>
   );
 };
-
-export default ClientDetails;

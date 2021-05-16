@@ -1,10 +1,10 @@
 import { useMemo } from 'react';
 import { NavLink } from 'react-router-dom';
-import { isDesktop } from 'services/utils';
-import { labels } from '../../constants';
+import { isDesktop } from 'utils/helpers';
+import { labels } from 'utils/constants';
 import './styles.scss';
 
-const DesktopNavigation = () => {
+export const DesktopNavigation = () => {
   const shouldDisplay = useMemo(() => isDesktop(), []);
 
   return shouldDisplay ? (
@@ -22,5 +22,3 @@ const DesktopNavigation = () => {
     <div/>
   );
 };
-
-export default DesktopNavigation;

@@ -1,12 +1,12 @@
 import { useState, useMemo } from 'react';
 import { OutlinedInput, Button, InputAdornment } from '@material-ui/core';
-import { Dialog } from '..';
-import { labels } from '../../constants';
-import { isMobile } from 'services/utils';
 import { AddAlarm, PersonAdd, Search } from '@material-ui/icons';
+import { Dialog } from 'components';
+import { labels } from 'utils/constants';
+import { isMobile } from 'utils/helpers';
 import './styles.scss';
 
-const Header = ({ onSearch, type }) => {
+export const Header = ({ onSearch, type }) => {
   const [showDialog, setShowDialog] = useState(false);
   const isDesktop = useMemo(() => !isMobile(), []);
   const handleSearch = (event) => onSearch(event.target.value);
@@ -67,5 +67,3 @@ const Header = ({ onSearch, type }) => {
     </>
   );
 };
-
-export default Header;

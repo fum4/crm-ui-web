@@ -1,12 +1,11 @@
-import ListItemText from '@material-ui/core/ListItemText';
-import ListItem from '@material-ui/core/ListItem';
-import { AttachMoney, Build, LocalHospital, Timelapse, WatchLater } from '@material-ui/icons';
-import { FaPen, FaTrashAlt } from 'react-icons/fa';
-import { formatPrettyDate, getHourFromDate } from 'services/utils';
 import { useMemo } from 'react';
+import { FaPen, FaTrashAlt } from 'react-icons/fa';
+import { ListItem, ListItemText } from '@material-ui/core';
+import { AttachMoney, Build, LocalHospital, Timelapse, WatchLater } from '@material-ui/icons';
+import { formatPrettyDate, getHourFromDate } from 'utils/helpers';
 import './styles.scss';
 
-const AppointmentExpanded = ({ entry, setShowEditDialog, setShowDeleteDialog }) => {
+export const AppointmentExpanded = ({ entry, setShowEditDialog, setShowDeleteDialog }) => {
   const fullDate = useMemo(() => {
     const date = entry.type === 'appointment' ? entry.appointment : entry.date;
     const { hour, minutes } = getHourFromDate(date);
@@ -94,5 +93,3 @@ const AppointmentExpanded = ({ entry, setShowEditDialog, setShowDeleteDialog }) 
     </ListItem>
   );
 };
-
-export default AppointmentExpanded;

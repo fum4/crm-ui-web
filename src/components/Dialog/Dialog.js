@@ -1,6 +1,9 @@
 import { useState, useEffect } from 'react';
-import { Form } from '..';
-import { formTypes } from '../../constants';
+import { useDispatch } from 'react-redux';
+import { FaTimes } from 'react-icons/fa';
+import { Button, Dialog as Modal } from '@material-ui/core';
+import { Form } from 'components';
+import { formTypes } from 'utils/constants';
 import {
   getFormConfig,
   serializeForm,
@@ -9,7 +12,7 @@ import {
   getDialogTitle,
   getDialogSubmitButtonText,
   validators
-} from 'services/utils';
+} from 'utils/helpers';
 import {
   insertClient,
   editClient,
@@ -18,14 +21,11 @@ import {
   insertAppointment,
   editAppointment,
   removeAppointment
-} from '../../store';
-import { useDispatch } from 'react-redux';
-import { FaTimes } from 'react-icons/fa';
-import { Button, Dialog as Modal } from '@material-ui/core';
+} from 'store';
 import _ from 'lodash';
 import './styles.scss';
 
-const Dialog = ({ action, type, config, setShowModal }) => {
+export const Dialog = ({ action, type, config, setShowModal }) => {
   const [formFields, setFormFields] = useState();
   const [title, setTitle] = useState();
   const [isInitialized, setIsInitialized] = useState(false);
@@ -242,5 +242,3 @@ const Dialog = ({ action, type, config, setShowModal }) => {
     <div />
   );
 };
-
-export default Dialog;

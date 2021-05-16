@@ -1,6 +1,6 @@
 import { AlarmOff, AccessTime, AddCircle } from '@material-ui/icons';
 import { green } from '@material-ui/core/colors';
-import { validators } from './services/utils';
+import { validators } from './helpers';
 
 export const labels = {
   ADD: 'Adaugă',
