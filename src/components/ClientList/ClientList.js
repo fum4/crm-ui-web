@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { labels } from '../../constants';
 import { isMobile } from 'services/utils';
 import { PeopleAlt } from '@material-ui/icons';
@@ -5,6 +6,8 @@ import ClientCollapsable from './ClientCollapsable';
 import './styles.scss';
 
 const ClientList = ({ entries }) => {
+  const [expanded, setExpanded] = useState(false);
+
   return (
     <div className='clients-container'>
       {
@@ -16,8 +19,10 @@ const ClientList = ({ entries }) => {
         )
       }
       {
-        entries?.map((entry) => (
+        entries?.map((entry, index) => (
           <ClientCollapsable
+            isExpanded={index === expanded}
+            onExpand={() => setExpanded(index)}
             entry={entry}
             key={entry._id}
           />

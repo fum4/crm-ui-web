@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { Accordion, AccordionDetails, AccordionSummary } from '@material-ui/core';
 import { AppointmentList } from '../../';
 import { labels } from '../../../constants';
@@ -8,18 +7,12 @@ import ClientPreview from './ClientPreview';
 import './styles.scss';
 
 
-const ClientCollapsable = ({ entry }) => {
-  const [isExpanded, setIsExpanded] = useState(false);
-
-  const toggleExpanded = () => {
-    setIsExpanded(!isExpanded);
-  };
-
+const ClientCollapsable = ({ entry, isExpanded, onExpand }) => {
   return (
     <Accordion
       expanded={isExpanded}
       key={entry._id}
-      onChange={toggleExpanded}
+      onChange={onExpand}
     >
       <AccordionSummary aria-controls='panel1bh-content' id='panel1bh-header'>
         <ClientPreview entry={entry} />
