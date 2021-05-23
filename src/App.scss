@@ -79,7 +79,7 @@ code {
   }
 
   .clients-container {
-    margin-top: 77px;
+    margin-top: 165px;
     width: 100%;
   }
 
@@ -91,6 +91,17 @@ code {
     min-width: 50px;
     max-width: 50px;
     padding: 5px;
+  }
+
+  .client-preview button.add-new-btn, .client-preview button.remove-btn {
+    min-width: 40px;
+    max-width: 40px;
+    min-height: 32px;
+    max-height: 32px;
+  }
+
+  .clients-container .MuiAccordion-root {
+    padding: 0 4px;
   }
 
   .clients-container .MuiAccordion-root.Mui-expanded {
@@ -119,16 +130,17 @@ code {
   }
 
   .wrapper.fixed {
+    margin-top: 67px;
     height: 75px;
+    background-color: transparent;
   }
 
   .search-input-container {
-    background-color: #212121;
     padding: 0 4% 0;
   }
 
   .appointments-container-primary {
-    margin: 65px auto auto auto;
+    margin: 20px auto auto;
     width: 93%;
   }
 

@@ -1,0 +1,30 @@
+.welcome-card {
+  display: flex;
+  height: 200px;
+  width: 91%;
+  max-width: 850px;
+  margin: 80px auto 35px;
+  background-image: url('../../static/welcome-card-bg.jpeg');
+  background-position: right;
+
+  .card-content {
+    display: flex;
+    flex-direction: column;
+    color: white;
+    font-size: 20px;
+    margin: auto;
+    text-align: center;
+
+    span {
+      padding: 8px;
+
+      &.current-date {
+        font-size: 28px;
+
+        span {
+          font-weight: bold;
+        }
+      }
+    }
+  }
+}

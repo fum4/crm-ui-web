@@ -1,7 +1,6 @@
 import { useState, useEffect, Fragment } from 'react';
 import { FormControlLabel, Switch } from '@material-ui/core';
-import { AssignmentTurnedIn } from '@material-ui/icons';
-import { AppointmentPrimary, AppointmentSecondary } from 'components';
+import { AppointmentPrimary, AppointmentSecondary, AppointmentsPlaceholder } from 'components';
 import { isMobile, isActiveAppointment } from 'utils/helpers';
 import { labels } from 'utils/constants';
 import moment from 'moment';
@@ -29,22 +28,24 @@ export const AppointmentList = ({ entries, type }) => {
   }, [ sortedEntries ]);
 
   useEffect(() => {
-    const sorted = entries.slice().sort((a, b) => {
-      if (a.type === 'control' && b.type === 'appointment') {
-        return a.date < b.appointment ? -1 : 1;
-      }
+    const sorted = entries
+      .slice()
+      .sort((a, b) => {
+        if (a.type === 'control' && b.type === 'appointment') {
+          return a.date < b.appointment ? -1 : 1;
+        }
 
-      if (a.type === 'appointment' && b.type === 'control') {
-        return a.appointment < b.date ? -1 : 1;
-      }
+        if (a.type === 'appointment' && b.type === 'control') {
+          return a.appointment < b.date ? -1 : 1;
+        }
 
-      if (a.type === 'appointment' && b.type === 'appointment') {
-        return a.appointment < b.appointment ? -1 : 1;
-      }
+        if (a.type === 'appointment' && b.type === 'appointment') {
+          return a.appointment < b.appointment ? -1 : 1;
+        }
 
-      if (a.type === 'control' && b.type === 'control') {
-        return a.date < b.date ? -1 : 1;
-      }
+        if (a.type === 'control' && b.type === 'control') {
+          return a.date < b.date ? -1 : 1;
+        }
     });
 
     setSortedEntries(sorted);
@@ -59,8 +60,7 @@ export const AppointmentList = ({ entries, type }) => {
     const previousEntryDate =
       previousEntryDateAndTime && previousEntryDateAndTime.slice(0, previousEntryDateAndTime.indexOf('T'));
     const isFirstEntry = !previousEntry || !isActiveAppointment(previousEntry) && isActiveAppointment(entry);
-    const isDifferentDay = currentItemDate !== previousEntryDate;
-    const shouldDisplayHeader = isFirstEntry || isDifferentDay;
+    const shouldDisplayHeader = (currentItemDate !== previousEntryDate) && !isFirstEntry;
 
     if (shouldDisplayHeader) {
       const currentDate = moment(currentItemDate);
@@ -87,14 +87,18 @@ export const AppointmentList = ({ entries, type }) => {
 
   return (
     <div className={`appointments-container-${type}`}>
-      <FormControlLabel
-        checked={shouldDisplayInactive}
-        className={`appointments-container-${type}__switch`}
-        control={<Switch color='primary' />}
-        label={labels.SHOW_INACTIVE_APPOINTMENTS}
-        labelPlacement={isMobile() ? undefined : 'start'}
-        onChange={toggleShouldDisplayInactive}
-      />
+      {
+        type === 'secondary' && (
+          <FormControlLabel
+            checked={shouldDisplayInactive}
+            className={`appointments-container-${type}__switch`}
+            control={<Switch color='primary' />}
+            label={labels.SHOW_INACTIVE_APPOINTMENTS}
+            labelPlacement={isMobile() ? undefined : 'start'}
+            onChange={toggleShouldDisplayInactive}
+          />
+        )
+      }
       {sortedEntries?.map((entry, index) => {
         if (shouldDisplayEntry(entry)) {
           return type === 'primary' ? (
@@ -111,12 +115,7 @@ export const AppointmentList = ({ entries, type }) => {
           );
         }
       })}
-      {type === 'primary' && (
-        <div className={`appointments-container-${type}__no-active-appointments`}>
-          <AssignmentTurnedIn color='primary' fontSize='large' />
-          <p>{labels.NO_ACTIVE_APPOINTMENTS}</p>
-        </div>
-      )}
+      { type === 'primary' && <AppointmentsPlaceholder /> }
     </div>
   );
 };

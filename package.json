@@ -5,7 +5,7 @@
   "homepage": ".",
   "proxy": "http://localhost:3000",
   "scripts": {
-    "start": "react-scripts start",
+    "start": "cross-env react-scripts start",
     "build": "react-scripts build",
     "eject": "react-scripts eject",
     "lint": "eslint .",
@@ -28,13 +28,14 @@
     "moment": "^2.29.1",
     "react": "^17.0.1",
     "react-bootstrap": "^1.4.3",
-    "react-calendar": "^3.3.1",
+    "react-calendar": "^3.4.0",
     "react-collapsible": "^2.8.1",
     "react-dom": "^17.0.1",
     "react-icons": "^4.1.0",
     "react-redux": "^7.2.3",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",
+    "react-swipeable-views": "^0.13.9",
     "redux": "^4.0.5",
     "web-vitals": "^0.2.4"
   },
@@ -62,6 +63,7 @@
   },
   "devDependencies": {
     "@types/react-router-dom": "^5.1.7",
+    "cross-env": "^7.0.3",
     "eslint": "^7.19.0",
     "eslint-config-prettier": "^7.2.0",
     "eslint-plugin-prettier": "^3.3.1",

@@ -1,0 +1,14 @@
+.appointments-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 100px auto 120px;
+  align-self: center;
+  width: 100%;
+  max-width: 850px;
+
+  p {
+    font-size: 20px;
+    opacity: 0.6;
+  }
+}

@@ -1,9 +1,10 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import { Auth, Today, Clients } from 'screens';
-import { DesktopNavigation, MobileNavigation, Notifications, LoadingIndicator } from './components';
+import { Auth, Home, Today, Clients } from 'screens';
+import { DesktopNavigation, Notifications, LoadingIndicator } from 'components';
 import { login } from 'services/network';
+import { isMobile } from 'utils/helpers';
 import { authenticate, setLoading, fetchClients } from 'store';
 import './App.scss';
 
@@ -42,30 +43,29 @@ function App() {
           isAuthenticated && <DesktopNavigation />
         }
         <Switch>
+          <Route exact path='/login'>
+            <Auth action='login'/>
+          </Route>
+          <Route exact path='/register'>
+            <Auth action='register'/>
+          </Route>
           {
-            <Route exact path='/login'>
-              <Auth action='login'/>
-            </Route>
-          }
-          {
-            <Route exact path='/register'>
-              <Auth action='register'/>
-            </Route>
-          }
-          {
-            <Route exact path='/'>
-              <Today/>
-            </Route>
-          }
-          {
-            <Route path='/clients'>
-              <Clients/>
-            </Route>
+            isMobile() ? (
+              <Route exact path='/'>
+                <Home/>
+              </Route>
+            ) : (
+              <>
+                <Route exact path='/'>
+                  <Today/>
+                </Route>
+                <Route path='/clients'>
+                  <Clients/>
+                </Route>
+              </>
+            )
           }
         </Switch>
-        {
-          isAuthenticated && <MobileNavigation/>
-        }
       </div>
       </Notifications>
     </Router>

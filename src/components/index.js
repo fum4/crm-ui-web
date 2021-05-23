@@ -1,9 +1,11 @@
 export { AppointmentPrimary } from './AppointmentPrimary';
 export { AppointmentPreview } from './AppointmentPreview';
 export { AppointmentSecondary } from './AppointmentSecondary';
+export { AppointmentCalendarItem } from './AppointmentCalendarItem';
 export { AppointmentList } from './AppointmentList';
 export { AppointmentCollapsable } from './AppointmentCollapsable';
 export { AppointmentExpanded } from './AppointmentExpanded';
+export { AppointmentsPlaceholder } from './AppointmentsPlaceholder';
 export { ClientList } from './ClientList';
 export { ClientCollapsable } from './ClientCollapsable';
 export { ClientDetails } from './ClientDetails';
@@ -14,5 +16,4 @@ export { Field } from './Field';
 export { Header } from './Header';
 export { LoadingIndicator } from './LoadingIndicator';
 export { DesktopNavigation } from './DesktopNavigation';
-export { MobileNavigation } from './MobileNavigation/MobileNavigation';
 export { Notifications } from './Notifications';

@@ -61,6 +61,9 @@ export const labels = {
     FETCH_CLIENTS: 'Pacienții nu au putut fi actualizați.',
   },
   GENERIC_ERROR_MESSAGE: 'Ne pare rău, a apărut o eroare.',
+  GOOD_MORNING: 'Bună dimineața',
+  GOOD_DAY: 'Bună ziua',
+  GOOD_EVENING: 'Bună seara',
   HOUR: 'Ora',
   LOGIN: 'Autentificare',
   LOGIN_ERROR: 'Autentificarea a eșuat',
@@ -93,6 +96,36 @@ export const labels = {
   PASSWORD: 'Parolă',
   REGISTER: 'Înregistrare',
   REGISTER_ERROR: 'Înregistrarea a eșuat',
+  WELCOME_CARD: {
+    MODAY: [
+      'I know it\'s Monday, but you\'re awesome!',
+      'Wohoo, it\'s Monday!',
+      'Don\'t let Monday win. Drink coffee.',
+      'I swear it was Friday like 9 minutes ago..'
+    ],
+    TUESDAY: [
+      'I wish this Tuesday.. was Friday.',
+      'It\'s only Tuesday??',
+      'Tuesday is just Monday\'s ugly sister'
+    ],
+    WEDNESDAY: [
+      'This must be the Mondayest Wednesday ever'
+    ],
+    THURSDAY: [
+      'It\'s Thursday, or as I like to call it.. "Day 4 of the hostage situation"'
+    ],
+    FRIDAY: [
+      'Yeah baby, it\'s FRIDAY !!',
+      'I added some Friday to your coffee, you\'re welcome',
+      'Fri-nally!'
+    ],
+    SATURDAY: [
+      'YES, WEEKEND!'
+    ],
+    SUNDAY: [
+      'I am just not emotionally prepared for tomorrow to be Monday'
+    ],
+  }
 };
 
 export const fieldsConfig = {

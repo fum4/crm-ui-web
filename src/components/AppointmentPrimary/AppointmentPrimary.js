@@ -62,7 +62,7 @@ export const AppointmentPrimary = ({ entry }) => {
     <div className='appointments-container-primary__item'>
       <Card
         className={`appointment-primary ${isActive ? 'active' : 'inactive'}`}
-        variant={isActive ? 'elevated' : 'outlined'}
+        variant={isActive ? 'elevation' : 'outlined'}
       >
         <CardContent className='card-content'>
           <div className='name'>
